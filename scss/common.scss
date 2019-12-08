@@ -1,0 +1,87 @@
+body {
+	font-size: 16px;
+	line-height: 1.375;
+	font-family: $main;
+	font-smoothing: antialiased;
+}
+
+section, header, footer, main {
+	position: relative;
+}
+
+svg, a {
+	transition: 0.3s all;
+}
+
+input, button, textarea {
+	font-size: 16px;
+	line-height: 1.35;
+	font-family: $main;
+}
+
+button {
+	cursor: pointer;
+	transition: 0.3s all;
+}
+
+.title {
+	font-weight: bold;
+	font-size: 30px;
+	line-height: 28px;
+	color: $light;
+	display: flex;
+	align-items: center;
+	margin-bottom: 40px;
+	&__line {
+		flex-shrink: 0;
+		display: flex;
+		margin-right: 20px;
+		content: "";
+		width: calc(33% - 10px);
+		height: 21px;
+		background-color: $red;
+		padding-left: 15px;
+		padding-right: 15px;
+		align-items: center;
+	}
+	&__text {
+		flex-grow: 1;
+		min-width: 0px;
+	}
+	&__control {
+		flex-shrink: 0;
+	}
+	&__link {
+		text-decoration: none;
+		color: $blue;
+		font-weight: bold;
+		font-size: 16px;
+		line-height: 28px;
+		&:hover {
+			opacity: 0.7;
+		}
+	}
+	&__crumb {
+		text-decoration: none;
+		color: $light;
+		font-size: 14px;
+		line-height: 19px;
+		margin-right: 20px;
+		font-weight: normal;
+		&:hover {
+			opacity: 0.7;
+		}
+	}
+	&__arrow {
+		height: 12px;
+		width: 7px;
+		transform: rotate(180deg);
+	}
+}
+
+.icon {
+	display: block;
+	height: 1rem;
+	width: 1rem;
+	fill: $blue;
+}
