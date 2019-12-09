@@ -19,10 +19,12 @@ module.exports = {
 	],
 	plugins: [
     	{ src: '~/plugins/swiper.js', ssr: false },
+    	{ src: '~/plugins/datepicker', ssr: false }
   	],
 	styleResources: {
 		scss: [
 		'~/node_modules/swiper/dist/css/swiper.css',
+		'~/node_modules/vue2-datepicker/index.css',
 		'~/scss/reset.scss',
 		'~/scss/mixins.scss',
 		'~/scss/variables.scss',
@@ -39,7 +41,8 @@ module.exports = {
 					exclude: /(node_modules)/
 				})
 			}
-		}
+		},
+		transpile: ['vue-clamp', 'resize-detector']
 	}
 }
 

@@ -50,11 +50,14 @@
 				<div class="title__line"></div>
 				<p class="title__text">Подкасты</p>
 				<p class="title__control">
-					<nuxt-link class="title__link" to="/programs/">
+					<nuxt-link class="title__link" to="/podcasts/">
 						Все подкасты
 					</nuxt-link>
 				</p>
 			</h2>
+			<div class="home-podcasts__articles">
+				<appPodcast v-for="item in podcastsCount" v-bind:key="item.id"></appPodcast>
+			</div>
 		</section>
 		<section class="home-video">
 			<h2 class="title">
@@ -71,9 +74,7 @@
 				<p class="title__text">Блог радиостанции</p>
 			</h2>
 			<div class="home-blog__articles">
-				<appArticle></appArticle>
-				<appArticle></appArticle>
-				<appArticle></appArticle>
+				<appArticle v-for="item in newsCount" v-bind:key="item.id"></appArticle>
 				<div class="home-blog__clear"></div>
 			</div>
 		</section>
@@ -85,17 +86,21 @@
 
 	import appSlider from '~/components/sections/MainSlider'
 	import appArticle from '~/components/Article'
+	import appPodcast from '~/components/Podcast'
 
 	export default {
 		name: 'home',
 		data () {
 			return {
+				podcastsCount: 8,
+				newsCount: 3,
 				videoCode: '<iframe src="https://www.youtube.com/embed/Mhv_JA47vYI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
 			}
 		},
 		components: {
 			appSlider,
-			appArticle
+			appArticle,
+			appPodcast
 		}
 	}
 </script>
@@ -138,6 +143,11 @@
 	}
 	.home-podcasts {
 		margin-bottom: 105px;
+		&__articles {
+			display: flex;
+			justify-content: space-between;
+			flex-wrap: wrap;
+		}
 	}
 	.home-video {
 		margin-bottom: 105px;

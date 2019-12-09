@@ -13,7 +13,7 @@ svg, a {
 	transition: 0.3s all;
 }
 
-input, button, textarea {
+input, button, textarea, select {
 	font-size: 16px;
 	line-height: 1.35;
 	font-family: $main;
@@ -22,6 +22,10 @@ input, button, textarea {
 button {
 	cursor: pointer;
 	transition: 0.3s all;
+}
+
+.page {
+	padding-bottom: 60px;
 }
 
 .title {

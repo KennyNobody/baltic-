@@ -9,12 +9,12 @@
 			<div class="article__date">
 
 			</div>
-			<p class="article__title">
-				{{ articleTitle }}
-			</p>
-			<p class="article__text">
-				{{ articleText }}
-			</p>
+			<div class="article__title">
+				<v-clamp :max-lines="2">{{ articleTitle }}</v-clamp>
+			</div>
+			<div class="article__text">
+				<v-clamp :max-lines="4">{{ articleDiscription }}</v-clamp>
+			</div>
 		</div>
 		<div class="article__bottom">
 			<div class="article__link">
@@ -31,18 +31,20 @@
 
 <script>
 
+	import VClamp from 'vue-clamp'
+
 	export default {
 		name: 'newsArticle',
 		data () {
 			return {
 				articleThumb: 'http://placehold.it/1000x600',
 				articleTitle: 'В Калининградскую область завезли швейцарский реактор',
-				articleDescription: 'Любое взаимодействие с потребителем — коммуникация, дизайн, пользовательский опыт — создаёт образ продукта. Об этом стоит задумываться, как только вы...'
+				articleDiscription: 'Любое взаимодействие с потребителем — коммуникация, дизайн, пользовательский опыт — создаёт образ продукта. Любое взаимодействие с потребителем — коммуникация, дизайн, пользовательский опыт — создаёт образ продукта.Любое взаимодействие с потребителем — коммуникация, дизайн, пользовательский опыт — создаёт образ продукта.'
 				
 			}
 		},
 		components: {
-			
+			VClamp
 		}
 	}
 </script>
@@ -58,6 +60,7 @@
 		background-color: $light;
 		box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
 		text-decoration: none;
+		margin-bottom: 20px;
 		&:hover {
 			.article__link {
 				background-color: $red;
