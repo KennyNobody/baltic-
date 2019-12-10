@@ -26,6 +26,14 @@
 	import appPagination from '~/components/Pagination'
 
 	export default {
+		head () {
+			return {
+				title: 'Новости - Балтик+',
+				meta: [
+				{}
+				]
+			}
+		},
 		name: 'page-news',
 		data () {
 			return {

@@ -68,7 +68,7 @@
 					<nuxt-link active-class="header__link--active" class="header__link" to="/podcasts/">
 						Подкасты
 					</nuxt-link>
-					<nuxt-link active-class="header__link--active" class="header__link" to="/about/">
+					<nuxt-link class="header__link" to="/about/history/">
 						О радио
 					</nuxt-link>
 					<nuxt-link active-class="header__link--active" class="header__link" to="/contacts/">

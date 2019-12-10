@@ -4,17 +4,56 @@
 			<appSlider></appSlider>
 		</section>
 		<section class="home-now">
-			Сейчас
+			<div class="home-now__articles">
+				<article class="home-now__article">
+					<div class="home-now__thumb">
+						<img src="http://placehold.it/1000x600" alt="">
+					</div>
+					<div class="home-now__content">
+						<p class="home-now__discript">
+							Сейчас в эфире
+						</p>
+						<div class="home-now__clock">
+							<time class="home-now__time">
+								18:00
+							</time>
+							<time class="home-now__date">
+								29/09/2019
+							</time>
+						</div>
+						<h3 class="home-now__title">
+							<v-clamp :max-lines="3">
+								Гость в эфире: Антонина Кочеткова о загрязнении окружающей среды
+							</v-clamp>
+						</h3>
+					</div>
+				</article>
+				<article class="home-now__article">
+					<div class="home-now__thumb">
+						<img src="http://placehold.it/1000x600" alt="">
+					</div>
+					<div class="home-now__content">
+						<p class="home-now__discript">
+							Далее в эфире
+						</p>
+						<div class="home-now__clock">
+							<time class="home-now__time">
+								19:00
+							</time>
+							<time class="home-now__date">
+								29/09/2019
+							</time>
+						</div>
+						<h3 class="home-now__title">
+							<v-clamp :max-lines="3">
+								Интервью с режиссером “Биссера”, Геннадием Урсуловым
+							</v-clamp>
+						</h3>
+					</div>
+				</article>
+			</div>
 		</section>
-		<section class="home-news">
-			<h2 class="title">
-				<div class="title__line"></div>
-				<p class="title__text">Региональные новости</p>
-				<p class="title__control">
-					
-				</p>
-			</h2>
-		</section>
+		<appNews></appNews>
 		<section class="home-programs">
 			<h2 class="title">
 				<div class="title__line"></div>
@@ -26,6 +65,9 @@
 				</p>
 			</h2>
 			<div class="home-programs__items">
+				<a href="#" class="home-programs__item">
+					<img src="http://placehold.it/600x600" alt="Альт">
+				</a>
 				<a href="#" class="home-programs__item">
 					<img src="http://placehold.it/600x600" alt="Альт">
 				</a>
@@ -87,9 +129,19 @@
 	import appSlider from '~/components/sections/MainSlider'
 	import appArticle from '~/components/Article'
 	import appPodcast from '~/components/Podcast'
+	import appNews from '~/components/sections/Home-news'
+	import VClamp from 'vue-clamp'
 
 	export default {
 		name: 'home',
+		head () {
+			return {
+				title: 'Балтик+',
+				meta: [
+				{}
+				]
+			}
+		},
 		data () {
 			return {
 				podcastsCount: 8,
@@ -100,7 +152,9 @@
 		components: {
 			appSlider,
 			appArticle,
-			appPodcast
+			appPodcast,
+			appNews,
+			VClamp
 		}
 	}
 </script>
@@ -110,10 +164,56 @@
 		margin-bottom: 22px;
 	}
 	.home-now {
-		margin-bottom: 105px;
-	}
-	.home-news {
-		margin-bottom: 105px;
+		margin-bottom: 60px;
+		&__articles {
+			display: flex;
+			justify-content: space-between;
+		}
+		&__article {
+			display: flex;
+			padding: 10px;
+			background-color: $light;
+			box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+			width: calc(50% - 10px);
+			color: $dark;
+			margin-bottom: 20px;
+		}
+		&__thumb {
+			flex-shrink: 0;
+			width: 140px;
+			height: 177px;
+			img {
+				display: block;
+				height: 100%;
+				width: 100%;
+				object-fit: cover;
+			}
+		}
+		&__content {
+			padding: 10px 20px;
+		}
+		&__discript {
+			font-size: 16px;
+			line-height: 18px;
+			color: $red;
+		}
+		&__clock {
+			color: $blue;
+			margin-bottom: 5px;
+		}
+		&__time {
+			font-weight: 300;
+			font-size: 50px;
+			line-height: 1.2;
+		}
+		&__date {
+			font-size: 20px;
+		}
+		&__title {
+			font-size: 20px;
+			line-height: 24px;
+			font-weight: 600;
+		}
 	}
 	.home-programs {
 		margin-bottom: 105px;
@@ -166,7 +266,7 @@
 		}
 	}
 	.home-blog {
-		margin-bottom: 55px;
+		// margin-bottom: 55px;
 		&__articles {
 			display: flex;
 			justify-content: space-between;

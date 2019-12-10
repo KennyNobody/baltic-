@@ -86,6 +86,9 @@
 			min-height: 0px;
 			flex-shrink: 0;
 			position: relative;
+			display: flex;
+			justify-content: space-between;
+			flex-direction: column;
 		}
 	}
 </style>
