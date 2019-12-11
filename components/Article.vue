@@ -1,8 +1,8 @@
 <template>
-	<a href="#" class="article">
+	<nuxt-link :to='"/news/" + slug' class="article">
 		<div class="article__top">
 			<div class="article__thumb">
-				<img :src="articleThumb" :alt="articleTitle">
+				<img :src="thumb" :alt="title">
 			</div>
 		</div>
 		<div class="article__middle">
@@ -10,10 +10,10 @@
 
 			</div>
 			<div class="article__title">
-				<v-clamp :max-lines="2">{{ articleTitle }}</v-clamp>
+				<v-clamp :max-lines="2">{{ title }}</v-clamp>
 			</div>
 			<div class="article__text">
-				<v-clamp :max-lines="4">{{ articleDiscription }}</v-clamp>
+				<v-clamp :max-lines="4">{{ discription }}</v-clamp>
 			</div>
 		</div>
 		<div class="article__bottom">
@@ -26,7 +26,7 @@
 				</svg>
 			</div>
 		</div>
-	</a>
+	</nuxt-link>
 </template>
 
 <script>
@@ -35,13 +35,9 @@
 
 	export default {
 		name: 'newsArticle',
+		props: ['title', 'thumb', 'discription', 'slug'],
 		data () {
-			return {
-				articleThumb: 'http://placehold.it/1000x600',
-				articleTitle: 'В Калининградскую область завезли швейцарский реактор',
-				articleDiscription: 'Любое взаимодействие с потребителем — коммуникация, дизайн, пользовательский опыт — создаёт образ продукта. Любое взаимодействие с потребителем — коммуникация, дизайн, пользовательский опыт — создаёт образ продукта.Любое взаимодействие с потребителем — коммуникация, дизайн, пользовательский опыт — создаёт образ продукта.'
-				
-			}
+			return {}
 		},
 		components: {
 			VClamp

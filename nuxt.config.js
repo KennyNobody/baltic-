@@ -12,7 +12,9 @@ module.exports = {
 	},
 	loading: { color: '#3B8070' },
 	modules: [
-	['@nuxtjs/style-resources'],
+	'@nuxtjs/style-resources',
+	'@nuxtjs/axios',
+	'@nuxtjs/vuex',
 	['nuxt-svg-sprite-module', {
 		directory: '~/assets/svg-sprite'
 	}],
