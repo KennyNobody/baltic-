@@ -1,5 +1,5 @@
 <template>
-	<nuxt-link :to='"/news/" + slug' class="article">
+	<nuxt-link :to='"/news/" + id' class="article">
 		<div class="article__top">
 			<div class="article__thumb">
 				<img :src="thumb" :alt="title">
@@ -35,7 +35,7 @@
 
 	export default {
 		name: 'newsArticle',
-		props: ['title', 'thumb', 'discription', 'slug'],
+		props: ['title', 'thumb', 'discription', 'slug', 'id'],
 		data () {
 			return {}
 		},

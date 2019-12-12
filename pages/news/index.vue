@@ -19,6 +19,7 @@
 			:discription="item.discription"
 			:thumb="item.preview"
 			:slug="item.slug"
+			:id="item.id"
 			:public_at="item.public_at"
 			></appArticle>
 		</div>
