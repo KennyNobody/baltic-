@@ -18,18 +18,17 @@
 			<p class="title__text">Новости</p>
 			<p class="title__control"></p>
 		</h2>
-		Одиночная новость
 		{{ post.title }}
 		<div class="page-news__articles">
-			<!-- <appArticle
-			v-for="item in newsArticles.slice(0, 3)" v-bind:key="item.id"
+			<appArticle
+			v-for="item in posts.slice(0, 3)" v-bind:key="item.id"
 
 			:title="item.title"
 			:discription="item.discription"
 			:thumb="item.preview"
 			:slug="item.slug"
 			:public_at="item.public_at"
-			></appArticle> -->
+			></appArticle>
 		</div>
 		<div class="page-news__pagination">
 			<appPagination></appPagination>
@@ -56,7 +55,8 @@
 		},
 		async asyncData ({$axios, params}) {
 			const post = await $axios.$get("http://my-json-server.typicode.com/KennyNobody/baltic-/blog/" + params.id);
-			return {post};
+			const posts = await $axios.$get("http://my-json-server.typicode.com/KennyNobody/baltic-/blog/");
+			return {post, posts};
 		},
 		data () {
 			return {
@@ -68,9 +68,6 @@
 			appArticle,
 			appPagination
 		},
-		mounted() {
-			console.log(params)
-		}
 	}
 </script>
 

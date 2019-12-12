@@ -14,7 +14,7 @@
 		</h2>
 		<div class="page-news__articles">
 			<appArticle
-			v-for="item in newsArticles" v-bind:key="item.id"
+			v-for="item in blog" v-bind:key="item.id"
 			:title="item.title"
 			:discription="item.discription"
 			:thumb="item.preview"
@@ -55,9 +55,16 @@
 			appArticle,
 			appPagination
 		},
-		async mounted() {
-			this.newsArticles = await this.$axios.$get("http://my-json-server.typicode.com/KennyNobody/baltic-/blog")
-		}
+		computed: {
+			blog() {
+				return this.$store.getters['blog/blog']
+			}
+		},
+		async fetch({store}) {
+			if (store.getters['blog/blog'].length === 0) {
+				await store.dispatch('blog/fetch')
+			}
+		},
 	}
 </script>
 
