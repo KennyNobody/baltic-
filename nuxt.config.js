@@ -14,7 +14,7 @@ module.exports = {
 	modules: [
 	'@nuxtjs/style-resources',
 	'@nuxtjs/axios',
-	'@nuxtjs/vuex',
+	// '@nuxtjs/vuex',
 	['nuxt-svg-sprite-module', {
 		directory: '~/assets/svg-sprite'
 	}],
