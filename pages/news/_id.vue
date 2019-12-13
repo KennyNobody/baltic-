@@ -30,9 +30,6 @@
 			:public_at="item.public_at"
 			></appArticle>
 		</div>
-		<div class="page-news__pagination">
-			<appPagination></appPagination>
-		</div>
 	</div>
 </template>
 
@@ -53,15 +50,19 @@
 		validate({params}){
 			return /^\d+$/.test(params.id)
 		},
-		async asyncData ({$axios, params}) {
-			const post = await $axios.$get("http://my-json-server.typicode.com/KennyNobody/baltic-/blog/" + params.id);
-			const posts = await $axios.$get("http://my-json-server.typicode.com/KennyNobody/baltic-/blog/");
-			return {post, posts};
+		computed: {
+			posts(params) {
+				return this.$store.getters['blog/blog']
+			},
+			post (params) {
+				// для примера указал конкретный id, чтобы было видно, что дальше все работает. Там должен быть динамический по типу params.id
+				return this.$store.getters['blog/postById'](this.id)
+			}
 		},
 		data () {
 			return {
 				newsPerPage: 3,
-				newsArticles: []
+				newsArticles: [],
 			}
 		},
 		components: {

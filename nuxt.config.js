@@ -14,15 +14,15 @@ module.exports = {
 	modules: [
 	'@nuxtjs/style-resources',
 	'@nuxtjs/axios',
-	// '@nuxtjs/vuex',
+	'@nuxtjs/proxy',
 	['nuxt-svg-sprite-module', {
 		directory: '~/assets/svg-sprite'
 	}],
 	],
 	plugins: [
-    	{ src: '~/plugins/swiper.js', ssr: false },
-    	{ src: '~/plugins/datepicker', ssr: false }
-  	],
+	{ src: '~/plugins/swiper.js', ssr: false },
+	{ src: '~/plugins/datepicker', ssr: false }
+	],
 	styleResources: {
 		scss: [
 		'~/node_modules/swiper/dist/css/swiper.css',
