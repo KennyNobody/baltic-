@@ -56,7 +56,7 @@
 			},
 			post (params) {
 				// для примера указал конкретный id, чтобы было видно, что дальше все работает. Там должен быть динамический по типу params.id
-				return this.$store.getters['blog/postById'](this.id)
+				return this.$store.getters['blog/postById'](3)
 			}
 		},
 		data () {
