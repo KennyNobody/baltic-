@@ -111,7 +111,8 @@
 					<span class="now__author">
 						{{ author }}
 					</span>
-					-
+					<span class="now__defis">-</span>
+					<br class="now__br">
 					<span class="now__title">
 						{{ title }}
 					</span>
@@ -154,11 +155,14 @@
 		width: 100%;
 		display: block;
 		position: sticky;
-		z-index: 3;
+		z-index: 5;
 		bottom: 0px;
 		box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
 		background-color: $dark;
 		display: flex;
+		@include r(1100) {
+			bottom: 10px;
+		}
 		&__left {
 			width: 247px;
 			background-color: $light;
@@ -188,12 +192,15 @@
 				height: 15px;
 				width: 15px;
 				position: relative;
-				left: 2px;
-				top: 1px;
+				left: 1px;
+				top: 2px;
 			}
 			&--pause {
 				height: 15px;
 				width: 15px;
+				position: relative;
+				left: 1px;
+				top: 2px;
 			}
 		}
 		&__info {
@@ -205,6 +212,9 @@
 		&__thumb {
 			height: 100%;
 			width: 88px;
+			@include r(1100) {
+				display: none;
+			}
 			img {
 				height: 100%;
 				width: 100%;
@@ -287,6 +297,9 @@
 		justify-content: space-between;
 		height: 100%;
 		flex-grow: 1;
+		@include r(1100) {
+			justify-content: center;
+		}
 		&__discript {
 			color: $blue;
 			font-size: 14px;
@@ -299,6 +312,20 @@
 			display: block;
 			position: relative;
 			top: 1px;
+			@include r(1100) {
+				display: none;
+			}
+		}
+		&__defis {
+			@include r(1100) {
+				display: none;
+			}
+		}
+		&__br {
+			display: none;
+			@include r(1100) {
+				display: block;
+			}
 		}
 		&__progress {
 			height: 100%;
@@ -321,6 +348,9 @@
 		align-items: center;
 		margin-left: 20px;
 		flex-shrink: 0px;
+		@include r(1100) {
+			display: none;
+		}
 		&__line {
 			display: block;
 			height: 2px;

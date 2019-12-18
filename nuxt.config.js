@@ -8,7 +8,11 @@ module.exports = {
 		],
 		link: [
 		{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-		]
+		],
+		script: [
+		{ src: "https://code.jquery.com/jquery-3.4.1.min.js" },
+		{ src: "https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" },
+		],
 	},
 	loading: { color: '#3B8070' },
 	modules: [
@@ -21,7 +25,11 @@ module.exports = {
 	],
 	plugins: [
 	{ src: '~/plugins/swiper.js', ssr: false },
-	{ src: '~/plugins/datepicker', ssr: false }
+	{ src: '~/plugins/datepicker', ssr: false },
+
+	],
+	css: [
+	'~/node_modules/@fancyapps/fancybox/dist/jquery.fancybox.min.css',
 	],
 	styleResources: {
 		scss: [
@@ -31,7 +39,7 @@ module.exports = {
 		'~/scss/mixins.scss',
 		'~/scss/variables.scss',
 		'~/scss/common.scss',
-		]
+		],
 	},
 	build: {
 		extend (config, { isDev, isClient }) {

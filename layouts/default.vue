@@ -1,11 +1,11 @@
 <template>
 	<div id="app">
 		<div class="layout">
+			<appHeader></appHeader>
 			<div class="layout__left">
 
 			</div>
 			<div class="layout__content">
-				<appHeader></appHeader>
 				<div class="layout__main">
 					<nuxt></nuxt>
 					<appPlayer></appPlayer>
@@ -52,6 +52,7 @@
 			min-width: 0px;
 		}
 		&__content {
+			padding-top: 150px;
 			background-color: $dark;
 			width: 1070px;
 			padding-left: 15px;
@@ -74,6 +75,9 @@
 				bottom: 0px;
 				width: 262px;
 				background-color: $light;
+				@include r(1100) {
+					display: none;
+				}
 			}
 		}
 		&__right {

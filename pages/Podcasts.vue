@@ -107,6 +107,9 @@
 		align-items: center;
 		justify-content: space-between;
 		margin-bottom: 34px;
+		@include r(900) {
+			display: block;
+		}
 		&__dates {
 			color: $dark;
 			font-size: 14px;
@@ -116,8 +119,16 @@
 			margin-right: 40px;
 			flex-shrink: 0;
 			font-family: $main !important;
+			@include r(1100) {
+				color: $light;
+				width: 100%;
+			}
 			.mx-datepicker-range {
 				width: 240px;
+				@include r(1100) {
+					width: 100%;
+					margin-bottom: 20px;
+				}
 			}
 			.mx-icon-calendar {
 				color: $blue;
@@ -125,6 +136,9 @@
 		}
 		&__date-text {
 			margin-right: 15px;
+			@include r(900) {
+				display: none;
+			}
 		}
 		&__select {
 			height: 40px;
@@ -144,6 +158,10 @@
 			appearance: none;
 			font-size: 14px;
 			line-height: 28px;
+			@include r(1100) {
+				width: 100%;
+				margin-bottom: 20px;
+			}
 		}
 		&__all {
 			text-decoration: none;
@@ -154,6 +172,11 @@
 			font-size: 16px;
 			line-height: 28px;
 			cursor: pointer;
+			@include r(1100) {
+				margin: 0px;
+				text-align: center;
+				width: 100%;
+			}
 			&:hover {
 				opacity: 0.7;
 			}

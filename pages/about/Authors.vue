@@ -24,25 +24,25 @@
 			</div>
 			<div class="page-about__main">
 				<div class="authors">
-					<article class="authors__article" v-for="item in authorsCounter" v-bind:key="item.id">
-						<div class="authors__main" style="background-image: url('http://placehold.it/1000x600')">
+					<article class="authors__article" v-for="item in authors" v-bind:key="item.id">
+						<div class="authors__main" v-bind:style="{ 'background-image': 'url(' + item.thumb + ')' }">
 							<div class="authors__content">
 								<h5 class="authors__title">
-									Ведущий новостей
+									{{ item.position }}
 								</h5>
-								<div class="authors__footer">
+								<div class="authors__footer" v-if="item.time">
 									<p class="authors__discript">
 										В эфире:
 									</p>
 									<p class="authors__time">
-										09.00-09.10, 12.00-12.10, 15.00-15.00, 18.00-18.00
+										{{ item.time }}
 									</p>
 								</div>
 							</div>
 						</div>
 						<div class="authors__name">
 							<p>
-								Игорь Хвастолюбов
+								{{ item.name }}
 							</p>
 						</div>
 					</article>
@@ -67,9 +67,14 @@
 			}
 		},
 		name: 'page-authors',
-		data () {
-			return {
-				authorsCounter: 8,
+		computed: {
+			authors() {
+				return this.$store.getters['authors/authors']
+			}
+		},
+		async fetch({store}) {
+			if (store.getters['authors/authors'].length === 0) {
+				await store.dispatch('authors/fetch')
 			}
 		},
 		components: {

@@ -49,7 +49,6 @@
 	.article {
 		width: calc(33% - 10px);
 		color: $dark;
-		height: 438px;
 		display: flex;
 		justify-content: space-between;
 		flex-direction: column;
@@ -57,6 +56,12 @@
 		box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
 		text-decoration: none;
 		margin-bottom: 20px;
+		@include r(700) {
+			width: calc(50% - 10px);
+		}
+		@include r(480) {
+			width: 100%;
+		}
 		&:hover {
 			.article__link {
 				background-color: $red;
@@ -75,16 +80,19 @@
 		}
 		&__title {
 			font-size: 18px;
-			line-height: 25px;
+			line-height: 22px;
 			margin-bottom: 16px;
 			font-weight: 600;
+			@include r(700) {
+				
+			}
 		}
 		&__top {
 
 		}
 		&__middle {
 			flex-grow: 1;
-			padding: 7px 15px;
+			padding: 10px 15px 15px 15px;
 		}
 		&__bottom {
 

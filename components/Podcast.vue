@@ -63,6 +63,12 @@
 		box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
 		color: $dark;
 		margin-bottom: 20px;
+		@include r(1100) {
+			width: 100%;
+		}
+		@include r(470) {
+			display: block;
+		}
 		&__thumb {
 			flex-shrink: 0px;
 			height: 156px;
@@ -71,6 +77,9 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
+			@include r(470) {
+				display: none;
+			}
 		}
 		&__content {
 			padding: 16px 12px 16px 20px;
@@ -88,6 +97,7 @@
 		&__footer {
 			display: flex;
 			justify-content: space-between;
+			align-items: flex-end;
 		}
 		&__time {
 			color: $blue;
@@ -114,11 +124,11 @@
 		}
 		&__discript {
 			font-size: 16px;
-			line-height: 28px;
+			line-height: 21px;
 		}
 		&__duration {
 			font-size: 14px;
-			line-height: 28px;
+			line-height: 21px;
 			color: #BDBDBD;
 		}
 		&__btn {

@@ -46,7 +46,7 @@
 					<input type="text" class="form__input" v-model="form.email" placeholder="E-mail">
 					<p class="form__privacy">
 						Нажимая кнопку “Отправить”, вы подтверждаете свое согласие с 
-						<nuxt-link to="/privacy/" target="_blank">
+						<nuxt-link to="about/politics/" target="_blank">
 							политикой использования персональных данных.
 						</nuxt-link>
 					</p>

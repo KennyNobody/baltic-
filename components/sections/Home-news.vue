@@ -74,6 +74,12 @@
 						tap() {
 							// console.log('onTap', this);
 						}
+					},
+					breakpoints: {
+						1080: {
+							slidesPerView: 1,
+							slidesPerColumn: 1
+						} 
 					}
 				}
 			}
@@ -161,6 +167,9 @@
 
 	.home-news {
 		margin-bottom: 105px;
+		@include r(1100) {
+			margin-bottom: 60px;
+		}
 		&__container {
 			overflow: visible; 
 		}
@@ -181,6 +190,9 @@
 			flex-shrink: 0;
 			width: 158px;
 			height: 120px;
+			@include r(560) {
+				display: none;
+			}
 			img {
 				height: 100%;
 				width: 100%;

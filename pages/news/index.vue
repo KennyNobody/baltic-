@@ -9,7 +9,7 @@
 					<use xlink:href="#icon-icon-arrow"></use>
 				</svg>
 			</div>
-			<p class="title__text">Новости</p>
+			<p class="title__text">Блог</p>
 			<p class="title__control"></p>
 		</h2>
 		<div class="page-news__articles">
@@ -36,7 +36,7 @@
 	export default {
 		head () {
 			return {
-				title: 'Новости - Балтик+',
+				title: 'Блог - Балтик+',
 				meta: [
 				{}
 				]

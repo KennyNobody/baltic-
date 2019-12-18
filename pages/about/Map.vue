@@ -59,28 +59,14 @@
 			}
 		},
 		name: 'page-map',
-		data () {
-			return {
-				markers: [
-				{
-					city: 'Калининград',
-					wave: '105,2',
-					top: '54.9',
-					left: '25.5'
-				},
-				{
-					city: 'Советск',
-					wave: '105,2',
-					top: '19.5',
-					left: '68.5'
-				},
-				{
-					city: 'Черняховск',
-					wave: '105,2',
-					top: '61.1',
-					left: '70.1'
-				},
-				]
+		computed: {
+			markers() {
+				return this.$store.getters['map/markers']
+			}
+		},
+		async fetch({store}) {
+			if (store.getters['map/markers'].length === 0) {
+				await store.dispatch('map/fetch')
 			}
 		},
 		components: {

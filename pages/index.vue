@@ -116,7 +116,16 @@
 				<p class="title__text">Блог радиостанции</p>
 			</h2>
 			<div class="home-blog__articles">
-				<appArticle v-for="item in newsCount" v-bind:key="item.id"></appArticle>
+				<appArticle
+				v-for="item in blog"
+				v-bind:key="item.id"
+				:title="item.title"
+				:discription="item.discription"
+				:thumb="item.preview"
+				:slug="item.slug"
+				:id="item.id"
+				:public_at="item.public_at"
+				></appArticle>
 				<div class="home-blog__clear"></div>
 			</div>
 		</section>
@@ -145,8 +154,13 @@
 		data () {
 			return {
 				podcastsCount: 8,
-				newsCount: 3,
+				// newsCount: 3,
 				videoCode: '<iframe src="https://www.youtube.com/embed/Mhv_JA47vYI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+			}
+		},
+		computed: {
+			blog() {
+				return this.$store.getters['blog/blogFront']
 			}
 		},
 		components: {
@@ -162,12 +176,16 @@
 <style lang="scss">
 	.home-slider {
 		margin-bottom: 22px;
+		overflow: hidden; 
 	}
 	.home-now {
 		margin-bottom: 60px;
 		&__articles {
 			display: flex;
 			justify-content: space-between;
+			@include r(1100) {
+				display: block;
+			}
 		}
 		&__article {
 			display: flex;
@@ -177,11 +195,21 @@
 			width: calc(50% - 10px);
 			color: $dark;
 			margin-bottom: 20px;
+			@include r(1100) {
+				width: 100%;
+				margin-bottom: 20px;
+				&:last-child {
+					margin-bottom: 0px;
+				}
+			}
 		}
 		&__thumb {
 			flex-shrink: 0;
 			width: 140px;
 			height: 177px;
+			@include r(560) {
+				display: none;
+			}
 			img {
 				display: block;
 				height: 100%;
@@ -191,6 +219,9 @@
 		}
 		&__content {
 			padding: 10px 20px;
+			@include r(560) {
+				
+			}
 		}
 		&__discript {
 			font-size: 16px;
@@ -217,6 +248,9 @@
 	}
 	.home-programs {
 		margin-bottom: 105px;
+		@include r(1100) {
+			margin-bottom: 60px;
+		}
 		&__items {
 			display: flex;
 			justify-content: space-between;
@@ -226,6 +260,9 @@
 			display: block;
 			width: calc(33% - 10px);
 			margin-bottom: 20px;
+			@include r(670) {
+				width: calc(50% - 10px);
+			}
 			img {
 				height: inherit;
 				width: 100%;
@@ -235,6 +272,9 @@
 				height: 0px;
 				display: block;
 				width: calc(33% - 10px);
+				@include r(670) {
+					width: calc(50% - 10px);
+				}
 			}
 			&:hover {
 				opacity: 0.9;
@@ -243,10 +283,16 @@
 	}
 	.home-podcasts {
 		margin-bottom: 105px;
+		@include r(1100) {
+			margin-bottom: 60px;
+		}
 		&__articles {
 			display: flex;
 			justify-content: space-between;
 			flex-wrap: wrap;
+			@include r(1100) {
+				display: block;
+			}
 		}
 	}
 	.home-video {
@@ -255,6 +301,9 @@
 		padding-bottom: 56.25%;
 		height: 0;
 		overflow: hidden;
+		@include r(1100) {
+			margin-bottom: 60px;
+		}
 		iframe {
 			position: absolute;
 			top: 0;

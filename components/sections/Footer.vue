@@ -1,15 +1,15 @@
 <template>
 	<footer class="footer">
 		<div class="footer__left">
-			<router-link class="footer__logo" to="/">
+			<nuxt-link class="footer__logo" to="/">
 				<img src="~/assets/img/svg/logo-top.svg" alt="Логотип Балтик+">
-			</router-link>
-			<a href="#" class="footer__link">
+			</nuxt-link>
+			<nuxt-link to="/about/politics/" class="footer__link">
 				Политика конфиденциальности
-			</a>
-			<a href="#" class="footer__link">
+			</nuxt-link>
+			<nuxt-link to="#" class="footer__link">
 				Пользовательское соглашение
-			</a>
+			</nuxt-link>
 		</div>
 		<div class="footer__right">
 			<div class="footer__socials">
@@ -64,7 +64,7 @@
 				</p>
 				<br>
 				<p>
-					© 2019 «Балтик Плюс» 12+. Все права защищены. Разработано <a href="https://diez.io/" target="_blank">#dieztech</a>
+					© 2019 «Балтик Плюс» 12+. <br> Все права защищены. <br> Разработано <a href="https://diez.io/" target="_blank">#dieztech</a>
 				</p>
 			</div>
 		</div>
@@ -84,15 +84,33 @@
 		flex-shrink: 0;
 		padding-top: 40px;
 		padding-bottom: 80px;
+		@include r(1100) {
+			display: block;
+			padding-top: 30px;
+			padding-bottom: 30px;
+		}
 		&__left {
 			flex-shrink: 0;
 			width: 247px;
 			background-color: $light;
+			@include r(1100) {
+				width: 248px;
+				text-align: center;
+				padding: 15px;
+				margin-left: auto;
+				margin-right: auto;
+				margin-bottom: 25px;
+			}
 		}
 		&__right {
 			padding-left: 20px;
 			display: flex;
 			padding-top: 16px;
+			@include r(1100) {
+				display: block;
+				padding-left: 0px;
+				padding-top: 0px;
+			}
 		}
 		&__logo {
 			padding-top: 12px;
@@ -118,6 +136,13 @@
 		&__socials {
 			margin-right: 20px;
 			padding-top: 4px;
+			@include r(1100) {
+				width: 100%;
+				max-width: 248px;
+				margin-left: auto;
+				margin-right: auto;
+				margin-bottom: 25px;
+			}
 		}
 		&__text {
 			color: $light;
@@ -125,11 +150,23 @@
 			line-height: 19px;
 			flex-grow: 1;
 			min-width: 0px;
+			@include r(1100) {
+				width: 100%;
+				max-width: 248px;
+				margin-left: auto;
+				margin-right: auto;
+			}
 			a {
 				text-decoration: none;
 				color: #EF4136;
 				&:hover {
 					color: $light;
+				}
+			}
+			br {
+				display: none;
+				@include r(1100) {
+					display: block;
 				}
 			}
 		}
