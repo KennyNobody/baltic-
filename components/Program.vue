@@ -1,29 +1,29 @@
 <template>
 	<article class="program">
 		<div class="program__thumb">
-			<img :src="programThumb" :alt="programTitle">
+			<img :src="preview" :alt="title">
 		</div>
 		<div class="program__content">
 			<h3 class="program__title">
-				{{ programTitle }}
+				{{ title }}
 			</h3>
 			<div class="program__info">
-				<p class="program__time" v-if="programTime">
-					<strong>В эфире:</strong> {{ programTime }}
+				<p class="program__time" v-if="time">
+					<strong>В эфире:</strong> {{ time }}
 				</p>
-				<p class="program__author" v-if="programAuthor">
-					<strong>Ведущие:</strong> {{ programAuthor }}
+				<p class="program__author" v-if="author">
+					<strong>Ведущие:</strong> {{ author }}
 				</p>
 			</div>
 			<p class="program__text">
-				{{ programText }}
+				{{ content }}
 			</p>
 		</div>
-		<div class="program__link">
+		<nuxt-link :to='"/programs/" + id' class="program__link">
 			<svg>
 				<use xlink:href="#icon-icon-arrow"></use>
 			</svg>
-		</div>
+		</nuxt-link>
 	</article>
 </template>
 
@@ -33,16 +33,17 @@
 
 	export default {
 		name: 'program',
-		data () {
-			return {
-				programPlay: false,
-				programThumb: 'http://placehold.it/1000x600',
-				programTitle: 'Утро на Балтик Плюс',
-				programText: 'Вы ищете текст любимой песни? У нас вы найдете слова и перевод любимых зарубежных песен 70 х 80 х 90 х и 2000 х на русский язык, а также истории и интересные факты о создании музыкальных хитов. Читайте и слушайте онлайн на "Радио 7 на семи холмах".',
-				programTime: '17:00-21:00 (Пн-Пт)',
-				programAuthor: 'Артём Королёв'
-			}
-		},
+		props: ['id', 'programPlay', 'preview', 'title', 'content', 'time', 'author'],
+		// data () {
+		// 	return {
+		// 		programPlay: false,
+		// 		programThumb: 'http://placehold.it/1000x600',
+		// 		programTitle: 'Утро на Балтик Плюс',
+		// 		programText: 'Вы ищете текст любимой песни? У нас вы найдете слова и перевод любимых зарубежных песен 70 х 80 х 90 х и 2000 х на русский язык, а также истории и интересные факты о создании музыкальных хитов. Читайте и слушайте онлайн на "Радио 7 на семи холмах".',
+		// 		programTime: '17:00-21:00 (Пн-Пт)',
+		// 		programAuthor: 'Артём Королёв'
+		// 	}
+		// },
 		components: {
 			VClamp,
 		},	

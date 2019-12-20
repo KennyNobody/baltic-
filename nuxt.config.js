@@ -26,10 +26,11 @@ module.exports = {
 	plugins: [
 	{ src: '~/plugins/swiper.js', ssr: false },
 	{ src: '~/plugins/datepicker', ssr: false },
-
+	{ src: '~/plugins/mq', ssr: false },
 	],
 	css: [
 	'~/node_modules/@fancyapps/fancybox/dist/jquery.fancybox.min.css',
+	'~/node_modules/simplebar/dist/simplebar.min.css'
 	],
 	styleResources: {
 		scss: [

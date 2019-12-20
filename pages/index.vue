@@ -65,23 +65,8 @@
 				</p>
 			</h2>
 			<div class="home-programs__items">
-				<a href="#" class="home-programs__item">
-					<img src="http://placehold.it/600x600" alt="Альт">
-				</a>
-				<a href="#" class="home-programs__item">
-					<img src="http://placehold.it/600x600" alt="Альт">
-				</a>
-				<a href="#" class="home-programs__item">
-					<img src="http://placehold.it/600x600" alt="Альт">
-				</a>
-				<a href="#" class="home-programs__item">
-					<img src="http://placehold.it/600x600" alt="Альт">
-				</a>
-				<a href="#" class="home-programs__item">
-					<img src="http://placehold.it/600x600" alt="Альт">
-				</a>
-				<a href="#" class="home-programs__item">
-					<img src="http://placehold.it/600x600" alt="Альт">
+				<a href="#" class="home-programs__item" v-for="item in programs" v-bind:key="item.id">
+					<img :src="item.preview" alt="Альт">
 				</a>
 				<div class="home-programs__item--clear"></div>
 				<div class="home-programs__item--clear"></div>
@@ -159,6 +144,9 @@
 			}
 		},
 		computed: {
+			programs() {
+				return this.$store.getters['programs/programsFront']
+			},
 			blog() {
 				return this.$store.getters['blog/blogFront']
 			}

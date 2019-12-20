@@ -1,9 +1,10 @@
 <template>
 	<header class="header">
 		<div class="header__container">
-			<nuxt-link class="header__logo" to="/" exact>
+			<!-- <nuxt-link class="header__logo" to="/" exact>
 				<img src="~/assets/img/svg/logo-top.svg" alt="Логотип Балтик+">
-			</nuxt-link>
+			</nuxt-link> -->
+			<appLogo></appLogo>
 			<div class="header__content">
 				<div class="header__topline">
 					<div class="header__contacts">
@@ -83,6 +84,7 @@
 </template>
 
 <script>
+	import appLogo from '~/components/Logo'
 	export default {
 		name: 'Header',
 		// data () {
@@ -108,6 +110,9 @@
 				await store.dispatch('setting/fetch')
 			}
 		},
+		components: {
+			appLogo
+		},	
 	}
 </script>
 
@@ -132,37 +137,7 @@
 			margin-left: auto;
 			margin-right: auto;
 		}
-		&__logo {
-			flex-shrink: 0;
-			padding-top: 12px;
-			padding-right: 23px;
-			padding-bottom: 8px;
-			position: relative;
-			width: 247px;
-			background-color: $light;
-			padding: 15px;
-			display: flex;
-			align-items: center;
-			&:after {
-				content: "";
-				position: absolute;
-				right: 100%;
-				width: 100vw;
-				top: 0px;
-				bottom: 0px;
-				display: block;
-				background-color: $light;
-			}
-			img {
-				display: block;
-				height: 100%;
-				width: 100%;
-				object-fit: contain;
-			}
-			&:hover {
-				opacity: 0.7;
-			}
-		}
+		
 		&__content {
 			color: $light;
 			padding-top: 16px;
@@ -256,9 +231,13 @@
 				font-size: 24px;
 				line-height: 33px;
 			}
+			&:hover {
+				opacity: 0.7;
+			}
 		}
 		&__discript {
 			font-size: 14px;
+			font-weight: 600;
 			line-height: 19px;
 			&--red {
 				color: $red;

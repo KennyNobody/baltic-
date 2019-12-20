@@ -11,61 +11,19 @@
 					<p class="playlist__title playlist__title--padding">
 						История воспроизведения
 					</p>
-					<div class="playlist__song">
-						<p class="playlist__time">
-							13:46
-						</p>
-						<p class="playlist__author">
-							{{ author }}
-						</p>
-						<p class="playlist__name">
-							{{ title }}
-						</p>
-					</div>
-					<div class="playlist__song">
-						<p class="playlist__time">
-							13:46
-						</p>
-						<p class="playlist__author">
-							{{ author }}
-						</p>
-						<p class="playlist__name">
-							{{ title }}
-						</p>
-					</div>
-					<div class="playlist__song">
-						<p class="playlist__time">
-							13:46
-						</p>
-						<p class="playlist__author">
-							{{ author }}
-						</p>
-						<p class="playlist__name">
-							{{ title }}
-						</p>
-					</div>
-					<div class="playlist__song">
-						<p class="playlist__time">
-							13:46
-						</p>
-						<p class="playlist__author">
-							{{ author }}
-						</p>
-						<p class="playlist__name">
-							{{ title }}
-						</p>
-					</div>
-					<div class="playlist__song">
-						<p class="playlist__time">
-							13:46
-						</p>
-						<p class="playlist__author">
-							{{ author }}
-						</p>
-						<p class="playlist__name">
-							{{ title }}
-						</p>
-					</div>
+					<simplebar class="playlist__list">
+						<div class="playlist__song" v-for="item in player.playlist" v-bind:key="item.id">
+							<p class="playlist__time">
+								13:46
+							</p>
+							<p class="playlist__author">
+								{{ item.author }}
+							</p>
+							<p class="playlist__name">
+								{{ item.title }}
+							</p>
+						</div>
+					</simplebar>
 				</div>
 			</div>
 		</transition>
@@ -97,30 +55,30 @@
 			</div>
 		</div>
 		<div class="player__thumb">
-			<img v-bind:src="thumb" alt="">
+			<img v-bind:src="player.thumb" :alt="player.title">
 		</div>
 		<div class="player__right">
 			<div class="now">
 				<p class="now__discript">
 					Сейчас в эфире:
 				</p>
-				<div class="now__line">
+				<!-- <div class="now__line">
 					<div class="now__progress" v-bind:style="{ width : progress + '%'}"></div>
-				</div>
+				</div> -->
 				<p class="now__text">
 					<span class="now__author">
-						{{ author }}
+						{{ player.author }}
 					</span>
 					<span class="now__defis">-</span>
 					<br class="now__br">
 					<span class="now__title">
-						{{ title }}
+						{{ player.title }}
 					</span>
 				</p>
 			</div>
-			<div class="volume">
+<!-- 			<div class="volume">
 				<div class="volume__line"></div>
-			</div>
+			</div> -->
 			<div class="player__toggle" v-on:click="open = !open">
 				<svg class="player__drop-icon" v-bind:class="{'player__drop-icon--open': open === true}">
 					<use xlink:href="#icon-icon-arrow"></use>
@@ -131,20 +89,26 @@
 </template>
 
 <script>
+	import simplebar from 'simplebar-vue';
+
 	export default {
 		name: 'Player',
-		data: function () {
+		data () {
 			return {
 				play: false,
-				format: 'radio',
-				thumb: 'https://images.genius.com/133f0dd4933c0e7973f57619de0736ae.712x712x1.jpg',
-				author: 'Гарри Топор',
-				title: 'Собеседник',
 				open: false,
 				progress: 30,
 				volume: 50
 			}
 		},
+		computed: {
+			player(params) {
+				return this.$store.getters['player/player']
+			},
+		},
+		components: {
+			simplebar
+		}
 	}
 </script>
 
@@ -364,7 +328,10 @@
 		bottom: 100%;
 		left: 0px;
 		right: 0px;
-		height: calc(100vh - 100px);
+		// height: calc(100vh - 100px);
+		height: auto;
+		// height: 100%;
+		max-height: calc(100vh - 244px);
 		display: flex;
 		box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
 		z-index: -1;
@@ -373,6 +340,7 @@
 			background-color: $light;
 			padding: 16px 15px;
 			color: $dark;
+			flex-shrink: 0;
 		}
 		&__right {
 			background-color: #00496A;
@@ -380,6 +348,7 @@
 			color: $light;
 			padding-top: 16px;
 			padding-bottom: 16px;
+			min-width: 0px;
 		}
 		&__title {
 			margin-bottom: 15px;
@@ -389,6 +358,10 @@
 			padding-right: 20px;
 			line-height: 27px;
 		}
+		&__list {
+			height: 100%;
+			// overflow-y: scroll; 
+		}
 		&__song {
 			display: flex;
 			padding-top: 7px;
@@ -396,28 +369,29 @@
 			transition: 0.3s all;
 			padding-left: 20px;
 			padding-right: 20px;
-			&:hover {
-				cursor: pointer;
-				background-color: $blue;
-				.playlist__time {
-					color: $dark;
-				}
-			}
+			width: 100%;
+			overflow: hidden; 
 		}
 		&__time {
 			color: $blue;
 			width: 88px;
 			transition: 0.3s all;
+			flex-shrink: 0;
 		}
 		&__author {
 			font-weight: bold;
 			font-size: 16px;
 			line-height: 22px;
 			margin-right: 10px;
+			flex-shrink: 0;
 		}
 		&__name {
 			font-size: 16px;
 			line-height: 22px;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			min-width: 0px;
+			overflow: hidden;
 		}
 	}
 </style>

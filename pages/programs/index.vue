@@ -10,9 +10,21 @@
 				</svg>
 			</div>
 			<p class="title__text">Программы</p>
+			<nuxt-link to="/shedule/" class="title__btn">
+				Сетка программ
+			</nuxt-link>
 		</h2>
 		<div class="page-programs">
-			<appProgram v-for="item in programCount" v-bind:key="item.id"></appProgram>
+			<appProgram 
+			v-for="item in programs"
+			:preview="item.preview"
+			:title="item.title"
+			:time="item.time"
+			:id="item.id"
+			:author="item.author"
+			:content="item.text"
+			v-bind:key="item.id"
+			></appProgram>
 		</div>
 	</div>
 </template>
@@ -36,6 +48,11 @@
 			}
 		},
 		name: 'home',
+		computed: {
+			programs() {
+				return this.$store.getters['programs/programs']
+			},
+		},
 		components: {
 			appProgram
 		}
