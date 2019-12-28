@@ -83,6 +83,11 @@
 			width: 247px;
 			flex-shrink: 0px;
 			flex-shrink: 0;
+			&-thumb {
+				display: block;
+				width: 100%;
+				height: auto;
+			}
 		}
 		&__main {
 			padding-left: 20px;

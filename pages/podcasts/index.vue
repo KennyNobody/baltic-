@@ -23,14 +23,25 @@
 			</div>
 			<select class="filter__select" v-model="genre">
 				<option value="" selected>По подкасту</option>
-				<option v-for="item in podcastsList" value="item.value" v-bind:key="item.id">{{ item.name }}</option>
+				<option v-for="item in podcasts" value="item.value" v-bind:key="item.id">{{ item.name }}</option>
 			</select>
 			<div class="filter__all" v-on:click="clearFilter">
 				Все подкасты
 			</div>
 		</div>
 		<div class="page-news__articles">
-			<appPodcast v-for="item in podcastsPerPage" v-bind:key="item.id"></appPodcast>
+			<appPodcast
+				v-for="item in podcasts"
+				v-bind:key="item.id"
+				:title="item.title"
+				:date="item.date"
+				:play="item.play"
+				:id="item.id"
+				:slug="item.slug"
+				:time="item.time"
+				:thumb="item.thumb"
+				:info="item.info"
+				></appPodcast>
 		</div>
 		<div class="page-news__pagination">
 			<appPagination></appPagination>
@@ -57,29 +68,19 @@
 				podcastsPerPage: 16,
 				filterDate: '',
 				genre: '',
-				podcastsList: [
-				{
-					name: 'Хороший подкаст',
-					podcastId: '1'
-				},
-				{
-					name: 'Средний подкаст',
-					podcastId: '2'
-				},
-				{
-					name: 'Плохой подкаст',
-					podcastId: '3'
-				},
-				]
 			}
 		},
 		components: {
 			appPodcast,
 			appPagination
 		},
+		computed: {
+			podcasts() {
+				return this.$store.getters['podcasts/podcasts']
+			},
+		},
 		methods: {
 			clearFilter() {
-				console.log('Привет');
 				this.filterDate = '';
 				this.genre = '';
 			}

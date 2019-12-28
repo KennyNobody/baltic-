@@ -1,9 +1,6 @@
 <template>
 	<header class="header">
 		<div class="header__container">
-			<!-- <nuxt-link class="header__logo" to="/" exact>
-				<img src="~/assets/img/svg/logo-top.svg" alt="Логотип Балтик+">
-			</nuxt-link> -->
 			<appLogo></appLogo>
 			<div class="header__content">
 				<div class="header__topline">
@@ -25,8 +22,8 @@
 							</p>
 						</div>
 						<div class="h-contact">
-							<a :href="'viber://chat?number=' + contacts.phones.viber.link" class="h-contact__link">
-								{{ contacts.phones.viber.code }} <strong>{{ contacts.phones.viber.phone }}</strong>
+							<a :href="'viber://chat?number=' + contacts.phones.messengers.link" class="h-contact__link">
+								{{ contacts.phones.messengers.code }} <strong>{{ contacts.phones.messengers.phone }}</strong>
 							</a>
 							<p class="h-contact__discript h-contact__discript--blue">
 								WhatsApp, Viber
@@ -61,9 +58,6 @@
 						<nuxt-link active-class="header__link--active" class="header__link" to="/" exact>
 							Главная
 						</nuxt-link>
-						<nuxt-link active-class="header__link--active" class="header__link" to="/news/">
-							Новости
-						</nuxt-link>
 						<nuxt-link active-class="header__link--active" class="header__link" to="/programs/">
 							Программы
 						</nuxt-link>
@@ -73,6 +67,9 @@
 						<nuxt-link class="header__link" to="/about/history/">
 							О радио
 						</nuxt-link>
+						<nuxt-link active-class="header__link--active" class="header__link" to="/advertising/">
+							Рекламодателям
+						</nuxt-link>
 						<nuxt-link active-class="header__link--active" class="header__link" to="/contacts/">
 							Контакты
 						</nuxt-link>
@@ -80,23 +77,112 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="header__container header__container--mob">
+			<nuxt-link to="/" exact class="header__mob-logo">
+				<svg>
+					<use xlink:href="#icon-icon-mob-logo"></use>
+				</svg>
+			</nuxt-link>
+
+			<div class="header__burger" v-on:click="menuOpen = true">
+				<svg>
+					<use xlink:href="#icon-icon-burger"></use>
+				</svg>
+			</div>
+		</div>
+
+		<transition name="fade">
+			<div class="mob-menu" v-if="menuOpen">
+				<div class="mob-menu__content">
+					<div class="mob-menu__header">
+						<div class="h-contact">
+							<a :href="'tel:+' + contacts.phones.broadcast.link" class="h-contact__link">
+								{{ contacts.phones.broadcast.code }} <strong>{{ contacts.phones.broadcast.phone }}</strong>
+							</a>
+							<p class="h-contact__discript h-contact__discript--red">
+								Прямой эфир
+							</p>
+						</div>
+						<div class="h-contact">
+							<a :href="'tel:+' + contacts.phones.office.link" class="h-contact__link">
+								{{ contacts.phones.office.code }} <strong>{{ contacts.phones.office.phone }}</strong>
+							</a>
+							<p class="h-contact__discript h-contact__discript--blue">
+								Офис
+							</p>
+						</div>
+						<div class="h-contact">
+							<a :href="'viber://chat?number=' + contacts.phones.messengers.link" class="h-contact__link">
+								{{ contacts.phones.messengers.code }} <strong>{{ contacts.phones.messengers.phone }}</strong>
+							</a>
+							<p class="h-contact__discript h-contact__discript--blue">
+								WhatsApp, Viber
+							</p>
+						</div>
+					</div>
+					<div class="mob-menu__middle">
+						<nuxt-link class="mob-menu__link" to="/" exact>
+							Главная
+						</nuxt-link>
+						<nuxt-link class="mob-menu__link" to="/programs/">
+							Программы
+						</nuxt-link>
+						<nuxt-link class="mob-menu__link" to="/podcasts/">
+							Подкасты
+						</nuxt-link>
+						<nuxt-link class="mob-menu__link" to="/about/history/">
+							О радио
+						</nuxt-link>
+						<nuxt-link class="mob-menu__link" to="/advertising/">
+							Рекламодателям
+						</nuxt-link>
+						<nuxt-link class="mob-menu__link" to="/contacts/">
+							Контакты
+						</nuxt-link>
+					</div>
+					<div class="mob-menu__footer">
+						<a :href="socials.vkontakte" v-if="socials.vkontakte" class="header__soc-link" target="_blank">
+							<svg>
+								<use xlink:href="#icon-icon-vk"></use>
+							</svg>
+						</a>
+						<a :href="socials.instagram" v-if="socials.instagram" class="header__soc-link" target="_blank">
+							<svg>
+								<use xlink:href="#icon-icon-instagram"></use>
+							</svg>
+						</a>
+						<a :href="socials.facebook" v-if="socials.facebook" class="header__soc-link" target="_blank">
+							<svg>
+								<use xlink:href="#icon-icon-facebook"></use>
+							</svg>
+						</a>
+						<a :href="socials.youtube" v-if="socials.youtube" class="header__soc-link" target="_blank">
+							<svg>
+								<use xlink:href="#icon-icon-youtube"></use>
+							</svg>
+						</a>
+					</div>
+				</div>
+				<div class="mob-menu__overlay" v-on:click="menuOpen = false">
+
+				</div>
+			</div>
+		</transition>
 	</header>
+
+	
 </template>
 
 <script>
 	import appLogo from '~/components/Logo'
 	export default {
 		name: 'Header',
-		// data () {
-		// 	return {
-		// 		codeBroadcast: '(4012)',
-		// 		phoneBroadcast: '952-444',
-		// 		codeOffice: '(4012)',
-		// 		phoneOffice: '952-555',
-		// 		codeViber: '(952)',
-		// 		phoneViber: '222-88-885'
-		// 	}
-		// },
+		data () {
+			return {
+				menuOpen: false
+			}
+		},
 		computed: {
 			socials() {
 				return this.$store.getters['contacts/socials']
@@ -109,10 +195,19 @@
 			if (store.getters['setting/setting'].length === 0) {
 				await store.dispatch('setting/fetch')
 			}
+
+			if (store.getters['contacts/socials'].length === 0) {
+				await store.dispatch('contacts/fetch')
+			}
 		},
 		components: {
 			appLogo
-		},	
+		},
+		watch:{
+			$route (to, from){
+				this.menuOpen = false;
+			}
+		} 
 	}
 </script>
 
@@ -126,6 +221,10 @@
 		right: 0px;
 		z-index: 4;
 		transition: 0.3s all;
+		@include r(1100) {
+			background-color: $dark;
+			box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+		}
 		&--scrolled {
 			box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
 		}
@@ -135,7 +234,21 @@
 			padding-left: 15px;
 			padding-right: 15px;
 			margin-left: auto;
+			max-width: 100%;
 			margin-right: auto;
+			@include r(1100) {
+				display: none;
+			}
+			&--mob {
+				display: none;
+				@include r(1100) {
+					display: flex;
+					padding-top: 15px;
+					padding-bottom: 15px;
+					justify-content: space-between;
+					align-items: center;
+				}
+			}
 		}
 		
 		&__content {
@@ -148,6 +261,9 @@
 			min-width: 0px;
 			background-color: $dark;
 			position: relative;
+			@include r(1100) {
+				// display: none;
+			}
 			&:after {
 				content: "";
 				position: absolute;
@@ -216,20 +332,47 @@
 				opacity: 0.7;
 			}
 		}
+		&__mob-logo {
+			svg {
+				display: block;
+				width: 220px;
+				height: 20px;
+			}
+		}
+		&__burger {
+			padding: 10px;
+			svg {
+				display: block;
+				height: 20px;
+				width: 20px;
+			}
+		}
 	}
 
 	.h-contact {
 		margin-right: 32px;
+		@include r(1100) {
+			margin-right: 0px;
+			text-align: center;
+		}
 		&__link {
 			color: $light;
 			font-size: 16px;
 			line-height: 26px;
 			text-decoration: none;
 			margin-bottom: -2px;
+			@include r(1100) {
+				margin-bottom: 0px;
+			}
 			strong {
 				font-weight: bold;
 				font-size: 24px;
 				line-height: 33px;
+				@include r(1100) {
+					font-size: 16px;
+					line-height: 26px;
+					font-weight: normal;
+				}
 			}
 			&:hover {
 				opacity: 0.7;
@@ -246,5 +389,59 @@
 				color: $blue;
 			}
 		}
+	}
+
+	.mob-menu {
+		position: fixed;
+		top: 0px;
+		bottom: 0px;
+		left: 0px;
+		right: 0px;
+		display: flex;
+		justify-content: space-between;
+		z-index: 5;
+		&__content {
+			padding-left: 15px;
+			padding-right: 15px;
+			background-color: $dark;
+			min-width: 300px;
+			width: 60%;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
+		&__header {
+			padding-top: 15px;
+			padding-bottom: 15px;
+		}
+		&__middle {
+			text-align: center;
+		}
+		&__link {
+			display: block;
+			font-size: 18px;
+			color: $light;
+			text-decoration: none;
+			margin-bottom: 5px;
+		}
+		&__footer {
+			display: flex;
+			justify-content: center;
+			padding-top: 20px;
+			padding-bottom: 20px;
+		}
+		&__overlay {
+			background-color: rgba(0, 0, 0, 0.7);
+			display: block;
+			flex-grow: 1;
+			min-width: 0px;
+		}
+	}
+
+	.fade-enter-active, .fade-leave-active {
+		transition: opacity .2s;
+	}
+	.fade-enter, .fade-leave-to {
+		opacity: 0;
 	}
 </style>

@@ -3,11 +3,9 @@ import VueMq from 'vue-mq';
 
 Vue.use(VueMq, {
   breakpoints: {
-    xs: 576,
-    sm: 768,
-    md: 992,
-    lg: 1200,
-    xl: Infinity
+    sm: 520,
+    md: 1100,
+    full: Infinity
   },
-  defaultBreakpoint: 'lg'
+  defaultBreakpoint: 'full'
 });

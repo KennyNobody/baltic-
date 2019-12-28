@@ -1,8 +1,8 @@
 <template>
 	<article class="podcast">
-		<div class="podcast__thumb" :style="{ 'background-image': 'url(' + podcastThumb + ')' }">
-			<div class="podcast__btn" v-on:click="podcastPlay = !podcastPlay">
-				<svg class="podcast__play-icon" v-if="podcastPlay == false">
+		<div class="podcast__thumb" :style="{ 'background-image': 'url(' + thumb + ')' }">
+			<div class="podcast__btn" v-on:click="play = !play">
+				<svg class="podcast__play-icon" v-if="play == false">
 					<use xlink:href="#icon-icon-play"></use>
 				</svg>
 				<svg class="podcast__playing-icon" v-else>
@@ -12,21 +12,21 @@
 		</div>
 		<div class="podcast__content">
 			<div class="podcast__header">
-				<time class="podcast__time">30/09/2019</time>
+				<time class="podcast__time">{{ date }}</time>
 				<svg class="podcast__share-icon">
 					<use xlink:href="#icon-icon-share"></use>
 				</svg>
 			</div>
 			<div class="podcast__info">
-				<h3 class="podcast__title">
-					<v-clamp :max-lines="2">{{ podcastTitle }}</v-clamp>
-				</h3>
+				<nuxt-link :to='"/podcasts/" + id' class="podcast__title">
+					<v-clamp :max-lines="2">{{ title }}</v-clamp>
+				</nuxt-link>
 				<div class="podcast__footer">
 					<div class="podcast__discript">
-						<v-clamp :max-lines="1">{{ podcastInfo }}</v-clamp>
+						<v-clamp :max-lines="1">{{ info }}</v-clamp>
 					</div>
 					<div class="podcast__duration">
-						{{ podcastTime }}
+						{{ time }}
 					</div>
 				</div>
 			</div>
@@ -40,14 +40,9 @@
 
 	export default {
 		name: 'podcast',
+		props: ['title', 'time', 'date', 'thumb', 'info', 'slug', 'id', 'play'],
 		data () {
-			return {
-				podcastPlay: false,
-				podcastThumb: 'http://placehold.it/1000x600',
-				podcastTitle: 'Все свои',
-				podcastInfo: 'выпуск №116 (24.09.19)',
-				podcastTime: '25:12'
-			}
+			return {}
 		},
 		components: {
 			VClamp
@@ -121,6 +116,12 @@
 			line-height: 28px;
 			font-weight: 600;
 			margin-bottom: 6px;
+			color: $dark;
+			text-decoration: none;
+			display: block;
+			&:hover {
+				opacity: 0.7;
+			}
 		}
 		&__discript {
 			font-size: 16px;

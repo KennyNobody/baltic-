@@ -65,6 +65,9 @@
 			flex-direction: column;
 			min-height: 100vh;
 			justify-content: space-between;
+			@include r(1100) {
+				padding-top: 100px;
+			}
 			&:before {
 				content: "";
 				position: absolute;

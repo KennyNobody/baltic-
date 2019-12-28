@@ -69,8 +69,9 @@
 					<span class="now__author">
 						{{ player.author }}
 					</span>
-					<span class="now__defis">-</span>
-					<br class="now__br">
+					<!-- <span class="now__defis">-</span>
+					<br class="now__br"> -->
+					<br>
 					<span class="now__title">
 						{{ player.title }}
 					</span>
@@ -134,6 +135,10 @@
 			padding: 8px 15px;
 			display: flex;
 			align-items: center;
+			@include r(880) {
+				background-color: #00496A;
+				width: auto;
+			}
 		}
 		&__play {
 			background-color: $red;
@@ -172,6 +177,9 @@
 			min-width: 0px;
 			padding-top: 4px;
 			margin-left: 28px;
+			@include r(880) {
+				display: none;
+			}
 		}
 		&__thumb {
 			height: 100%;
@@ -193,6 +201,9 @@
 			align-items: center;
 			background-color: #00496A;
 			padding: 12px 20px;
+			@include r(1100) {
+				padding-left: 0px;
+			}
 		}
 		&__toggle {
 			width: 46px;
@@ -241,6 +252,9 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
+		@include r(880) {
+			display: none;
+		}
 		&__title {
 			color: $red;
 			margin-bottom: 6px;
@@ -341,6 +355,9 @@
 			padding: 16px 15px;
 			color: $dark;
 			flex-shrink: 0;
+			@include r(1100) {
+				display: none;
+			}
 		}
 		&__right {
 			background-color: #00496A;

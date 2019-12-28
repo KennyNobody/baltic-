@@ -22,7 +22,7 @@ export const state = () => ({
 })
 
 export const mutations = {
-	setSlider (state, markers) {
+	setMarkers (state, markers) {
 		state.markers = markers
 	}
 }

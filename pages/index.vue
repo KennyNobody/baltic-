@@ -83,7 +83,18 @@
 				</p>
 			</h2>
 			<div class="home-podcasts__articles">
-				<appPodcast v-for="item in podcastsCount" v-bind:key="item.id"></appPodcast>
+				<appPodcast
+				v-for="item in podcasts"
+				v-bind:key="item.id"
+				:title="item.title"
+				:date="item.date"
+				:play="item.play"
+				:id="item.id"
+				:slug="item.slug"
+				:time="item.time"
+				:thumb="item.thumb"
+				:info="item.info"
+				></appPodcast>
 			</div>
 		</section>
 		<section class="home-video">
@@ -149,7 +160,10 @@
 			},
 			blog() {
 				return this.$store.getters['blog/blogFront']
-			}
+			},
+			podcasts() {
+				return this.$store.getters['podcasts/podcastsFront']
+			},
 		},
 		components: {
 			appSlider,

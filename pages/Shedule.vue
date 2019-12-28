@@ -212,7 +212,7 @@
 			appSidebar
 		},
 		mounted() {
-			let date = new Date(2014, 0, 3);
+			let date = new Date();
 			let days = [7, 1, 2, 3, 4, 5, 6];
 
 			this.currentTab = days[date.getDay()];

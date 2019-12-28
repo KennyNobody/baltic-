@@ -4,6 +4,7 @@ body {
 	font-family: $main;
 	font-smoothing: antialiased;
 	overflow-x: hidden;
+	color: $dark;
 	@include r(1100) {
 
 	}

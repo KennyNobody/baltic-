@@ -13,68 +13,65 @@
 		</h2>
 		<div class="contacts__columns">
 			<div class="contacts__column">
-				<div class="contacts__map"></div>
+				<div class="contacts__map" id="map"></div>
 			</div>
 			<div class="contacts__column">
-				<p class="contacts__bold">
-					Информационное агентство «Балтик Плюс»
-				</p>
-				<p>
-					236023, Калининград, ул. Яналова, 2
-				</p>
-				<a href="" class="contacts__link">
-					Посмотреть на карте
-				</a>
-				<br>
-				<br>
-				<a href="" class="contacts__phone">
-					+7 (4012) 952-555
-				</a>
-				<span>(многоканальный)</span>
-				<br>
-				<br>
-				<p class="contacts__bold">
-					Рекламный отдел «Балтик Плюс»
-				</p>
-				<p>
-					236023, Калининград, ул. Третьяковская, 10
-				</p>
-				<a href="" class="contacts__link">
-					Посмотреть на карте
-				</a>
-				<br>
-				<br>
-				<a href="" class="contacts__phone">
-					+7 (4012) 952-555
-				</a>
-				<span>(многоканальный)</span>
-				<br>
-				<a href="mailto:reklama@balticplus.ru" class="contacts__mail">
-					reklama@balticplus.ru
-				</a>
-				<br>
-				<br>
-				<p class="contacts__bold">
-					Прямой эфир «Балтик Плюс»
-				</p>
-				<a href="" class="contacts__phone">
-					+7 (4012) 952-555
-				</a>
-				<span>(многоканальный)</span> 
-				<br>
-				<a href="mailto:online@balticplus.ru" class="contacts__mail">
-					online@balticplus.ru
-				</a>
-				<br>
-				<br>
-				<p>
-					Все ссылки радиостанции на подкасты, <br>
-					соцсети, новости, видео, онлайн вещание <br>
-					можно найти по единому адресу
-				</p>
-				<a href="http://taplink.cc/baltic_plus" target="_blank" class="contacts__link">
+				<template v-if="contacts.phones.office">
+					<p class="contacts__bold">
+						{{ contacts.phones.office.title }}
+					</p>
+					<p>
+						{{ contacts.phones.office.adress }}
+					</p>
+					<!-- <div class="contacts__link">
+						Посмотреть на карте
+					</div> -->
+					<a :href="contacts.phones.office.link" class="contacts__phone">
+						+7 {{ contacts.phones.office.code }} {{ contacts.phones.office.phone }}
+					</a>
+					<span v-if="contacts.phones.office.multichannel">(многоканальный)</span>
+					<br>
+					<br>
+				</template>
+				<template>
+					<p class="contacts__bold">
+						{{ contacts.phones.promo.title }}
+					</p>
+					<p>
+						{{ contacts.phones.promo.adress }}
+					</p>
+					<!-- <a href="" class="contacts__link">
+						Посмотреть на карте
+					</a> -->
+					<a :href="contacts.phones.promo.link" class="contacts__phone">
+						+7 {{ contacts.phones.promo.code }} {{ contacts.phones.promo.phone }}
+					</a>
+					<span v-if="contacts.phones.promo.multichannel">(многоканальный)</span><br>
+					<a :href="`mailto:${contacts.phones.promo.email}`" class="contacts__mail">
+						{{ contacts.phones.promo.email }}
+					</a>
+					<br>
+					<br>
+				</template>
+				<template>
+					<p class="contacts__bold">
+						{{ contacts.phones.broadcast.title }}
+					</p>
+					<a :href="contacts.phones.broadcast.link" class="contacts__phone">
+						+7 {{ contacts.phones.broadcast.code }} {{ contacts.phones.broadcast.phone }}
+					</a>
+					<span v-if="contacts.phones.broadcast.multichannel">(многоканальный)</span> 
+					<br>
+					<a :href="`mailto:${contacts.phones.broadcast.email}`" class="contacts__mail">
+						{{ contacts.phones.broadcast.email }}
+					</a>
+					<br>
+					<br>
+				</template>
+				<p v-html="contacts.phones.discript"></p>
+<!-- 				<a href="http://taplink.cc/baltic_plus" target="_blank" class="contacts__link">
 					http://taplink.cc/baltic_plus
-				</a>
+				</a> -->
 			</div>
 		</div>
 		<h2 class="title">
@@ -87,6 +84,7 @@
 
 <script>
 	import appForm from '~/components/ContactForm'
+	import { yandexMap, ymapMarker } from 'vue-yandex-maps'
 
 
 	export default {
@@ -98,9 +96,59 @@
 				]
 			}
 		},
-		name: 'home',
+		data () {
+			return {
+				massage: 'привет'
+			}
+		},
+		name: 'contacts',
 		components: {
 			appForm
+		},
+		computed: {
+			contacts() {
+				return this.$store.getters['contacts/contacts']
+			},
+		},
+		async fetch({store}) {
+			if (store.getters['setting/setting'].length === 0) {
+				await store.dispatch('setting/fetch')
+			}
+		},
+		mounted() {
+			let myMap;
+			let myPlacemark;
+			let myPlacemark2;
+
+			function init () {
+				
+				myMap = new ymaps.Map(
+					'map', {
+						center: [54.739337207314534,20.481609053816385],
+						zoom: 12,
+					}, {
+						searchControlProvider: 'yandex#search'
+					}),
+				myPlacemark = new ymaps.Placemark([54.74444506993298,20.47730349999996], {
+					balloonContentHeader: "Рекламный отдел «Балтик Плюс»",
+					balloonContentBody: "236023, Калининград, ул. Третьяковская, 10",
+				}),
+				myPlacemark2 = new ymaps.Placemark([54.73025506995538,20.488244999999978], {
+					balloonContentHeader: "Информационное агентство «Балтик Плюс»",
+					balloonContentBody: "Калининград, ул. Яналова, 2",
+				});
+
+				myMap.geoObjects.add(myPlacemark);
+				myMap.geoObjects.add(myPlacemark2);
+			}
+
+			function setTypeAndPan () {
+				myMap.panTo([62.915, 34.461], {
+					delay: 1500
+				});
+			}
+
+			ymaps.ready(init);
 		}
 	}
 </script>
@@ -119,7 +167,6 @@
 		&__map {
 			height: 488px;
 			width: 100%;
-			background-color: $blue;
 			display: block;
 		}
 		&__bold {

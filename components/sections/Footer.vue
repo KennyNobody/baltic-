@@ -13,7 +13,7 @@
 		</div>
 		<div class="footer__right">
 			<div class="footer__socials">
-				<a href="" class="soc-btn soc-btn--vk">
+				<a :href="socials.vkontakte" v-if="socials.vkontakte" class="soc-btn soc-btn--vk">
 					<div class="soc-btn__left">
 						<svg>
 							<use xlink:href="#icon-icon-vk"></use>
@@ -24,7 +24,7 @@
 						Подписаться
 					</div>
 				</a>
-				<a href="" class="soc-btn soc-btn--instagram">
+				<a :href="socials.instagram" v-if="socials.instagram" class="soc-btn soc-btn--instagram">
 					<div class="soc-btn__left">
 						<svg>
 							<use xlink:href="#icon-icon-instagram"></use>
@@ -35,7 +35,7 @@
 						Подписаться
 					</div>
 				</a>
-				<a href="" class="soc-btn soc-btn--facebook">
+				<a :href="socials.facebook" v-if="socials.facebook" class="soc-btn soc-btn--facebook">
 					<div class="soc-btn__left">
 						<svg>
 							<use xlink:href="#icon-icon-facebook"></use>
@@ -46,7 +46,7 @@
 						Подписаться
 					</div>
 				</a>
-				<a href="" class="soc-btn soc-btn--youtube">
+				<a :href="socials.youtube" v-if="socials.youtube" class="soc-btn soc-btn--youtube">
 					<div class="soc-btn__left">
 						<svg>
 							<use xlink:href="#icon-icon-youtube"></use>
@@ -58,15 +58,7 @@
 					</div>
 				</a>
 			</div>
-			<div class="footer__text">
-				<p>
-					Средство массовой информации «Радио Балтик Плюс» зарегистрировано 21 ноября 2014 г. в форме распространения «Сетевое издание». Свидетельство Эл № ФС77-59974 от 21.11.2014 выдано Федеральной службой по надзору в сфере связи, информационных технологий и массовых коммуникаций (Роскомнадзор).
-				</p>
-				<br>
-				<p>
-					© 2019 «Балтик Плюс» 12+. <br> Все права защищены. <br> Разработано <a href="https://diez.io/" target="_blank">#dieztech</a>
-				</p>
-			</div>
+			<div class="footer__text" v-html="footer.footerDiscript"></div>
 		</div>
 	</footer>
 </template>
@@ -74,6 +66,19 @@
 <script>
 	export default {
 		name: 'Footer',
+		computed: {
+			socials() {
+				return this.$store.getters['contacts/socials']
+			},
+			footer() {
+				return this.$store.getters['setting/setting']
+			},
+		},
+		async fetch({store}) {
+			if (store.getters['setting/setting'].length === 0) {
+				await store.dispatch('setting/fetch')
+			}
+		},
 	}
 </script>
 
@@ -164,10 +169,10 @@
 				}
 			}
 			br {
-				display: none;
-				@include r(1100) {
-					display: block;
-				}
+				display: block;
+				// @include r(1100) {
+				// 	display: block;
+				// }
 			}
 		}
 	}

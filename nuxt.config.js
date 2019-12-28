@@ -11,12 +11,19 @@ module.exports = {
 		],
 		script: [
 		{ src: "https://code.jquery.com/jquery-3.4.1.min.js" },
+		{ src: "https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=<ваш API-ключ>" },
 		{ src: "https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" },
 		],
 	},
 	loading: { color: '#3B8070' },
 	modules: [
 	'@nuxtjs/style-resources',
+	['vue-yandex-maps/nuxt', {
+		apiKey: 'ADjC810BAAAAlCVfVwIAwIulIyuf2kPxHKYI9VD1mI656NAAAAAAAAAAAAD3-Y_YkXzk4Ck0A7oSAYwnroyVdQ==',
+		lang: 'ru_RU',
+		coordorder: 'latlong',
+		version: '2.1'
+	}],
 	'@nuxtjs/axios',
 	'@nuxtjs/proxy',
 	['nuxt-svg-sprite-module', {
