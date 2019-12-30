@@ -118,15 +118,24 @@
 		display: flex;
 		justify-content: space-between;
 		padding-bottom: 50px;
+		@include r(1100) {
+			display: block;
+		}
 		&__left {
 			width: calc(33% - 10px);
 			flex-shrink: 0;
+			@include r(1100) {
+				display: none;
+			}
 		}
 		&__right {
 			flex-grow: 1;
 			min-width: 0px;
 			padding-left: 20px;
 			color: $light;
+			@include r(1100) {
+				padding-left: 0px;
+			}
 		}
 		&__thumb {
 			display: block;

@@ -98,6 +98,12 @@
 			flex-direction: column;
 			justify-content: flex-end;
 			background-color: $light;
+			@include r(850) {
+				width: calc(50% - 10px);
+			}
+			@include r(480) {
+				width: 100%;
+			}
 			&:hover {
 				.authors__content {
 					opacity: 1;
@@ -108,6 +114,12 @@
 			width: calc(100% / 3 - 10px);
 			display: block;
 			height: 0px;
+			@include r(850) {
+				width: calc(50% - 10px);
+			}
+			@include r(480) {
+				width: 100%;
+			}
 		}
 		&__name {
 			color: $light;

@@ -117,7 +117,9 @@ export const state = () => ({
 		info: 'Краткое описание подкаста для отображения под заголовком',
 		time: '25:15',
 		thumb: 'http://placehold.it/1000x600',
-		play: false
+		play: false,
+		slug: 'unique-slug',
+		content: '<p>- Калининградцы рассказали о проблемах, с которыми сталкиваются в поликлиниках;</p><p>- В прокуратуре Московского района Калининграда назвали самую коррумпированную государственную структуру;</p><p>- Судьба 300 тонн инженерного наследия решается в Калининграде;</p>'
 	},
 	{
 		id: 12,
@@ -194,7 +196,7 @@ export const actions = {
 export const getters = {
 	podcasts: s => s.podcasts,
 	podcastsFront: s => s.podcasts.slice(-8).reverse(),
-	podcastsPlayer: s => s.podcasts.slice(-5).reverse(),
+	podcastsPlayer: s => s.podcasts.slice(-3).reverse(),
 	podcastsById: s => id => {
 		return s.podcasts.find(podcasts => podcasts.id === id);
 	}

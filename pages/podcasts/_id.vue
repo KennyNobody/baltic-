@@ -18,29 +18,6 @@
 			<p class="title__text">{{ podcast.title }}</p>
 			<p class="title__control"></p>
 		</h2>
-		<!-- <div class="single-program__content">
-			<article class="program">
-				<div class="program__thumb">
-					<img :src="podcast.preview" :alt="podcast.title">
-				</div>
-				<div class="program__content">
-					<h3 class="program__title">
-						{{ podcast.title }}
-					</h3>
-					<div class="program__info">
-						<p class="program__time" v-if="podcast.time">
-							<strong>В эфире:</strong> {{ podcast.time }}
-						</p>
-						<p class="program__author" v-if="podcast.author">
-							<strong>Ведущие:</strong> {{ podcast.author }}
-						</p>
-					</div>
-					<p class="program__text">
-						{{ podcast.text }}
-					</p>
-				</div>
-			</article>
-		</div> -->
 		<article class="single-podcast">
 			<div class="single-podcast__thumb">
 				<img :src="podcast.thumb" :alt="podcast.title">
@@ -126,11 +103,17 @@
 	.single-podcast {
 		display: flex;
 		justify-content: space-between;
+		@include r(1100) {
+			display: block;
+		}
 		&__thumb {
 			width: 247px;
 			height: 247px;
 			background-color: red;
 			flex-shrink: 0;
+			@include r(1100) {
+				display: none;
+			}
 			img {
 				display: block;
 				height: 100%;
@@ -147,6 +130,11 @@
 			display: flex;
 			flex-direction: column;
 			justify-content: space-between;
+			@include r(1100) {
+				width: 100%;
+				height: auto;
+				margin-bottom: 20px;
+			}
 		}
 		&__discript {
 			margin-left: 20px;
@@ -165,6 +153,9 @@
 					text-decoration: underline;
 				}
 			}
+		}
+		&__info {
+			flex-grow: 1;
 		}
 		&__play {
 			background-color: $dark;
@@ -218,6 +209,7 @@
 			font-weight: 600;
 			font-size: 22px;
 			line-height: 23px;
+			margin-bottom: 10px;
 		}
 		&__footer {
 			display: flex;
@@ -225,7 +217,7 @@
 		}
 		&__information {
 			font-size: 16px;
-			line-height: 28px;
+			line-height: 22px;
 			padding-right: 10px;
 		}
 		&__duration {

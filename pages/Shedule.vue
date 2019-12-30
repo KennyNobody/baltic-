@@ -196,14 +196,11 @@
 			shedule(params) {
 				return this.$store.getters['shedule/shedule']
 			},
-			// currentTab: {
-			// 	// get() {
-					
-			// 	// },
-			// 	// set() {
-			// 	// 	return 1;
-			// 	// },
-			// }
+		},
+		async fetch({store}) {
+			if (store.getters['shedule/shedule'].length === 0) {
+				await store.dispatch('shedule/fetch')
+			}
 		},
 		methods: {
 
@@ -227,16 +224,26 @@
 		&__columns {
 			display: flex;
 			justify-content: space-between;
+			@include r(1100) {
+				display: block;
+			}
 		}
 		&__left {
 			width: 247px;
 			flex-shrink: 0;
+			@include r(1100) {
+				color: $light;
+				margin-bottom: 40px;
+			}
 		}
 		&__right {
 			flex-grow: 1;
 			min-width: 0px;
 			color: $light;
 			padding-left: 20px;
+			@include r(1100) {
+				padding-left: 0px;
+			}
 		}
 		&__shedule {
 
@@ -253,13 +260,25 @@
 			display: flex;
 			align-items: center;
 			transition: 0.3s all;
+			@include r(1100) {
+				color: $light;
+				border-bottom: 1px solid $blue;
+				font-size: 18px;
+				line-height: 23px;
+			}
 			svg {
 				opacity: 0;
 				margin-right: 9px;
 				display: block;
+				@include r(1100) {
+					display: none;
+				}
 			}
 			&--active {
 				color: $red;
+				@include r(1100) {
+					color: $blue;
+				}
 				svg {
 					opacity: 1;
 				}
@@ -268,6 +287,10 @@
 		&__item {
 			display: flex;
 			margin-bottom: 3px;
+			@include r(1100) {
+				display: block;
+				margin-bottom: 10px;
+			}
 		}
 		&__time {
 			font-size: 16px;

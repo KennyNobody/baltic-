@@ -111,8 +111,8 @@
 			},
 		},
 		async fetch({store}) {
-			if (store.getters['setting/setting'].length === 0) {
-				await store.dispatch('setting/fetch')
+			if (store.getters['contacts/contacts'].length === 0) {
+				await store.dispatch('contacts/fetch')
 			}
 		},
 		mounted() {
@@ -140,6 +140,7 @@
 
 				myMap.geoObjects.add(myPlacemark);
 				myMap.geoObjects.add(myPlacemark2);
+				myMap.behaviors.disable('drag');
 			}
 
 			function setTypeAndPan () {
@@ -160,9 +161,21 @@
 			justify-content: space-between;
 			color: $light;
 			margin-bottom: 74px;
+			@include r(1100) {
+				flex-direction: column;
+			}
 		}
 		&__column {
 			width: calc(50% - 10px);
+			@include r(1100) {
+				width: 100%;
+			}
+			&:nth-child(2) {
+				@include r(1100) {
+					order: -1;
+					margin-bottom: 40px;
+				}
+			}
 		}
 		&__map {
 			height: 488px;

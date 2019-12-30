@@ -81,10 +81,17 @@
 <style lang="scss">
 	.form {
 		display: flex;
+		@include r(1100) {
+			display: block;
+		}
 		&__left {
 			width: 247px;
 			flex-shrink: 0;
 			color: $dark;
+			@include r(1100) {
+				color: $light;
+				width: 100%;
+			}
 		}
 		&__main {
 			color: $light;
@@ -93,6 +100,9 @@
 			line-height: 19px;
 			padding-left: 20px;
 			flex-grow: 1;
+			@include r(1100) {
+				padding-left: 0px;
+			}
 		}
 		&__title {
 			margin-bottom: 26px;
@@ -139,12 +149,19 @@
 		&__content {
 			display: flex;
 			justify-content: space-between;
+			@include r(850) {
+				flex-direction: column;
+			}
 		}
 		&__textarea {
 			min-width: 0px;
 			flex-grow: 1;
 			display: flex;
 			flex-direction: column;
+			@include r(850) {
+				height: 300px;
+				margin-bottom: 15px;
+			}
 		}
 		&__textarea-input {
 			display: block;
@@ -162,6 +179,10 @@
 		&__inputs {
 			margin-left: 20px;
 			width: 245px;
+			@include r(850) {
+				margin-left: 0px;
+				width: 100%;
+			}
 		}
 		&__input {
 			display: block;

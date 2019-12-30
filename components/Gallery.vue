@@ -38,6 +38,9 @@
 			width: calc(100% / 6 - 20px);
 			margin-bottom: 20px;
 			height: auto;
+			@include r(900) {
+				width: calc(33% - 10px);
+			}
 			img {
 				display: block;
 				width: 100%;
@@ -52,6 +55,9 @@
 			width: calc(100% / 6 - 20px);
 			height: 0px;
 			display: block;
+			@include r(900) {
+				width: calc(33% - 10px);
+			}
 		}
 	}
 </style>

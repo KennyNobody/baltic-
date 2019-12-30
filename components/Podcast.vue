@@ -122,6 +122,10 @@
 			&:hover {
 				opacity: 0.7;
 			}
+			@include r(1100) {
+				font-size: 20px;
+				line-height: 23px;
+			}
 		}
 		&__discript {
 			font-size: 16px;

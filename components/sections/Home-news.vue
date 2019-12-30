@@ -76,7 +76,7 @@
 						}
 					},
 					breakpoints: {
-						1080: {
+						1100: {
 							slidesPerView: 1,
 							slidesPerColumn: 1
 						} 
@@ -167,6 +167,7 @@
 
 	.home-news {
 		margin-bottom: 105px;
+		overflow: hidden; 
 		@include r(1100) {
 			margin-bottom: 60px;
 		}

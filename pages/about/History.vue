@@ -78,6 +78,10 @@
 		&__columns {
 			display: flex;
 			justify-content: space-between;
+			position: relative;
+			@include r(1100) {
+				display: block;
+			}
 		}
 		&__side {
 			width: 247px;
@@ -87,6 +91,9 @@
 				display: block;
 				width: 100%;
 				height: auto;
+				@include r(1100) {
+					display: none;
+				}
 			}
 		}
 		&__main {
@@ -94,6 +101,9 @@
 			color: $light;
 			flex-grow: 1;
 			min-width: 0px;
+			@include r(1100) {
+				padding-left: 0px;
+			}
 		}
 		&__history {
 			margin-bottom: 60px;
@@ -107,6 +117,9 @@
 			flex-shrink: 0;
 			width: 157px;
 			margin-right: 20px;
+			@include r(850) {
+				display: none;
+			}
 			img {
 				display: block;
 				width: 100%;
@@ -117,12 +130,18 @@
 			flex-grow: 1;
 			min-width: 0px;
 			padding-top: 20px;
+			@include r(850) {
+				padding-top: 0px;
+			}
 		}
 		&__title {
 			margin-bottom: 20px;
 			font-weight: bold;
 			font-size: 20px;
 			line-height: 28px;
+			@include r(850) {
+				margin-bottom: 0px;
+			}
 		}
 	}
 </style>

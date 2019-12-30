@@ -6,6 +6,35 @@
 					<p class="playlist__title">
 						Подкасты
 					</p>
+					<article class="p-podcast" v-for="item in podcasts" v-bind:key="item.id">
+						<div class="p-podcast__thumb" style="background-image: url('http://placehold.it/1000x600')">
+							<div class="p-podcast__play">
+								<template v-if="item.play == false">
+									<svg class="p-podcast__icon--play">
+										<use xlink:href="#icon-icon-play"></use>
+									</svg>
+								</template>
+								<template v-else>
+									<svg class="p-podcast__icon--pause">
+										<use xlink:href="#icon-icon-pause"></use>
+									</svg>
+								</template>
+							</div>
+						</div>
+						<div class="p-podcast__content">
+							<div class="p-podcast__header">
+								<p class="p-podcast__title">
+									<v-clamp :max-lines="1" >{{ item.title }}</v-clamp>
+								</p>
+								<p class="p-podcast__discript">
+									<v-clamp :max-lines="2">{{ item.info }}</v-clamp>
+								</p>
+							</div>
+							<time class="p-podcast__time">
+								{{ item.time }}
+							</time>
+						</div>
+					</article>
 				</div>
 				<div class="playlist__right">
 					<p class="playlist__title playlist__title--padding">
@@ -91,6 +120,7 @@
 
 <script>
 	import simplebar from 'simplebar-vue';
+	import VClamp from 'vue-clamp';
 
 	export default {
 		name: 'Player',
@@ -106,9 +136,13 @@
 			player(params) {
 				return this.$store.getters['player/player']
 			},
+			podcasts() {
+				return this.$store.getters['podcasts/podcastsPlayer']
+			},
 		},
 		components: {
-			simplebar
+			simplebar,
+			VClamp,
 		}
 	}
 </script>
@@ -202,6 +236,9 @@
 			background-color: #00496A;
 			padding: 12px 20px;
 			@include r(1100) {
+				padding-left: 12px;
+			}
+			@include r(880) {
 				padding-left: 0px;
 			}
 		}
@@ -342,9 +379,7 @@
 		bottom: 100%;
 		left: 0px;
 		right: 0px;
-		// height: calc(100vh - 100px);
 		height: auto;
-		// height: 100%;
 		max-height: calc(100vh - 244px);
 		display: flex;
 		box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
@@ -411,4 +446,73 @@
 			overflow: hidden;
 		}
 	}
+
+	.p-podcast {
+		display: flex;
+		margin-bottom: 12px;
+		&__thumb {
+			width: 85px;
+			height: 85px;
+			flex-shrink: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-right: 9px;
+		}
+		&__content {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			padding-right: 15px;
+		}
+		&__play {
+			width: 33px;
+			height: 33px;
+			background-color: $red;
+			border-radius: 50px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			cursor: pointer;
+			transition: 0.3s all;
+			&:hover {
+				opacity: 0.7;
+			}
+			svg {
+				height: 14px;
+				width: 14px;
+				position: relative;
+				left: 1px;
+			}
+		}
+		&__title {
+			font-size: 16px;
+			font-weight: 600;
+		}
+		&__discript {
+			font-size: 14px;
+		}
+		&__time {
+			font-size: 14px;
+			line-height: 19px;
+			color: $blue;
+		}
+	}
 </style>
+
+<!-- <article class="p-podcast">
+	<div class="p-podcast__thumb">
+
+	</div>
+	<div class="p-podcast__content">
+		<p class="p-podcast__title">
+
+		</p>
+		<p class="p-podcast__discript">
+
+		</p>
+		<time class="p-podcast__time">
+
+		</time>
+	</div>
+</article> -->

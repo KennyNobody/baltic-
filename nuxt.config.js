@@ -24,7 +24,10 @@ module.exports = {
 		coordorder: 'latlong',
 		version: '2.1'
 	}],
-	'@nuxtjs/axios',
+	['@nuxtjs/axios', {
+		baseURL: 'http://localhost:8000'
+	}],
+	// :src="`${$axios.defaults.baseURL}upload/1.png`"
 	'@nuxtjs/proxy',
 	['nuxt-svg-sprite-module', {
 		directory: '~/assets/svg-sprite'

@@ -46,7 +46,18 @@
 			<p class="title__text">Подкасты</p>
 		</h2>
 		<div class="single-program__articles">
-			<appPodcast v-for="item in 10" v-bind:key="item.id"></appPodcast>
+			<appPodcast
+				v-for="item in podcasts"
+				v-bind:key="item.id"
+				:title="item.title"
+				:date="item.date"
+				:play="item.play"
+				:id="item.id"
+				:slug="item.slug"
+				:time="item.time"
+				:thumb="item.thumb"
+				:info="item.info"
+				></appPodcast>
 		</div>
 	</div>
 </template>
@@ -68,8 +79,8 @@
 			return /^\d+$/.test(params.id)
 		},
 		computed: {
-			posts(params) {
-				return this.$store.getters['programs/programs']
+			podcasts(params) {
+				return this.$store.getters['podcasts/podcasts']
 			},
 			post ({app, params}) {
 				console.log(this.now)

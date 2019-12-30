@@ -35,13 +35,23 @@
 
 <style lang="scss">
 	.sidebar {
+		@include r(1100) {
+			margin-bottom: 40px;
+		}
 		&__link {
 			display: block;
 			margin-bottom: 15px;
 			color: $dark;
 			text-decoration: none;
+			@include r(1100) {
+				color: $light;
+				border-bottom: 1px solid $blue;
+			}
 			&--active {
 				color: $blue;
+				@include r(1100) {
+					color: $blue;
+				}
 			}
 			&:hover {
 				opacity: 0.7;

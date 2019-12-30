@@ -34,16 +34,6 @@
 	export default {
 		name: 'program',
 		props: ['id', 'programPlay', 'preview', 'title', 'content', 'time', 'author'],
-		// data () {
-		// 	return {
-		// 		programPlay: false,
-		// 		programThumb: 'http://placehold.it/1000x600',
-		// 		programTitle: 'Утро на Балтик Плюс',
-		// 		programText: 'Вы ищете текст любимой песни? У нас вы найдете слова и перевод любимых зарубежных песен 70 х 80 х 90 х и 2000 х на русский язык, а также истории и интересные факты о создании музыкальных хитов. Читайте и слушайте онлайн на "Радио 7 на семи холмах".',
-		// 		programTime: '17:00-21:00 (Пн-Пт)',
-		// 		programAuthor: 'Артём Королёв'
-		// 	}
-		// },
 		components: {
 			VClamp,
 		},	
@@ -55,6 +45,9 @@
 		display: flex;
 		justify-content: space-between;
 		margin-bottom: 20px;
+		@include r(1100) {
+			// display: block;
+		}
 		&__thumb {
 			height: 247px;
 			width: 247px;
@@ -62,6 +55,9 @@
 			justify-content: center;
 			align-items: center;
 			flex-shrink: 0;
+			@include r(670) {
+				display: none;
+			}
 			img {
 				display: block;
 				object-fit: cover;
@@ -75,12 +71,19 @@
 			padding-right: 58px;
 			color: $light;
 			padding: 20px;
+			@include r(670) {
+				padding: 0px;
+				padding-right: 15px;
+			}
 		}
 		&__title {
 			font-weight: bold;
 			font-size: 20px;
-			line-height: 28px;
+			line-height: 24px;
 			margin-bottom: 20px;
+			@include r(670) {
+				margin-bottom: 10px;
+			}
 		}
 		&__info {
 			margin-bottom: 20px;
@@ -99,6 +102,9 @@
 			flex-shrink: 0;
 			cursor: pointer;
 			transition: 0.3s all;
+			@include r(670) {
+				height: auto;
+			}
 			svg {
 				display: block;
 				transform: rotate(180deg);

@@ -102,7 +102,7 @@
 				<div class="title__line"></div>
 				<p class="title__text">Гость в эфире</p>
 			</h2>
-			<div class="home-video" v-html="videoCode">
+			<div class="home-video__wrap" v-html="videoCode">
 				
 			</div>
 		</section>
@@ -110,6 +110,11 @@
 			<h2 class="title">
 				<div class="title__line"></div>
 				<p class="title__text">Блог радиостанции</p>
+				<p class="title__control">
+					<nuxt-link class="title__link" to="/news/">
+						Все записи
+					</nuxt-link>
+				</p>
 			</h2>
 			<div class="home-blog__articles">
 				<appArticle
@@ -165,6 +170,17 @@
 				return this.$store.getters['podcasts/podcastsFront']
 			},
 		},
+		async fetch({store}) {
+			if (store.getters['programs/programs'].length === 0) {
+				await store.dispatch('programs/fetch')
+			}
+			if (store.getters['blog/blog'].length === 0) {
+				await store.dispatch('blog/fetch')
+			}
+			if (store.getters['podcasts/podcasts'].length === 0) {
+				await store.dispatch('podcasts/fetch')
+			}
+		},
 		components: {
 			appSlider,
 			appArticle,
@@ -203,6 +219,9 @@
 				&:last-child {
 					margin-bottom: 0px;
 				}
+			}
+			@include r(470) {
+				padding: 0px;
 			}
 		}
 		&__thumb {
@@ -299,10 +318,12 @@
 	}
 	.home-video {
 		margin-bottom: 105px;
-		position: relative;
-		padding-bottom: 56.25%;
-		height: 0;
-		overflow: hidden;
+		&__wrap {
+			position: relative;
+			padding-bottom: 56.25%;
+			height: 0;
+			overflow: hidden;
+		}
 		@include r(1100) {
 			margin-bottom: 60px;
 		}

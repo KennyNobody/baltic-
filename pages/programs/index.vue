@@ -53,6 +53,11 @@
 				return this.$store.getters['programs/programs']
 			},
 		},
+		async fetch({store}) {
+			if (store.getters['programs/programs'].length === 0) {
+				await store.dispatch('programs/fetch')
+			}
+		},
 		components: {
 			appProgram
 		}

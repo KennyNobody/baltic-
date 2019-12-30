@@ -31,17 +31,17 @@
 		</div>
 		<div class="page-news__articles">
 			<appPodcast
-				v-for="item in podcasts"
-				v-bind:key="item.id"
-				:title="item.title"
-				:date="item.date"
-				:play="item.play"
-				:id="item.id"
-				:slug="item.slug"
-				:time="item.time"
-				:thumb="item.thumb"
-				:info="item.info"
-				></appPodcast>
+			v-for="item in podcasts"
+			v-bind:key="item.id"
+			:title="item.title"
+			:date="item.date"
+			:play="item.play"
+			:id="item.id"
+			:slug="item.slug"
+			:time="item.time"
+			:thumb="item.thumb"
+			:info="item.info"
+			></appPodcast>
 		</div>
 		<div class="page-news__pagination">
 			<appPagination></appPagination>
@@ -79,6 +79,11 @@
 				return this.$store.getters['podcasts/podcasts']
 			},
 		},
+		async fetch({store}) {
+			if (store.getters['podcasts/podcasts'].length === 0) {
+				await store.dispatch('podcasts/fetch')
+			}
+		},
 		methods: {
 			clearFilter() {
 				this.filterDate = '';
@@ -100,6 +105,10 @@
 			display: flex;
 			justify-content: flex-end;
 			align-items: center;
+			@include r(670) {
+				margin-left: auto;
+				margin-right: auto;
+			}
 		}
 	}
 
@@ -108,7 +117,7 @@
 		align-items: center;
 		justify-content: space-between;
 		margin-bottom: 34px;
-		@include r(900) {
+		@include r(1100) {
 			display: block;
 		}
 		&__dates {
@@ -123,6 +132,7 @@
 			@include r(1100) {
 				color: $light;
 				width: 100%;
+				height: 40px;
 			}
 			.mx-datepicker-range {
 				width: 240px;
@@ -134,10 +144,13 @@
 			.mx-icon-calendar {
 				color: $blue;
 			}
+			.mx-input {
+				height: 40px;
+			}
 		}
 		&__date-text {
 			margin-right: 15px;
-			@include r(900) {
+			@include r(1100) {
 				display: none;
 			}
 		}
