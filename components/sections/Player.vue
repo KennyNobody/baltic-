@@ -71,15 +71,17 @@
 			</div>
 			<div class="player__info">
 				<div class="player__radio live">
-					<p class="live__title">
+					<div v-if="live == true" class="live__radio">
 						Прямой эфир
-					</p>
-					<p class="live__discript">
-						Радио
-					</p>
-					<p class="live__name">
-						Балтик Плюс
-					</p>
+					</div>
+					<div v-else>
+						<div  class="live__podcast">
+							Подкаст
+						</div>
+						<div class="live__radio live__radio--btn" v-on:click="live = true">
+							Прямой эфир
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -91,24 +93,16 @@
 				<p class="now__discript">
 					Сейчас в эфире:
 				</p>
-				<!-- <div class="now__line">
-					<div class="now__progress" v-bind:style="{ width : progress + '%'}"></div>
-				</div> -->
 				<p class="now__text">
 					<span class="now__author">
 						{{ player.author }}
 					</span>
-					<!-- <span class="now__defis">-</span>
-					<br class="now__br"> -->
 					<br>
 					<span class="now__title">
 						{{ player.title }}
 					</span>
 				</p>
 			</div>
-<!-- 			<div class="volume">
-				<div class="volume__line"></div>
-			</div> -->
 			<div class="player__toggle" v-on:click="open = !open">
 				<svg class="player__drop-icon" v-bind:class="{'player__drop-icon--open': open === true}">
 					<use xlink:href="#icon-icon-arrow"></use>
@@ -128,8 +122,7 @@
 			return {
 				play: false,
 				open: false,
-				progress: 30,
-				volume: 50
+				live: false
 			}
 		},
 		computed: {
@@ -209,7 +202,6 @@
 		&__info {
 			flex-grow: 1;
 			min-width: 0px;
-			padding-top: 4px;
 			margin-left: 28px;
 			@include r(880) {
 				display: none;
@@ -283,26 +275,32 @@
 	}
 
 	.live {
-		font-size: 14px;
-		line-height: 19px;
 		height: 100%;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
 		@include r(880) {
 			display: none;
 		}
-		&__title {
+		&__podcast {
+			font-size: 14px;
+			line-height: 19px;
 			color: $red;
-			margin-bottom: 6px;
 		}
-		&__discript {
-			color: $blue;
-		}
-		&__name {
-			color: $dark;
-			font-size: 16px;
-			line-height: 22px;
+		&__radio {
+			font-size: 14px;
+			line-height: 19px;
+			color: $red;
+			&--btn {
+				margin-top: 12px;
+				border-radius: 4px;
+				background-color: $blue;
+				padding: 3px 12px;
+				color: $light;
+				display: inline-block;
+				cursor: pointer;
+				transition: 0.3s all;
+				&:hover {
+					opacity: 0.7;
+				}
+			}
 		}
 	}
 
@@ -499,20 +497,3 @@
 		}
 	}
 </style>
-
-<!-- <article class="p-podcast">
-	<div class="p-podcast__thumb">
-
-	</div>
-	<div class="p-podcast__content">
-		<p class="p-podcast__title">
-
-		</p>
-		<p class="p-podcast__discript">
-
-		</p>
-		<time class="p-podcast__time">
-
-		</time>
-	</div>
-</article> -->

@@ -69,16 +69,27 @@
 			padding-top: 40px;
 			display: flex;
 			justify-content: space-between;
+			@include r(1100) {
+				display: block;
+			}
 		}
 		&__left {
 			width: calc(33% - 10px);
 			flex-shrink: 0;
+			@include r(1100) {
+				max-width: 320px;
+				margin-bottom: 30px;
+				width: 100%;
+			}
 		}
 		&__right {
 			flex-grow: 1;
 			min-width: 0px;
 			padding-left: 20px;
 			color: #fefefe;
+			@include r(1100) {
+				padding-left: 0px;
+			}
 		}
 		&__img-block {
 			position: relative;
@@ -87,6 +98,9 @@
 			position: absolute;
 			bottom: 13px;
 			left: 630px;
+			@include r(1100) {
+				display: none;
+			}
 		}
 	}
 </style>
