@@ -38,12 +38,44 @@
 			</p>
 			<div class="form__content">
 				<div class="form__textarea">
-					<textarea class="form__textarea-input" v-model="form.text"></textarea>
+					<textarea class="form__textarea-input"
+					v-model="form.text"
+					name="text"
+					v-validate="'required'"
+					v-bind:class="{'form__textarea-input--error': errors.first('text') }"
+					></textarea>
 				</div>
 				<div class="form__inputs">
-					<input type="text" class="form__input" v-model="form.name" placeholder="Имя">
-					<input type="text" class="form__input" v-model="form.phone" placeholder="Телефон">
-					<input type="text" class="form__input" v-model="form.email" placeholder="E-mail">
+
+					<input
+					v-bind:class="{'form__input--error': errors.first('name') }" 
+					v-validate="'required'" 
+					type="text"
+					name="name"
+					class="form__input" 
+					v-model="form.name"  
+					placeholder="Имя"
+					>
+
+					<input
+					v-bind:class="{'form__input--error': errors.first('phone') }"
+					type="text"
+					name="phone"
+					v-validate="'required'" 
+					class="form__input" 
+					v-model="form.phone" 
+					placeholder="Телефон"
+					>
+
+					<input
+					v-bind:class="{'form__input--error': errors.first('email') }"
+					v-validate="'required|email'" 
+					name="email" 
+					type="text" 
+					class="form__input" 
+					v-model="form.email" 
+					placeholder="E-mail"
+					>
 					<p class="form__privacy">
 						Нажимая кнопку “Отправить”, вы подтверждаете свое согласие с 
 						<nuxt-link to="about/politics/" target="_blank">
@@ -66,7 +98,7 @@
 		data () {
 			return {
 				form: {
-					recipient: '123',
+					recipient: '',
 					name: '',
 					phone: '',
 					email: '',
@@ -166,14 +198,18 @@
 		&__textarea-input {
 			display: block;
 			height: 100%;
-			border: none;
+			border: 1px solid $dark;
 			padding: 8px 13px;
 			background-color: #00496A;
 			resize: none;
 			color: $light;
 			outline: none;
+			transition: 0.3s all;
 			&::placeholder {
 				color: $blue;
+			}
+			&--error {
+				border-color: $red;
 			}
 		}
 		&__inputs {
@@ -195,8 +231,13 @@
 			padding-left: 13px;
 			padding-right: 13px;
 			outline: none;
+			border: 1px solid $dark;
+			transition: 0.3s all;
 			&::placeholder {
 				color: $blue;
+			}
+			&--error {
+				border-color: $red;
 			}
 		}
 		&__privacy {

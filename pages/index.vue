@@ -1,5 +1,6 @@
 <template>
 	<div class="page page--home">
+		<!-- <appTestPlayer></appTestPlayer> -->
 		<section class="home-slider">
 			<appSlider></appSlider>
 		</section>
@@ -140,6 +141,7 @@
 	import appArticle from '~/components/Article'
 	import appPodcast from '~/components/Podcast'
 	import appNews from '~/components/sections/Home-news'
+	// import appTestPlayer from '~/components/sections/TestPlayer'
 	import VClamp from 'vue-clamp'
 
 	export default {
@@ -186,7 +188,8 @@
 			appArticle,
 			appPodcast,
 			appNews,
-			VClamp
+			VClamp,
+			// appTestPlayer
 		}
 	}
 </script>

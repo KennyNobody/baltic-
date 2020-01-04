@@ -32,11 +32,20 @@ module.exports = {
 	['nuxt-svg-sprite-module', {
 		directory: '~/assets/svg-sprite'
 	}],
+	['nuxt-validate', {
+      lang: 'es',
+      nuxti18n: {
+        locale: {
+          'zh-CN': 'zh_CN'
+        }
+      }
+    }]
 	],
 	plugins: [
 	{ src: '~/plugins/swiper.js', ssr: false },
 	{ src: '~/plugins/datepicker', ssr: false },
 	{ src: '~/plugins/mq', ssr: false },
+	// { src: '~plugins/vue-aplayer', ssr: false },
 	],
 	css: [
 	'~/node_modules/@fancyapps/fancybox/dist/jquery.fancybox.min.css',

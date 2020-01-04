@@ -8,6 +8,7 @@
 					</p>
 					<article class="p-podcast" v-for="item in podcasts" v-bind:key="item.id">
 						<div class="p-podcast__thumb" style="background-image: url('http://placehold.it/1000x600')">
+
 							<div class="p-podcast__play">
 								<template v-if="item.play == false">
 									<svg class="p-podcast__icon--play">
@@ -57,8 +58,11 @@
 			</div>
 		</transition>
 		<div class="player__left">
-			<div class="player__play" v-on:click="play = !play">
-				<div v-if="play == false">
+			<audio class="player__audio" :src="file" preload="auto" type="audio/mp3"></audio>
+			
+			<!-- При прямом эфире просто глушим звук, не останавливая трансляцию. Поставить соответствующую иконку -->
+			<div class="player__play" v-if="live == true" v-on:click.prevent="playing = !playing">
+				<div v-if="playing == false">
 					<svg class="player__icon--play">
 						<use xlink:href="#icon-icon-play"></use>
 					</svg>
@@ -69,6 +73,21 @@
 					</svg>
 				</div>
 			</div>
+
+			<!-- При прямом эфире просто глушим звук, не останавливая трансляцию. Поставить соответствующую иконку -->
+			<div class="player__play" v-if="live == false">
+				<div v-if="playing == false">
+					<svg class="player__icon--play">
+						<use xlink:href="#icon-icon-play"></use>
+					</svg>
+				</div>
+				<div v-else>
+					<svg class="player__icon--pause">
+						<use xlink:href="#icon-icon-pause"></use>
+					</svg>
+				</div>
+			</div>
+
 			<div class="player__info">
 				<div class="player__radio live">
 					<div v-if="live == true" class="live__radio">
@@ -95,13 +114,16 @@
 				</p>
 				<p class="now__text">
 					<span class="now__author">
-						{{ player.author }}
+						{{ name }}
 					</span>
 					<br>
 					<span class="now__title">
-						{{ player.title }}
+						{{ title }}
 					</span>
 				</p>
+			</div>
+			<div class="volume">
+				<input class="e-range" type="range" min="0" max="100" v-model.number="volume">
 			</div>
 			<div class="player__toggle" v-on:click="open = !open">
 				<svg class="player__drop-icon" v-bind:class="{'player__drop-icon--open': open === true}">
@@ -120,9 +142,20 @@
 		name: 'Player',
 		data () {
 			return {
+				file: 'http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3',
+				name: 'Балтик+',
+				title: 'Прямой эфир',
 				play: false,
 				open: false,
-				live: false
+				live: true,
+				audio: undefined,
+				currentSeconds: 0,
+				durationSeconds: 0,
+				loaded: false,
+				playing: false,
+				previousVolume: 35,
+				showVolume: false,
+				volume: 100,
 			}
 		},
 		computed: {
@@ -132,10 +165,78 @@
 			podcasts() {
 				return this.$store.getters['podcasts/podcastsPlayer']
 			},
+			muted() {
+				return this.volume / 100 === 0;
+			},
+			percentComplete() {
+				return parseInt(this.currentSeconds / this.durationSeconds * 100);
+			},
 		},
 		components: {
 			simplebar,
 			VClamp,
+		},
+		filters: {
+			convertTimeHHMMSS(val) {
+				let hhmmss = new Date(val * 1000).toISOString().substr(11, 8);
+
+				return hhmmss.indexOf("00:") === 0 ? hhmmss.substr(3) : hhmmss;
+			}
+		},
+		watch: {
+			playing(value) {
+				if (value) { return this.audio.play(); }
+				this.audio.pause();
+			},
+			volume(value) {
+				this.showVolume = false;
+				this.audio.volume = this.volume / 100;
+			}
+		},
+		methods: {
+			load() {
+				if (this.audio.readyState >= 2) {
+					this.loaded = true;
+					this.durationSeconds = parseInt(this.audio.duration);
+					return this.playing = false;
+				}
+
+				throw new Error('Failed to load sound file.');
+			},
+			mute() {
+				if (this.muted) {
+					return this.volume = this.previousVolume;
+				}
+				this.previousVolume = this.volume;
+				this.volume = 0;
+			},
+			seek(e) {
+				if (!this.playing || e.target.tagName === 'SPAN') {
+					return;
+				}
+
+				const el = e.target.getBoundingClientRect();
+				const seekPos = (e.clientX - el.left) / el.width;
+
+				this.audio.currentTime = parseInt(this.audio.duration * seekPos);
+			},
+			stop() {
+				this.playing = false;
+				this.audio.currentTime = 0;
+			},
+			update(e) {
+				this.currentSeconds = parseInt(this.audio.currentTime);
+			}
+		},
+		update(e) {
+			this.currentSeconds = parseInt(this.audio.currentTime);
+		},
+		mounted() {
+			this.audio = this.$el.querySelector('.player__audio');
+			this.audio.addEventListener('timeupdate', this.update);
+			this.audio.addEventListener('loadeddata', this.load);
+			this.audio.addEventListener('pause', () => { this.playing = false; });
+			this.audio.addEventListener('play', () => { this.playing = true; });
 		}
 	}
 </script>
@@ -161,11 +262,17 @@
 			flex-shrink: 0;
 			padding: 8px 15px;
 			display: flex;
+			position: relative;
 			align-items: center;
 			@include r(880) {
 				background-color: #00496A;
 				width: auto;
 			}
+		}
+		&__audio {
+			bottom: calc(100% + 10px);
+			left: 0px;
+			position: absolute;
 		}
 		&__play {
 			background-color: $red;
@@ -188,14 +295,14 @@
 				height: 15px;
 				width: 15px;
 				position: relative;
-				left: 1px;
+				left: 0px;
 				top: 2px;
 			}
 			&--pause {
 				height: 15px;
 				width: 15px;
 				position: relative;
-				left: 1px;
+				left: 0px;
 				top: 2px;
 			}
 		}
@@ -210,6 +317,7 @@
 		&__thumb {
 			height: 100%;
 			width: 88px;
+			background-color: $dark;
 			@include r(1100) {
 				display: none;
 			}
@@ -364,11 +472,127 @@
 		@include r(1100) {
 			display: none;
 		}
-		&__line {
+
+		$height: 30px;
+		$thumb-height: 13px;
+		$track-height: 3px;
+
+		$upper-color: $blue;
+		$lower-color: $light;
+		$thumb-color: $light;
+		$thumb-hover-color: $light;
+
+		$upper-background: linear-gradient(to bottom, $upper-color, $upper-color) 100% 50% / 100% $track-height no-repeat transparent;
+		$lower-background: linear-gradient(to bottom, $lower-color, $lower-color) 100% 50% / 100% $track-height no-repeat transparent;
+
+		@function webkit-slider-thumb-shadow($i: 1) {
+			$val: #{$i}px 0 0 -#{($thumb-height - $track-height) / 2} #{$upper-color};
+			@if $i == 1 {
+				@for $k from 2 through 1000 {
+					$val: #{$val}, webkit-slider-thumb-shadow($k);
+				}
+			}
+			@return $val;
+		}
+
+		.e-range {
+			background-color: #00496A;
 			display: block;
-			height: 2px;
-			background-color: $dark;
-			width: 157px;
+			appearance: none;
+			width: 100%;
+			margin: 0;
+			height: $height;
+			overflow: hidden;
+			cursor: pointer;
+
+			&:focus {
+				outline: none;
+			}
+		}
+
+		.e-range::-webkit-slider-runnable-track {
+			width: 100%;
+			height: $height;
+			background: $lower-background;
+		}
+
+		.e-range::-webkit-slider-thumb {
+			position: relative;
+			appearance: none;
+			height: $thumb-height;
+			width: $thumb-height;
+			background: $thumb-color;
+			border-radius: 100%;
+			border: 0;
+			top: 50%;
+			margin-top: (-$thumb-height/2);
+			box-shadow: webkit-slider-thumb-shadow();
+			transition: background-color 150ms;
+		}
+
+		.e-range::-moz-range-track,
+		.e-range::-moz-range-progress {
+			width: 100%;
+			height: $height;
+			background: $upper-background;
+		}
+
+		.e-range::-moz-range-progress {
+			background: $lower-background;
+		}
+
+		.e-range::-moz-range-thumb {
+			appearance: none;
+			margin: 0;
+			height: $thumb-height;
+			width: $thumb-height;
+			background: $thumb-color;
+			border-radius: 100%;
+			border: 0;
+			transition: background-color 150ms;
+		}
+
+		.e-range::-ms-track {
+			width: 100%;
+			height: $height;
+			border: 0;
+			color: transparent;
+			background: transparent;
+		}
+
+		.e-range::-ms-fill-lower {
+			background: $lower-background;
+		}
+
+		.e-range::-ms-fill-upper {
+			background: $upper-background;
+		}
+
+		.e-range::-ms-thumb {
+			appearance: none;
+			height: $thumb-height;
+			width: $thumb-height;
+			background: $thumb-color;
+			border-radius: 100%;
+			border: 0;
+			transition: background-color 150ms;
+			top: 0;
+			margin: 0;
+			box-shadow: none;
+		}
+
+		.e-range:hover,
+		.e-range:focus {
+
+			&::-webkit-slider-thumb {
+				background-color: $thumb-hover-color;
+			}
+			&::-moz-range-thumb {
+				background-color: $thumb-hover-color;
+			}
+			&::-ms-thumb {
+				background-color: $thumb-hover-color;
+			}
 		}
 	}
 
