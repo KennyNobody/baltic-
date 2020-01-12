@@ -6,9 +6,9 @@
 		</section>
 		<section class="home-now">
 			<div class="home-now__articles">
-				<article class="home-now__article">
+				<article class="home-now__article" v-if="broadcast.now">
 					<div class="home-now__thumb">
-						<img src="http://placehold.it/1000x600" alt="">
+						<img :src="broadcast.now.preview" alt="">
 					</div>
 					<div class="home-now__content">
 						<p class="home-now__discript">
@@ -24,12 +24,12 @@
 						</div>
 						<h3 class="home-now__title">
 							<v-clamp :max-lines="3">
-								Гость в эфире: Антонина Кочеткова о загрязнении окружающей среды
+								{{ broadcast.now.title }}
 							</v-clamp>
 						</h3>
 					</div>
 				</article>
-				<article class="home-now__article">
+				<article class="home-now__article" v-if="broadcast.next">
 					<div class="home-now__thumb">
 						<img src="http://placehold.it/1000x600" alt="">
 					</div>
@@ -47,7 +47,7 @@
 						</div>
 						<h3 class="home-now__title">
 							<v-clamp :max-lines="3">
-								Интервью с режиссером “Биссера”, Геннадием Урсуловым
+								{{ broadcast.next.title }}
 							</v-clamp>
 						</h3>
 					</div>
@@ -162,6 +162,9 @@
 			}
 		},
 		computed: {
+			broadcast() {
+				return this.$store.getters['broadcast/broadcast']
+			},
 			programs() {
 				return this.$store.getters['programs/programsFront']
 			},
