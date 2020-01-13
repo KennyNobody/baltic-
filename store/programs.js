@@ -222,7 +222,7 @@ export const state = () => ({
 		"slug": "program-slug-1",
 		"link": "http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3",
 		"author": "Артём Королёв",
-		"public_at": "",
+		"public_at": 1555065432,
 		"podcasts": [41, 14, 41, 53, 63, 78]
 	},
 	{	

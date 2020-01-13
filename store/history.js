@@ -29,8 +29,7 @@ export const mutations = {
 
 export const actions = {
 	async fetch ({commit}) {
-		// Здесь указываем, откуда получать слайды, массив сверху должен быть пустым
-		const history = await this.$axios.$get("https://api.myjson.com/bins/18oqjg")
+		const history = await this.$axios.$get("/api/history")
 		commit('setHistory', history)
 	}
 }

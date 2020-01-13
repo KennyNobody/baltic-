@@ -29,12 +29,11 @@ export const mutations = {
 
 export const actions = {
 	async fetch ({commit}) {
-		// Здесь указываем, откуда получать слайды, массив сверху должен быть пустым
-		const mainSlider = await this.$axios.$get("https://api.myjson.com/bins/18oqjg")
+		const mainSlider = await this.$axios.$get("/api/slider")
 		commit('setSlider', mainSlider)
 	}
 }
 
 export const getters = {
-	mainSlider: s => s.mainSlider.slice(-5).reverse()
+	mainSlider: s => s.mainSlider
 }

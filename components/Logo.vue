@@ -1,5 +1,5 @@
 <template>
-	<div class="logo">
+	<nuxt-link to="/" exact class="logo">
 		<img src="~/assets/img/svg/logo-top.svg" alt="Логотип Балтик+">
 		<div class="logo__slider" v-swiper:mySwiper="swiperOption">
 			<div class="swiper-wrapper logo__wrapper">
@@ -8,7 +8,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</nuxt-link>
 </template>
 
 <script>

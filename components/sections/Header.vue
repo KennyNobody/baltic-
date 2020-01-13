@@ -67,7 +67,7 @@
 						<nuxt-link class="header__link" to="/about/history/">
 							О радио
 						</nuxt-link>
-						<nuxt-link class="header__link" to="/news/">
+						<nuxt-link active-class="header__link--active" class="header__link" to="/news/">
 							Блог
 						</nuxt-link>
 						<nuxt-link active-class="header__link--active" class="header__link" to="/information/">

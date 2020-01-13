@@ -82,11 +82,10 @@ export const mutations = {
 }
 
 export const actions = {
-	async fetch ({commit}) {
-		// Здесь указываем, откуда получать слайды, массив сверху должен быть пустым
-		const player = await this.$axios.$get("https://api.myjson.com/bins/18oqjg")
-		commit('setPlayer', player)
-	}
+	// async fetch ({commit}) {
+	// 	const player = await this.$axios.$get("https://api.myjson.com/bins/18oqjg")
+	// 	commit('setPlayer', player)
+	// }
 }
 
 export const getters = {
