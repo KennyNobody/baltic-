@@ -18,17 +18,17 @@
 				</div>
 			</h2>
 			<div class="swiper-wrapper">
-				<a href="#" class="swiper-slide home-news__article" v-for="item in news.slice(0, 16).reverse()" v-bind:key="item.id">
+				<a href="#" class="swiper-slide home-news__article" v-for="item in news" v-bind:key="item.id">
 					<div class="home-news__thumb">
-						<img src="http://placehold.it/1000x600" alt="Превью">
+						<img :src="item.preview" :alt="item.title">
 					</div>
 					<div class="home-news__content">
 						<div class="home-news__header">
 							<time class="home-news__time">
-								23:01
+								{{ $moment.unix(item.date).format('h:mm') }}
 							</time>
 							<time class="home-news__date">
-								30/09/2019
+								{{ $moment.unix(item.date).format('DD/MM/YYYY') }}
 							</time>
 						</div>
 						<h3 class="home-news__title">
@@ -96,7 +96,7 @@
 			if (store.getters['news/news'].length === 0) {
 				await store.dispatch('news/fetch')
 			}
-		},
+		}
 	}
 </script>
 

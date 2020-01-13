@@ -12,7 +12,7 @@
 		</div>
 		<div class="podcast__content">
 			<div class="podcast__header">
-				<time class="podcast__time">{{ date }}</time>
+				<time class="podcast__time">{{ $moment.unix(date).format('DD/MM/YYYY') }}</time>
 				<svg class="podcast__share-icon">
 					<use xlink:href="#icon-icon-share"></use>
 				</svg>

@@ -1,4 +1,5 @@
 export const state = () => ({
+	// Программ немного, поэтому постраничная пагинация нам не нужна
 	programs: [
 	{	
 		"id": 1,
@@ -9,7 +10,7 @@ export const state = () => ({
 		"slug": "program-slug-1",
 		"link": "http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3",
 		"author": "Артём Королёв",
-		"public_at": ""
+		"public_at": 1555065432
 	},
 	{	
 		"id": 2,
@@ -20,7 +21,7 @@ export const state = () => ({
 		"slug": "program-slug-1",
 		"link": "http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3",
 		"author": "Артём Королёв",
-		"public_at": ""
+		"public_at": 1555065432
 	},
 	{	
 		"id": 3,
@@ -31,7 +32,7 @@ export const state = () => ({
 		"slug": "program-slug-1",
 		"link": "http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3",
 		"author": "Артём Королёв",
-		"public_at": ""
+		"public_at": 1555065432
 	},
 	{	
 		"id": 4,
@@ -54,7 +55,7 @@ export const state = () => ({
 		"slug": "program-slug-1",
 		"link": "http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3",
 		"author": "Артём Королёв",
-		"public_at": ""
+		"public_at": 1555065432
 	},
 	{	
 		"id": 6,
@@ -65,7 +66,7 @@ export const state = () => ({
 		"slug": "program-slug-1",
 		"link": "http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3",
 		"author": "Артём Королёв",
-		"public_at": ""
+		"public_at": 1555065432
 	},
 	{	
 		"id": 7,
@@ -76,7 +77,7 @@ export const state = () => ({
 		"slug": "program-slug-1",
 		"link": "http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3",
 		"author": "Артём Королёв",
-		"public_at": ""
+		"public_at": 1555065432
 	},
 	{	
 		"id": 8,
@@ -87,7 +88,7 @@ export const state = () => ({
 		"slug": "program-slug-1",
 		"link": "http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3",
 		"author": "Артём Королёв",
-		"public_at": ""
+		"public_at": 1555065432
 	},
 	{	
 		"id": 9,
@@ -98,7 +99,7 @@ export const state = () => ({
 		"slug": "program-slug-1",
 		"link": "http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3",
 		"author": "Артём Королёв",
-		"public_at": ""
+		"public_at": 1555065432
 	},
 	{	
 		"id": 10,
@@ -109,7 +110,7 @@ export const state = () => ({
 		"slug": "program-slug-1",
 		"link": "http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3",
 		"author": "Артём Королёв",
-		"public_at": ""
+		"public_at": 1555065432
 	},
 	{	
 		"id": 11,
@@ -120,7 +121,7 @@ export const state = () => ({
 		"slug": "program-slug-1",
 		"link": "http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3",
 		"author": "Артём Королёв",
-		"public_at": ""
+		"public_at": 1555065432
 	},
 	{	
 		"id": 12,
@@ -131,7 +132,7 @@ export const state = () => ({
 		"slug": "program-slug-1",
 		"link": "http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3",
 		"author": "Артём Королёв",
-		"public_at": ""
+		"public_at": 1555065432
 	},
 	{	
 		"id": 13,
@@ -142,7 +143,7 @@ export const state = () => ({
 		"slug": "program-slug-1",
 		"link": "http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3",
 		"author": "Артём Королёв",
-		"public_at": ""
+		"public_at": 1555065432
 	},
 	{	
 		"id": 14,
@@ -153,7 +154,7 @@ export const state = () => ({
 		"slug": "program-slug-1",
 		"link": "http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3",
 		"author": "Артём Королёв",
-		"public_at": ""
+		"public_at": 1555065432
 	},
 	{	
 		"id": 15,
@@ -164,7 +165,7 @@ export const state = () => ({
 		"slug": "program-slug-1",
 		"link": "http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3",
 		"author": "Артём Королёв",
-		"public_at": ""
+		"public_at": 1555065432
 	},
 	{	
 		"id": 16,
@@ -175,27 +176,103 @@ export const state = () => ({
 		"slug": "program-slug-1",
 		"link": "http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3",
 		"author": "Артём Королёв",
-		"public_at": ""
+		"public_at": 1555065432
 	},
+	],
+	programsFront: [
+	{	
+		"id": 1,
+		"title": 'Утро на Балтик Плюс',
+		"preview": 'http://placehold.it/1000x1000',
+		"text": 'Вы ищете текст любимой песни? У нас вы найдете слова и перевод любимых зарубежных песен 70 х 80 х 90 х и 2000 х на русский язык, а также истории и интересные факты о создании музыкальных хитов. Читайте и слушайте онлайн на "Радио 7 на семи холмах".',
+		"time": '17:00-21:00 (Пн-Пт)',
+		"slug": "program-slug-1",
+		"link": "http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3",
+		"author": "Артём Королёв",
+		"public_at": 1555065432
+	},
+	{	
+		"id": 2,
+		"title": 'Утро на Балтик Плюс',
+		"preview": 'http://placehold.it/1000x1000',
+		"text": 'Вы ищете текст любимой песни? У нас вы найдете слова и перевод любимых зарубежных песен 70 х 80 х 90 х и 2000 х на русский язык, а также истории и интересные факты о создании музыкальных хитов. Читайте и слушайте онлайн на "Радио 7 на семи холмах".',
+		"time": '17:00-21:00 (Пн-Пт)',
+		"slug": "program-slug-1",
+		"link": "http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3",
+		"author": "Артём Королёв",
+		"public_at": 1555065432
+	},
+	{	
+		"id": 3,
+		"title": 'Утро на Балтик Плюс',
+		"preview": 'http://placehold.it/1000x1000',
+		"text": 'Вы ищете текст любимой песни? У нас вы найдете слова и перевод любимых зарубежных песен 70 х 80 х 90 х и 2000 х на русский язык, а также истории и интересные факты о создании музыкальных хитов. Читайте и слушайте онлайн на "Радио 7 на семи холмах".',
+		"time": '17:00-21:00 (Пн-Пт)',
+		"slug": "program-slug-1",
+		"link": "http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3",
+		"author": "Артём Королёв",
+		"public_at": 1555065432
+	},
+	{	
+		"id": 4,
+		"title": 'Утро на Балтик Плюс',
+		"preview": 'http://placehold.it/1000x1000',
+		"text": 'Вы ищете текст любимой песни? У нас вы найдете слова и перевод любимых зарубежных песен 70 х 80 х 90 х и 2000 х на русский язык, а также истории и интересные факты о создании музыкальных хитов. Читайте и слушайте онлайн на "Радио 7 на семи холмах".',
+		"time": '17:00-21:00 (Пн-Пт)',
+		"slug": "program-slug-1",
+		"link": "http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3",
+		"author": "Артём Королёв",
+		"public_at": "",
+		"podcasts": [41, 14, 41, 53, 63, 78]
+	},
+	{	
+		"id": 5,
+		"title": 'Утро на Балтик Плюс',
+		"preview": 'http://placehold.it/1000x1000',
+		"text": 'Вы ищете текст любимой песни? У нас вы найдете слова и перевод любимых зарубежных песен 70 х 80 х 90 х и 2000 х на русский язык, а также истории и интересные факты о создании музыкальных хитов. Читайте и слушайте онлайн на "Радио 7 на семи холмах".',
+		"time": '17:00-21:00 (Пн-Пт)',
+		"slug": "program-slug-1",
+		"link": "http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3",
+		"author": "Артём Королёв",
+		"public_at": 1555065432
+	},
+	{	
+		"id": 6,
+		"title": 'Утро на Балтик Плюс',
+		"preview": 'http://placehold.it/1000x1000',
+		"text": 'Вы ищете текст любимой песни? У нас вы найдете слова и перевод любимых зарубежных песен 70 х 80 х 90 х и 2000 х на русский язык, а также истории и интересные факты о создании музыкальных хитов. Читайте и слушайте онлайн на "Радио 7 на семи холмах".',
+		"time": '17:00-21:00 (Пн-Пт)',
+		"slug": "program-slug-1",
+		"link": "http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3",
+		"author": "Артём Королёв",
+		"public_at": 1555065432
+	}
 	]
 })
 
 export const mutations = {
 	setPrograms (state, programs) {
 		state.programs = programs
+	},
+	setProgramsFront (state, programsFront) {
+		state.programsFront = programsFront
 	}
 }
 
 export const actions = {
 	async fetch ({commit}) {
-		const blog = await this.$axios.$get("https://api.myjson.com/bins/ebmos")
-		commit('setPosts', blog)
+		const programs = await this.$axios.$get("/api/programs/")
+		commit('setPrograms', programs)
+	},
+	async fetchFront ({commit}) {
+		const programsFront = await this.$axios.$get("/api/programs/")
+		commit('setProgramsFront', programsFront)
 	}
 }
 
 export const getters = {
 	programs: s => s.programs,
-	programsFront: s => s.programs.slice(-6).reverse(),
+	programsFront: s => s.programsFront,
 	programsById: s => id => {
 		return s.programs.find(post => post.id === id);
 	}

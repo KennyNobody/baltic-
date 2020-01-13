@@ -8,7 +8,7 @@
 			<div class="home-now__articles">
 				<article class="home-now__article" v-if="broadcast.now">
 					<div class="home-now__thumb">
-						<img :src="broadcast.now.preview" alt="">
+						<img :src="broadcast.now.preview" :alt="broadcast.now.title">
 					</div>
 					<div class="home-now__content">
 						<p class="home-now__discript">
@@ -16,10 +16,10 @@
 						</p>
 						<div class="home-now__clock">
 							<time class="home-now__time">
-								18:00
+								{{ $moment.unix(broadcast.now.date).format('H:mm') }}
 							</time>
 							<time class="home-now__date">
-								29/09/2019
+								{{ $moment.unix(broadcast.now.date).format('DD/MM/YYYY') }}
 							</time>
 						</div>
 						<h3 class="home-now__title">
@@ -31,7 +31,7 @@
 				</article>
 				<article class="home-now__article" v-if="broadcast.next">
 					<div class="home-now__thumb">
-						<img src="http://placehold.it/1000x600" alt="">
+						<img :src="broadcast.next.preview" :alt="broadcast.next.title">
 					</div>
 					<div class="home-now__content">
 						<p class="home-now__discript">
@@ -39,10 +39,10 @@
 						</p>
 						<div class="home-now__clock">
 							<time class="home-now__time">
-								19:00
+								{{ $moment.unix(broadcast.next.date).format('H:mm') }}
 							</time>
 							<time class="home-now__date">
-								29/09/2019
+								{{ $moment.unix(broadcast.next.date).format('DD/MM/YYYY') }}
 							</time>
 						</div>
 						<h3 class="home-now__title">
@@ -177,7 +177,7 @@
 		},
 		async fetch({store}) {
 			if (store.getters['programs/programs'].length === 0) {
-				await store.dispatch('programs/fetch')
+				await store.dispatch('programs/fetchFront')
 			}
 			if (store.getters['blog/blog'].length === 0) {
 				await store.dispatch('blog/fetch')

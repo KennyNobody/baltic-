@@ -45,7 +45,7 @@ module.exports = {
 	{ src: '~/plugins/swiper.js', ssr: false },
 	{ src: '~/plugins/datepicker', ssr: false },
 	{ src: '~/plugins/mq', ssr: false },
-	// { src: '~plugins/vue-aplayer', ssr: false },
+	// { src: '~/plugins/moment.js', ssr: false },
 	],
 	css: [
 	'~/node_modules/@fancyapps/fancybox/dist/jquery.fancybox.min.css',
@@ -73,6 +73,12 @@ module.exports = {
 			}
 		},
 		transpile: ['vue-clamp', 'resize-detector']
-	}
+	},
+	buildModules: [
+		'@nuxtjs/moment'
+	],
+	moment: {
+    locales: ['ru']
+  }
 }
 
