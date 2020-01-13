@@ -14,7 +14,7 @@
 		</h2>
 		<div class="page-news__articles">
 			<appArticle
-			v-for="item in blog" v-bind:key="item.id"
+			v-for="item in blog.items" v-bind:key="item.id"
 			:title="item.title"
 			:discription="item.discription"
 			:thumb="item.preview"

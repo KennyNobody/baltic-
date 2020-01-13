@@ -176,14 +176,14 @@
 			},
 		},
 		async fetch({store}) {
-			if (store.getters['programs/programs'].length === 0) {
+			if (store.getters['programs/programsFront'].length === 0) {
 				await store.dispatch('programs/fetchFront')
 			}
-			if (store.getters['blog/blog'].length === 0) {
-				await store.dispatch('blog/fetch')
+			if (store.getters['blog/blogFront'].length === 0) {
+				await store.dispatch('blog/fetchFront')
 			}
-			if (store.getters['podcasts/podcasts'].length === 0) {
-				await store.dispatch('podcasts/fetch')
+			if (store.getters['podcasts/podcastsFront'].length === 0) {
+				await store.dispatch('podcasts/fetchFront')
 			}
 		},
 		components: {

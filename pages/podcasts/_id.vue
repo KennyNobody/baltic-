@@ -34,7 +34,7 @@
 					</div>
 					<div class="single-podcast__info">
 						<div class="single-podcast__subheader">
-							<time class="single-podcast__time">{{ podcast.date }}</time>
+							<time class="single-podcast__time">{{ $moment.unix(podcast.date).format('DD/MM/YYYY') }}</time>
 							<svg class="single-podcast__share-icon">
 								<use xlink:href="#icon-icon-share"></use>
 							</svg>

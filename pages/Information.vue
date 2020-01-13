@@ -14,10 +14,10 @@
 		</h2>
 		<div class="page-about__columns">
 			<div class="page-about__side">
-				<img :src="advertising.thumb" class="page-about__side-thumb" alt="">
+				<img :src="information.thumb" class="page-about__side-thumb" alt="">
 			</div>
 			<div class="page-about__main text">
-				<div class="page-about__history" v-html="advertising.content">
+				<div class="page-about__history" v-html="information.content">
 					
 				</div>
 			</div>
@@ -36,15 +36,15 @@
 				]
 			}
 		},
-		name: 'page-advertising',
+		name: 'page-information',
 		computed: {
-			advertising() {
-				return this.$store.getters['advertising/advertising']
+			information() {
+				return this.$store.getters['information/information']
 			}
 		},
 		async fetch({store}) {
-			if (store.getters['advertising/advertising'].length === 0) {
-				await store.dispatch('advertising/fetch')
+			if (store.getters['information/information'].length === 0) {
+				await store.dispatch('information/fetch')
 			}
 		},
 		components: {}

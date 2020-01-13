@@ -67,7 +67,10 @@
 						<nuxt-link class="header__link" to="/about/history/">
 							О радио
 						</nuxt-link>
-						<nuxt-link active-class="header__link--active" class="header__link" to="/advertising/">
+						<nuxt-link class="header__link" to="/news/">
+							Блог
+						</nuxt-link>
+						<nuxt-link active-class="header__link--active" class="header__link" to="/information/">
 							Рекламодателям
 						</nuxt-link>
 						<nuxt-link active-class="header__link--active" class="header__link" to="/contacts/">
@@ -134,7 +137,10 @@
 						<nuxt-link class="mob-menu__link" to="/about/history/">
 							О радио
 						</nuxt-link>
-						<nuxt-link class="mob-menu__link" to="/advertising/">
+						<nuxt-link class="mob-menu__link" to="/news/">
+							Блог
+						</nuxt-link>
+						<nuxt-link class="mob-menu__link" to="/information/">
 							Рекламодателям
 						</nuxt-link>
 						<nuxt-link class="mob-menu__link" to="/contacts/">
@@ -296,10 +302,13 @@
 			&__link {
 				text-decoration: none;
 				color: $light;
-				margin-right: 40px;
+				margin-right: 34px;
 				position: relative;
 				&:hover {
 					opacity: 0.7;
+				}
+				&:last-child {
+					margin-right: 0px;
 				}
 				&--active {
 					// pointer-events: none;

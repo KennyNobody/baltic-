@@ -265,7 +265,7 @@ export const actions = {
 		commit('setPrograms', programs)
 	},
 	async fetchFront ({commit}) {
-		const programsFront = await this.$axios.$get("/api/programs/")
+		const programsFront = await this.$axios.$get("/api/programs?front")
 		commit('setProgramsFront', programsFront)
 	}
 }
