@@ -23,7 +23,6 @@ export const state = () => ({
 		link: "http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3",
 		author: "Артём Королёв",
 		public_at: 1555065432,
-		podcasts: []
 	},
 	{	
 		id: 3,
@@ -35,7 +34,6 @@ export const state = () => ({
 		link: "http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3",
 		author: "Артём Королёв",
 		public_at: 1555065432,
-		podcasts: false
 	},
 	{	
 		id: 4,
@@ -107,7 +105,6 @@ export const state = () => ({
 		link: "http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3",
 		author: "Артём Королёв",
 		public_at: 1555065432,
-		podcasts: false
 	},
 	{	
 		id: 10,
@@ -119,7 +116,6 @@ export const state = () => ({
 		link: "http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3",
 		author: "Артём Королёв",
 		public_at: 1555065432,
-		podcasts: []
 	},
 	{	
 		id: 11,
@@ -131,7 +127,6 @@ export const state = () => ({
 		link: "http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3",
 		author: "Артём Королёв",
 		public_at: 1555065432,
-		podcasts: false
 	},
 	{	
 		id: 12,
@@ -179,7 +174,6 @@ export const state = () => ({
 		link: "http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3",
 		author: "Артём Королёв",
 		public_at: 1555065432,
-		podcasts: false
 	},
 	{	
 		id: 16,
