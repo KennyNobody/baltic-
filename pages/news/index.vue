@@ -24,14 +24,39 @@
 			></appArticle>
 		</div>
 		<div class="page-news__pagination">
-			<appPagination></appPagination>
+			<div class="pagination">
+				<div class="pagination__link pagination__link--prev">
+					<svg>
+						<use xlink:href="#icon-icon-arrow"></use>
+					</svg>
+				</div>
+				<div class="pagination__link pagination__link--now">
+					1
+				</div>
+				<div class="pagination__link">
+					2
+				</div>
+				<div class="pagination__link">
+					3
+				</div>
+				<div class="pagination__link pagination__link--static">
+					...
+				</div>
+				<div class="pagination__link">
+					13
+				</div>
+				<div class="pagination__link pagination__link--next">
+					<svg>
+						<use xlink:href="#icon-icon-arrow"></use>
+					</svg>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script>
 	import appArticle from '~/components/Article'
-	import appPagination from '~/components/Pagination'
 
 	export default {
 		head () {
@@ -53,7 +78,6 @@
 		},
 		components: {
 			appArticle,
-			appPagination
 		},
 		computed: {
 			blog() {
@@ -69,17 +93,17 @@
 </script>
 
 <style lang="scss">
-	.page-news {
-		&__articles {
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: space-between;
-			margin-bottom: 36px;
-		}
-		&__pagination {
-			display: flex;
-			justify-content: flex-end;
-			align-items: center;
-		}
+.page-news {
+	&__articles {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		margin-bottom: 36px;
 	}
+	&__pagination {
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+	}
+}
 </style>

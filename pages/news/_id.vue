@@ -54,8 +54,8 @@
 		</div>
 		<div class="single-post__articles">
 			<appArticle
-			v-for="item in posts.slice(0, 3)" v-bind:key="item.id"
-
+			v-for="item in posts" v-bind:key="item.id"
+			:id="item.id"
 			:title="item.title"
 			:discription="item.discription"
 			:thumb="item.preview"
@@ -87,7 +87,7 @@
 		},
 		computed: {
 			posts(params) {
-				return this.$store.getters['blog/blog']
+				return this.$store.getters['blog/blogRandom']
 			},
 			post ({app, params}) {
 				console.log(this.now)
@@ -114,58 +114,61 @@
 </script>
 
 <style lang="scss">
-	.single-post {
-		display: flex;
-		justify-content: space-between;
-		padding-bottom: 50px;
+.single-post {
+	display: flex;
+	justify-content: space-between;
+	padding-bottom: 50px;
+	@include r(1100) {
+		display: block;
+	}
+	&__left {
+		width: calc(33% - 10px);
+		flex-shrink: 0;
 		@include r(1100) {
-			display: block;
+			display: none;
 		}
-		&__left {
-			width: calc(33% - 10px);
-			flex-shrink: 0;
-			@include r(1100) {
-				display: none;
-			}
+	}
+	&__right {
+		flex-grow: 1;
+		min-width: 0px;
+		padding-left: 20px;
+		color: $light;
+		@include r(1100) {
+			padding-left: 0px;
 		}
-		&__right {
-			flex-grow: 1;
-			min-width: 0px;
-			padding-left: 20px;
-			color: $light;
-			@include r(1100) {
-				padding-left: 0px;
-			}
+	}
+	&__thumb {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+	&__articles {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		margin-bottom: 36px;
+		@include r(700) {
+			display: none;
 		}
-		&__thumb {
-			display: block;
-			width: 100%;
-			height: auto;
-		}
-		&__articles {
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: space-between;
-			margin-bottom: 36px;
-		}
-		&__info {
-			color: $blue;
-			font-weight: bold;
-			margin-bottom: 21px;
-		}
-		&__content {
-			blockquote {
-				&:before {
-					content: url("~assets/img/quote.svg");
-					display: block;
-					position: absolute;
-					width: 32px;
-					height: 28px;
-					top: 0px;
-					left: -64px;
-					font-family: sans-serif;
-				}
+	}
+	&__info {
+		color: $blue;
+		font-weight: bold;
+		margin-bottom: 21px;
+	}
+	&__content {
+		blockquote {
+			&:before {
+				content: url("~assets/img/quote.svg");
+				display: block;
+				position: absolute;
+				width: 32px;
+				height: 28px;
+				top: 0px;
+				left: -64px;
+				font-family: sans-serif;
 			}
 		}
 	}
+}
 </style>

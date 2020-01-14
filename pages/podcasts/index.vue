@@ -23,7 +23,7 @@
 			</div>
 			<select class="filter__select" v-model="genre">
 				<option value="" selected>По подкасту</option>
-				<option v-for="item in podcasts" value="item.value" v-bind:key="item.id">{{ item.name }}</option>
+				<option v-for="item in programs" value="item.value" v-bind:key="item.id">{{ item.title }}</option>
 			</select>
 			<div class="filter__all" v-on:click="clearFilter">
 				Все подкасты
@@ -44,7 +44,33 @@
 			></appPodcast>
 		</div>
 		<div class="page-news__pagination">
-			<appPagination></appPagination>
+			<div class="pagination">
+				<div class="pagination__link pagination__link--prev">
+					<svg>
+						<use xlink:href="#icon-icon-arrow"></use>
+					</svg>
+				</div>
+				<div class="pagination__link pagination__link--now">
+					1
+				</div>
+				<div class="pagination__link">
+					2
+				</div>
+				<div class="pagination__link">
+					3
+				</div>
+				<div class="pagination__link pagination__link--static">
+					...
+				</div>
+				<div class="pagination__link">
+					13
+				</div>
+				<div class="pagination__link pagination__link--next">
+					<svg>
+						<use xlink:href="#icon-icon-arrow"></use>
+					</svg>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -78,6 +104,9 @@
 			podcasts() {
 				return this.$store.getters['podcasts/podcasts']
 			},
+			programs() {
+				return this.$store.getters['programs/programsList']
+			},
 		},
 		async fetch({store}) {
 			if (store.getters['podcasts/podcasts'].length === 0) {
@@ -94,106 +123,106 @@
 </script>
 
 <style lang="scss">
-	.page-news {
-		&__articles {
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: space-between;
-			margin-bottom: 36px;
-		}
-		&__pagination {
-			display: flex;
-			justify-content: flex-end;
-			align-items: center;
-			@include r(670) {
-				margin-left: auto;
-				margin-right: auto;
-			}
+.page-news {
+	&__articles {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		margin-bottom: 36px;
+	}
+	&__pagination {
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+		@include r(670) {
+			margin-left: auto;
+			margin-right: auto;
 		}
 	}
+}
 
-	.filter {
+.filter {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 34px;
+	@include r(1100) {
+		display: block;
+	}
+	&__dates {
+		color: $dark;
+		font-size: 14px;
+		line-height: 28px;
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
-		margin-bottom: 34px;
+		margin-right: 40px;
+		flex-shrink: 0;
+		font-family: $main !important;
 		@include r(1100) {
-			display: block;
-		}
-		&__dates {
-			color: $dark;
-			font-size: 14px;
-			line-height: 28px;
-			display: flex;
-			align-items: center;
-			margin-right: 40px;
-			flex-shrink: 0;
-			font-family: $main !important;
-			@include r(1100) {
-				color: $light;
-				width: 100%;
-				height: 40px;
-			}
-			.mx-datepicker-range {
-				width: 240px;
-				@include r(1100) {
-					width: 100%;
-					margin-bottom: 20px;
-				}
-			}
-			.mx-icon-calendar {
-				color: $blue;
-			}
-			.mx-input {
-				height: 40px;
-			}
-		}
-		&__date-text {
-			margin-right: 15px;
-			@include r(1100) {
-				display: none;
-			}
-		}
-		&__select {
-			height: 40px;
-			flex-grow: 1;
-			min-width: 0px;
-			border: 1px solid $blue;
-			background-color: $dark;
-			cursor: pointer;
 			color: $light;
-			padding-left: 20px;
-			padding-right: 20px;
-			background-image: url(~assets/img/arrow.png);
-			background-repeat: no-repeat;
-			background-position: 98% center;
-			-webkit-appearance: none;
-			-moz-appearance: none;
-			appearance: none;
-			font-size: 14px;
-			line-height: 28px;
+			width: 100%;
+			height: 40px;
+		}
+		.mx-datepicker-range {
+			width: 240px;
 			@include r(1100) {
 				width: 100%;
 				margin-bottom: 20px;
 			}
 		}
-		&__all {
-			text-decoration: none;
-			margin-left: 32px;
-			transition: 0.3s all;
+		.mx-icon-calendar {
 			color: $blue;
-			font-weight: bold;
-			font-size: 16px;
-			line-height: 28px;
-			cursor: pointer;
-			@include r(1100) {
-				margin: 0px;
-				text-align: center;
-				width: 100%;
-			}
-			&:hover {
-				opacity: 0.7;
-			}
+		}
+		.mx-input {
+			height: 40px;
 		}
 	}
+	&__date-text {
+		margin-right: 15px;
+		@include r(1100) {
+			display: none;
+		}
+	}
+	&__select {
+		height: 40px;
+		flex-grow: 1;
+		min-width: 0px;
+		border: 1px solid $blue;
+		background-color: $dark;
+		cursor: pointer;
+		color: $light;
+		padding-left: 20px;
+		padding-right: 20px;
+		background-image: url(~assets/img/arrow.png);
+		background-repeat: no-repeat;
+		background-position: 98% center;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		font-size: 14px;
+		line-height: 28px;
+		@include r(1100) {
+			width: 100%;
+			margin-bottom: 20px;
+		}
+	}
+	&__all {
+		text-decoration: none;
+		margin-left: 32px;
+		transition: 0.3s all;
+		color: $blue;
+		font-weight: bold;
+		font-size: 16px;
+		line-height: 28px;
+		cursor: pointer;
+		@include r(1100) {
+			margin: 0px;
+			text-align: center;
+			width: 100%;
+		}
+		&:hover {
+			opacity: 0.7;
+		}
+	}
+}
 </style>
