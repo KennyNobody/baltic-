@@ -2,8 +2,12 @@ export const state = () => ({
 	player: {
 		format: 'radio',
 		thumb: 'https://images.genius.com/133f0dd4933c0e7973f57619de0736ae.712x712x1.jpg',
-		author: 'Гарри Топор',
-		title: 'Собеседник',
+		name: 'Балтик+',
+		title: 'Прямой эфир',
+		file: 'http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3',
+		radioLink: 'http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3',
+		radioAuthor: 'Балтик+',
+		radioTitle: 'Прямой эфир',
 		playlist: [
 		{
 			id: 1,
