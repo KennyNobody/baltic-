@@ -276,7 +276,7 @@ button {
 		cursor: pointer;
 		padding-left: 12px;
 		padding-right: 12px;
-		transition: 0.3s all;
+		transition: 0.3s border-bottom, border-top, background-color, color;
 		&:first-child {
 			border-left: 1px solid $blue;
 		}

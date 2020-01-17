@@ -25,27 +25,15 @@
 		</div>
 		<div class="page-news__pagination">
 			<div class="pagination">
-				<div class="pagination__link pagination__link--prev">
+				<div class="pagination__link pagination__link--prev" v-on:click="prevPage">
 					<svg>
 						<use xlink:href="#icon-icon-arrow"></use>
 					</svg>
 				</div>
-				<div class="pagination__link pagination__link--now">
-					1
+				<div class="pagination__link" v-on:click="changePage(index)" v-for="(item, index) in blog.pages.max" v-bind:key="item.id" :class="{ 'pagination__link--now' : index == pageNow - 1}">
+					{{ index+1 }}
 				</div>
-				<div class="pagination__link">
-					2
-				</div>
-				<div class="pagination__link">
-					3
-				</div>
-				<div class="pagination__link pagination__link--static">
-					...
-				</div>
-				<div class="pagination__link">
-					13
-				</div>
-				<div class="pagination__link pagination__link--next">
+				<div class="pagination__link pagination__link--next" v-on:click="nextPage">
 					<svg>
 						<use xlink:href="#icon-icon-arrow"></use>
 					</svg>
@@ -70,10 +58,7 @@
 		name: 'page-news',
 		data () {
 			return {
-				newsPerPage: 9,
-				newsArticles: [
-				
-				]
+				pageNow: 1,
 			}
 		},
 		components: {
@@ -82,6 +67,37 @@
 		computed: {
 			blog() {
 				return this.$store.getters['blog/blog']
+			}
+		},
+		watch: {
+			pageNow: function () {
+				this.getPosts();
+			}
+		},
+		methods: {
+			changePage (index) {
+				this.pageNow = index + 1
+			},
+			prevPage () {
+				if (this.pageNow <= 1) {
+					return false;
+				} else {
+					this.pageNow = this.pageNow - 1
+				}
+			},
+			nextPage () {
+				if (this.pageNow >= this.blog.pages.max) {
+					return false;
+				} else {
+					this.pageNow = this.pageNow + 1
+				}
+			},
+			async getPosts() {
+				let filterInfo = {
+					page: this.pageNow
+				}
+
+				await this.$store.dispatch('blog/fetchCustom', filterInfo)
 			}
 		},
 		async fetch({store}) {

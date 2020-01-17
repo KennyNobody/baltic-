@@ -14,16 +14,19 @@
 		</h2>
 		<div class="filter">
 			<div class="filter__dates">
-				<p class="filter__date-text">
+<!-- 				<p class="filter__date-text">
 					Дата
-				</p>
+				</p> -->
 				<no-ssr>
-					<date-picker format="DD-MM-YYYY" range v-model="filterDate" placeholder="Выберите период"></date-picker>
+					<date-picker format="x" v-model="filter.filterDateStart" valueType="timestamp" v-on:change="getPosts" placeholder="От"></date-picker>
+				</no-ssr>
+				<no-ssr>
+					<date-picker format="x" v-model="filter.filterDateEnd" valueType="timestamp" v-on:change="getPosts" placeholder="До"></date-picker>
 				</no-ssr>
 			</div>
-			<select class="filter__select" v-model="genre">
+			<select class="filter__select" v-on:change="getPosts" v-model="filter.genre">
 				<option value="" selected>По подкасту</option>
-				<option v-for="item in programs" value="item.value" v-bind:key="item.id">{{ item.title }}</option>
+				<option v-for="item in programs" :value="item.id" v-bind:key="item.id">{{ item.title }}</option>
 			</select>
 			<div class="filter__all" v-on:click="clearFilter">
 				Все подкасты
@@ -31,7 +34,7 @@
 		</div>
 		<div class="page-news__articles">
 			<appPodcast
-			v-for="item in podcasts"
+			v-for="item in podcasts.items"
 			v-bind:key="item.id"
 			:title="item.title"
 			:date="item.date"
@@ -45,27 +48,16 @@
 		</div>
 		<div class="page-news__pagination">
 			<div class="pagination">
-				<div class="pagination__link pagination__link--prev">
+				<div class="pagination__link pagination__link--prev" v-on:click="prevPage">
 					<svg>
 						<use xlink:href="#icon-icon-arrow"></use>
 					</svg>
 				</div>
-				<div class="pagination__link pagination__link--now">
-					1
+				<div class="pagination__link" v-on:click="changePage(index)" v-for="(item, index) in podcasts.pages.max" v-bind:key="item.id" :class="{ 'pagination__link--now' : index == pageNow - 1}">
+					{{ index+1 }}
 				</div>
-				<div class="pagination__link">
-					2
-				</div>
-				<div class="pagination__link">
-					3
-				</div>
-				<div class="pagination__link pagination__link--static">
-					...
-				</div>
-				<div class="pagination__link">
-					13
-				</div>
-				<div class="pagination__link pagination__link--next">
+				<!-- pagination__link--now -->
+				<div class="pagination__link pagination__link--next" v-on:click="nextPage">
 					<svg>
 						<use xlink:href="#icon-icon-arrow"></use>
 					</svg>
@@ -91,9 +83,12 @@
 		name: 'page-news',
 		data () {
 			return {
-				podcastsPerPage: 16,
-				filterDate: '',
-				genre: '',
+				filter: {
+					filterDateStart: '',
+					filterDateEnd: '',
+					genre: ''
+				},
+				pageNow: 1,
 			}
 		},
 		components: {
@@ -108,15 +103,48 @@
 				return this.$store.getters['programs/programsList']
 			},
 		},
-		async fetch({store}) {
-			if (store.getters['podcasts/podcasts'].length === 0) {
+		async fetch({store, params}) {
+			if (Object.keys(store.getters['podcasts/podcasts']).length === 0) {
 				await store.dispatch('podcasts/fetch')
 			}
 		},
+		watch: {
+			pageNow: function () {
+				this.getPosts();
+			}
+		},
 		methods: {
+			changePage (index) {
+				this.pageNow = index + 1
+			},
 			clearFilter() {
-				this.filterDate = '';
-				this.genre = '';
+				this.filter.genre = '';
+				this.filter.filterDateStart = '';
+				this.filter.filterDateEnd = '';
+			},
+			prevPage () {
+				if (this.pageNow <= 1) {
+					return false;
+				} else {
+					this.pageNow = this.pageNow - 1
+				}
+			},
+			nextPage () {
+				if (this.pageNow >= this.podcasts.pages.max) {
+					return false;
+				} else {
+					this.pageNow = this.pageNow + 1
+				}
+			},
+			async getPosts() {
+				let filterInfo = {
+					dateStart: this.filter.filterDateStart,
+					dateEnd: this.filter.filterDateEnd,
+					genre: this.filter.genre,
+					page: this.pageNow
+				}
+
+				await this.$store.dispatch('podcasts/fetchCustom', filterInfo)
 			}
 		}
 	}
@@ -155,7 +183,6 @@
 		line-height: 28px;
 		display: flex;
 		align-items: center;
-		margin-right: 40px;
 		flex-shrink: 0;
 		font-family: $main !important;
 		@include r(1100) {
@@ -163,11 +190,18 @@
 			width: 100%;
 			height: 40px;
 		}
-		.mx-datepicker-range {
-			width: 240px;
+		@include r(480) {
+			display: block;
+			height: auto;
+		}
+		.mx-datepicker {
+			margin-right: 20px;
 			@include r(1100) {
 				width: 100%;
 				margin-bottom: 20px;
+				&:last-child {
+					margin-right: 0px;
+				}
 			}
 		}
 		.mx-icon-calendar {
@@ -201,6 +235,7 @@
 		appearance: none;
 		font-size: 14px;
 		line-height: 28px;
+		outline: none;
 		@include r(1100) {
 			width: 100%;
 			margin-bottom: 20px;

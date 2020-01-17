@@ -44,7 +44,7 @@
 		},
 		data () {
 			return {
-				programCount: 8,
+				
 			}
 		},
 		name: 'home',

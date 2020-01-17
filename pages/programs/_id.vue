@@ -47,7 +47,7 @@
 		</h2>
 		<div class="single-program__articles">
 			<appPodcast
-				v-for="item in podcasts"
+				v-for="item in podcasts.items"
 				v-bind:key="item.id"
 				:title="item.title"
 				:date="item.date"

@@ -405,8 +405,19 @@ export const mutations = {
 
 export const actions = {
 	async fetch ({commit}) {
-		const blog = await this.$axios.$get("/api/blog?page=1")
+		const blog = await this.$axios.$get("/api/blog", {
+			page: 1,
+		})
 		commit('setPosts', blog)
+	},
+	async fetchCustom ({commit}, payload) {
+		let podcasts = await this.$axios.$get("/api/blog", {
+			params: {
+				page: payload.page || null,
+			}
+		})
+		console.log(payload)
+		commit('setPodcasts', podcasts)
 	},
 	async fetchFront ({commit}) {
 		const blogFront = await this.$axios.$get("/api/blog?front")
