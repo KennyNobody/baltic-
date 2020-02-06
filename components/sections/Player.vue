@@ -57,12 +57,8 @@
 			</div>
 		</transition>
 		<div class="player__left">
-<<<<<<< HEAD
-			<audio class="player__audio" :src="player.nowLink" preload="auto" type="audio/mp3"></audio>
-=======
 			<audio class="player__audio" :src="player.file" preload="auto" type="audio/mp3"></audio>
->>>>>>> 1c23ee2d1981d907a77a63112b7b107a1ac2999c
-			
+
 			<!-- При прямом эфире просто глушим звук, не останавливая трансляцию. Поставить соответствующую иконку -->
 			<div class="player__play" v-if="live == true" v-on:click.prevent="playing = !playing">
 				<div v-if="playing == false">
@@ -115,16 +111,6 @@
 				<p class="now__discript">
 					Сейчас в эфире:
 				</p>
-<<<<<<< HEAD
-				<div class="now__text">
-					<p class="now__author">
-						{{ player.author }}
-					</p>
-					<p class="now__title">
-						{{ player.title }}
-					</p>
-				</div>
-=======
 				<p class="now__text">
 					<span class="now__author">
 						{{ player.name }}
@@ -134,7 +120,6 @@
 						{{ player.title }}
 					</span>
 				</p>
->>>>>>> 1c23ee2d1981d907a77a63112b7b107a1ac2999c
 			</div>
 			<div class="volume">
 				<input class="e-range" type="range" min="0" max="100" v-model.number="volume">
@@ -332,10 +317,7 @@
 		height: 100%;
 		width: 88px;
 		background-color: $dark;
-<<<<<<< HEAD
 		flex-shrink: 0;
-=======
->>>>>>> 1c23ee2d1981d907a77a63112b7b107a1ac2999c
 		@include r(1100) {
 			display: none;
 		}
@@ -350,10 +332,6 @@
 		flex-grow: 1;
 		min-width: 0px;
 		display: flex;
-<<<<<<< HEAD
-		display: -webkit-box;
-=======
->>>>>>> 1c23ee2d1981d907a77a63112b7b107a1ac2999c
 		align-items: center;
 		background-color: #00496A;
 		padding: 12px 20px;
@@ -482,7 +460,6 @@
 	}
 	&__author {
 		font-weight: bold;
-<<<<<<< HEAD
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
@@ -491,8 +468,6 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
-=======
->>>>>>> 1c23ee2d1981d907a77a63112b7b107a1ac2999c
 	}
 }
 
@@ -502,10 +477,6 @@
 	align-items: center;
 	margin-left: 20px;
 	flex-shrink: 0px;
-<<<<<<< HEAD
-	flex-shrink: 0;
-=======
->>>>>>> 1c23ee2d1981d907a77a63112b7b107a1ac2999c
 	@include r(1100) {
 		display: none;
 	}
@@ -541,8 +512,6 @@
 		height: $height;
 		overflow: hidden;
 		cursor: pointer;
-<<<<<<< HEAD
-
 		&:focus {
 			outline: none;
 		}
@@ -632,35 +601,6 @@
 			background-color: $thumb-hover-color;
 		}
 	}
-}
-
-.playlist {
-	position: absolute;
-	bottom: 100%;
-	left: 0px;
-	right: 0px;
-	height: auto;
-	max-height: calc(100vh - 244px);
-	display: flex;
-	box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
-	z-index: -1;
-	&__left {
-		width: 247px;
-		background-color: $light;
-		padding: 16px 15px;
-		color: $dark;
-		flex-shrink: 0;
-		@include r(1100) {
-			display: none;
-		}
-	}
-=======
-
-		&:focus {
-			outline: none;
-		}
-	}
-
 	.e-range::-webkit-slider-runnable-track {
 		width: 100%;
 		height: $height;
@@ -732,8 +672,7 @@
 		box-shadow: none;
 	}
 
-	.e-range:hover,
-	.e-range:focus {
+	.e-range:hover, .e-range:focus {
 
 		&::-webkit-slider-thumb {
 			background-color: $thumb-hover-color;
@@ -767,7 +706,31 @@
 			display: none;
 		}
 	}
->>>>>>> 1c23ee2d1981d907a77a63112b7b107a1ac2999c
+	&:focus {
+		outline: none;
+	}
+}
+
+.playlist {
+	position: absolute;
+	bottom: 100%;
+	left: 0px;
+	right: 0px;
+	height: auto;
+	max-height: calc(100vh - 244px);
+	display: flex;
+	box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+	z-index: -1;
+	&__left {
+		width: 247px;
+		background-color: $light;
+		padding: 16px 15px;
+		color: $dark;
+		flex-shrink: 0;
+		@include r(1100) {
+			display: none;
+		}
+	}
 	&__right {
 		background-color: #00496A;
 		flex-grow: 1;
@@ -786,90 +749,89 @@
 	}
 	&__list {
 		height: 100%;
-			// overflow-y: scroll; 
-		}
-		&__song {
-			display: flex;
-			padding-top: 7px;
-			padding-bottom: 7px;
-			transition: 0.3s all;
-			padding-left: 20px;
-			padding-right: 20px;
-			width: 100%;
-			overflow: hidden; 
-		}
-		&__time {
-			color: $blue;
-			width: 88px;
-			transition: 0.3s all;
-			flex-shrink: 0;
-		}
-		&__author {
-			font-weight: bold;
-			font-size: 16px;
-			line-height: 22px;
-			margin-right: 10px;
-			flex-shrink: 0;
-		}
-		&__name {
-			font-size: 16px;
-			line-height: 22px;
-			white-space: nowrap;
-			text-overflow: ellipsis;
-			min-width: 0px;
-			overflow: hidden;
-		}
 	}
-
-	.p-podcast {
+	&__song {
 		display: flex;
-		margin-bottom: 12px;
-		&__thumb {
-			width: 85px;
-			height: 85px;
-			flex-shrink: 0;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			margin-right: 9px;
+		padding-top: 7px;
+		padding-bottom: 7px;
+		transition: 0.3s all;
+		padding-left: 20px;
+		padding-right: 20px;
+		width: 100%;
+		overflow: hidden; 
+	}
+	&__time {
+		color: $blue;
+		width: 88px;
+		transition: 0.3s all;
+		flex-shrink: 0;
+	}
+	&__author {
+		font-weight: bold;
+		font-size: 16px;
+		line-height: 22px;
+		margin-right: 10px;
+		flex-shrink: 0;
+	}
+	&__name {
+		font-size: 16px;
+		line-height: 22px;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		min-width: 0px;
+		overflow: hidden;
+	}
+}
+
+.p-podcast {
+	display: flex;
+	margin-bottom: 12px;
+	&__thumb {
+		width: 85px;
+		height: 85px;
+		flex-shrink: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-right: 9px;
+	}
+	&__content {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		padding-right: 15px;
+	}
+	&__play {
+		width: 33px;
+		height: 33px;
+		background-color: $red;
+		border-radius: 50px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+		transition: 0.3s all;
+		&:hover {
+			opacity: 0.7;
 		}
-		&__content {
-			display: flex;
-			flex-direction: column;
-			justify-content: space-between;
-			padding-right: 15px;
-		}
-		&__play {
-			width: 33px;
-			height: 33px;
-			background-color: $red;
-			border-radius: 50px;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			cursor: pointer;
-			transition: 0.3s all;
-			&:hover {
-				opacity: 0.7;
-			}
-			svg {
-				height: 14px;
-				width: 14px;
-				position: relative;
-				left: 1px;
-			}
-		}
-		&__title {
-			font-size: 16px;
-			font-weight: 600;
-		}
-		&__discript {
-			font-size: 14px;
-		}
-		&__time {
-			font-size: 14px;
-			line-height: 19px;
-			color: $blue;
+		svg {
+			height: 14px;
+			width: 14px;
+			position: relative;
+			left: 1px;
 		}
 	}
+	&__title {
+		font-size: 16px;
+		font-weight: 600;
+	}
+	&__discript {
+		font-size: 14px;
+	}
+	&__time {
+		font-size: 14px;
+		line-height: 19px;
+		color: $blue;
+	}
+}
 </style>

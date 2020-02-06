@@ -2,19 +2,12 @@ export const state = () => ({
 	player: {
 		broadcast: true,
 		thumb: 'https://images.genius.com/133f0dd4933c0e7973f57619de0736ae.712x712x1.jpg',
-<<<<<<< HEAD
-		author: 'Гарри Топор',
-		title: 'Собеседник',
-		radioLink: 'http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3',
-		nowLink: 'http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3',
-=======
 		name: 'Балтик+',
 		title: 'Прямой эфир',
 		file: 'http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3',
 		radioLink: 'http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3',
 		radioAuthor: 'Балтик+',
 		radioTitle: 'Прямой эфир',
->>>>>>> 1c23ee2d1981d907a77a63112b7b107a1ac2999c
 		playlist: [
 		{
 			id: 1,
