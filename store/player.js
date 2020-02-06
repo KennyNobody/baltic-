@@ -1,9 +1,11 @@
 export const state = () => ({
 	player: {
-		format: 'radio',
+		broadcast: true,
 		thumb: 'https://images.genius.com/133f0dd4933c0e7973f57619de0736ae.712x712x1.jpg',
 		author: 'Гарри Топор',
 		title: 'Собеседник',
+		radioLink: 'http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3',
+		nowLink: 'http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3',
 		playlist: [
 		{
 			id: 1,
@@ -78,6 +80,13 @@ export const state = () => ({
 export const mutations = {
 	setSetting (state, player) {
 		state.player = player
+	},
+	setPlayer (state, payload) {
+		console.log(payload)
+		state.player.thumb = payload.thumb;
+		state.player.nowLink = payload.link;
+		state.player.title = payload.title;
+		state.player.author = payload.info;
 	}
 }
 

@@ -273,7 +273,16 @@ export const mutations = {
 	},
 	setPodcastsFront (state, podcastsFront) {
 		state.podcastsFront = podcastsFront
-	}
+	},
+	changePodcast (state, payload) {
+		for (let i = 0; i < state.podcasts.items.length; i++) {
+			state.podcasts.items[i].play = false;
+		}
+		// дописать аналогичный для front-версии
+		let podcast = state.podcasts.items.find(podcasts => podcasts.id === payload);
+		podcast.play = !podcast.play;
+		// дописать аналогичный для front-версии
+	},
 }
 
 // Пример полного запроса, любой из параметров может отсутствовать

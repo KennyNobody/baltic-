@@ -40,6 +40,7 @@
 			:date="item.date"
 			:play="item.play"
 			:id="item.id"
+			:link="item.link"
 			:slug="item.slug"
 			:time="item.time"
 			:thumb="item.thumb"

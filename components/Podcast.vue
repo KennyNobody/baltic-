@@ -1,7 +1,7 @@
 <template>
 	<article class="podcast">
 		<div class="podcast__thumb" :style="{ 'background-image': 'url(' + thumb + ')' }">
-			<div class="podcast__btn" v-on:click="play = !play">
+			<div class="podcast__btn" v-on:click="playThis">
 				<svg class="podcast__play-icon" v-if="play == false">
 					<use xlink:href="#icon-icon-play"></use>
 				</svg>
@@ -40,13 +40,25 @@
 
 	export default {
 		name: 'podcast',
-		props: ['title', 'time', 'date', 'thumb', 'info', 'slug', 'id', 'play'],
+		props: ['title', 'time', 'date', 'thumb', 'info', 'slug', 'id', 'play', 'link'],
 		data () {
 			return {}
 		},
 		components: {
 			VClamp
-		},	
+		},
+		methods: {
+			playThis () {
+				this.$store.commit('podcasts/changePodcast', this.id)
+				let newPodcast = {
+					title: this.title,
+					thumb: this.thumb,
+					link: this.link,
+					info: this.info
+				}
+				this.$store.commit('player/setPlayer', newPodcast)
+			}
+		}
 	}
 </script>
 
