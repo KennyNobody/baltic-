@@ -18,7 +18,7 @@
 				</div>
 			</h2>
 			<div class="swiper-wrapper">
-				<a href="#" class="swiper-slide home-news__article" v-for="item in news" v-bind:key="item.id">
+				<a :href="item.link" class="swiper-slide home-news__article" v-for="item in news" v-bind:key="item.id">
 					<div class="home-news__thumb">
 						<img :src="item.preview" :alt="item.title">
 					</div>
@@ -92,10 +92,16 @@
 				return this.$store.getters['news/news']
 			}
 		},
-		async fetch({store}) {
-			if (store.getters['news/news'].length === 0) {
-				await store.dispatch('news/fetch')
+		mounted() {
+			if (this.$store.getters['news/news'].length === 0) {
+				this.$store.dispatch('news/fetch')
 			}
+		},
+		async fetch({store}) {
+			// console.log('арб')
+			// if (this.$store.getters['news/news'].length === 0) {
+			// 	await this.$store.dispatch('news/fetch')
+			// }
 		}
 	}
 </script>

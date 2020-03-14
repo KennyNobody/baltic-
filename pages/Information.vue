@@ -47,6 +47,10 @@
 				await store.dispatch('information/fetch')
 			}
 		},
+		mounted () {
+			this.$store.dispatch('information/fetch')
+			console.log(this.information)
+		},
 		components: {}
 	}
 </script>

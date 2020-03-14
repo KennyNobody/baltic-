@@ -16,12 +16,13 @@
 			<appArticle
 			v-for="item in blog.items" v-bind:key="item.id"
 			:title="item.title"
-			:discription="item.discription"
+			:description="item.description"
 			:thumb="item.preview"
 			:slug="item.slug"
 			:id="item.id"
-			:public_at="item.public_at"
+			:date="item.date"
 			></appArticle>
+			<div class="page-news__article-clear"></div>
 		</div>
 		<div class="page-news__pagination">
 			<div class="pagination">
@@ -30,9 +31,9 @@
 						<use xlink:href="#icon-icon-arrow"></use>
 					</svg>
 				</div>
-				<div class="pagination__link" v-on:click="changePage(index)" v-for="(item, index) in blog.pages.max" v-bind:key="item.id" :class="{ 'pagination__link--now' : index == pageNow - 1}">
+				<!-- <div class="pagination__link" v-if="blog" v-on:click="changePage(index)" v-for="(item, index) in blog.pages.max" v-bind:key="item.id" :class="{ 'pagination__link--now' : index == pageNow - 1}">
 					{{ index+1 }}
-				</div>
+				</div> -->
 				<div class="pagination__link pagination__link--next" v-on:click="nextPage">
 					<svg>
 						<use xlink:href="#icon-icon-arrow"></use>
@@ -93,6 +94,7 @@
 				}
 			},
 			async getPosts() {
+				console.log(filterInfo)
 				let filterInfo = {
 					page: this.pageNow
 				}
@@ -100,11 +102,17 @@
 				await this.$store.dispatch('blog/fetchCustom', filterInfo)
 			}
 		},
-		async fetch({store}) {
-			if (store.getters['blog/blog'].length === 0) {
-				await store.dispatch('blog/fetch')
-			}
+		mounted() {
+			this.$store.dispatch('blog/fetch')
+			// if (this.$store.getters['blog/blog'].length === 0) {
+			// 	this.$store.dispatch('blog/fetch')
+			// }
 		},
+		// async fetch({store}) {
+		// 	if (store.getters['blog/blog'].length === 0) {
+		// 		await store.dispatch('blog/fetch')
+		// 	}
+		// },
 	}
 </script>
 
@@ -120,6 +128,11 @@
 		display: flex;
 		justify-content: flex-end;
 		align-items: center;
+	}
+	&__article-clear {
+		width: calc(33% - 10px);
+		display: block;
+		height: 0px;
 	}
 }
 </style>

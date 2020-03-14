@@ -16,7 +16,7 @@
 						</p>
 						<div class="home-now__clock">
 							<time class="home-now__time">
-								{{ $moment.unix(broadcast.now.date).format('H:mm') }}
+								{{ $moment.unix(broadcast.now.date).format('hh:mm') }}
 							</time>
 							<time class="home-now__date">
 								{{ $moment.unix(broadcast.now.date).format('DD/MM/YYYY') }}
@@ -39,7 +39,7 @@
 						</p>
 						<div class="home-now__clock">
 							<time class="home-now__time">
-								{{ $moment.unix(broadcast.next.date).format('H:mm') }}
+								{{ $moment.unix(broadcast.next.date).format('hh:mm') }}
 							</time>
 							<time class="home-now__date">
 								{{ $moment.unix(broadcast.next.date).format('DD/MM/YYYY') }}
@@ -122,11 +122,11 @@
 				v-for="item in blog"
 				v-bind:key="item.id"
 				:title="item.title"
-				:discription="item.discription"
+				:description="item.description"
 				:thumb="item.preview"
 				:slug="item.slug"
 				:id="item.id"
-				:public_at="item.public_at"
+				:date="item.date"
 				></appArticle>
 				<div class="home-blog__clear"></div>
 			</div>
@@ -175,13 +175,23 @@
 				return this.$store.getters['podcasts/podcastsFront']
 			},
 		},
+		mounted() {
+			if (this.$store.getters['blog/blogFront'].length === 0) {
+				this.$store.dispatch('blog/fetchFront')
+			}
+			this.$store.dispatch('blog/fetch')
+			// // это временное решение-имитация
+			// if (this.$store.getters['blog/blog'].length === 0) {
+			// 	this.$store.dispatch('blog/fetch')
+			// }
+		},
 		async fetch({store}) {
 			if (store.getters['programs/programsFront'].length === 0) {
 				await store.dispatch('programs/fetchFront')
 			}
-			if (store.getters['blog/blogFront'].length === 0) {
-				await store.dispatch('blog/fetchFront')
-			}
+			// if (store.getters['blog/blogFront'].length === 0) {
+			// 	await store.dispatch('blog/fetchFront')
+			// }
 			if (store.getters['podcasts/podcastsFront'].length === 0) {
 				await store.dispatch('podcasts/fetchFront')
 			}

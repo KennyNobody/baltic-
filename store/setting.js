@@ -1,20 +1,20 @@
 export const state = () => ({
 	setting: {
-		footerDiscript: '<p>Средство массовой информации «Радио Балтик Плюс» зарегистрировано 21 ноября 2014 г. в форме распространения «Сетевое издание». Свидетельство Эл № ФС77-59974 от 21.11.2014 выдано Федеральной службой по надзору в сфере связи, информационных технологий и массовых коммуникаций (Роскомнадзор).</p><br><p>© 2019 «Балтик Плюс» 12+. <br>Все права защищены. <br>Разработано <a href="https://diez.io/" target="_blank">#dieztech</a></p>'
+		// footerDiscript: '<p>Средство массовой информации «Радио Балтик Плюс» зарегистрировано 21 ноября 2014 г. в форме распространения «Сетевое издание». Свидетельство Эл № ФС77-59974 от 21.11.2014 выдано Федеральной службой по надзору в сфере связи, информационных технологий и массовых коммуникаций (Роскомнадзор).</p><br><p>© 2019 «Балтик Плюс» 12+. <br>Все права защищены. <br>Разработано <a href="https://diez.io/" target="_blank">#dieztech</a></p>'
 	}
 })
 
 export const mutations = {
 	setSetting (state, setting) {
-		state.setting = setting
+		state.setting.footerDiscript = setting
 	}
 }
 
 export const actions = {
 	async fetch ({commit}) {
 		// Здесь указываем, откуда получать слайды, массив сверху должен быть пустым
-		const setting = await this.$axios.$get("/api/setting")
-		commit('setSetting', setting)
+		const setting = await this.$axios.$get("http://89.108.65.88/api/v1/contacts")
+		commit('setSetting', setting.contacts.footer_description)
 	}
 }
 

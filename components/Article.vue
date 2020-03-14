@@ -7,13 +7,13 @@
 		</div>
 		<div class="article__middle">
 			<div class="article__date">
-
+				{{ $moment.unix(date).format('DD/MM/YYYY') }}
 			</div>
 			<div class="article__title">
 				<v-clamp :max-lines="2">{{ title }}</v-clamp>
 			</div>
 			<div class="article__text">
-				<v-clamp :max-lines="4">{{ discription }}</v-clamp>
+				<v-clamp :max-lines="4">{{ description }}</v-clamp>
 			</div>
 		</div>
 		<div class="article__bottom">
@@ -35,7 +35,7 @@
 
 	export default {
 		name: 'newsArticle',
-		props: ['title', 'thumb', 'discription', 'slug', 'id'],
+		props: ['title', 'thumb', 'description', 'slug', 'id', 'date'],
 		data () {
 			return {}
 		},

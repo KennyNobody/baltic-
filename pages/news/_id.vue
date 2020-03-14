@@ -20,15 +20,16 @@
 		</h2>
 		<div class="single-post">
 			<div class="single-post__left">
-				<img src="http://placehold.it/1000x600" class="single-post__thumb" :alt="post.title">
+				<img :src="post.preview" class="single-post__thumb" :alt="post.title">
 			</div>
 			<div class="single-post__right">
 				<div class="single-post__info">
 					<time class="single-post__time">
-						14:20
+						<!-- 14:20 -->
+						{{ $moment.unix(post.date).format('hh:mm') }}
 					</time>
 					<time class="single-post__date">
-						30/09/2019
+						{{ $moment.unix(post.date).format('DD/MM/YYYY') }}
 					</time>
 				</div>
 				<div class="single-post__content text" v-html="post.content">
@@ -36,9 +37,9 @@
 				</div>
 			</div>
 		</div>
-		<appGallery
+		<!-- <appGallery
 		:gallery="post.gallery"
-		></appGallery>
+		></appGallery> -->
 
 		<div class="single-post">
 			<div class="single-post__left">
@@ -57,10 +58,10 @@
 			v-for="item in posts" v-bind:key="item.id"
 			:id="item.id"
 			:title="item.title"
-			:discription="item.discription"
+			:description="item.description"
 			:thumb="item.preview"
 			:slug="item.slug"
-			:public_at="item.public_at"
+			:date="item.date"
 			></appArticle>
 		</div>
 	</div>
@@ -90,9 +91,12 @@
 				return this.$store.getters['blog/blogRandom']
 			},
 			post ({app, params}) {
-				console.log(this.now)
-				return this.$store.getters['blog/postById'](+this.now)
+				return this.$store.getters['blog/singleBlog']
 			}
+		},
+		mounted() {
+			this.$store.dispatch('blog/fetchRandom');
+			this.$store.dispatch('blog/fetchSingle', this.$route.params.id);
 		},
 		data () {
 			return {

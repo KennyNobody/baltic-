@@ -40,23 +40,26 @@ export const state = () => ({
 			'facebook': 'https://www.facebook.com/',
 			'youtube': 'https://www.youtube.com/'
 		},
+		footer_description: ''
 	}
 })
 
 export const mutations = {
 	setContacts (state, contacts) {
-		state.contacts = contacts
+		state.contacts = contacts.contacts
 	}
 }
 
 export const actions = {
 	async fetch ({commit}) {
-		const contacts = await this.$axios.$get("/api/contacts")
+		const contacts = await this.$axios.$get("http://89.108.65.88/api/v1/contacts")
+		console.log(this)
 		commit('setContacts', contacts)
 	}
 }
 
 export const getters = {
 	contacts: s => s.contacts,
+	setting: s => s.contacts.footer_description,
 	socials: s => s.contacts.socials
 }

@@ -27,19 +27,18 @@ module.exports = {
 	['@nuxtjs/axios', {
 		baseURL: 'http://localhost:8000'
 	}],
-	// :src="`${$axios.defaults.baseURL}upload/1.png`"
 	'@nuxtjs/proxy',
 	['nuxt-svg-sprite-module', {
 		directory: '~/assets/svg-sprite'
 	}],
 	['nuxt-validate', {
-      lang: 'es',
-      nuxti18n: {
-        locale: {
-          'zh-CN': 'zh_CN'
-        }
-      }
-    }]
+		lang: 'es',
+		nuxti18n: {
+			locale: {
+				'zh-CN': 'zh_CN'
+			}
+		}
+	}]
 	],
 	plugins: [
 	{ src: '~/plugins/swiper.js', ssr: false },
@@ -75,10 +74,10 @@ module.exports = {
 		transpile: ['vue-clamp', 'resize-detector']
 	},
 	buildModules: [
-		'@nuxtjs/moment'
+	'@nuxtjs/moment'
 	],
 	moment: {
-    locales: ['ru']
-  }
+		locales: ['ru']
+	},
 }
 

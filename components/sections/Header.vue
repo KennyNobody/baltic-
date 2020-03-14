@@ -5,7 +5,7 @@
 			<div class="header__content">
 				<div class="header__topline">
 					<div class="header__contacts">
-						<div class="h-contact">
+						<div class="h-contact" v-if="contacts.phones.broadcast.phone">
 							<a :href="'tel:+' + contacts.phones.broadcast.link" class="h-contact__link">
 								{{ contacts.phones.broadcast.code }} <strong>{{ contacts.phones.broadcast.phone }}</strong>
 							</a>
@@ -13,7 +13,7 @@
 								Прямой эфир
 							</p>
 						</div>
-						<div class="h-contact">
+						<div class="h-contact" v-if="contacts.phones.office.phone">
 							<a :href="'tel:+' + contacts.phones.office.link" class="h-contact__link">
 								{{ contacts.phones.office.code }} <strong>{{ contacts.phones.office.phone }}</strong>
 							</a>
@@ -21,7 +21,7 @@
 								Офис
 							</p>
 						</div>
-						<div class="h-contact">
+						<div class="h-contact" v-if="contacts.phones.messengers.phone">
 							<a :href="'viber://chat?number=' + contacts.phones.messengers.link" class="h-contact__link">
 								{{ contacts.phones.messengers.code }} <strong>{{ contacts.phones.messengers.phone }}</strong>
 							</a>
@@ -99,7 +99,7 @@
 			<div class="mob-menu" v-if="menuOpen">
 				<div class="mob-menu__content">
 					<div class="mob-menu__header">
-						<div class="h-contact">
+						<div class="h-contact" v-if="contacts.phones.broadcast.phone">
 							<a :href="'tel:+' + contacts.phones.broadcast.link" class="h-contact__link">
 								{{ contacts.phones.broadcast.code }} <strong>{{ contacts.phones.broadcast.phone }}</strong>
 							</a>
@@ -107,7 +107,7 @@
 								Прямой эфир
 							</p>
 						</div>
-						<div class="h-contact">
+						<div class="h-contact" v-if="contacts.phones.office.phone">
 							<a :href="'tel:+' + contacts.phones.office.link" class="h-contact__link">
 								{{ contacts.phones.office.code }} <strong>{{ contacts.phones.office.phone }}</strong>
 							</a>
@@ -115,7 +115,7 @@
 								Офис
 							</p>
 						</div>
-						<div class="h-contact">
+						<div class="h-contact" v-if="contacts.phones.messengers.phone">
 							<a :href="'viber://chat?number=' + contacts.phones.messengers.link" class="h-contact__link">
 								{{ contacts.phones.messengers.code }} <strong>{{ contacts.phones.messengers.phone }}</strong>
 							</a>
@@ -199,16 +199,19 @@
 			},
 		},
 		async fetch({store}) {
-			if (store.getters['setting/setting'].length === 0) {
-				await store.dispatch('setting/fetch')
-			}
+			// if (store.getters['setting/setting'].length === 0) {
+			// 	await store.dispatch('setting/fetch')
+			// }
 
-			if (store.getters['contacts/socials'].length === 0) {
-				await store.dispatch('contacts/fetch')
-			}
+			// if (store.getters['contacts/socials'].length === 0) {
+			// 	await store.dispatch('contacts/fetch')
+			// }
 		},
 		components: {
 			appLogo
+		},
+		mounted () {
+			this.$store.dispatch('contacts/fetch');
 		},
 		watch:{
 			$route (to, from){
@@ -220,55 +223,55 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
-	.header {
-		flex-shrink: 0;
-		position: fixed;
-		top: 0px;
-		left: 0px;
-		right: 0px;
-		z-index: 4;
-		transition: 0.3s all;
+.header {
+	flex-shrink: 0;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	z-index: 4;
+	transition: 0.3s all;
+	@include r(1100) {
+		background-color: $dark;
+		box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+	}
+	&--scrolled {
+		box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+	}
+	&__container {
+		display: flex;
+		width: 1070px;
+		padding-left: 15px;
+		padding-right: 15px;
+		margin-left: auto;
+		max-width: 100%;
+		margin-right: auto;
 		@include r(1100) {
-			background-color: $dark;
-			box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+			display: none;
 		}
-		&--scrolled {
-			box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
-		}
-		&__container {
-			display: flex;
-			width: 1070px;
-			padding-left: 15px;
-			padding-right: 15px;
-			margin-left: auto;
-			max-width: 100%;
-			margin-right: auto;
+		&--mob {
+			display: none;
 			@include r(1100) {
-				display: none;
-			}
-			&--mob {
-				display: none;
-				@include r(1100) {
-					display: flex;
-					padding-top: 15px;
-					padding-bottom: 15px;
-					justify-content: space-between;
-					align-items: center;
-				}
+				display: flex;
+				padding-top: 15px;
+				padding-bottom: 15px;
+				justify-content: space-between;
+				align-items: center;
 			}
 		}
+	}
 
-		&__content {
-			color: $light;
-			padding-top: 16px;
-			padding-left: 20px;
-			padding-bottom: 26px;
-			padding-right: 15px;
-			flex-grow: 1;
-			min-width: 0px;
-			background-color: $dark;
-			position: relative;
-			@include r(1100) {
+	&__content {
+		color: $light;
+		padding-top: 16px;
+		padding-left: 20px;
+		padding-bottom: 26px;
+		padding-right: 15px;
+		flex-grow: 1;
+		min-width: 0px;
+		background-color: $dark;
+		position: relative;
+		@include r(1100) {
 					// display: none;
 				}
 				&:after {

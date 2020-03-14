@@ -58,7 +58,9 @@
 					</div>
 				</a>
 			</div>
-			<div class="footer__text" v-html="footer.footerDiscript"></div>
+			<!-- {{ footer.contacts.footer_description }} -->
+			<div class="footer__text" v-html="footer"></div>
+			<!-- {{ footer.footer_description }} -->
 		</div>
 	</footer>
 </template>
@@ -71,14 +73,15 @@
 				return this.$store.getters['contacts/socials']
 			},
 			footer() {
-				return this.$store.getters['setting/setting']
+				return this.$store.getters['contacts/setting']
 			},
 		},
-		async fetch({store}) {
-			if (store.getters['setting/setting'].length === 0) {
-				await store.dispatch('setting/fetch')
-			}
-		},
+		// async fetch({store}) {
+		// 	if (store.getters['setting/setting'].length === 0) {
+		// 		await store.dispatch('setting/fetch')
+		// 	}
+		// },
+		mounted () {}
 	}
 </script>
 

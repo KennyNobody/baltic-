@@ -42,16 +42,10 @@
 				return this.$store.getters['front-slider/mainSlider']
 			}
 		},
-		async fetch({store}) {
-			if (store.getters['front-slider/mainSlider'].length === 0) {
-				await store.dispatch('front-slider/fetch')
-			}
-		},
 		mounted() {
-			// setTimeout(() => {
-			// 	this.banners.push('/5.jpg')
-			// 	console.log('banners update')
-			// }, 3000)
+			if (this.$store.getters['front-slider/mainSlider'].length === 0) {
+				this.$store.dispatch('front-slider/fetch')
+			}
 		}
 	}
 </script>

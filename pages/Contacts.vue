@@ -16,17 +16,17 @@
 				<div class="contacts__map" id="map"></div>
 			</div>
 			<div class="contacts__column">
-				<template v-if="contacts.phones.office">
-					<p class="contacts__bold">
+				<template>
+					<p class="contacts__bold" v-if="contacts.phones.office.title">
 						{{ contacts.phones.office.title }}
 					</p>
-					<p>
+					<p v-if="contacts.phones.office.adress">
 						{{ contacts.phones.office.adress }}
 					</p>
 					<!-- <div class="contacts__link">
 						Посмотреть на карте
 					</div> -->
-					<a :href="contacts.phones.office.link" class="contacts__phone">
+					<a v-if="contacts.phones.office.link" :href="contacts.phones.office.link" class="contacts__phone">
 						+7 {{ contacts.phones.office.code }} {{ contacts.phones.office.phone }}
 					</a>
 					<span v-if="contacts.phones.office.multichannel">(многоканальный)</span>
@@ -34,44 +34,41 @@
 					<br>
 				</template>
 				<template>
-					<p class="contacts__bold">
+					<p class="contacts__bold" v-if="contacts.phones.promo.title">
 						{{ contacts.phones.promo.title }}
 					</p>
-					<p>
+					<p v-if="contacts.phones.promo.adress">
 						{{ contacts.phones.promo.adress }}
 					</p>
 					<!-- <a href="" class="contacts__link">
 						Посмотреть на карте
 					</a> -->
-					<a :href="contacts.phones.promo.link" class="contacts__phone">
+					<a v-if="contacts.phones.promo.phone" :href="contacts.phones.promo.link" class="contacts__phone">
 						+7 {{ contacts.phones.promo.code }} {{ contacts.phones.promo.phone }}
 					</a>
 					<span v-if="contacts.phones.promo.multichannel">(многоканальный)</span><br>
-					<a :href="`mailto:${contacts.phones.promo.email}`" class="contacts__mail">
+					<a v-if="contacts.phones.promo.email" :href="`mailto:${contacts.phones.promo.email}`" class="contacts__mail">
 						{{ contacts.phones.promo.email }}
 					</a>
 					<br>
 					<br>
 				</template>
 				<template>
-					<p class="contacts__bold">
+					<p class="contacts__bold" v-if="contacts.phones.broadcast.title">
 						{{ contacts.phones.broadcast.title }}
 					</p>
-					<a :href="contacts.phones.broadcast.link" class="contacts__phone">
+					<a v-if="contacts.phones.broadcast.phone" :href="contacts.phones.broadcast.link" class="contacts__phone">
 						+7 {{ contacts.phones.broadcast.code }} {{ contacts.phones.broadcast.phone }}
 					</a>
 					<span v-if="contacts.phones.broadcast.multichannel">(многоканальный)</span> 
 					<br>
-					<a :href="`mailto:${contacts.phones.broadcast.email}`" class="contacts__mail">
+					<a v-if="contacts.phones.broadcast.email" :href="`mailto:${contacts.phones.broadcast.email}`" class="contacts__mail">
 						{{ contacts.phones.broadcast.email }}
 					</a>
 					<br>
 					<br>
 				</template>
-				<p v-html="contacts.phones.discript"></p>
-<!-- 				<a href="http://taplink.cc/baltic_plus" target="_blank" class="contacts__link">
-					http://taplink.cc/baltic_plus
-				</a> -->
+				<p v-if="contacts.phones.discript" v-html="contacts.phones.discript"></p>
 			</div>
 		</div>
 		<h2 class="title">
@@ -98,7 +95,7 @@
 		},
 		data () {
 			return {
-				massage: 'привет'
+				
 			}
 		},
 		name: 'contacts',
@@ -110,11 +107,11 @@
 				return this.$store.getters['contacts/contacts']
 			},
 		},
-		async fetch({store}) {
-			if (store.getters['contacts/contacts'].length === 0) {
-				await store.dispatch('contacts/fetch')
-			}
-		},
+		// async fetch({store}) {
+		// 	if (store.getters['contacts/contacts'].length === 0) {
+		// 		await store.dispatch('contacts/fetch')
+		// 	}
+		// },
 		mounted() {
 			let myMap;
 			let myPlacemark;
