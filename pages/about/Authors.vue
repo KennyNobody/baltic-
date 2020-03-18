@@ -72,11 +72,16 @@
 				return this.$store.getters['authors/authors']
 			}
 		},
-		async fetch({store}) {
-			if (store.getters['authors/authors'].length === 0) {
-				await store.dispatch('authors/fetch')
+		mounted() {
+			if (this.$store.getters['authors/authors'].length === 0) {
+				this.$store.dispatch('authors/fetch')
 			}
 		},
+		// async fetch({store}) {
+		// 	if (store.getters['authors/authors'].length === 0) {
+		// 		await store.dispatch('authors/fetch')
+		// 	}
+		// },
 		components: {
 			appSidebar
 		}

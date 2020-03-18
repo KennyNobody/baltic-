@@ -44,7 +44,7 @@ module.exports = {
 	{ src: '~/plugins/swiper.js', ssr: false },
 	{ src: '~/plugins/datepicker', ssr: false },
 	{ src: '~/plugins/mq', ssr: false },
-	// { src: '~/plugins/moment.js', ssr: false },
+	{ src: '~/plugins/socket.js', ssr: false },
 	],
 	css: [
 	'~/node_modules/@fancyapps/fancybox/dist/jquery.fancybox.min.css',

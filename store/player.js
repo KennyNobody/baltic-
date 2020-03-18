@@ -5,9 +5,9 @@ export const state = () => ({
 		name: 'Балтик+',
 		title: 'Прямой эфир',
 		file: 'http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3',
-		radioLink: 'http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3',
-		radioAuthor: 'Балтик+',
-		radioTitle: 'Прямой эфир',
+		// radioLink: 'http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3',
+		// radioAuthor: 'Балтик+',
+		// radioTitle: 'Прямой эфир',
 		playlist: [
 		{
 			id: 1,
@@ -89,6 +89,11 @@ export const mutations = {
 		state.player.nowLink = payload.link;
 		state.player.title = payload.title;
 		state.player.author = payload.info;
+	},
+	SOCKET_flow(state, payload) {
+		console.log(payload)
+		state.player.name = payload.title;
+		state.player.title = payload.song;
 	}
 }
 
@@ -97,6 +102,9 @@ export const actions = {
 	// 	const player = await this.$axios.$get("https://api.myjson.com/bins/18oqjg")
 	// 	commit('setPlayer', player)
 	// }
+	SOCKET_flow({commit}, payload) {
+		commit('SOCKET_flow', payload)
+	}
 }
 
 export const getters = {

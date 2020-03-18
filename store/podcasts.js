@@ -184,86 +184,86 @@ export const state = () => ({
 		}
 	},
 	podcastsFront: [
-	{
-		id: 1,
-		title: '1. Очень длинное и сложноепроизносимое название хорошего подкаста',
-		date: 1555065432,
-		info: 'Краткое описание подкаста для отображения под заголовком',
-		time: '25:15',
-		thumb: 'http://placehold.it/1000x600',
-		play: false,
-		link: 'http://d.zaix.ru/gQNF.mp3',
-	},
-	{
-		id: 2,
-		title: '2. Очень длинное и сложноепроизносимое название хорошего подкаста',
-		date: 1555065432,
-		info: 'Краткое описание подкаста для отображения под заголовком',
-		time: '25:15',
-		thumb: 'http://placehold.it/1000x600',
-		play: false,
-		link: 'http://d.zaix.ru/gQNA.mp3',
-	},
-	{
-		id: 3,
-		title: '3. Очень длинное и сложноепроизносимое название хорошего подкаста',
-		date: 1555065432,
-		info: 'Краткое описание подкаста для отображения под заголовком',
-		time: '25:15',
-		thumb: 'http://placehold.it/1000x600',
-		play: false,
-		link: 'http://d.zaix.ru/gQNC.mp3',
-	},
-	{
-		id: 4,
-		title: '4. Очень длинное и сложноепроизносимое название хорошего подкаста',
-		date: 1555065432,
-		info: 'Краткое описание подкаста для отображения под заголовком',
-		time: '25:15',
-		thumb: 'http://placehold.it/1000x600',
-		play: false,
-		link: 'http://d.zaix.ru/gQNF.mp3',
-	},
-	{
-		id: 5,
-		title: '5. Очень длинное и сложноепроизносимое название хорошего подкаста',
-		date: 1555065432,
-		info: 'Краткое описание подкаста для отображения под заголовком',
-		time: '25:15',
-		thumb: 'http://placehold.it/1000x600',
-		play: false,
-		link: 'http://d.zaix.ru/gQNC.mp3',
-	},
-	{
-		id: 6,
-		title: '6. Очень длинное и сложноепроизносимое название хорошего подкаста',
-		date: 1555065432,
-		info: 'Краткое описание подкаста для отображения под заголовком',
-		time: '25:15',
-		thumb: 'http://placehold.it/1000x600',
-		play: false,
-		link: 'http://d.zaix.ru/gQNC.mp3',
-	},
-	{
-		id: 7,
-		title: '7. Очень длинное и сложноепроизносимое название хорошего подкаста',
-		date: 1555065432,
-		info: 'Краткое описание подкаста для отображения под заголовком',
-		time: '25:15',
-		thumb: 'http://placehold.it/1000x600',
-		play: false,
-		link: 'http://d.zaix.ru/gQNF.mp3',
-	},
-	{
-		id: 8,
-		title: '8. Очень длинное и сложноепроизносимое название хорошего подкаста',
-		date: 1555065432,
-		info: 'Краткое описание подкаста для отображения под заголовком',
-		time: '25:15',
-		thumb: 'http://placehold.it/1000x600',
-		play: false,
-		link: 'http://d.zaix.ru/gQNC.mp3',
-	},
+	// {
+	// 	id: 1,
+	// 	title: '1. Очень длинное и сложноепроизносимое название хорошего подкаста',
+	// 	date: 1555065432,
+	// 	info: 'Краткое описание подкаста для отображения под заголовком',
+	// 	time: '25:15',
+	// 	thumb: 'http://placehold.it/1000x600',
+	// 	play: false,
+	// 	link: 'http://d.zaix.ru/gQNF.mp3',
+	// },
+	// {
+	// 	id: 2,
+	// 	title: '2. Очень длинное и сложноепроизносимое название хорошего подкаста',
+	// 	date: 1555065432,
+	// 	info: 'Краткое описание подкаста для отображения под заголовком',
+	// 	time: '25:15',
+	// 	thumb: 'http://placehold.it/1000x600',
+	// 	play: false,
+	// 	link: 'http://d.zaix.ru/gQNA.mp3',
+	// },
+	// {
+	// 	id: 3,
+	// 	title: '3. Очень длинное и сложноепроизносимое название хорошего подкаста',
+	// 	date: 1555065432,
+	// 	info: 'Краткое описание подкаста для отображения под заголовком',
+	// 	time: '25:15',
+	// 	thumb: 'http://placehold.it/1000x600',
+	// 	play: false,
+	// 	link: 'http://d.zaix.ru/gQNC.mp3',
+	// },
+	// {
+	// 	id: 4,
+	// 	title: '4. Очень длинное и сложноепроизносимое название хорошего подкаста',
+	// 	date: 1555065432,
+	// 	info: 'Краткое описание подкаста для отображения под заголовком',
+	// 	time: '25:15',
+	// 	thumb: 'http://placehold.it/1000x600',
+	// 	play: false,
+	// 	link: 'http://d.zaix.ru/gQNF.mp3',
+	// },
+	// {
+	// 	id: 5,
+	// 	title: '5. Очень длинное и сложноепроизносимое название хорошего подкаста',
+	// 	date: 1555065432,
+	// 	info: 'Краткое описание подкаста для отображения под заголовком',
+	// 	time: '25:15',
+	// 	thumb: 'http://placehold.it/1000x600',
+	// 	play: false,
+	// 	link: 'http://d.zaix.ru/gQNC.mp3',
+	// },
+	// {
+	// 	id: 6,
+	// 	title: '6. Очень длинное и сложноепроизносимое название хорошего подкаста',
+	// 	date: 1555065432,
+	// 	info: 'Краткое описание подкаста для отображения под заголовком',
+	// 	time: '25:15',
+	// 	thumb: 'http://placehold.it/1000x600',
+	// 	play: false,
+	// 	link: 'http://d.zaix.ru/gQNC.mp3',
+	// },
+	// {
+	// 	id: 7,
+	// 	title: '7. Очень длинное и сложноепроизносимое название хорошего подкаста',
+	// 	date: 1555065432,
+	// 	info: 'Краткое описание подкаста для отображения под заголовком',
+	// 	time: '25:15',
+	// 	thumb: 'http://placehold.it/1000x600',
+	// 	play: false,
+	// 	link: 'http://d.zaix.ru/gQNF.mp3',
+	// },
+	// {
+	// 	id: 8,
+	// 	title: '8. Очень длинное и сложноепроизносимое название хорошего подкаста',
+	// 	date: 1555065432,
+	// 	info: 'Краткое описание подкаста для отображения под заголовком',
+	// 	time: '25:15',
+	// 	thumb: 'http://placehold.it/1000x600',
+	// 	play: false,
+	// 	link: 'http://d.zaix.ru/gQNC.mp3',
+	// },
 	]
 })
 
@@ -292,18 +292,18 @@ export const actions = {
 		let podcasts = await this.$axios.$get("/api/podcasts", {
 			params: {
 				page: 1,
+				front: false
 			}
 		})
 		.then( response => {
-			console.log('Отправлено')
 			commit('setPodcasts', podcasts)
 		})
 		.catch(() => {
-			console.log('Ошибка')
+			console.log('Ошибка загрузки podcasts')
 		})
 	},
 	async fetchCustom ({commit}, payload) {
-		let podcasts = await this.$axios.$get("/api/podcasts", {
+		let podcasts = await this.$axios.$get("http://89.108.65.88/api/v1/podcasts", {
 			params: {
 				dateStart: payload.dateStart || null,
 				dateEnd: payload.dateEnd || null,
@@ -314,8 +314,17 @@ export const actions = {
 		commit('setPodcasts', podcasts)
 	},
 	async fetchFront ({commit}) {
-		const podcastsFront = await this.$axios.$get("/api/podcasts?front")
-		commit('setPodcastsFront', podcastsFront)
+		let podcastsFront = await this.$axios.$get("http://89.108.65.88/api/v1/podcasts", {
+			params: {
+				front: true
+			}
+		})
+		.then( response => {
+			commit('setPodcastsFront', response.podcasts.items)
+		})
+		.catch(() => {
+			console.log('Ошибка загрузки podcast-front')
+		})
 	}
 }
 

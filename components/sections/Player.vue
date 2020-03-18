@@ -182,6 +182,11 @@
 				return hhmmss.indexOf("00:") === 0 ? hhmmss.substr(3) : hhmmss;
 			}
 		},
+		sockets: {
+			flow: function (data) {
+				this.$store.dispatch('player/SOCKET_flow', data)
+			},
+		},
 		watch: {
 			playing(value) {
 				if (value) { return this.audio.play(); }
@@ -225,7 +230,7 @@
 			},
 			update(e) {
 				this.currentSeconds = parseInt(this.audio.currentTime);
-			}
+			},
 		},
 		update(e) {
 			this.currentSeconds = parseInt(this.audio.currentTime);
@@ -236,6 +241,10 @@
 			this.audio.addEventListener('loadeddata', this.load);
 			this.audio.addEventListener('pause', () => { this.playing = false; });
 			this.audio.addEventListener('play', () => { this.playing = true; });
+
+			this.$options.sockets.connect = (data) => {
+				console.log(data)
+			}
 		}
 	}
 </script>
@@ -417,6 +426,7 @@
 	flex-direction: column;
 	justify-content: space-between;
 	height: 100%;
+	min-width: 0px;
 	flex-grow: 1;
 	@include r(1100) {
 		justify-content: center;
@@ -468,6 +478,7 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
+		display: block;
 	}
 }
 
@@ -476,7 +487,8 @@
 	display: flex;
 	align-items: center;
 	margin-left: 20px;
-	flex-shrink: 0px;
+	flex-shrink: 0;
+	min-width: 0px;
 	@include r(1100) {
 		display: none;
 	}

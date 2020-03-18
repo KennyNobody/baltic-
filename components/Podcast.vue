@@ -84,6 +84,8 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
+			background-size: cover;
+			background-position: center;
 			@include r(470) {
 				display: none;
 			}

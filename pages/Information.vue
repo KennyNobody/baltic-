@@ -49,7 +49,6 @@
 		},
 		mounted () {
 			this.$store.dispatch('information/fetch')
-			console.log(this.information)
 		},
 		components: {}
 	}

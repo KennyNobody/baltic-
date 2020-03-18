@@ -184,6 +184,7 @@
 			// if (this.$store.getters['blog/blog'].length === 0) {
 			// 	this.$store.dispatch('blog/fetch')
 			// }
+			this.$store.dispatch('podcasts/fetchFront')
 		},
 		async fetch({store}) {
 			if (store.getters['programs/programsFront'].length === 0) {
@@ -192,9 +193,9 @@
 			// if (store.getters['blog/blogFront'].length === 0) {
 			// 	await store.dispatch('blog/fetchFront')
 			// }
-			if (store.getters['podcasts/podcastsFront'].length === 0) {
-				await store.dispatch('podcasts/fetchFront')
-			}
+			// if (store.getters['podcasts/podcastsFront'].length === 0) {
+			// 	await store.dispatch('podcasts/fetchFront')
+			// }
 		},
 		components: {
 			appSlider,
