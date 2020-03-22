@@ -14,9 +14,6 @@
 		</h2>
 		<div class="filter">
 			<div class="filter__dates">
-<!-- 				<p class="filter__date-text">
-					Дата
-				</p> -->
 				<no-ssr>
 					<date-picker format="x" v-model="filter.filterDateStart" valueType="timestamp" v-on:change="getPosts" placeholder="От"></date-picker>
 				</no-ssr>

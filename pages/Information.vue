@@ -42,11 +42,11 @@
 				return this.$store.getters['information/information']
 			}
 		},
-		async fetch({store}) {
-			if (store.getters['information/information'].length === 0) {
-				await store.dispatch('information/fetch')
-			}
-		},
+		// async fetch({store}) {
+		// 	if (store.getters['information/information'].length === 0) {
+		// 		await store.dispatch('information/fetch')
+		// 	}
+		// },
 		mounted () {
 			this.$store.dispatch('information/fetch')
 		},

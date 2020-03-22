@@ -1,79 +1,17 @@
 export const state = () => ({
 	player: {
-		broadcast: true,
-		thumb: 'https://images.genius.com/133f0dd4933c0e7973f57619de0736ae.712x712x1.jpg',
+		live: true,
+		thumb: null,
 		name: 'Балтик+',
 		title: 'Прямой эфир',
 		file: 'http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3',
-		// radioLink: 'http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3',
-		// radioAuthor: 'Балтик+',
-		// radioTitle: 'Прямой эфир',
+		broadcastFile: 'http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3',
 		playlist: [
 		{
 			id: 1,
 			time: '22:31',
 			author:'Ваня Усович',
 			title:'Stand Up в Питере'
-		},
-		{
-			id: 2,
-			time: '30:32',
-			author:'О России с любовью',
-			title:'Олеся Герасименко: АП, кредит на свадьбу и страсть к игре'
-		},
-		{
-			id: 3,
-			time: '30:32',
-			author:'О России с любовью',
-			title:'Руслан Белый: коррупция, доносы и ипотека'
-		},
-		{
-			id: 4,
-			time: '30:32',
-			author:'KuJi Podcast',
-			title:'Руслан Белый: коррупция, доносы и ипотека'
-		},
-		{
-			id: 5,
-			time: '30:32',
-			author:'О России с любовью',
-			title:'Дмитрий Глуховский: зачем нужны писатели?'
-		},
-		{
-			id: 6,
-			time: '33:45',
-			author:'KuJi Podcast',
-			title:'Каргинов и Коняев: суверенный интернет, оскорбления и фильм «Текст»'
-		},
-		{
-			id: 7,
-			time: '15:21',
-			author:'О России с любовью',
-			title:'KUJI LIVE: цена твита, страх, суды, миллениалы'
-		},
-		{
-			id: 8,
-			time: '1:32',
-			author:'О России с любовью',
-			title:'Каргинов и Коняев: Чернобыль и новостная политика'
-		},
-		{
-			id: 9,
-			time: '176:43',
-			author:'KuJi Podcast',
-			title:'Wylsacom: айфон и кибербуллинг'
-		},
-		{
-			id: 10,
-			time: '30:32',
-			author:'О России с любовью',
-			title:'Kuji Live: подарки, кризис, Первый канал'
-		},
-		{
-			id: 11,
-			time: '30:32',
-			author:'О России с любовью',
-			title:'Борух Горин: иудаизм, ксенофобия и место юмора в религии Борух Горин: иудаизм, ксенофобия и место юмора в религии Борух Горин: иудаизм, ксенофобия и место юмора в религии'
 		},
 		]
 	}
@@ -84,17 +22,30 @@ export const mutations = {
 		state.player = player
 	},
 	setPlayer (state, payload) {
-		console.log(payload)
 		state.player.thumb = payload.thumb;
-		state.player.nowLink = payload.link;
+		// state.player.nowLink = payload.link;
 		state.player.title = payload.title;
-		state.player.author = payload.info;
+		state.player.name = payload.info;
+		state.player.file = payload.file;
+		state.player.live = payload.live;
 	},
 	SOCKET_flow(state, payload) {
-		console.log(payload)
 		state.player.name = payload.title;
 		state.player.title = payload.song;
-	}
+	},
+	setPlayerThumb(state, payload) {
+		state.player.thumb = payload
+	},
+	enableRadio (state) {
+		state.player.live = true;
+		state.player.file = state.player.broadcastFile;
+	},
+	// disableRadio () {
+	// 	state.player.live = false;
+	// }
+	// setPlayerStandartThumb(state, payload) {
+	// 	state.player.thumb = state.player.standartThumb
+	// },
 }
 
 export const actions = {
@@ -102,8 +53,32 @@ export const actions = {
 	// 	const player = await this.$axios.$get("https://api.myjson.com/bins/18oqjg")
 	// 	commit('setPlayer', player)
 	// }
-	SOCKET_flow({commit}, payload) {
-		commit('SOCKET_flow', payload)
+	SOCKET_flow({dispatch, commit, state}, payload) {
+		(function() {
+			if (JSON.stringify(payload.song) !== JSON.stringify(state.player.title)) {
+				commit('SOCKET_flow', payload)
+				dispatch('fetchThumb');
+			}
+		})();
+	},
+	async fetchThumb ({commit, state}, payload) {
+
+		let thumbResponse = await this.$axios.$get('http://ws.audioscrobbler.com/2.0/', {
+			params: {
+				method: 'track.getInfo',
+				api_key: '861baedc28c740b908f8e71ea9d51d00',
+				artist: state.player.name,
+				track: state.player.title,
+				format: 'json',
+			}
+		})
+		.then( response => {
+			commit('setPlayerThumb', response.track.album.image[2]['#text'] || response.track.album.image[3]['#text'] ||response.track.album.image[1]['#text'] || response.track.album.image[0]['#text'])
+		})
+		.catch((e) => {
+			commit('setPlayerThumb', false)
+			console.log(e)
+		})
 	}
 }
 

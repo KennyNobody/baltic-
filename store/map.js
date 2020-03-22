@@ -21,7 +21,7 @@ export const state = () => ({
 	// ]
 	map: {
 		id: 1,
-		image: 'http://placehold.it/900x600',
+		image: null,
 	}
 })
 
@@ -34,7 +34,12 @@ export const mutations = {
 export const actions = {
 	async fetch ({commit}) {
 		const map = await this.$axios.$get("http://89.108.65.88/api/v1/about/map")
-		commit('setMarkers', map[0])
+		.then( response => {
+			commit('setMarkers', response[0])
+		})
+		.catch((e) => {
+			console.log(e)
+		})
 	}
 }
 

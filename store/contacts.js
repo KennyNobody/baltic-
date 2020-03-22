@@ -53,7 +53,12 @@ export const mutations = {
 export const actions = {
 	async fetch ({commit}) {
 		const contacts = await this.$axios.$get("http://89.108.65.88/api/v1/contacts")
-		commit('setContacts', contacts)
+		.then( response => {
+			commit('setContacts', response)
+		})
+		.catch((e) => {
+			console.log(e)
+		})
 	}
 }
 

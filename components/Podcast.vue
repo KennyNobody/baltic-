@@ -53,8 +53,10 @@
 				let newPodcast = {
 					title: this.title,
 					thumb: this.thumb,
-					link: this.link,
-					info: this.info
+					file: this.link,
+					info: this.info,
+					live: false,
+					play: true
 				}
 				this.$store.commit('player/setPlayer', newPodcast)
 			}

@@ -95,6 +95,7 @@
 				:time="item.time"
 				:thumb="item.thumb"
 				:info="item.info"
+				:link="item.link"
 				></appPodcast>
 			</div>
 		</section>

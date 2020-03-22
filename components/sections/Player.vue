@@ -60,21 +60,23 @@
 			<audio class="player__audio" :src="player.file" preload="auto" type="audio/mp3"></audio>
 
 			<!-- При прямом эфире просто глушим звук, не останавливая трансляцию. Поставить соответствующую иконку -->
-			<div class="player__play" v-if="live == true" v-on:click.prevent="playing = !playing">
+			<div class="player__play" v-if="player.live == true" v-on:click.prevent="playing = !playing">
 				<div v-if="playing == false">
-					<svg class="player__icon--play">
+					<!-- <svg class="player__icon--play">
 						<use xlink:href="#icon-icon-play"></use>
-					</svg>
+					</svg> -->
+					-
 				</div>
 				<div v-else>
-					<svg class="player__icon--pause">
+					<!-- <svg class="player__icon--pause">
 						<use xlink:href="#icon-icon-pause"></use>
-					</svg>
+					</svg> -->
+					+
 				</div>
 			</div>
 
 			<!-- При прямом эфире просто глушим звук, не останавливая трансляцию. Поставить соответствующую иконку -->
-			<div class="player__play" v-if="live == false">
+			<div class="player__play" v-if="player.live == false" v-on:click.prevent="playing = !playing">
 				<div v-if="playing == false">
 					<svg class="player__icon--play">
 						<use xlink:href="#icon-icon-play"></use>
@@ -89,14 +91,14 @@
 
 			<div class="player__info">
 				<div class="player__radio live">
-					<div v-if="live == true" class="live__radio">
+					<div v-if="player.live == true" class="live__radio">
 						Прямой эфир
 					</div>
 					<div v-else>
 						<div  class="live__podcast">
 							Подкаст
 						</div>
-						<div class="live__radio live__radio--btn" v-on:click="live = true">
+						<div class="live__radio live__radio--btn" v-on:click="enableLive">
 							Прямой эфир
 						</div>
 					</div>
@@ -104,7 +106,14 @@
 			</div>
 		</div>
 		<div class="player__thumb">
-			<img v-bind:src="player.thumb" :alt="player.title">
+			<template v-if="player.thumb">
+				<img v-bind:src="player.thumb" :alt="player.title">
+			</template>
+			<template v-else>
+				<svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M40.7969 0.494375C38.8817 0.168992 36.9427 0.00362902 35 0C15.6625 0 0 15.6625 0 35C0 42.4244 2.33406 49.2844 6.25625 54.9741C8.6625 51.4391 14.2122 49 20.6456 49C25.0644 49 29.0609 50.1659 31.9244 52.0406L40.7969 0.494375ZM59.395 9.93344C65.4391 23.2991 60.1366 30.4391 60.1366 30.4391C56.035 18.1016 44.1569 16.2991 44.1569 16.2991C44.1569 16.2991 36.3431 58.4041 36.3431 58.9334C36.3431 63.4944 31.5 67.3487 24.9244 68.5147C28.1926 69.4981 31.587 69.9985 35 70C54.3375 70 70 54.3375 70 35C70 25.1716 65.9334 16.2969 59.395 9.93344Z" fill="#00496A"/>
+				</svg>
+			</template>
 		</div>
 		<div class="player__right">
 			<div class="now">
@@ -146,8 +155,8 @@
 				// title: 'Прямой эфир',
 				play: false,
 				open: false,
-				live: true,
-				audio: undefined,
+				// live: true,
+				// audio: undefined,
 				currentSeconds: 0,
 				durationSeconds: 0,
 				loaded: false,
@@ -184,7 +193,12 @@
 		},
 		sockets: {
 			flow: function (data) {
-				this.$store.dispatch('player/SOCKET_flow', data)
+				if (player.live == true) {
+					console.log('Прямой эфир')
+					this.$store.dispatch('player/SOCKET_flow', data)
+				} else {
+					console.log('Кривой эфир')
+				}
 			},
 		},
 		watch: {
@@ -195,6 +209,9 @@
 			volume(value) {
 				this.showVolume = false;
 				this.audio.volume = this.volume / 100;
+			},
+			player (value) {
+				console.log('Изменили плеер')
 			}
 		},
 		methods: {
@@ -231,6 +248,13 @@
 			update(e) {
 				this.currentSeconds = parseInt(this.audio.currentTime);
 			},
+			disableLive() {
+				console.log('Отключили радио')
+				// this.$store.commit('player/disableRadio');
+			},
+			enableLive() {
+				this.$store.commit('player/enableRadio');
+			}
 		},
 		update(e) {
 			this.currentSeconds = parseInt(this.audio.currentTime);
@@ -242,9 +266,11 @@
 			this.audio.addEventListener('pause', () => { this.playing = false; });
 			this.audio.addEventListener('play', () => { this.playing = true; });
 
-			this.$options.sockets.connect = (data) => {
-				console.log(data)
-			}
+			this.$store.watch(
+				state => state.player.player.file,
+				() => {
+					console.log("Обновили файл");
+				});
 		}
 	}
 </script>
@@ -284,6 +310,7 @@
 	}
 	&__play {
 		background-color: $red;
+		color: $light;
 		width: 46px;
 		height: 46px;
 		border-radius: 50px;
@@ -327,6 +354,9 @@
 		width: 88px;
 		background-color: $dark;
 		flex-shrink: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		@include r(1100) {
 			display: none;
 		}
@@ -335,6 +365,9 @@
 			width: 100%;
 			display: block;
 			object-fit: cover;
+		}
+		svg {
+
 		}
 	}
 	&__right {

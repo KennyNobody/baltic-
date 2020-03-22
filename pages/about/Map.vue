@@ -72,7 +72,6 @@
 		// },
 		mounted() {
 			this.$store.dispatch('map/fetch')
-			console.log(this.$store)
 		},
 		components: {
 			appSidebar

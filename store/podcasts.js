@@ -194,85 +194,18 @@ export const state = () => ({
 	// 	play: false,
 	// 	link: 'http://d.zaix.ru/gQNF.mp3',
 	// },
-	// {
-	// 	id: 2,
-	// 	title: '2. Очень длинное и сложноепроизносимое название хорошего подкаста',
-	// 	date: 1555065432,
-	// 	info: 'Краткое описание подкаста для отображения под заголовком',
-	// 	time: '25:15',
-	// 	thumb: 'http://placehold.it/1000x600',
-	// 	play: false,
-	// 	link: 'http://d.zaix.ru/gQNA.mp3',
-	// },
-	// {
-	// 	id: 3,
-	// 	title: '3. Очень длинное и сложноепроизносимое название хорошего подкаста',
-	// 	date: 1555065432,
-	// 	info: 'Краткое описание подкаста для отображения под заголовком',
-	// 	time: '25:15',
-	// 	thumb: 'http://placehold.it/1000x600',
-	// 	play: false,
-	// 	link: 'http://d.zaix.ru/gQNC.mp3',
-	// },
-	// {
-	// 	id: 4,
-	// 	title: '4. Очень длинное и сложноепроизносимое название хорошего подкаста',
-	// 	date: 1555065432,
-	// 	info: 'Краткое описание подкаста для отображения под заголовком',
-	// 	time: '25:15',
-	// 	thumb: 'http://placehold.it/1000x600',
-	// 	play: false,
-	// 	link: 'http://d.zaix.ru/gQNF.mp3',
-	// },
-	// {
-	// 	id: 5,
-	// 	title: '5. Очень длинное и сложноепроизносимое название хорошего подкаста',
-	// 	date: 1555065432,
-	// 	info: 'Краткое описание подкаста для отображения под заголовком',
-	// 	time: '25:15',
-	// 	thumb: 'http://placehold.it/1000x600',
-	// 	play: false,
-	// 	link: 'http://d.zaix.ru/gQNC.mp3',
-	// },
-	// {
-	// 	id: 6,
-	// 	title: '6. Очень длинное и сложноепроизносимое название хорошего подкаста',
-	// 	date: 1555065432,
-	// 	info: 'Краткое описание подкаста для отображения под заголовком',
-	// 	time: '25:15',
-	// 	thumb: 'http://placehold.it/1000x600',
-	// 	play: false,
-	// 	link: 'http://d.zaix.ru/gQNC.mp3',
-	// },
-	// {
-	// 	id: 7,
-	// 	title: '7. Очень длинное и сложноепроизносимое название хорошего подкаста',
-	// 	date: 1555065432,
-	// 	info: 'Краткое описание подкаста для отображения под заголовком',
-	// 	time: '25:15',
-	// 	thumb: 'http://placehold.it/1000x600',
-	// 	play: false,
-	// 	link: 'http://d.zaix.ru/gQNF.mp3',
-	// },
-	// {
-	// 	id: 8,
-	// 	title: '8. Очень длинное и сложноепроизносимое название хорошего подкаста',
-	// 	date: 1555065432,
-	// 	info: 'Краткое описание подкаста для отображения под заголовком',
-	// 	time: '25:15',
-	// 	thumb: 'http://placehold.it/1000x600',
-	// 	play: false,
-	// 	link: 'http://d.zaix.ru/gQNC.mp3',
-	// },
 	]
 })
 
 export const mutations = {
 	setPodcasts (state, podcasts) {
 		state.podcasts = podcasts
+		state.podcasts.play = false
+		console.log(state.podcasts)
 	},
 	setPodcastsFront (state, podcastsFront) {
 		state.podcastsFront = podcastsFront
+		state.podcastsFront.play = false
 	},
 	changePodcast (state, payload) {
 		for (let i = 0; i < state.podcasts.items.length; i++) {
@@ -298,8 +231,8 @@ export const actions = {
 		.then( response => {
 			commit('setPodcasts', podcasts)
 		})
-		.catch(() => {
-			console.log('Ошибка загрузки podcasts')
+		.catch((e) => {
+			console.log(e)
 		})
 	},
 	async fetchCustom ({commit}, payload) {
@@ -311,7 +244,12 @@ export const actions = {
 				page: payload.page || null,
 			}
 		})
-		commit('setPodcasts', podcasts)
+		.then( response => {
+			commit('setPodcasts', podcasts)
+		})
+		.catch((e) => {
+			console.log(e)
+		})
 	},
 	async fetchFront ({commit}) {
 		let podcastsFront = await this.$axios.$get("http://89.108.65.88/api/v1/podcasts", {
@@ -322,8 +260,8 @@ export const actions = {
 		.then( response => {
 			commit('setPodcastsFront', response.podcasts.items)
 		})
-		.catch(() => {
-			console.log('Ошибка загрузки podcast-front')
+		.catch((e) => {
+			console.log(e)
 		})
 	}
 }
