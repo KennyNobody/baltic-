@@ -1,5 +1,24 @@
 <template>
 	<div class="player">
+		<!-- <div class="loading">
+			<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+				<rect x="0" y="10" width="4" height="10" fill="#333" opacity="0.2">
+					<animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0s" dur="0.6s" repeatCount="indefinite" />
+					<animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0s" dur="0.6s" repeatCount="indefinite" />
+					<animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0s" dur="0.6s" repeatCount="indefinite" />
+				</rect>
+				<rect x="8" y="10" width="4" height="10" fill="#333"  opacity="0.2">
+					<animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0.15s" dur="0.6s" repeatCount="indefinite" />
+					<animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0.15s" dur="0.6s" repeatCount="indefinite" />
+					<animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0.15s" dur="0.6s" repeatCount="indefinite" />
+				</rect>
+				<rect x="16" y="10" width="4" height="10" fill="#333"  opacity="0.2">
+					<animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0.3s" dur="0.6s" repeatCount="indefinite" />
+					<animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0.3s" dur="0.6s" repeatCount="indefinite" />
+					<animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0.3s" dur="0.6s" repeatCount="indefinite" />
+				</rect>
+			</svg>
+		</div> -->
 		<transition name="player__fade">
 			<div class="playlist" v-if="open">
 				<div class="playlist__left">
@@ -60,18 +79,16 @@
 			<audio class="player__audio" :src="player.file" preload="auto" type="audio/mp3"></audio>
 
 			<!-- При прямом эфире просто глушим звук, не останавливая трансляцию. Поставить соответствующую иконку -->
-			<div class="player__play" v-if="player.live == true" v-on:click.prevent="playing = !playing">
+			<div class="player__play" v-if="player.live == true" v-on:click.prevent="playing = !playing" :class="{'player__play--disabled':player.loading}">
 				<div v-if="playing == false">
-					<!-- <svg class="player__icon--play">
+					<svg class="player__icon--play">
 						<use xlink:href="#icon-icon-play"></use>
-					</svg> -->
-					-
+					</svg>
 				</div>
 				<div v-else>
-					<!-- <svg class="player__icon--pause">
+					<svg class="player__icon--pause">
 						<use xlink:href="#icon-icon-pause"></use>
-					</svg> -->
-					+
+					</svg>
 				</div>
 			</div>
 
@@ -150,13 +167,8 @@
 		name: 'Player',
 		data () {
 			return {
-				// file: 'http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3',
-				// name: 'Балтик+',
-				// title: 'Прямой эфир',
 				play: false,
 				open: false,
-				// live: true,
-				// audio: undefined,
 				currentSeconds: 0,
 				durationSeconds: 0,
 				loaded: false,
@@ -164,6 +176,8 @@
 				previousVolume: 35,
 				showVolume: false,
 				volume: 100,
+				firstLoad: true,
+				// loading: false,
 			}
 		},
 		computed: {
@@ -193,36 +207,37 @@
 		},
 		sockets: {
 			flow: function (data) {
-				if (player.live == true) {
-					console.log('Прямой эфир')
+				if (this.player.live == true) {
 					this.$store.dispatch('player/SOCKET_flow', data)
-				} else {
-					console.log('Кривой эфир')
 				}
 			},
 		},
 		watch: {
-			playing(value) {
+			playing(value, data) {
 				if (value) { return this.audio.play(); }
 				this.audio.pause();
 			},
 			volume(value) {
 				this.showVolume = false;
 				this.audio.volume = this.volume / 100;
-			},
-			player (value) {
-				console.log('Изменили плеер')
 			}
 		},
 		methods: {
 			load() {
+				this.$store.dispatch('player/controlLoading', true);
 				if (this.audio.readyState >= 2) {
 					this.loaded = true;
 					this.durationSeconds = parseInt(this.audio.duration);
-					return this.playing = false;
+					this.playing = false;
 				}
 
-				throw new Error('Failed to load sound file.');
+				if (this.player.live == false && this.firstLoad ==  true) {
+					// this.playing = true;
+					this.firstLoad = false;
+				} else if (this.player.live == false && this.firstLoad == false) {
+					// this.playing = true;
+				}
+				this.$store.dispatch('player/controlLoading', false);
 			},
 			mute() {
 				if (this.muted) {
@@ -248,18 +263,19 @@
 			update(e) {
 				this.currentSeconds = parseInt(this.audio.currentTime);
 			},
-			disableLive() {
-				console.log('Отключили радио')
-				// this.$store.commit('player/disableRadio');
-			},
 			enableLive() {
-				this.$store.commit('player/enableRadio');
+				if (this.audio.readyState >= 2) {
+					this.loaded = true;
+					// this.playing = true;
+					this.$store.commit('player/enableRadio');
+				}
 			}
 		},
 		update(e) {
 			this.currentSeconds = parseInt(this.audio.currentTime);
 		},
 		mounted() {
+			this.$store.dispatch('player/controlLoading', true)
 			this.audio = this.$el.querySelector('.player__audio');
 			this.audio.addEventListener('timeupdate', this.update);
 			this.audio.addEventListener('loadeddata', this.load);
@@ -269,7 +285,9 @@
 			this.$store.watch(
 				state => state.player.player.file,
 				() => {
-					console.log("Обновили файл");
+					this.$store.dispatch('player/controlLoading', true);
+					this.load;
+					this.$store.dispatch('player/controlLoading', false);
 				});
 		}
 	}
@@ -323,6 +341,10 @@
 		user-select: none;
 		&:hover {
 			opacity: 0.7;
+		}
+		&--disabled {
+			opacity: 0.3;
+			pointer-events: none;
 		}
 	}
 	&__icon {
@@ -877,6 +899,15 @@
 		font-size: 14px;
 		line-height: 19px;
 		color: $blue;
+	}
+}
+
+.loading {
+	position: absolute;
+	right: calc(100% + 30px);
+	top: calc(50% - 13px);
+	svg {
+		display: block;
 	}
 }
 </style>

@@ -177,7 +177,7 @@
 		</transition>
 	</header>
 
-	
+
 </template>
 
 <script>
@@ -272,189 +272,188 @@
 		background-color: $dark;
 		position: relative;
 		@include r(1100) {
-					// display: none;
-				}
-				&:after {
-					content: "";
-					position: absolute;
-					left: 100%;
-					width: 100vw;
-					top: 0px;
-					bottom: 0px;
-					display: block;
-					background-color: $dark;
-				}
-			}
-			&__topline {
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				margin-bottom: 17px;
-			}
-			&__contacts {
-				display: flex;
-			}
-			&__bottomline {
-				display: flex;
-				justify-content: space-between;
-			}
-			&__nav {
-				display: flex;
-				align-items: center;
-			}
-			&__link {
-				text-decoration: none;
-				color: $light;
-				margin-right: 34px;
-				position: relative;
-				&:hover {
-					opacity: 0.7;
-				}
-				&:last-child {
-					margin-right: 0px;
-				}
-				&--active {
-					// pointer-events: none;
-					&:after {
-						position: absolute;
-						top: calc(100% + 3px);
-						left: 0px;
-						right: 0px;
-						height: 3px;
-						background-color: $red;
-						content: "";
-						display: block;
-					}
-				}
-			}
-			&__socials {
-				display: flex;
-				align-items: center;
-			}
-			&__soc-link {
-				transition: 0.3s all;
-				margin-left: 14px;
-				text-decoration: none;
-				svg {
-					display: block;
-					height: 20px;
-					width: 24px;
-					fill: $blue;
-				}
-				&:hover {
-					opacity: 0.7;
-				}
-			}
-			&__mob-logo {
-				svg {
-					display: block;
-					width: 220px;
-					height: 20px;
-				}
-			}
-			&__burger {
-				padding: 10px;
-				svg {
-					display: block;
-					height: 20px;
-					width: 20px;
-				}
-			}
-		}
 
-		.h-contact {
-			margin-right: 32px;
-			@include r(1100) {
-				margin-right: 0px;
-				text-align: center;
-			}
-			&__link {
-				color: $light;
-				font-size: 16px;
-				line-height: 26px;
-				text-decoration: none;
-				margin-bottom: -2px;
-				@include r(1100) {
-					margin-bottom: 0px;
-				}
-				strong {
-					font-weight: bold;
-					font-size: 24px;
-					line-height: 33px;
-					@include r(1100) {
-						font-size: 16px;
-						line-height: 26px;
-						font-weight: normal;
-					}
-				}
-				&:hover {
-					opacity: 0.7;
-				}
-			}
-			&__discript {
-				font-size: 14px;
-				font-weight: 600;
-				line-height: 19px;
-				&--red {
-					color: $red;
-				}
-				&--blue {
-					color: $blue;
-				}
-			}
 		}
-
-		.mob-menu {
-			position: fixed;
+		&:after {
+			content: "";
+			position: absolute;
+			left: 100%;
+			width: 100vw;
 			top: 0px;
 			bottom: 0px;
-			left: 0px;
-			right: 0px;
-			display: flex;
-			justify-content: space-between;
-			z-index: 5;
-			&__content {
-				padding-left: 15px;
-				padding-right: 15px;
-				background-color: $dark;
-				min-width: 300px;
-				width: 60%;
-				display: flex;
-				flex-direction: column;
-				justify-content: space-between;
-			}
-			&__header {
-				padding-top: 15px;
-				padding-bottom: 15px;
-			}
-			&__middle {
-				text-align: center;
-			}
-			&__link {
+			display: block;
+			background-color: $dark;
+		}
+	}
+	&__topline {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 17px;
+	}
+	&__contacts {
+		display: flex;
+	}
+	&__bottomline {
+		display: flex;
+		justify-content: space-between;
+	}
+	&__nav {
+		display: flex;
+		align-items: center;
+	}
+	&__link {
+		text-decoration: none;
+		color: $light;
+		margin-right: 34px;
+		position: relative;
+		&:hover {
+			opacity: 0.7;
+		}
+		&:last-child {
+			margin-right: 0px;
+		}
+		&--active {
+			&:after {
+				position: absolute;
+				top: calc(100% + 3px);
+				left: 0px;
+				right: 0px;
+				height: 3px;
+				background-color: $red;
+				content: "";
 				display: block;
-				font-size: 18px;
-				color: $light;
-				text-decoration: none;
-				margin-bottom: 5px;
-			}
-			&__footer {
-				display: flex;
-				justify-content: center;
-				padding-top: 20px;
-				padding-bottom: 20px;
-			}
-			&__overlay {
-				background-color: rgba(0, 0, 0, 0.7);
-				display: block;
-				flex-grow: 1;
-				min-width: 0px;
 			}
 		}
+	}
+	&__socials {
+		display: flex;
+		align-items: center;
+	}
+	&__soc-link {
+		transition: 0.3s all;
+		margin-left: 14px;
+		text-decoration: none;
+		svg {
+			display: block;
+			height: 20px;
+			width: 24px;
+			fill: $blue;
+		}
+		&:hover {
+			opacity: 0.7;
+		}
+	}
+	&__mob-logo {
+		svg {
+			display: block;
+			width: 220px;
+			height: 20px;
+		}
+	}
+	&__burger {
+		padding: 10px;
+		svg {
+			display: block;
+			height: 20px;
+			width: 20px;
+		}
+	}
+}
 
-		.fade-enter-active, .fade-leave-active {
-			transition: opacity .2s;
+.h-contact {
+	margin-right: 32px;
+	@include r(1100) {
+		margin-right: 0px;
+		text-align: center;
+	}
+	&__link {
+		color: $light;
+		font-size: 16px;
+		line-height: 26px;
+		text-decoration: none;
+		margin-bottom: -2px;
+		@include r(1100) {
+			margin-bottom: 0px;
 		}
-		.fade-enter, .fade-leave-to {
-			opacity: 0;
+		strong {
+			font-weight: bold;
+			font-size: 24px;
+			line-height: 33px;
+			@include r(1100) {
+				font-size: 16px;
+				line-height: 26px;
+				font-weight: normal;
+			}
 		}
-	</style>
+		&:hover {
+			opacity: 0.7;
+		}
+	}
+	&__discript {
+		font-size: 14px;
+		font-weight: 600;
+		line-height: 19px;
+		&--red {
+			color: $red;
+		}
+		&--blue {
+			color: $blue;
+		}
+	}
+}
+
+.mob-menu {
+	position: fixed;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	display: flex;
+	justify-content: space-between;
+	z-index: 5;
+	&__content {
+		padding-left: 15px;
+		padding-right: 15px;
+		background-color: $dark;
+		min-width: 300px;
+		width: 60%;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+	&__header {
+		padding-top: 15px;
+		padding-bottom: 15px;
+	}
+	&__middle {
+		text-align: center;
+	}
+	&__link {
+		display: block;
+		font-size: 18px;
+		color: $light;
+		text-decoration: none;
+		margin-bottom: 5px;
+	}
+	&__footer {
+		display: flex;
+		justify-content: center;
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
+	&__overlay {
+		background-color: rgba(0, 0, 0, 0.7);
+		display: block;
+		flex-grow: 1;
+		min-width: 0px;
+	}
+}
+
+.fade-enter-active, .fade-leave-active {
+	transition: opacity .2s;
+}
+.fade-enter, .fade-leave-to {
+	opacity: 0;
+}
+</style>

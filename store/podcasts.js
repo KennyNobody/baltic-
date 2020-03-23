@@ -200,12 +200,9 @@ export const state = () => ({
 export const mutations = {
 	setPodcasts (state, podcasts) {
 		state.podcasts = podcasts
-		state.podcasts.play = false
-		console.log(state.podcasts)
 	},
 	setPodcastsFront (state, podcastsFront) {
 		state.podcastsFront = podcastsFront
-		state.podcastsFront.play = false
 	},
 	changePodcast (state, payload) {
 		for (let i = 0; i < state.podcasts.items.length; i++) {
