@@ -25,7 +25,6 @@
 			<div class="single-post__right">
 				<div class="single-post__info">
 					<time class="single-post__time">
-						<!-- 14:20 -->
 						{{ $moment.unix(post.date).format('hh:mm') }}
 					</time>
 					<time class="single-post__date">
@@ -37,9 +36,10 @@
 				</div>
 			</div>
 		</div>
-		<!-- <appGallery
-		:gallery="post.gallery"
-		></appGallery> -->
+		{{ post.gallery_array }}
+		<appGallery
+		:gallery="post.gallery_array"
+		></appGallery>
 
 		<div class="single-post">
 			<div class="single-post__left">
@@ -83,6 +83,10 @@
 			}
 		},
 		name: 'page-news',
+		mounted() {
+			this.$store.dispatch('blog/fetchSingle', this.$route.params.id);
+			this.$store.dispatch('blog/fetchRandom');
+		},
 		validate({params}){
 			return /^\d+$/.test(params.id)
 		},
@@ -93,10 +97,6 @@
 			post ({app, params}) {
 				return this.$store.getters['blog/singleBlog']
 			}
-		},
-		mounted() {
-			this.$store.dispatch('blog/fetchRandom');
-			this.$store.dispatch('blog/fetchSingle', this.$route.params.id);
 		},
 		data () {
 			return {

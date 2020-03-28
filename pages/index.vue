@@ -7,9 +7,6 @@
 		<section class="home-now">
 			<div class="home-now__articles">
 				<article class="home-now__article" v-if="broadcast.now">
-					<div class="home-now__thumb">
-						<img :src="broadcast.now.preview" :alt="broadcast.now.title">
-					</div>
 					<div class="home-now__content">
 						<p class="home-now__discript">
 							Сейчас в эфире
@@ -30,9 +27,6 @@
 					</div>
 				</article>
 				<article class="home-now__article" v-if="broadcast.next">
-					<div class="home-now__thumb">
-						<img :src="broadcast.next.preview" :alt="broadcast.next.title">
-					</div>
 					<div class="home-now__content">
 						<p class="home-now__discript">
 							Далее в эфире
@@ -224,7 +218,6 @@
 			}
 		}
 		&__article {
-			display: flex;
 			padding: 10px;
 			background-color: $light;
 			box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);

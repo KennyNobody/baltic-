@@ -29,7 +29,7 @@
 					<a v-if="contacts.phones.office.link" :href="contacts.phones.office.link" class="contacts__phone">
 						+7 {{ contacts.phones.office.code }} {{ contacts.phones.office.phone }}
 					</a>
-					<span v-if="contacts.phones.office.multichannel">(многоканальный)</span>
+					<span v-if="contacts.phones.office.multichannel == 1">(многоканальный)</span>
 					<br>
 					<br>
 				</template>
@@ -46,7 +46,7 @@
 					<a v-if="contacts.phones.promo.phone" :href="contacts.phones.promo.link" class="contacts__phone">
 						+7 {{ contacts.phones.promo.code }} {{ contacts.phones.promo.phone }}
 					</a>
-					<span v-if="contacts.phones.promo.multichannel">(многоканальный)</span><br>
+					<span v-if="contacts.phones.promo.multichannel == 1">(многоканальный)</span><br>
 					<a v-if="contacts.phones.promo.email" :href="`mailto:${contacts.phones.promo.email}`" class="contacts__mail">
 						{{ contacts.phones.promo.email }}
 					</a>
@@ -60,7 +60,7 @@
 					<a v-if="contacts.phones.broadcast.phone" :href="contacts.phones.broadcast.link" class="contacts__phone">
 						+7 {{ contacts.phones.broadcast.code }} {{ contacts.phones.broadcast.phone }}
 					</a>
-					<span v-if="contacts.phones.broadcast.multichannel">(многоканальный)</span> 
+					<span v-if="contacts.phones.broadcast.multichannel == 1">(многоканальный)</span> 
 					<br>
 					<a v-if="contacts.phones.broadcast.email" :href="`mailto:${contacts.phones.broadcast.email}`" class="contacts__mail">
 						{{ contacts.phones.broadcast.email }}

@@ -3,13 +3,11 @@ export const state = () => ({
 		now: {
 			title: 'Гость в эфире: Антонина Кочеткова о загрязнении окружающей среды',
 			date: 1555065432,
-			preview: 'http://placehold.it/1000x600',
 			link: ''
 		},
 		next: {
 			title: 'Интервью с режиссером “Биссера”, Геннадием Урсуловым',
 			date: 1555065432,
-			preview: 'http://placehold.it/1000x600',
 			link: ''
 		}
 	}

@@ -45,22 +45,20 @@
 			></appPodcast>
 		</div>
 		<div class="page-news__pagination">
-			<div class="pagination">
-				<div class="pagination__link pagination__link--prev" v-on:click="prevPage">
-					<svg>
-						<use xlink:href="#icon-icon-arrow"></use>
-					</svg>
-				</div>
-				<div class="pagination__link" v-on:click="changePage(index)" v-for="(item, index) in podcasts.pages.max" v-bind:key="item.id" :class="{ 'pagination__link--now' : index == pageNow - 1}">
-					{{ index+1 }}
-				</div>
-				<!-- pagination__link--now -->
-				<div class="pagination__link pagination__link--next" v-on:click="nextPage">
-					<svg>
-						<use xlink:href="#icon-icon-arrow"></use>
-					</svg>
-				</div>
-			</div>
+			<no-ssr>
+				<paginate
+				:prev-class="'pagination__link pagination__link--prev'"
+				:next-class="'pagination__link pagination__link--next'"
+				:active-class="'pagination__link pagination__link--now'"
+				:container-class="'pagination'"
+				:page-count="podcasts.pages.max"
+				:disabled-class="'pagination__link--disabled'"
+				:click-handler="changePage"
+				:prev-text="'🡠'"
+				:next-text="'🡢'"
+				:page-class="'pagination__link'">
+			</paginate>
+		</no-ssr>
 		</div>
 	</div>
 </template>
@@ -101,15 +99,18 @@
 				return this.$store.getters['programs/programsList']
 			},
 		},
-		async fetch({store, params}) {
-			if (Object.keys(store.getters['podcasts/podcasts']).length === 0) {
-				await store.dispatch('podcasts/fetch')
-			}
-		},
+		// async fetch({store, params}) {
+		// 	if (Object.keys(store.getters['podcasts/podcasts']).length === 0) {
+		// 		await store.dispatch('podcasts/fetch')
+		// 	}
+		// },
 		watch: {
 			pageNow: function () {
 				this.getPosts();
 			}
+		},
+		mounted() {
+			this.$store.dispatch('podcasts/fetch')
 		},
 		methods: {
 			changePage (index) {

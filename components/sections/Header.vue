@@ -6,7 +6,7 @@
 				<div class="header__topline">
 					<div class="header__contacts">
 						<div class="h-contact" v-if="contacts.phones.broadcast.phone">
-							<a :href="'tel:+' + contacts.phones.broadcast.link" class="h-contact__link">
+							<a :href="'tel:' + contacts.phones.broadcast.link" class="h-contact__link" target="_blank">
 								{{ contacts.phones.broadcast.code }} <strong>{{ contacts.phones.broadcast.phone }}</strong>
 							</a>
 							<p class="h-contact__discript h-contact__discript--red">
@@ -14,7 +14,7 @@
 							</p>
 						</div>
 						<div class="h-contact" v-if="contacts.phones.office.phone">
-							<a :href="'tel:+' + contacts.phones.office.link" class="h-contact__link">
+							<a :href="'tel:' + contacts.phones.office.link" class="h-contact__link" target="_blank">
 								{{ contacts.phones.office.code }} <strong>{{ contacts.phones.office.phone }}</strong>
 							</a>
 							<p class="h-contact__discript h-contact__discript--blue">

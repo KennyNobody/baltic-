@@ -177,6 +177,7 @@
 				showVolume: false,
 				volume: 100,
 				firstLoad: true,
+				canplay: false
 				// loading: false,
 			}
 		},
@@ -220,7 +221,7 @@
 			volume(value) {
 				this.showVolume = false;
 				this.audio.volume = this.volume / 100;
-			}
+			},
 		},
 		methods: {
 			load() {
@@ -281,6 +282,7 @@
 			this.audio.addEventListener('loadeddata', this.load);
 			this.audio.addEventListener('pause', () => { this.playing = false; });
 			this.audio.addEventListener('play', () => { this.playing = true; });
+			// this.audio.addEventListener('canplay', () => {this.canplay = true});
 
 			this.$store.watch(
 				state => state.player.player.file,

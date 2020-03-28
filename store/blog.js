@@ -1,6 +1,6 @@
 export const state = () => ({
 	blog: {
-		// items: [
+		items: [
 		// {	
 		// 	"id": 1,
 		// 	"title": "В Калининграде пропал без вести 24-летний мужчина",
@@ -93,10 +93,10 @@ export const state = () => ({
 		// 	},
 		// 	]
 		// },
-		// ],
+		],
 		pages: {
 			current: 1,
-			max: 3
+			max: 1
 		}
 	},
 	blogFront: [
@@ -177,7 +177,9 @@ export const actions = {
 				single: payload,
 			}
 		})
+		// commit('setSingleBlog', singleBlog)
 		.then( response => {
+			console.log(response)
 			commit('setSingleBlog', response)
 		})
 		.catch((e) => {

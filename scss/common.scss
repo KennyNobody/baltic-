@@ -268,20 +268,16 @@ button {
 	display: inline-flex;
 	align-items: center;
 	&__link {
-		height: 36px;
-		display: flex;
-		align-items: center;
-		border-top: 1px solid $blue;
-		border-bottom: 1px solid $blue;
-		cursor: pointer;
-		padding-left: 12px;
-		padding-right: 12px;
-		transition: 0.3s border-bottom, border-top, background-color, color;
+		transition: 0.3s all;
 		&:first-child {
-			border-left: 1px solid $blue;
+			a {
+				border-left: 1px solid $blue;
+			}
 		}
 		&:last-child {
-			border-right: 1px solid $blue;
+			a {
+				border-right: 1px solid $blue;
+			}
 		}
 		svg {
 			height: 14px;
@@ -296,12 +292,32 @@ button {
 			}
 		}
 		&--now {
-			background-color: $light;
-			height: 44px;
-			color: $dark;
-			pointer-events: none;
+			a {
+				background-color: $light;
+				height: 44px;
+				color: $dark;
+				pointer-events: none;
+			}
 		}
 		&--static {
+			a {
+				pointer-events: none;
+			}
+		}
+		a {
+			cursor: pointer;
+			padding-left: 12px;
+			padding-right: 12px;
+			height: 36px;
+			display: flex;
+			align-items: center;
+			border-top: 1px solid $blue;
+			border-bottom: 1px solid $blue;
+			outline: none;
+			transition: 0.3s border-bottom, border-top, background-color, color;
+		}
+		&--disabled {
+			opacity: 0.5;
 			pointer-events: none;
 		}
 	}

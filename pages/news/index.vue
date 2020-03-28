@@ -25,23 +25,37 @@
 			<div class="page-news__article-clear"></div>
 		</div>
 		<div class="page-news__pagination">
-			<div class="pagination">
+			<!-- <div class="pagination">
 				<div class="pagination__link pagination__link--prev" v-on:click="prevPage">
 					<svg>
 						<use xlink:href="#icon-icon-arrow"></use>
 					</svg>
 				</div>
-				<!-- <div class="pagination__link" v-if="blog" v-on:click="changePage(index)" v-for="(item, index) in blog.pages.max" v-bind:key="item.id" :class="{ 'pagination__link--now' : index == pageNow - 1}">
+				<div class="pagination__link" v-if="blog" v-on:click="changePage(index)" v-for="(item, index) in blog.pages.max" v-bind:key="item.id" :class="{ 'pagination__link--now' : index == pageNow - 1}">
 					{{ index+1 }}
-				</div> -->
+				</div>
 				<div class="pagination__link pagination__link--next" v-on:click="nextPage">
 					<svg>
 						<use xlink:href="#icon-icon-arrow"></use>
 					</svg>
 				</div>
-			</div>
-		</div>
+			</div> -->
+			<no-ssr>
+				<paginate
+				:prev-class="'pagination__link pagination__link--prev'"
+				:next-class="'pagination__link pagination__link--next'"
+				:active-class="'pagination__link pagination__link--now'"
+				:container-class="'pagination'"
+				:page-count="blog.pages.max"
+				:disabled-class="'pagination__link--disabled'"
+				:click-handler="changePage"
+				:prev-text="'🡠'"
+				:next-text="'🡢'"
+				:page-class="'pagination__link'">
+			</paginate>
+		</no-ssr>
 	</div>
+</div>
 </template>
 
 <script>
@@ -77,7 +91,7 @@
 		},
 		methods: {
 			changePage (index) {
-				this.pageNow = index + 1
+				this.pageNow = index
 			},
 			prevPage () {
 				if (this.pageNow <= 1) {

@@ -10,9 +10,63 @@ export const state = () => ({
 		playlist: [
 		{
 			id: 1,
-			time: '22:31',
-			author:'Ваня Усович',
-			title:'Stand Up в Питере'
+			time: '2:31',
+			author:'The Doors',
+			title:'Riders On The Storm'
+		},
+		{
+			id: 2,
+			time: '7:02',
+			author:'Дима Билан',
+			title:'Невозможное возможно'
+		},
+		{
+			id: 3,
+			time: '2:01',
+			author:'The Doors',
+			title:'Riders On The Storm'
+		},
+		{
+			id: 4,
+			time: '3:47',
+			author:'Radiohead',
+			title:'Videotape'
+		},
+		{
+			id: 5,
+			time: '4:19',
+			author:'Тату',
+			title:'Нас не догонят'
+		},
+		{
+			id: 6,
+			time: '2:31',
+			author:'Linkin Park',
+			title:'Numb'
+		},
+		{
+			id: 7,
+			time: '4:11',
+			author:'Серега',
+			title:'Возле дома твоего'
+		},
+		{
+			id: 8,
+			time: '3:01',
+			author:'Pink Floyd',
+			title:'The wall'
+		},
+		{
+			id: 9,
+			time: '01:31',
+			author:'Филипп Киркоров',
+			title:'Цвет настроения синий'
+		},
+		{
+			id: 10,
+			time: '2:31',
+			author:'Halsey',
+			title:'Colors'
 		},
 		]
 	}
