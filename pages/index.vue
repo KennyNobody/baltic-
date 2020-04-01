@@ -60,9 +60,9 @@
 				</p>
 			</h2>
 			<div class="home-programs__items">
-				<a href="#" class="home-programs__item" v-for="item in programs" v-bind:key="item.id">
-					<img :src="item.preview" alt="Альт">
-				</a>
+				<nuxt-link :to='"/programs/" + item.id' class="home-programs__item" v-for="item in programs" v-bind:key="item.id">
+					<img :src="item.preview" :alt="item.title">
+				</nuxt-link>
 				<div class="home-programs__item--clear"></div>
 				<div class="home-programs__item--clear"></div>
 			</div>
@@ -174,17 +174,19 @@
 			if (this.$store.getters['blog/blogFront'].length === 0) {
 				this.$store.dispatch('blog/fetchFront')
 			}
+			this.$store.dispatch('blog/fetchFront')
 			this.$store.dispatch('blog/fetch')
 			// // это временное решение-имитация
 			// if (this.$store.getters['blog/blog'].length === 0) {
 			// 	this.$store.dispatch('blog/fetch')
 			// }
 			this.$store.dispatch('podcasts/fetchFront')
+			this.$store.dispatch('programs/fetchFront')
 		},
 		async fetch({store}) {
-			if (store.getters['programs/programsFront'].length === 0) {
-				await store.dispatch('programs/fetchFront')
-			}
+			//if (store.getters['programs/programsFront'].length === 0) {
+			//	await store.dispatch('programs/fetchFront')
+			//}
 			// if (store.getters['blog/blogFront'].length === 0) {
 			// 	await store.dispatch('blog/fetchFront')
 			// }

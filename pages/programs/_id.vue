@@ -74,6 +74,10 @@
 				]
 			}
 		},
+		mounted () {
+			this.$store.dispatch('programs/fetchSingle', this.$route.params.id);
+			console.log(this.$store)
+		},
 		name: 'page-news',
 		validate({params}){
 			return /^\d+$/.test(params.id)
@@ -82,9 +86,8 @@
 			podcasts(params) {
 				return this.$store.getters['podcasts/podcasts']
 			},
-			post ({app, params}) {
-				console.log(this.now)
-				return this.$store.getters['programs/programsById'](+this.now)
+			post (params) {
+				return this.$store.getters['programs/singleProgram']
 			}
 		},
 		data () {

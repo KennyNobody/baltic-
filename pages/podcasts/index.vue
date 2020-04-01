@@ -96,7 +96,7 @@
 				return this.$store.getters['podcasts/podcasts']
 			},
 			programs() {
-				return this.$store.getters['programs/programsList']
+				return this.$store.getters['podcasts/podcastsList']
 			},
 		},
 		// async fetch({store, params}) {

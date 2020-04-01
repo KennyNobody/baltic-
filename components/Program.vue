@@ -1,5 +1,5 @@
 <template>
-	<article class="program">
+	<nuxt-link :to='"/programs/" + id' class="program">
 		<div class="program__thumb">
 			<img :src="preview" :alt="title">
 		</div>
@@ -19,12 +19,12 @@
 				{{ content }}
 			</p>
 		</div>
-		<nuxt-link :to='"/programs/" + id' class="program__link">
+		<div class="program__link">
 			<svg>
 				<use xlink:href="#icon-icon-arrow"></use>
 			</svg>
-		</nuxt-link>
-	</article>
+		</div>
+	</nuxt-link>
 </template>
 
 <script>
@@ -45,8 +45,20 @@
 		display: flex;
 		justify-content: space-between;
 		margin-bottom: 20px;
+		text-decoration: none;
 		@include r(1100) {
 			// display: block;
+		}
+		&:hover {
+			.program__title {
+				opacity: 0.7;
+			}
+			.program__thumb {
+				opacity: 0.7;
+			}
+			.program__link {
+				opacity: 0.7;
+			}
 		}
 		&__thumb {
 			height: 247px;
@@ -55,6 +67,7 @@
 			justify-content: center;
 			align-items: center;
 			flex-shrink: 0;
+			transition: 0.3s all;
 			@include r(670) {
 				display: none;
 			}
@@ -81,6 +94,8 @@
 			font-size: 20px;
 			line-height: 24px;
 			margin-bottom: 20px;
+			transition: 0.3s all;
+			text-decoration: none;
 			@include r(670) {
 				margin-bottom: 10px;
 			}
