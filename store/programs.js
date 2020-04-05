@@ -62,7 +62,6 @@ export const actions = {
 			}
 		})
 		.then( response => {
-			console.log(response.programs)
 			commit('setProgramsFront', response.programs)
 		})
 		.catch((e) => {
@@ -88,6 +87,5 @@ export const actions = {
 export const getters = {
 	programs: s => s.programs,
 	programsFront: s => s.programsFront,
-	// programsList: s => s.programs.filter(todo => todo.podcasts),
 	singleProgram: s => s.singleProgram
 }

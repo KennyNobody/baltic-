@@ -8,7 +8,7 @@
 				<svg class="title__arrow">
 					<use xlink:href="#icon-icon-arrow"></use>
 				</svg>
-				<nuxt-link to="/news/" class="title__crumb">
+				<nuxt-link to="/programs/" class="title__crumb">
 					Программы
 				</nuxt-link>
 				<svg class="title__arrow">
@@ -76,7 +76,6 @@
 		},
 		mounted () {
 			this.$store.dispatch('programs/fetchSingle', this.$route.params.id);
-			console.log(this.$store)
 		},
 		name: 'page-news',
 		validate({params}){

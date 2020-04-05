@@ -30,7 +30,10 @@ export const state = () => ({
 	// 	play: false,
 	// 	link: 'http://d.zaix.ru/gQNF.mp3',
 	// },
-	]
+	],
+	singlePodcast: {
+		title: 'Загрузка...'
+	}
 })
 
 export const mutations = {
@@ -52,6 +55,9 @@ export const mutations = {
 		podcast.play = !podcast.play;
 		// дописать аналогичный для front-версии
 	},
+	setSinglePodcast (state, singlePodcast) {
+		state.singlePodcast = singlePodcast
+	}
 }
 
 // Пример полного запроса, любой из параметров может отсутствовать
@@ -100,6 +106,20 @@ export const actions = {
 		.catch((e) => {
 			console.log(e)
 		})
+	},
+	async fetchSingle ({commit}, payload) {
+		const singlePodcast = await this.$axios.$get("http://89.108.65.88/api/v1/podcasts", {
+			params: {
+				single: payload,
+			}
+		})
+		.then( response => {
+			console.log(response)
+			commit('setSinglePodcast', response.podcasts.items)
+		})
+		.catch((e) => {
+			console.log(e)
+		})
 	}
 }
 
@@ -108,7 +128,5 @@ export const getters = {
 	podcastsFront: s => s.podcastsFront,
 	podcastsPlayer: s => s.podcastsFront.slice(0, 4),
 	podcastsList: s => s.podcastsList,
-	podcastsById: s => id => {
-		return s.podcasts.items.find(podcasts => podcasts.id === id);
-	}
+	singlePodcast: s => s.singlePodcast
 }

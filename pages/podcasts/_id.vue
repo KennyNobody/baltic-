@@ -79,13 +79,16 @@
 				]
 			}
 		},
+		mounted () {
+			this.$store.dispatch('podcasts/fetchSingle', this.$route.params.id);
+		},
 		name: 'page-podcast',
 		validate({params}){
 			return /^\d+$/.test(params.id)
 		},
 		computed: {
 			podcast ({app, params}) {
-				return this.$store.getters['podcasts/podcastsById'](+this.now)
+				return this.$store.getters['podcasts/singlePodcast']
 			}
 		},
 		asyncData({$axios, params}) {
@@ -109,7 +112,6 @@
 		&__thumb {
 			width: 247px;
 			height: 247px;
-			background-color: red;
 			flex-shrink: 0;
 			@include r(1100) {
 				display: none;
