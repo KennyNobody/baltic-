@@ -37,3 +37,4 @@ export const actions = {
 export const getters = {
 	history: s => s.history
 }
+// process.env.apiURL + 

@@ -64,7 +64,7 @@ export const mutations = {
 // http://localhost:8000/api/podcasts?dateStart=1578078000000&dateEnd=1578423600000&genre=7&page=1
 export const actions = {
 	async fetch ({commit}) {
-		let podcasts = await this.$axios.$get("http://89.108.65.88/api/v1/podcasts", {
+		let podcasts = await this.$axios.$get(process.env.apiURL + "/api/v1/podcasts", {
 			params: {
 				page: 1,
 				front: false
@@ -79,7 +79,7 @@ export const actions = {
 		})
 	},
 	async fetchCustom ({commit}, payload) {
-		let podcasts = await this.$axios.$get("http://89.108.65.88/api/v1/podcasts", {
+		let podcasts = await this.$axios.$get(process.env.apiURL + "/api/v1/podcasts", {
 			params: {
 				dateStart: payload.dateStart || null,
 				dateEnd: payload.dateEnd || null,
@@ -95,7 +95,7 @@ export const actions = {
 		})
 	},
 	async fetchFront ({commit}) {
-		let podcastsFront = await this.$axios.$get("http://89.108.65.88/api/v1/podcasts", {
+		let podcastsFront = await this.$axios.$get(process.env.apiURL + "/api/v1/podcasts", {
 			params: {
 				front: true
 			}
@@ -108,13 +108,12 @@ export const actions = {
 		})
 	},
 	async fetchSingle ({commit}, payload) {
-		const singlePodcast = await this.$axios.$get("http://89.108.65.88/api/v1/podcasts", {
+		const singlePodcast = await this.$axios.$get(process.env.apiURL + "/api/v1/podcasts", {
 			params: {
 				single: payload,
 			}
 		})
 		.then( response => {
-			console.log(response)
 			commit('setSinglePodcast', response.podcasts.items)
 		})
 		.catch((e) => {

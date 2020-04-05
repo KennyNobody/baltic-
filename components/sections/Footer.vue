@@ -7,9 +7,9 @@
 			<nuxt-link to="/about/politics/" class="footer__link">
 				Политика конфиденциальности
 			</nuxt-link>
-			<nuxt-link to="#" class="footer__link">
+			<!-- <nuxt-link to="#" class="footer__link">
 				Пользовательское соглашение
-			</nuxt-link>
+			</nuxt-link> -->
 		</div>
 		<div class="footer__right">
 			<div class="footer__socials">

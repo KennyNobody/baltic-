@@ -31,6 +31,10 @@ module.exports = {
 		],
 	},
 	loading: { color: '#3B8070' },
+	env: {
+		baseURL:"localhost:3000/",
+		apiURL: "http://89.108.65.88/"
+	},
 	modules: [
 	'@nuxtjs/style-resources',
 	['vue-yandex-maps/nuxt', {
@@ -39,9 +43,7 @@ module.exports = {
 		coordorder: 'latlong',
 		version: '2.1'
 	}],
-	['@nuxtjs/axios', {
-		baseURL: 'http://localhost:8000'
-	}],
+	'@nuxtjs/axios',
 	'@nuxtjs/proxy',
 	['nuxt-svg-sprite-module', {
 		directory: '~/assets/svg-sprite'

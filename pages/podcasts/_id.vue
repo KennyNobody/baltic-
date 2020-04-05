@@ -35,9 +35,16 @@
 					<div class="single-podcast__info">
 						<div class="single-podcast__subheader">
 							<time class="single-podcast__time">{{ $moment.unix(podcast.date).format('DD/MM/YYYY') }}</time>
-							<svg class="single-podcast__share-icon">
-								<use xlink:href="#icon-icon-share"></use>
-							</svg>
+							<client-only placeholder="Loading...">
+								<div class="podcast__share">
+									<transition name="fade">
+										<yandex-share v-if="showToggle" v-bind="content" :services="['telegram', 'whatsapp', 'viber', 'vkontakte','facebook']"/>
+									</transition>
+									<svg v-on:click="showToggle = !showToggle" class="podcast__share-icon">
+										<use xlink:href="#icon-icon-share"></use>
+									</svg>
+								</div>
+							</client-only>
 						</div>
 						<h2 class="single-podcast__title">
 							<v-clamp :max-lines="2">{{ podcast.title }}</v-clamp>
@@ -67,8 +74,9 @@
 </template>
 
 <script>
-	import appPodcast from '~/components/Podcast'
-	import VClamp from 'vue-clamp'
+	import appPodcast from '~/components/Podcast';
+	import VClamp from 'vue-clamp';
+	import YandexShare from '@cookieseater/vue-yandex-share';
 
 	export default {
 		head () {
@@ -79,8 +87,21 @@
 				]
 			}
 		},
+		data () {
+			return {
+				showToggle: false,
+				content: {
+					title: this.title,
+					url: process.env.baseURL + '/podcasts/' + this.id,
+					url: '${$axios.defaults.baseURL}',
+					image: this.thumb,
+					description: this.info,
+				}
+			}
+		},
 		mounted () {
 			this.$store.dispatch('podcasts/fetchSingle', this.$route.params.id);
+			console.log(process)
 		},
 		name: 'page-podcast',
 		validate({params}){
@@ -97,135 +118,136 @@
 		},
 		components: {
 			appPodcast,
-			VClamp
+			VClamp,
+			YandexShare
 		},
 	}
 </script>
 
 <style lang="scss">
-	.single-podcast {
-		display: flex;
-		justify-content: space-between;
+.single-podcast {
+	display: flex;
+	justify-content: space-between;
+	@include r(1100) {
+		display: block;
+	}
+	&__thumb {
+		width: 247px;
+		height: 247px;
+		flex-shrink: 0;
 		@include r(1100) {
+			display: none;
+		}
+		img {
 			display: block;
-		}
-		&__thumb {
-			width: 247px;
-			height: 247px;
-			flex-shrink: 0;
-			@include r(1100) {
-				display: none;
-			}
-			img {
-				display: block;
-				height: 100%;
-				width: 100%;
-				object-fit: cover;
-			}
-		}
-		&__content {
-			width: 442px;
-			background-color: $light;
-			flex-shrink: 0;
-			height: 247px;
-			padding: 13px 16px 16px 20px;
-			display: flex;
-			flex-direction: column;
-			justify-content: space-between;
-			@include r(1100) {
-				width: 100%;
-				height: auto;
-				margin-bottom: 20px;
-			}
-		}
-		&__discript {
-			margin-left: 20px;
-			min-width: 0px;
-			flex-grow: 1;
-			color: $light;
-			p {
-				margin-bottom: 1em;
-			}
-		}
-		&__content-discript {
-			a {
-				color: $dark;
-				text-decoration: none;
-				&:hover {
-					text-decoration: underline;
-				}
-			}
-		}
-		&__info {
-			flex-grow: 1;
-		}
-		&__play {
-			background-color: $dark;
-			height: 68px;
-			width: 68px;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			border-radius: 50px;
-			transition: 0.3s all;
-			cursor: pointer;
-			margin-right: 20px;
-			flex-shrink: 0;
-			position: relative;
-			top: 15px;
-			&:hover {
-				opacity: 0.7;
-			}
-			svg {
-				height: 30px;
-				width: 30px;
-				position: relative;
-				left: 2px;
-			}
-		}
-		&__header {
-			flex-grow: 1;
-			min-width: 0px;
-			display: flex;
-			justify-content: space-between;
-			color: $dark;
-		}
-		&__subheader {
-			display: flex;
-			justify-content: space-between;
-			// align-items: fl
-		}
-		&__time {
-			color: $blue;
-		}
-		&__share-icon {
-			height: 30px;
-			width: 30px;
-			cursor: pointer;
-			transition: 0.3s all;
-			&:hover {
-				opacity: 0.7;
-			}
-		}
-		&__title {
-			font-weight: 600;
-			font-size: 22px;
-			line-height: 23px;
-			margin-bottom: 10px;
-		}
-		&__footer {
-			display: flex;
-			justify-content: space-between;
-		}
-		&__information {
-			font-size: 16px;
-			line-height: 22px;
-			padding-right: 10px;
-		}
-		&__duration {
-			font-size: 14px;
-			line-height: 28px;
-			color: #BDBDBD;
+			height: 100%;
+			width: 100%;
+			object-fit: cover;
 		}
 	}
+	&__content {
+		width: 442px;
+		background-color: $light;
+		flex-shrink: 0;
+		height: 247px;
+		padding: 13px 16px 16px 20px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		@include r(1100) {
+			width: 100%;
+			height: auto;
+			margin-bottom: 20px;
+		}
+	}
+	&__discript {
+		margin-left: 20px;
+		min-width: 0px;
+		flex-grow: 1;
+		color: $light;
+		p {
+			margin-bottom: 1em;
+		}
+	}
+	&__content-discript {
+		a {
+			color: $dark;
+			text-decoration: none;
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+	&__info {
+		flex-grow: 1;
+	}
+	&__play {
+		background-color: $dark;
+		height: 68px;
+		width: 68px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 50px;
+		transition: 0.3s all;
+		cursor: pointer;
+		margin-right: 20px;
+		flex-shrink: 0;
+		position: relative;
+		top: 15px;
+		&:hover {
+			opacity: 0.7;
+		}
+		svg {
+			height: 30px;
+			width: 30px;
+			position: relative;
+			left: 2px;
+		}
+	}
+	&__header {
+		flex-grow: 1;
+		min-width: 0px;
+		display: flex;
+		justify-content: space-between;
+		color: $dark;
+	}
+	&__subheader {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 15px;
+	}
+	&__time {
+		color: $blue;
+	}
+	&__share-icon {
+		height: 30px;
+		width: 30px;
+		cursor: pointer;
+		transition: 0.3s all;
+		&:hover {
+			opacity: 0.7;
+		}
+	}
+	&__title {
+		font-weight: 600;
+		font-size: 22px;
+		line-height: 23px;
+		margin-bottom: 10px;
+	}
+	&__footer {
+		display: flex;
+		justify-content: space-between;
+	}
+	&__information {
+		font-size: 16px;
+		line-height: 22px;
+		padding-right: 10px;
+	}
+	&__duration {
+		font-size: 14px;
+		line-height: 28px;
+		color: #BDBDBD;
+	}
+}
 </style>

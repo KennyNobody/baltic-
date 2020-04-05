@@ -137,7 +137,7 @@ export const mutations = {
 
 export const actions = {
 	async fetch ({commit}) {
-		let blog = await this.$axios.$get("http://89.108.65.88/api/v1/blog?page=1")
+		let blog = await this.$axios.$get(process.env.apiURL + "/api/v1/blog?page=1")
 		.then( response => {
 			commit('setPosts', response)
 		})
@@ -146,7 +146,7 @@ export const actions = {
 		})
 	},
 	async fetchCustom ({commit}, payload) {
-		let blog = await this.$axios.$get("http://89.108.65.88/api/v1/blog", {
+		let blog = await this.$axios.$get(process.env.apiURL + "/api/v1/blog", {
 			params: {
 				page: payload.page || null,
 			}
@@ -159,11 +159,11 @@ export const actions = {
 		})
 	},
 	async fetchFront ({commit}) {
-		const blogFront = await this.$axios.$get("http://89.108.65.88/api/v1/blog?frontblog=1")
+		const blogFront = await this.$axios.$get(process.env.apiURL + "/api/v1/blog?frontblog=1")
 		commit('setPostsFront', blogFront)
 	},
 	async fetchRandom ({commit}) {
-		const blogRandom = await this.$axios.$get("http://89.108.65.88/api/v1/blog?blograndom=1")
+		const blogRandom = await this.$axios.$get(process.env.apiURL + "/api/v1/blog?blograndom=1")
 		.then( response => {
 			commit('setPostsRandom', response)
 		})
@@ -172,12 +172,11 @@ export const actions = {
 		})
 	},
 	async fetchSingle ({commit}, payload) {
-		const singleBlog = await this.$axios.$get("http://89.108.65.88/api/v1/blog", {
+		const singleBlog = await this.$axios.$get(process.env.apiURL + "/api/v1/blog", {
 			params: {
 				single: payload,
 			}
 		})
-		// commit('setSingleBlog', singleBlog)
 		.then( response => {
 			console.log(response)
 			commit('setSingleBlog', response)

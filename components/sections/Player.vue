@@ -291,7 +291,12 @@
 					this.load;
 					this.$store.dispatch('player/controlLoading', false);
 				});
-		}
+		},
+		watch:{
+			$route (to, from){
+				this.open = false;
+			}
+		} 
 	}
 </script>
 

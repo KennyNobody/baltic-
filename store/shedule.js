@@ -271,3 +271,4 @@ export const actions = {
 export const getters = {
 	shedule: s => s.shedule
 }
+// process.env.apiURL + 

@@ -17,7 +17,7 @@ export const mutations = {
 
 export const actions = {
 	async fetch ({commit}) {
-		const mainSlider = await this.$axios.$get("http://89.108.65.88/api/v1/banners")
+		const mainSlider = await this.$axios.$get(process.env.apiURL + "/api/v1/banners")
 		.then( response => {
 			commit('setSlider', response)
 		})

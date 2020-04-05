@@ -52,7 +52,7 @@
 				showToggle: false,
 				content: {
 					title: this.title,
-					url: window.document.URL + '/podcasts/' + this.id,
+					url: process.env.baseURL + '/podcasts/' + this.id,
 					image: this.thumb,
 					description: this.info,
 				}

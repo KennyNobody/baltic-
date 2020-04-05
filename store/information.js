@@ -13,7 +13,7 @@ export const mutations = {
 
 export const actions = {
 	async fetch ({commit}) {
-		const information = await this.$axios.$get("http://89.108.65.88/api/v1/promo")
+		const information = await this.$axios.$get(process.env.apiURL + "/api/v1/promo")
 		.then( response => {
 			commit('setInformation', response.information)
 		})

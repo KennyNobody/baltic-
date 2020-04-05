@@ -154,7 +154,7 @@
 				podcastsCount: 8,
 				// newsCount: 3,
 				videoLink: 'https://youtu.be/d8Oc90QevaI',
-				videoCode: '<iframe src="https://www.youtube.com/embed/Mhv_JA47vYI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+				videoCode: '<iframe src="https://www.youtube.com/embed/' + 'вставлено' +'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
 			}
 		},
 		computed: {
