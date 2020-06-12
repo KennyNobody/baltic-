@@ -33,7 +33,7 @@ module.exports = {
 	loading: { color: '#3B8070' },
 	env: {
 		baseURL:"localhost:3000/",
-		apiURL: "http://89.108.65.88/"
+		apiURL: "http://194.67.104.35/"
 	},
 	modules: [
 	'@nuxtjs/style-resources',
@@ -63,6 +63,7 @@ module.exports = {
 	{ src: '~/plugins/mq', ssr: false },
 	{ src: '~/plugins/socket.js', ssr: false },
 	{ src: '~/plugins/pagination.js', ssr: false },
+	{ src: '~/plugins/mask.js', ssr: false },
 	],
 	css: [
 	'~/node_modules/@fancyapps/fancybox/dist/jquery.fancybox.min.css',

@@ -30,7 +30,8 @@ export const state = () => ({
 	programsList: [],
 	singleProgram: {
 		title: 'Загрузка...'
-	}
+	},
+	subPodcasts: []
 })
 
 export const mutations = {
