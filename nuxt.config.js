@@ -98,5 +98,8 @@ module.exports = {
 	moment: {
 		locales: ['ru']
 	},
+	itsWork: {
+		
+	}
 }
 
