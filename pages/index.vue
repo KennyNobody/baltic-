@@ -172,11 +172,11 @@
 			},
 		},
 		mounted() {
-			if (this.$store.getters['blog/blogFront'].length === 0) {
-				this.$store.dispatch('blog/fetchFront')
-			}
+			// if (this.$store.getters['blog/blogFront'].length === 0) {
+			// 	this.$store.dispatch('blog/fetchFront')
+			// }
 			this.$store.dispatch('blog/fetchFront')
-			this.$store.dispatch('blog/fetch')
+			// this.$store.dispatch('blog/fetch')
 			// // это временное решение-имитация
 			// if (this.$store.getters['blog/blog'].length === 0) {
 			// 	this.$store.dispatch('blog/fetch')

@@ -62,6 +62,12 @@
 		@include r(480) {
 			width: 100%;
 		}
+		&--clear {
+			height: 0px;
+			padding: 0px;
+			margin: 0px;
+			visibility: hidden;
+		}
 		&:hover {
 			.article__link {
 				background-color: $red;

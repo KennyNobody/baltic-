@@ -64,6 +64,7 @@ module.exports = {
 	{ src: '~/plugins/socket.js', ssr: false },
 	{ src: '~/plugins/pagination.js', ssr: false },
 	{ src: '~/plugins/mask.js', ssr: false },
+	// { src: '~/plugins/howler.js', ssr: false },
 	],
 	css: [
 	'~/node_modules/@fancyapps/fancybox/dist/jquery.fancybox.min.css',
@@ -97,9 +98,6 @@ module.exports = {
 	],
 	moment: {
 		locales: ['ru']
-	},
-	itsWork: {
-		
 	}
 }
 

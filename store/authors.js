@@ -18,9 +18,10 @@ export const mutations = {
 
 export const actions = {
 	async fetch ({commit}) {
-		const authors = await this.$axios.$get(process.env.apiURL + "/api/v1/about/authors")
+		const authors = await this.$axios.$get(process.env.apiURL + "/api/v1/authors")
 		.then( response => {
-			commit('setAuthors', response.authors)
+			console.log(response)
+			commit('setAuthors', response)
 		})
 		.catch((e) => {
 			console.log(e)

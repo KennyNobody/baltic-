@@ -31,6 +31,7 @@
 						{{ $moment.unix(post.date).format('DD/MM/YYYY') }}
 					</time>
 				</div>
+				{{ post.date }}
 				<div class="single-post__content text" v-html="post.content">
 					
 				</div>
@@ -63,6 +64,7 @@
 			:slug="item.slug"
 			:date="item.date"
 			></appArticle>
+			<div class="article article--clear"></div>
 		</div>
 	</div>
 </template>

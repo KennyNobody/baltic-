@@ -4,9 +4,11 @@ export const state = () => ({
 		thumb: null,
 		name: 'Балтик+',
 		title: 'Прямой эфир',
-		file: 'http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3',
-		broadcastFile: 'http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3',
+		file: './song-1.mp3',
+		broadcastFile: './song-1.mp3',
 		loading: false,
+		playing: false,
+		volume: 0.7,
 		playlist: [
 		{
 			id: 1,
@@ -73,12 +75,11 @@ export const state = () => ({
 })
 
 export const mutations = {
-	setSetting (state, player) {
-		state.player = player
-	},
+	// setSetting (state, player) {
+	// 	state.player = player
+	// },
 	setPlayer (state, payload) {
 		state.player.thumb = payload.thumb;
-		// state.player.nowLink = payload.link;
 		state.player.title = payload.title;
 		state.player.name = payload.info;
 		state.player.file = payload.file;
@@ -98,18 +99,21 @@ export const mutations = {
 	setLoading(state, payload) {
 		state.player.loading = payload;
 		console.log('Загрузка: ' + payload)
+	},
+	setState(state, payload) {
+		state.player.playing = payload.playing;
 	}
 }
 
 export const actions = {
-	SOCKET_flow({dispatch, commit, state}, payload) {
-		(function() {
-			if (JSON.stringify(payload.song) !== JSON.stringify(state.player.title) && state.player.live == true) {
-				commit('SOCKET_flow_edit', payload)
-				dispatch('fetchThumb');
-			}
-		})();
-	},
+	// SOCKET_flow({dispatch, commit, state}, payload) {
+	// 	(function() {
+	// 		if (JSON.stringify(payload.song) !== JSON.stringify(state.player.title) && state.player.live == true) {
+	// 			commit('SOCKET_flow_edit', payload)
+	// 			dispatch('fetchThumb');
+	// 		}
+	// 	})();
+	// },
 	async fetchThumb ({commit, state}, payload) {
 		let thumbResponse = await this.$axios.$get('http://ws.audioscrobbler.com/2.0/', {
 			params: {

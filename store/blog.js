@@ -125,6 +125,7 @@ export const mutations = {
 		state.blog = blog.blog
 	},
 	setPostsFront (state, blogFront) {
+		// console.dir(blogFront)
 		state.blogFront = blogFront.blog.items
 	},
 	setPostsRandom (state, blogRandom) {
@@ -137,8 +138,11 @@ export const mutations = {
 
 export const actions = {
 	async fetch ({commit}) {
-		let blog = await this.$axios.$get(process.env.apiURL + "/api/v1/blog?page=1")
+		let blog = await this.$axios.$get(process.env.apiURL + "/api/v1/blog", {
+			page: 1,
+		})
 		.then( response => {
+			console.log(response)
 			commit('setPosts', response)
 		})
 		.catch((e) => {
@@ -153,17 +157,31 @@ export const actions = {
 		})
 		.then( response => {
 			commit('setPosts', response)
+			console.log(response)
 		})
 		.catch((e) => {
 			console.log(e)
 		})
 	},
 	async fetchFront ({commit}) {
-		const blogFront = await this.$axios.$get(process.env.apiURL + "/api/v1/blog?frontblog=1")
-		commit('setPostsFront', blogFront)
+		const blogFront = await this.$axios.$get(process.env.apiURL + "api/v1/blog", {
+			params: {
+				frontblog: 1,
+			}
+		})
+		.then( response => {
+			commit('setPostsFront', response)
+		})
+		.catch((e) => {
+			console.log(e)
+		})
 	},
 	async fetchRandom ({commit}) {
-		const blogRandom = await this.$axios.$get(process.env.apiURL + "/api/v1/blog?blograndom=1")
+		const blogRandom = await this.$axios.$get(process.env.apiURL + "/api/v1/blog", {
+			params: {
+				random: 1,
+			}
+		})
 		.then( response => {
 			commit('setPostsRandom', response)
 		})

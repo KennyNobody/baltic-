@@ -29,7 +29,7 @@ export const mutations = {
 
 export const actions = {
 	async fetch ({commit}) {
-		const history = await this.$axios.$get("/api/history")
+		const history = await this.$axios.$get(process.env.apiURL + "/api/v1/history")
 		commit('setHistory', history)
 	}
 }

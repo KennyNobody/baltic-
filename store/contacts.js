@@ -2,43 +2,43 @@ export const state = () => ({
 	contacts: {
 		phones: {
 			broadcast: {
-				title: 'Прямой эфир «Балтик Плюс»',
-				code: '(4012)',
-				phone: '952-444',
-				link: 'tel:+74012952444',
-				email: 'online@balticplus.ru',
+				title: '',
+				code: '',
+				phone: '',
+				link: '',
+				email: '',
 				multichannel: true
 			},
 			office: {
-				title: 'Информационное агентство «Балтик Плюс»',
-				code: '(4012)',
-				phone: '952-555',
-				link: 'tel:+74012952555',
-				adress: '236023, Калининград, ул. Яналова, 2',
+				title: '',
+				code: '',
+				phone: '',
+				link: '',
+				adress: '',
 				multichannel: true
 			},
 			promo: {
-				title: 'Рекламный отдел «Балтик Плюс»',
-				code: '(4012)',
-				phone: '952-555',
-				link: 'tel:+74012952555',
+				title: '',
+				code: '',
+				phone: '',
+				link: '',
 				multichannel: true,
-				email: 'reklama@balticplus.ru',
-				adress: '236023, Калининград, ул. Третьяковская, 10'
+				email: '',
+				adress: ''
 			},
 			messengers: {
-				code: '(952)',
-				phone: '222-88-885',
-				link: 'tel:+74012952444',
+				code: '',
+				phone: '',
+				link: '',
 				multichannel: true
 			},
-			discript: 'Все ссылки радиостанции на подкасты, <br>соцсети, новости, видео, онлайн вещание <br>можно найти по единому адресу<br><a href="http://taplink.cc/baltic_plus" target="_blank" class="contacts__link">http://taplink.cc/baltic_plus</a>'
+			discript: ''
 		},
 		socials: {
-			'vkontakte': 'https://vk.com/',
-			'instagram': 'https://www.instagram.com/',
-			'facebook': 'https://www.facebook.com/',
-			'youtube': 'https://www.youtube.com/'
+			'vkontakte': '',
+			'instagram': '',
+			'facebook': '',
+			'youtube': ''
 		},
 		footer_description: ''
 	}
@@ -46,7 +46,7 @@ export const state = () => ({
 
 export const mutations = {
 	setContacts (state, contacts) {
-		state.contacts = contacts.contacts
+		state.contacts = contacts
 	}
 }
 

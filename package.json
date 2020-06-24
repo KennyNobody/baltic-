@@ -16,6 +16,7 @@
   "dependencies": {
     "@cookieseater/vue-yandex-share": "^0.2.1",
     "@nuxtjs/axios": "^5.8.0",
+    "howler": "^2.2.0",
     "nuxt": "^2.0.0",
     "nuxt-svg-sprite-module": "^1.0.6",
     "nuxt-validate": "^1.0.1",

@@ -15,7 +15,7 @@ export const actions = {
 	async fetch ({commit}) {
 		const information = await this.$axios.$get(process.env.apiURL + "/api/v1/promo")
 		.then( response => {
-			commit('setInformation', response.information)
+			commit('setInformation', response)
 		})
 		.catch((e) => {
 			console.log(e)

@@ -1,24 +1,5 @@
 <template>
 	<div class="player">
-		<!-- <div class="loading">
-			<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">
-				<rect x="0" y="10" width="4" height="10" fill="#333" opacity="0.2">
-					<animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0s" dur="0.6s" repeatCount="indefinite" />
-					<animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0s" dur="0.6s" repeatCount="indefinite" />
-					<animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0s" dur="0.6s" repeatCount="indefinite" />
-				</rect>
-				<rect x="8" y="10" width="4" height="10" fill="#333"  opacity="0.2">
-					<animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0.15s" dur="0.6s" repeatCount="indefinite" />
-					<animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0.15s" dur="0.6s" repeatCount="indefinite" />
-					<animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0.15s" dur="0.6s" repeatCount="indefinite" />
-				</rect>
-				<rect x="16" y="10" width="4" height="10" fill="#333"  opacity="0.2">
-					<animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0.3s" dur="0.6s" repeatCount="indefinite" />
-					<animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0.3s" dur="0.6s" repeatCount="indefinite" />
-					<animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0.3s" dur="0.6s" repeatCount="indefinite" />
-				</rect>
-			</svg>
-		</div> -->
 		<transition name="player__fade">
 			<div class="playlist" v-if="open">
 				<div class="playlist__left">
@@ -76,11 +57,27 @@
 			</div>
 		</transition>
 		<div class="player__left">
-			<audio class="player__audio" :src="player.file" preload="auto" type="audio/mp3"></audio>
 
 			<!-- При прямом эфире просто глушим звук, не останавливая трансляцию. Поставить соответствующую иконку -->
-			<div class="player__play" v-if="player.live == true" v-on:click.prevent="playing = !playing" :class="{'player__play--disabled':player.loading}">
-				<div v-if="playing == false">
+			<!-- <button v-on:click="play">
+				КНОПКА
+			</button> -->
+			<div class="player__play">
+				<div v-if="player.playing == false" v-on:click="play">
+					<svg class="player__icon--play">
+						<use xlink:href="#icon-icon-play"></use>
+					</svg>
+				</div>
+				<div v-else v-on:click="pause">
+					<svg class="player__icon--pause">
+						<use xlink:href="#icon-icon-pause"></use>
+					</svg>
+				</div>
+			</div>
+
+			<!-- При прямом эфире просто глушим звук, не останавливая трансляцию. Поставить соответствующую иконку -->
+			<!-- <div class="player__play" v-if="player.live == false">
+				<div v-if="player.playing == false">
 					<svg class="player__icon--play">
 						<use xlink:href="#icon-icon-play"></use>
 					</svg>
@@ -90,21 +87,7 @@
 						<use xlink:href="#icon-icon-pause"></use>
 					</svg>
 				</div>
-			</div>
-
-			<!-- При прямом эфире просто глушим звук, не останавливая трансляцию. Поставить соответствующую иконку -->
-			<div class="player__play" v-if="player.live == false" v-on:click.prevent="playing = !playing">
-				<div v-if="playing == false">
-					<svg class="player__icon--play">
-						<use xlink:href="#icon-icon-play"></use>
-					</svg>
-				</div>
-				<div v-else>
-					<svg class="player__icon--pause">
-						<use xlink:href="#icon-icon-pause"></use>
-					</svg>
-				</div>
-			</div>
+			</div> -->
 
 			<div class="player__info">
 				<div class="player__radio live">
@@ -115,7 +98,7 @@
 						<div  class="live__podcast">
 							Подкаст
 						</div>
-						<div class="live__radio live__radio--btn" v-on:click="enableLive">
+						<div class="live__radio live__radio--btn">
 							Прямой эфир
 						</div>
 					</div>
@@ -148,7 +131,7 @@
 				</p>
 			</div>
 			<div class="volume">
-				<input class="e-range" type="range" min="0" max="100" v-model.number="volume">
+				<input class="e-range" type="range" min="0.0" max="1.0" step="0.01" v-model="volume">
 			</div>
 			<div class="player__toggle" v-on:click="open = !open">
 				<svg class="player__drop-icon" v-bind:class="{'player__drop-icon--open': open === true}">
@@ -162,23 +145,15 @@
 <script>
 	import simplebar from 'simplebar-vue';
 	import VClamp from 'vue-clamp';
+	import {Howl, Howler} from 'howler';
 
 	export default {
 		name: 'Player',
 		data () {
 			return {
-				play: false,
 				open: false,
-				currentSeconds: 0,
-				durationSeconds: 0,
-				loaded: false,
-				playing: false,
-				previousVolume: 35,
-				showVolume: false,
-				volume: 100,
-				firstLoad: true,
-				canplay: false
-				// loading: false,
+				howler: null,
+				volume: null
 			}
 		},
 		computed: {
@@ -188,115 +163,69 @@
 			podcasts() {
 				return this.$store.getters['podcasts/podcastsPlayer']
 			},
-			muted() {
-				return this.volume / 100 === 0;
-			},
-			percentComplete() {
-				return parseInt(this.currentSeconds / this.durationSeconds * 100);
-			},
 		},
 		components: {
 			simplebar,
 			VClamp,
 		},
-		filters: {
-			convertTimeHHMMSS(val) {
-				let hhmmss = new Date(val * 1000).toISOString().substr(11, 8);
-
-				return hhmmss.indexOf("00:") === 0 ? hhmmss.substr(3) : hhmmss;
-			}
-		},
-		sockets: {
-			flow: function (data) {
-				if (this.player.live == true) {
-					this.$store.dispatch('player/SOCKET_flow', data)
-				}
-			},
-		},
+		// sockets: {
+		// 	flow: function (data) {
+		// 		if (this.player.live == true) {
+		// 			this.$store.dispatch('player/SOCKET_flow', data)
+		// 		}
+		// 	},
+		// },
 		watch: {
-			playing(value, data) {
-				if (value) { return this.audio.play(); }
-				this.audio.pause();
-			},
-			volume(value) {
-				this.showVolume = false;
-				this.audio.volume = this.volume / 100;
-			},
+			volume: function() {
+				this.setVolume();
+			}
 		},
 		methods: {
-			load() {
-				this.$store.dispatch('player/controlLoading', true);
-				if (this.audio.readyState >= 2) {
-					this.loaded = true;
-					this.durationSeconds = parseInt(this.audio.duration);
-					this.playing = false;
-				}
-
-				if (this.player.live == false && this.firstLoad ==  true) {
-					// this.playing = true;
-					this.firstLoad = false;
-				} else if (this.player.live == false && this.firstLoad == false) {
-					// this.playing = true;
-				}
-				this.$store.dispatch('player/controlLoading', false);
+			play() {
+				this.howler.play();
 			},
-			mute() {
-				if (this.muted) {
-					return this.volume = this.previousVolume;
-				}
-				this.previousVolume = this.volume;
-				this.volume = 0;
+			pause() {
+				this.howler.pause();
 			},
-			seek(e) {
-				if (!this.playing || e.target.tagName === 'SPAN') {
-					return;
-				}
-
-				const el = e.target.getBoundingClientRect();
-				const seekPos = (e.clientX - el.left) / el.width;
-
-				this.audio.currentTime = parseInt(this.audio.duration * seekPos);
-			},
-			stop() {
-				this.playing = false;
-				this.audio.currentTime = 0;
-			},
-			update(e) {
-				this.currentSeconds = parseInt(this.audio.currentTime);
-			},
-			enableLive() {
-				if (this.audio.readyState >= 2) {
-					this.loaded = true;
-					// this.playing = true;
-					this.$store.commit('player/enableRadio');
-				}
+			setVolume() {
+				this.howler.volume(this.volume);
+				this.$store.commit('player/setState', {
+					volume: this.volume
+				});
+				console.log(this.$store);
 			}
-		},
-		update(e) {
-			this.currentSeconds = parseInt(this.audio.currentTime);
 		},
 		mounted() {
-			this.$store.dispatch('player/controlLoading', true)
-			this.audio = this.$el.querySelector('.player__audio');
-			this.audio.addEventListener('timeupdate', this.update);
-			this.audio.addEventListener('loadeddata', this.load);
-			this.audio.addEventListener('pause', () => { this.playing = false; });
-			this.audio.addEventListener('play', () => { this.playing = true; });
-			// this.audio.addEventListener('canplay', () => {this.canplay = true});
+			let component = this;
 
-			this.$store.watch(
-				state => state.player.player.file,
-				() => {
-					this.$store.dispatch('player/controlLoading', true);
-					this.load;
-					this.$store.dispatch('player/controlLoading', false);
+			this.howler = new Howl({
+				src: [this.player.file],
+				loop: true,
+				volume: component.player.volume,
+			});
+
+			this.howler.on('load', function(){
+				console.log('Загрузили');
+			});
+
+			this.howler.on('play', function(){
+				component.$store.commit('player/setState', {
+					playing: true
 				});
+				console.log('Играет');
+			});
+
+			this.howler.on('pause', function(){
+				component.$store.commit('player/setState', {
+					playing: false
+				});
+				console.log('На паузе');
+			});
+
+			this.howler.on('mute', function(){
+				console.log('Заглушен');
+			});
 		},
-		watch:{
-			$route (to, from){
-				this.open = false;
-			}
-		} 
 	}
 </script>
 
