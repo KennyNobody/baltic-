@@ -59,25 +59,14 @@
 		<div class="player__left">
 
 			<!-- При прямом эфире просто глушим звук, не останавливая трансляцию. Поставить соответствующую иконку -->
-			<!-- <button v-on:click="play">
-				КНОПКА
-			</button> -->
-			<div class="player__play">
-				<div v-if="player.playing == false" v-on:click="play">
-					<svg class="player__icon--play">
-						<use xlink:href="#icon-icon-play"></use>
-					</svg>
-				</div>
-				<div v-else v-on:click="pause">
-					<svg class="player__icon--pause">
-						<use xlink:href="#icon-icon-pause"></use>
-					</svg>
-				</div>
-			</div>
 
-			<!-- При прямом эфире просто глушим звук, не останавливая трансляцию. Поставить соответствующую иконку -->
-			<!-- <div class="player__play" v-if="player.live == false">
-				<div v-if="player.playing == false">
+			<div class="player__play" v-on:click="play">
+				<div v-if="player.loading == true" >
+					<svg class="player__icon--loading">
+						<use xlink:href="#icon-icon-loading"></use>
+					</svg>
+				</div>
+				<div v-else-if="player.loading == false && player.playing == false" >
 					<svg class="player__icon--play">
 						<use xlink:href="#icon-icon-play"></use>
 					</svg>
@@ -87,7 +76,7 @@
 						<use xlink:href="#icon-icon-pause"></use>
 					</svg>
 				</div>
-			</div> -->
+			</div>
 
 			<div class="player__info">
 				<div class="player__radio live">
@@ -120,15 +109,14 @@
 				<p class="now__discript">
 					Сейчас в эфире:
 				</p>
-				<p class="now__text">
-					<span class="now__author">
+				<div class="now__text">
+					<p class="now__author">
 						{{ player.name }}
-					</span>
-					<br>
-					<span class="now__title">
+					</p>
+					<p class="now__title">
 						{{ player.title }}
-					</span>
-				</p>
+					</p>
+				</div>
 			</div>
 			<div class="volume">
 				<input class="e-range" type="range" min="0.0" max="1.0" step="0.01" v-model="volume">
@@ -153,7 +141,7 @@
 			return {
 				open: false,
 				howler: null,
-				volume: null
+				volume: 1.0
 			}
 		},
 		computed: {
@@ -163,6 +151,9 @@
 			podcasts() {
 				return this.$store.getters['podcasts/podcastsPlayer']
 			},
+			file() {
+				return this.$store.getters['player/playerChanged']
+			}
 		},
 		components: {
 			simplebar,
@@ -178,53 +169,90 @@
 		watch: {
 			volume: function() {
 				this.setVolume();
+			},
+			file: function() {
+				this.$store.commit('player/setState', {
+					playing: false
+				});
+
+				this.howler.unload();
+
+				console.log('Деактивировали');
+
+				this.$store.commit('player/setLoading', {
+					loading: true
+				});
+				
+				this.initHowler();
 			}
 		},
 		methods: {
 			play() {
-				this.howler.play();
+				
+				if ((this.player.playing == false)) {
+					this.howler.play();
+				} else {
+					this.howler.pause();
+				}
 			},
-			pause() {
-				this.howler.pause();
-			},
+
 			setVolume() {
 				this.howler.volume(this.volume);
-				this.$store.commit('player/setState', {
-					volume: this.volume
+				// this.$store.commit('player/setVolume', {
+				// 	volume: this.volume
+				// });
+			},
+
+			initHowler() {
+				let component = this;
+
+				this.howler = new Howl({
+					src: [this.player.file],
+					html5: true,
+					volume: component.player.volume,
 				});
-				console.log(this.$store);
+
+				this.howler.on('load', function(){
+					component.$store.commit('player/setLoading', {
+						loading: false
+					});
+
+					if (component.player.playing == true) {
+						// this.play();
+						console.log('ЕБАНА')
+					}
+
+					console.log('Инициировали');
+				});
+
+				this.howler.on('play', function(){
+					component.$store.commit('player/setState', {
+						playing: true
+					});
+					console.log('Играет');
+				});
+
+				this.howler.on('pause', function(){
+					component.$store.commit('player/setState', {
+						playing: false
+					});
+					console.log('На паузе');
+				});
+
+				this.howler.on('mute', function(){
+					console.log('Заглушен');
+				});
 			}
 		},
 		mounted() {
-			let component = this;
+			this.initHowler();
 
-			this.howler = new Howl({
-				src: [this.player.file],
-				loop: true,
-				volume: component.player.volume,
-			});
+			
 
-			this.howler.on('load', function(){
-				console.log('Загрузили');
-			});
+			// this.howler.on('unload', function(){
+			// 	console.log('Деактивировали');
+			// });
 
-			this.howler.on('play', function(){
-				component.$store.commit('player/setState', {
-					playing: true
-				});
-				console.log('Играет');
-			});
-
-			this.howler.on('pause', function(){
-				component.$store.commit('player/setState', {
-					playing: false
-				});
-				console.log('На паузе');
-			});
-
-			this.howler.on('mute', function(){
-				console.log('Заглушен');
-			});
 		},
 	}
 </script>
@@ -289,14 +317,29 @@
 			width: 15px;
 			position: relative;
 			left: 0px;
-			top: 2px;
+			display: block;
 		}
 		&--pause {
 			height: 15px;
 			width: 15px;
 			position: relative;
 			left: 0px;
-			top: 2px;
+			display: block;
+		}
+		&--loading {
+			height: 26px;
+			width: 26px;
+			display: block;
+			fill: $light;
+			animation: 1s linear 0s normal none infinite running rot;
+			@keyframes rot {
+				0% {
+					transform: rotate(0deg);
+				}
+				100% {
+					transform: rotate(360deg);
+				}
+			}
 		}
 	}
 	&__info {
@@ -686,31 +729,6 @@
 		&::-ms-thumb {
 			background-color: $thumb-hover-color;
 		}
-	}
-}
-
-.playlist {
-	position: absolute;
-	bottom: 100%;
-	left: 0px;
-	right: 0px;
-	height: auto;
-	max-height: calc(100vh - 244px);
-	display: flex;
-	box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
-	z-index: -1;
-	&__left {
-		width: 247px;
-		background-color: $light;
-		padding: 16px 15px;
-		color: $dark;
-		flex-shrink: 0;
-		@include r(1100) {
-			display: none;
-		}
-	}
-	&:focus {
-		outline: none;
 	}
 }
 

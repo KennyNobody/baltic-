@@ -64,16 +64,17 @@
 		},
 		methods: {
 			playThis () {
-				this.$store.commit('podcasts/changePodcast', this.id)
+				// this.$store.commit('podcasts/changePodcast', this.id)
 				let newPodcast = {
-					title: this.title,
 					thumb: this.thumb,
-					file: this.link,
+					title: this.title,
 					info: this.info,
+					file: this.link,
 					live: false,
-					play: true
+					playing: true
 				}
 				this.$store.commit('player/setPlayer', newPodcast)
+				// this.$store.commit('player/setState', newPodcast);
 			}
 		},
 		mounted(){

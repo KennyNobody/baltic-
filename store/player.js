@@ -4,11 +4,11 @@ export const state = () => ({
 		thumb: null,
 		name: 'Балтик+',
 		title: 'Прямой эфир',
-		file: './song-1.mp3',
-		broadcastFile: './song-1.mp3',
-		loading: false,
+		file: 'http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3',
+		broadcastFile: 'http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3',
+		loading: true,
 		playing: false,
-		volume: 0.7,
+		// volume: 1.0,
 		playlist: [
 		{
 			id: 1,
@@ -84,6 +84,7 @@ export const mutations = {
 		state.player.name = payload.info;
 		state.player.file = payload.file;
 		state.player.live = payload.live;
+		state.player.playing = payload.playing;
 	},
 	SOCKET_flow_edit(state, payload) {
 		state.player.name = payload.title;
@@ -97,12 +98,14 @@ export const mutations = {
 		state.player.file = state.player.broadcastFile;
 	},
 	setLoading(state, payload) {
-		state.player.loading = payload;
-		console.log('Загрузка: ' + payload)
+		state.player.loading = payload.loading;
 	},
 	setState(state, payload) {
 		state.player.playing = payload.playing;
-	}
+	},
+	// setVolume(state, paylaod) {
+	// 	state.player.volume = payload.volume;
+	// }
 }
 
 export const actions = {
@@ -139,4 +142,7 @@ export const actions = {
 
 export const getters = {
 	player: s => s.player,
+	playerChanged: s => {
+		return s.player.file;
+	}
 }
