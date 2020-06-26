@@ -8,6 +8,7 @@ export const state = () => ({
 		broadcastFile: 'http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3',
 		loading: true,
 		playing: false,
+		wasPlaying: false,
 		// volume: 1.0,
 		playlist: [
 		{
@@ -95,7 +96,10 @@ export const mutations = {
 	},
 	enableRadio (state) {
 		state.player.live = true;
+		state.player.thumb = null;
 		state.player.file = state.player.broadcastFile;
+		state.player.name = 'Балтик+';
+		state.player.title = 'Прямой эфир';
 	},
 	setLoading(state, payload) {
 		state.player.loading = payload.loading;
@@ -103,8 +107,14 @@ export const mutations = {
 	setState(state, payload) {
 		state.player.playing = payload.playing;
 	},
+	setWasPlaying(state, payload) {
+		state.player.wasPlaying = payload.wasPlaying;
+	}
 	// setVolume(state, paylaod) {
 	// 	state.player.volume = payload.volume;
+	// }
+	// setBroadcast(state, paylaod) {
+
 	// }
 }
 

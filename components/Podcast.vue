@@ -64,7 +64,10 @@
 		},
 		methods: {
 			playThis () {
-				// this.$store.commit('podcasts/changePodcast', this.id)
+				this.$store.commit('player/setLoading', {
+					loading: true
+				});
+				this.$store.commit('podcasts/changePodcast', this.id);
 				let newPodcast = {
 					thumb: this.thumb,
 					title: this.title,

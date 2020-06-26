@@ -87,7 +87,7 @@
 						<div  class="live__podcast">
 							Подкаст
 						</div>
-						<div class="live__radio live__radio--btn">
+						<div class="live__radio live__radio--btn" v-on:click="enableRadio">
 							Прямой эфир
 						</div>
 					</div>
@@ -190,9 +190,27 @@
 			play() {
 				
 				if ((this.player.playing == false)) {
+					this.$store.commit('player/setLoading', {
+						loading: true
+					});
 					this.howler.play();
-				} else {
+				} else if (this.player.playing == true && this.player.live == true) {
+					// this.howler.pause();
+					this.howler.mute(true);
+					this.$store.commit('player/setState', {
+						playing: true
+					});
+				} else if (this.player.playing == true && this.player.live == false) {
 					this.howler.pause();
+				} else {
+					this.howler.mute(false);
+					this.$store.commit('player/setState', {
+						playing: true
+					});
+				}
+
+				if (this.player.live == true) {
+					this.$store.commit('podcasts/pauseAllPodcasts');
 				}
 			},
 
@@ -201,6 +219,25 @@
 				// this.$store.commit('player/setVolume', {
 				// 	volume: this.volume
 				// });
+			},
+
+			enableRadio() {
+				this.$store.commit('player/setState', {
+					playing: false
+				});
+
+				this.howler.unload();
+
+				console.log('Деактивировали');
+
+				this.$store.commit('player/setLoading', {
+					loading: true
+				});
+
+				this.$store.commit('player/enableRadio');
+				
+				this.initHowler();
+				
 			},
 
 			initHowler() {
@@ -217,10 +254,14 @@
 						loading: false
 					});
 
-					if (component.player.playing == true) {
-						// this.play();
-						console.log('ЕБАНА')
+					if (component.player.wasPlaying == true || component.player.live == false) {
+						this.play();
 					}
+
+
+					// this.$store.commit('player/setLoading', {
+					// 	loading: true
+					// });
 
 					console.log('Инициировали');
 				});
@@ -229,12 +270,21 @@
 					component.$store.commit('player/setState', {
 						playing: true
 					});
+					component.$store.commit('player/setLoading', {
+						loading: false
+					});
+					component.$store.commit('player/setWasPlaying', {
+						wasPlaying: true
+					});
 					console.log('Играет');
 				});
 
 				this.howler.on('pause', function(){
 					component.$store.commit('player/setState', {
 						playing: false
+					});
+					component.$store.commit('player/setWasPlaying', {
+						wasPlaying: false
 					});
 					console.log('На паузе');
 				});
@@ -301,7 +351,7 @@
 		align-items: center;
 		padding: 4px;
 		cursor: pointer;
-		transition: 0.3s all;
+		// transition: 0.3s all;
 		user-select: none;
 		&:hover {
 			opacity: 0.7;
@@ -312,6 +362,7 @@
 		}
 	}
 	&__icon {
+		transition: 0s;
 		&--play {
 			height: 15px;
 			width: 15px;

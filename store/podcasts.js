@@ -7,7 +7,7 @@ export const state = () => ({
 			date: 1555065432,
 			info: 'Краткое описание подкаста для отображения под заголовком',
 			time: '25:15',
-			thumb: 'http://placehold.it/1000x600',
+			thumb: 'http://placehold.it/500x500',
 			play: false,
 			link: './song-2.mp3',
 			content: '<p>- Калининградцы рассказали о проблемах, с которыми сталкиваются в поликлиниках;</p><p>- В прокуратуре Московского района Калининграда назвали самую коррумпированную государственную структуру;</p><p>- Судьба 300 тонн инженерного наследия решается в Калининграде;</p>'
@@ -70,13 +70,28 @@ export const mutations = {
 		state.podcastsList = podcasts
 	},
 	changePodcast (state, payload) {
+		// Для основного каталога
 		for (let i = 0; i < state.podcasts.items.length; i++) {
 			state.podcasts.items[i].play = false;
 		}
-		// дописать аналогичный для front-версии
-		let podcast = state.podcasts.items.find(podcasts => podcasts.id === payload);
+		let podcast = state.podcasts.items.find(podcast => podcast.id === payload);
 		podcast.play = !podcast.play;
-		// дописать аналогичный для front-версии
+
+		// Для front-версии
+		for (let z = 0; z < state.podcastsFront.length; z++) {
+			state.podcastsFront[z].play = false;
+		}
+		let podcastFront = state.podcastsFront.find(podcastFront => podcastFront.id === payload);
+		podcastFront.play = !podcastFront.play;
+		// console.log(payload);
+	},
+	pauseAllPodcasts (state, payload) {
+		for (let i = 0; i < state.podcasts.items.length; i++) {
+			state.podcasts.items[i].play = false;
+		}
+		for (let z = 0; z < state.podcastsFront.length; z++) {
+			state.podcastsFront[z].play = false;
+		}
 	},
 	setSinglePodcast (state, singlePodcast) {
 		state.singlePodcast = singlePodcast
