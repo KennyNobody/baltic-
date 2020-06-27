@@ -177,6 +177,10 @@
 
 				this.howler.unload();
 
+				this.$store.commit('player/setRadioMute', {
+					radioMute: false
+				});
+
 				console.log('Деактивировали');
 
 				this.$store.commit('player/setLoading', {
@@ -188,25 +192,37 @@
 		},
 		methods: {
 			play() {
-				
-				if ((this.player.playing == false)) {
+
+				if (this.player.playing == false && this.player.live == true && this.player.radioMute == false) {
 					this.$store.commit('player/setLoading', {
 						loading: true
 					});
 					this.howler.play();
-				} else if (this.player.playing == true && this.player.live == true) {
-					// this.howler.pause();
-					this.howler.mute(true);
+				} else if (this.player.playing == false && this.player.live == true && this.player.radioMute == true) {
+					this.$store.commit('player/setLoading', {
+						loading: false
+					});
 					this.$store.commit('player/setState', {
 						playing: true
 					});
+					this.howler.mute(false);
+				} else if (this.player.playing == true && this.player.live == true) {
+					this.howler.mute(true);
+					this.$store.commit('player/setState', {
+						playing: false
+					});
+					this.$store.commit('player/setRadioMute', {
+						radioMute: true
+					});
+				} else if (this.player.playing == false && this.player.live == false) {
+					this.$store.commit('player/setLoading', {
+						loading: true
+					});
+					this.howler.play();
 				} else if (this.player.playing == true && this.player.live == false) {
 					this.howler.pause();
 				} else {
-					this.howler.mute(false);
-					this.$store.commit('player/setState', {
-						playing: true
-					});
+					this.howler.play();
 				}
 
 				if (this.player.live == true) {
@@ -222,6 +238,8 @@
 			},
 
 			enableRadio() {
+				this.$store.commit('podcasts/pauseAllPodcasts');
+				
 				this.$store.commit('player/setState', {
 					playing: false
 				});
@@ -290,7 +308,7 @@
 				});
 
 				this.howler.on('mute', function(){
-					console.log('Заглушен');
+					console.log('муте/антмут');
 				});
 			}
 		},

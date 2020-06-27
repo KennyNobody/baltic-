@@ -9,6 +9,7 @@ export const state = () => ({
 		loading: true,
 		playing: false,
 		wasPlaying: false,
+		radioMute: false,
 		// volume: 1.0,
 		playlist: [
 		{
@@ -109,6 +110,9 @@ export const mutations = {
 	},
 	setWasPlaying(state, payload) {
 		state.player.wasPlaying = payload.wasPlaying;
+	},
+	setRadioMute(state, payload) {
+		state.player.radioMute = payload.radioMute;
 	}
 	// setVolume(state, paylaod) {
 	// 	state.player.volume = payload.volume;

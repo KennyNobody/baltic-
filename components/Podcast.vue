@@ -76,7 +76,13 @@
 					live: false,
 					playing: true
 				}
-				this.$store.commit('player/setPlayer', newPodcast)
+				this.$store.commit('player/setPlayer', newPodcast);
+				this.$store.commit('player/setWasPlaying', {
+					wasPlaying: true
+				});
+				this.$store.commit('player/setRadioMute', {
+					radioMute: false
+				});
 				// this.$store.commit('player/setState', newPodcast);
 			}
 		},
