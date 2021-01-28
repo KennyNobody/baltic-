@@ -62,10 +62,13 @@
 				return this.$store.getters['history/history']
 			}
 		},
-		async fetch({store}) {
-			if (store.getters['history/history'].length === 0) {
-				await store.dispatch('history/fetch')
-			}
+		// async fetch({store}) {
+		// 	if (store.getters['history/history'].length === 0) {
+		// 		await store.dispatch('history/fetch')
+		// 	}
+		// },
+		mounted() {
+			this.$store.dispatch('history/fetch');
 		},
 		components: {
 			appSidebar

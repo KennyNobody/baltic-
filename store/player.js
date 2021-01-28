@@ -123,14 +123,16 @@ export const mutations = {
 }
 
 export const actions = {
-	// SOCKET_flow({dispatch, commit, state}, payload) {
-	// 	(function() {
-	// 		if (JSON.stringify(payload.song) !== JSON.stringify(state.player.title) && state.player.live == true) {
-	// 			commit('SOCKET_flow_edit', payload)
-	// 			dispatch('fetchThumb');
-	// 		}
-	// 	})();
-	// },
+	SOCKET_flow({dispatch, commit, state}, payload) {
+		console.log(payload);
+		(function() {
+			console.log('Работает');
+			if (JSON.stringify(payload.song) !== JSON.stringify(state.player.title) && state.player.live == true) {
+				commit('SOCKET_flow_edit', payload)
+				dispatch('fetchThumb');
+			}
+		})();
+	},
 	async fetchThumb ({commit, state}, payload) {
 		let thumbResponse = await this.$axios.$get('http://ws.audioscrobbler.com/2.0/', {
 			params: {

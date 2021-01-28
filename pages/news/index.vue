@@ -20,7 +20,7 @@
 			:thumb="item.preview"
 			:slug="item.slug"
 			:id="item.id"
-			:date="item.date"
+			:date="item.public_at"
 			></appArticle>
 			<div class="page-news__article-clear"></div>
 		</div>
@@ -108,16 +108,11 @@
 				}
 			},
 			async getPosts() {
-				console.log(filterInfo)
-				let filterInfo = {
-					page: this.pageNow
-				}
-
-				await this.$store.dispatch('blog/fetchCustom', filterInfo)
+				await this.$store.dispatch('blog/fetch', {page: this.pageNow});
 			}
 		},
 		mounted() {
-			this.$store.dispatch('blog/fetch')
+			this.$store.dispatch('blog/fetch', {page: 1})
 			// if (this.$store.getters['blog/blog'].length === 0) {
 			// 	this.$store.dispatch('blog/fetch')
 			// }

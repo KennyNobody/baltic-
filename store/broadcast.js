@@ -21,8 +21,14 @@ export const mutations = {
 
 export const actions = {
 	async fetch ({commit}) {
-		const broadcast = await this.$axios.$get("api/broadcast");
-		commit('setBroadcast', broadcast);
+		const broadcast = await this.$axios.$get("api/broadcast")
+		.then( response => {
+			console.log(response)
+			commit('setBroadcast', broadcast);
+		})
+		.catch((e) => {
+			console.log(e)
+		})
 	}
 }
 

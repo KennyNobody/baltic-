@@ -1,6 +1,5 @@
 <template>
 	<div class="page page--home">
-		<!-- <appTestPlayer></appTestPlayer> -->
 		<section class="home-slider">
 			<appSlider></appSlider>
 		</section>
@@ -121,7 +120,7 @@
 				:thumb="item.preview"
 				:slug="item.slug"
 				:id="item.id"
-				:date="item.date"
+				:date="item.public_at"
 				></appArticle>
 				<div class="home-blog__clear"></div>
 			</div>

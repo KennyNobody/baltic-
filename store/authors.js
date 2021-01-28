@@ -20,8 +20,7 @@ export const actions = {
 	async fetch ({commit}) {
 		const authors = await this.$axios.$get(process.env.apiURL + "/api/v1/authors")
 		.then( response => {
-			console.log(response)
-			commit('setAuthors', response)
+			commit('setAuthors', response.authors)
 		})
 		.catch((e) => {
 			console.log(e)

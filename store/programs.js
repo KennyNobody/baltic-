@@ -36,19 +36,19 @@ export const state = () => ({
 
 export const mutations = {
 	setPrograms (state, programs) {
-		state.programs = programs
+		state.programs = programs.programs
 	},
 	setProgramsFront (state, programsFront) {
-		state.programsFront = programsFront
+		state.programsFront = programsFront.programs
 	},
 	setSingleProgram (state, singleProgram) {
-		state.singleProgram = singleProgram
+		state.singleProgram = singleProgram.programs
 	}
 }
 
 export const actions = {
 	async fetch ({commit}) {
-		const programs = await this.$axios.$get(process.env.apiURL + "/api/v1/programms")
+		const programs = await this.$axios.$get(process.env.apiURL + "/api/v1/programs")
 		.then( response => {
 			commit('setPrograms', response)
 		})
@@ -57,7 +57,7 @@ export const actions = {
 		})
 	},
 	async fetchFront ({commit}) {
-		const programsFront = await this.$axios.$get(process.env.apiURL + "/api/v1/programms", {
+		const programsFront = await this.$axios.$get(process.env.apiURL + "/api/v1/programs", {
 			params: {
 				front: true,
 			}
@@ -70,7 +70,7 @@ export const actions = {
 		})
 	},
 	async fetchSingle ({commit}, payload) {
-		const singleProgram = await this.$axios.$get(process.env.apiURL + "/api/v1/programms", {
+		const singleProgram = await this.$axios.$get(process.env.apiURL + "/api/v1/programs", {
 			params: {
 				single: payload,
 			}

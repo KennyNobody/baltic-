@@ -33,7 +33,7 @@ module.exports = {
 	loading: { color: '#3B8070' },
 	env: {
 		baseURL:"localhost:3000/",
-		apiURL: "http://194.67.104.35/"
+		apiURL: "http://new.balticplus.ru/"
 	},
 	modules: [
 	'@nuxtjs/style-resources',

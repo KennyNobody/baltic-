@@ -263,7 +263,7 @@ export const mutations = {
 
 export const actions = {
 	async fetch ({commit}) {
-		const shedule = await this.$axios.$get("/api/setting/")
+		const shedule = await this.$axios.$get("/api/v1/setting/")
 		commit('setShedule', shedule)
 	}
 }

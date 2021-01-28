@@ -152,6 +152,7 @@ export const actions = {
 			}
 		})
 		.then( response => {
+			console.log(response);
 			commit('setSinglePodcast', response.podcasts.items)
 		})
 		.catch((e) => {

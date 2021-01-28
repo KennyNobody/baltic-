@@ -25,13 +25,12 @@
 			<div class="single-post__right">
 				<div class="single-post__info">
 					<time class="single-post__time">
-						{{ $moment.unix(post.date).format('hh:mm') }}
+						{{ $moment.unix(post.public_at).format('hh:mm') }}
 					</time>
 					<time class="single-post__date">
-						{{ $moment.unix(post.date).format('DD/MM/YYYY') }}
+						{{ $moment.unix(post.public_at).format('DD/MM/YYYY') }}
 					</time>
 				</div>
-				{{ post.date }}
 				<div class="single-post__content text" v-html="post.content">
 					
 				</div>
@@ -62,7 +61,7 @@
 			:description="item.description"
 			:thumb="item.preview"
 			:slug="item.slug"
-			:date="item.date"
+			:date="item.public_at"
 			></appArticle>
 			<div class="article article--clear"></div>
 		</div>

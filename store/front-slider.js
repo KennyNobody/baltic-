@@ -19,7 +19,7 @@ export const actions = {
 	async fetch ({commit}) {
 		const mainSlider = await this.$axios.$get(process.env.apiURL + "/api/v1/banners")
 		.then( response => {
-			commit('setSlider', response)
+			commit('setSlider', response.mainSlider)
 		})
 		.catch((e) => {
 			console.log(e)

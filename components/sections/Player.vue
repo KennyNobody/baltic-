@@ -159,13 +159,15 @@
 			simplebar,
 			VClamp,
 		},
-		// sockets: {
-		// 	flow: function (data) {
-		// 		if (this.player.live == true) {
-		// 			this.$store.dispatch('player/SOCKET_flow', data)
-		// 		}
-		// 	},
-		// },
+		sockets: {
+			flow: function (data) {
+				console.log('В целом работает');
+				if (this.player.live == true) {
+					console.log('Да, лайв');
+					this.$store.dispatch('player/SOCKET_flow', data)
+				}
+			},
+		},
 		watch: {
 			volume: function() {
 				this.setVolume();

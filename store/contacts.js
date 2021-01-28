@@ -54,7 +54,7 @@ export const actions = {
 	async fetch ({commit}) {
 		const contacts = await this.$axios.$get(process.env.apiURL + "/api/v1/contacts")
 		.then( response => {
-			commit('setContacts', response)
+			commit('setContacts', response.contacts)
 		})
 		.catch((e) => {
 			console.log(e)

@@ -122,7 +122,7 @@ export const state = () => ({
 
 export const mutations = {
 	setPosts (state, blog) {
-		state.blog = blog.blog
+		state.blog = blog
 	},
 	setPostsFront (state, blogFront) {
 		// console.dir(blogFront)
@@ -137,32 +137,34 @@ export const mutations = {
 }
 
 export const actions = {
-	async fetch ({commit}) {
-		let blog = await this.$axios.$get(process.env.apiURL + "/api/v1/blog", {
-			page: 1,
-		})
-		.then( response => {
-			console.log(response)
-			commit('setPosts', response)
-		})
-		.catch((e) => {
-			console.log(e)
-		})
-	},
-	async fetchCustom ({commit}, payload) {
-		let blog = await this.$axios.$get(process.env.apiURL + "/api/v1/blog", {
+	async fetch ({commit}, payload) {
+		let blog = await this.$axios.$get(process.env.apiURL + "wp-content/themes/diez__template_balticnews/api/blog.php", {
 			params: {
-				page: payload.page || null,
+				page: payload.page || 1,
 			}
 		})
 		.then( response => {
-			commit('setPosts', response)
-			console.log(response)
+			commit('setPosts', response);
+			console.log(payload);
 		})
 		.catch((e) => {
-			console.log(e)
+			// console.log(e);
 		})
 	},
+	// async fetchCustom ({commit}, payload) {
+	// 	let blog = await this.$axios.$get(process.env.apiURL + "wp-content/themes/diez__template_balticnews/api/blog.php", {
+	// 		params: {
+	// 			page: payload.page || 1,
+	// 		}
+	// 	})
+	// 	.then( response => {
+	// 		commit('setPosts', response)
+	// 		console.log(response)
+	// 	})
+	// 	.catch((e) => {
+	// 		console.log(e)
+	// 	})
+	// },
 	async fetchFront ({commit}) {
 		const blogFront = await this.$axios.$get(process.env.apiURL + "api/v1/blog", {
 			params: {
