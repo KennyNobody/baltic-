@@ -132,7 +132,7 @@ export const mutations = {
 		state.blogRandom = blogRandom.blog.items
 	},
 	setSingleBlog (state, singleBlog) {
-		state.singleBlog = singleBlog.blog.items
+		state.singleBlog = singleBlog
 	},
 }
 
@@ -192,7 +192,7 @@ export const actions = {
 		})
 	},
 	async fetchSingle ({commit}, payload) {
-		const singleBlog = await this.$axios.$get(process.env.apiURL + "/api/v1/blog", {
+		const singleBlog = await this.$axios.$get(process.env.apiURL + "wp-content/themes/diez__template_balticnews/api/blog.php", {
 			params: {
 				single: payload,
 			}

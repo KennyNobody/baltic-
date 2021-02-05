@@ -87,6 +87,7 @@
 		mounted() {
 			this.$store.dispatch('blog/fetchSingle', this.$route.params.id);
 			this.$store.dispatch('blog/fetchRandom');
+			console.log(this.$store);
 		},
 		validate({params}){
 			return /^\d+$/.test(params.id)
@@ -119,6 +120,7 @@
 </script>
 
 <style lang="scss">
+
 .single-post {
 	display: flex;
 	justify-content: space-between;
