@@ -19,23 +19,20 @@ export const state = () => ({
 	// 	left: '70.1'
 	// },
 	// ]
-	map: {
-		id: 1,
-		image: null,
-	}
+	// link: 'http://new.balticplus.ru/wp-content/uploads/map.svg'
 })
 
 export const mutations = {
-	setMarkers (state, map) {
-		state.map = map
+	setMapLink (state, response) {
+		state.map = response
 	}
 }
 
 export const actions = {
 	async fetch ({commit}) {
-		const map = await this.$axios.$get(process.env.apiURL + "/api/v1/about/map")
+		const map = await this.$axios.$get(process.env.apiURL + "/wp-content/themes/diez__template_balticnews/api/map.php")
 		.then( response => {
-			commit('setMarkers', response[0])
+			commit('setMapLink', response)
 		})
 		.catch((e) => {
 			console.log(e)
@@ -44,5 +41,6 @@ export const actions = {
 }
 
 export const getters = {
-	map: s => s.map
+	link: s => s.link,
+	markers: s => s.markers
 }

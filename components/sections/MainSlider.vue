@@ -46,6 +46,7 @@
 			if (this.$store.getters['front-slider/mainSlider'].length === 0) {
 				this.$store.dispatch('front-slider/fetch')
 			}
+			console.log(this.$store);
 		}
 	}
 </script>

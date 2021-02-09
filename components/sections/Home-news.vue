@@ -25,10 +25,10 @@
 					<div class="home-news__content">
 						<div class="home-news__header">
 							<time class="home-news__time">
-								{{ $moment.unix(item.date).format('h:mm') }}
+								{{ $moment.unix(item.public_at).format('h:mm') }}
 							</time>
 							<time class="home-news__date">
-								{{ $moment.unix(item.date).format('DD/MM/YYYY') }}
+								{{ $moment.unix(item.public_at).format('DD/MM/YYYY') }}
 							</time>
 						</div>
 						<h3 class="home-news__title">
@@ -94,6 +94,7 @@
 		},
 		mounted() {
 			if (this.$store.getters['news/news'].length === 0) {
+				console.log(this.$store);
 				this.$store.dispatch('news/fetch')
 			}
 		},

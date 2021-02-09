@@ -12,13 +12,13 @@ export const state = () => ({
 
 export const mutations = {
 	setNews (state, news) {
-		state.news = news
+		state.news = news.news
 	}
 }
 
 export const actions = {
 	async fetch ({commit}) {
-		const news = await this.$axios.$get(process.env.apiURL + "/api/v1/news")
+		const news = await this.$axios.$get(process.env.apiURL + "wp-content/themes/diez__template_balticnews/api/news.php")
 		.then( response => {
 			commit('setNews', response)
 		})

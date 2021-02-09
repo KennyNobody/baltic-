@@ -24,23 +24,7 @@
 			</div>
 			<div class="page-about__main">
 				<div class="map">
-					<img :src="map.image" alt="">
-					<!-- <img class="map__svg" src="~/assets/img/map.svg" alt=""> -->
-					<!-- <div class="map__markers">
-						<div class="map__marker" v-for="item in markers" v-bind:key="item.id" :style="{ top: item.top + '%', left: item.left + '%' }">
-							<svg class="map__marker-icon">
-								<use xlink:href="#icon-icon-marker"></use>
-							</svg>
-							<div class="map__baloon">
-								<p class="map__baloon-title">
-									{{ item.city }}
-								</p>
-								<p class="map__baloon-text">
-									{{ item.wave }} FM
-								</p>
-							</div>
-						</div>
-					</div> -->
+					<img :src="map" alt="">
 				</div>
 			</div>
 		</div>
@@ -62,7 +46,7 @@
 		name: 'page-map',
 		computed: {
 			map() {
-				return this.$store.getters['map/map']
+				return this.$store.getters['map/link']
 			}
 		},
 		// async fetch({store}) {
@@ -71,7 +55,7 @@
 		// 	}
 		// },
 		mounted() {
-			this.$store.dispatch('map/fetch')
+			this.$store.dispatch('map/fetch');
 		},
 		components: {
 			appSidebar

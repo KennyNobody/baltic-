@@ -35,10 +35,13 @@
 				return this.$store.getters['map/markers']
 			}
 		},
-		async fetch({store}) {
-			if (store.getters['map/markers'].length === 0) {
-				await store.dispatch('map/fetch')
-			}
+		// async fetch({store}) {
+		// 	if (this.$store.getters['map/markers'].length === 0) {
+		// 		await this.$store.dispatch('map/fetch')
+		// 	}
+		// },
+		mounted() {
+			this.$store.dispatch('map/fetch');
 		},
 	}
 </script>

@@ -76,6 +76,7 @@
 			if (this.$store.getters['authors/authors'].length === 0) {
 				this.$store.dispatch('authors/fetch')
 			}
+			console.log(this.$store);
 		},
 		// async fetch({store}) {
 		// 	if (store.getters['authors/authors'].length === 0) {
