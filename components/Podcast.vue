@@ -1,13 +1,18 @@
 <template>
 	<article class="podcast">
 		<div class="podcast__thumb" :style="{ 'background-image': 'url(' + thumb + ')' }">
+			{{ play }}
 			<div class="podcast__btn" v-on:click="playThis">
-				<svg class="podcast__play-icon" v-if="play == false">
-					<use xlink:href="#icon-icon-play"></use>
-				</svg>
-				<svg class="podcast__playing-icon" v-else>
-					<use xlink:href="#icon-icon-playing"></use>
-				</svg>
+				<template v-if="play == true">
+					<svg class="podcast__play-icon">
+						<use xlink:href="#icon-icon-play"></use>
+					</svg>
+				</template>
+				<template v-else>
+					<svg class="podcast__playing-icon">
+						<use xlink:href="#icon-icon-playing"></use>
+					</svg>
+				</template>
 			</div>
 		</div>
 		<div class="podcast__content">

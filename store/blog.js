@@ -126,7 +126,7 @@ export const mutations = {
 	},
 	setPostsFront (state, blogFront) {
 		// console.dir(blogFront)
-		state.blogFront = blogFront.blog.items
+		state.blogFront = blogFront.items
 	},
 	setPostsRandom (state, blogRandom) {
 		state.blogRandom = blogRandom.blog.items
@@ -138,7 +138,7 @@ export const mutations = {
 
 export const actions = {
 	async fetch ({commit}, payload) {
-		let blog = await this.$axios.$get(process.env.apiURL + "wp-content/themes/diez__template_balticnews/api/blog.php", {
+		let blog = await this.$axios.$get(process.env.apiURL + "/wp-content/themes/diez__template_balticnews/api/blog.php", {
 			params: {
 				page: payload.page || 1,
 			}
@@ -166,9 +166,9 @@ export const actions = {
 	// 	})
 	// },
 	async fetchFront ({commit}) {
-		const blogFront = await this.$axios.$get(process.env.apiURL + "api/v1/blog", {
+		const blogFront = await this.$axios.$get(process.env.apiURL + "/wp-content/themes/diez__template_balticnews/api/blog.php", {
 			params: {
-				frontblog: 1,
+				page: 1,
 			}
 		})
 		.then( response => {
