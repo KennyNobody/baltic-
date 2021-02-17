@@ -23,7 +23,8 @@
 				<appSidebar></appSidebar>
 			</div>
 			<div class="page-about__main">
-				
+				<!-- <div class="editor" v-html="services"></div> -->
+				{{ services }}
 			</div>
 		</div>
 	</div>
@@ -41,15 +42,24 @@ import appSidebar from '~/components/Sidebar'
 				]
 			}
 		},
-		name: 'page-news-services',
 		data () {
 			return {
 				
 			}
 		},
+		name: 'page-news-services',
+		computed: {
+			services() {
+				return this.$store.getters['services/services']
+			}
+		},
 		components: {
 			appSidebar
-		}
+		},
+		mounted() {
+			console.log(this.$store);
+			this.$store.dispatch('services/fetch');
+		},
 	}
 </script>
 

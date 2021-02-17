@@ -113,6 +113,7 @@
 		},
 		mounted() {
 			this.$store.dispatch('blog/fetch', {page: 1})
+			console.log(this.$store)
 			// if (this.$store.getters['blog/blog'].length === 0) {
 			// 	this.$store.dispatch('blog/fetch')
 			// }

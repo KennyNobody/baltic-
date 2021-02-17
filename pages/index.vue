@@ -97,10 +97,19 @@
 				<div class="title__line"></div>
 				<p class="title__text">Гость в эфире</p>
 			</h2>
-			<div class="home-video__wrap" v-html="videoCode">
+			<div class="home-video__wrap" v-html="video.iframe">
 				
 			</div>
 		</section>
+<!-- 		<section class="home-playlist">
+			<h2 class="title">
+				<div class="title__line"></div>
+				<p class="title__text">Плейлисты</p>
+			</h2>
+			<div class="home-video__wrap" v-html="video.playlist">
+				
+			</div>
+		</section> -->
 		<section class="home-blog">
 			<h2 class="title">
 				<div class="title__line"></div>
@@ -152,8 +161,8 @@
 			return {
 				podcastsCount: 8,
 				// newsCount: 3,
-				videoLink: 'https://youtu.be/d8Oc90QevaI',
-				videoCode: '<iframe src="https://www.youtube.com/embed/' + 'вставлено' +'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+				// videoLink: 'https://youtu.be/d8Oc90QevaI',
+				// videoCode: '<iframe src="https://www.youtube.com/embed/' + 'вставлено' +'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
 			}
 		},
 		computed: {
@@ -169,19 +178,15 @@
 			podcasts() {
 				return this.$store.getters['podcasts/podcastsFront']
 			},
+			video() {
+				return this.$store.getters['video/video']
+			},
 		},
 		mounted() {
-			// if (this.$store.getters['blog/blogFront'].length === 0) {
-			// 	this.$store.dispatch('blog/fetchFront')
-			// }
 			this.$store.dispatch('blog/fetchFront')
-			// this.$store.dispatch('blog/fetch')
-			// // это временное решение-имитация
-			// if (this.$store.getters['blog/blog'].length === 0) {
-			// 	this.$store.dispatch('blog/fetch')
-			// }
 			this.$store.dispatch('podcasts/fetchFront')
 			this.$store.dispatch('programs/fetchFront')
+			// this.$store.dispatch('video/fetch')
 		},
 		async fetch({store}) {
 			//if (store.getters['programs/programsFront'].length === 0) {

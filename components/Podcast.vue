@@ -1,9 +1,8 @@
 <template>
 	<article class="podcast">
 		<div class="podcast__thumb" :style="{ 'background-image': 'url(' + thumb + ')' }">
-			{{ play }}
 			<div class="podcast__btn" v-on:click="playThis">
-				<template v-if="play == true">
+				<template v-if="play == false">
 					<svg class="podcast__play-icon">
 						<use xlink:href="#icon-icon-play"></use>
 					</svg>
@@ -72,14 +71,13 @@
 				this.$store.commit('player/setLoading', {
 					loading: true
 				});
+				this.$store.commit('player/setLive', false);
 				this.$store.commit('podcasts/changePodcast', this.id);
 				let newPodcast = {
-					thumb: this.thumb,
-					title: this.title,
-					info: this.info,
+					img: this.thumb,
+					author: this.title,
+					title: this.info,
 					file: this.link,
-					live: false,
-					playing: true
 				}
 				this.$store.commit('player/setPlayer', newPodcast);
 				this.$store.commit('player/setWasPlaying', {
@@ -88,11 +86,17 @@
 				this.$store.commit('player/setRadioMute', {
 					radioMute: false
 				});
-				// this.$store.commit('player/setState', newPodcast);
+				this.$store.commit('player/setState', {
+					playing: true
+				});
+				this.$store.commit('player/setLoading', {
+					loading: false
+				});
+				console.log(this.$store)
 			}
 		},
 		mounted(){
-			console.log()
+			
 		}
 	}
 </script>

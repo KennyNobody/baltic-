@@ -4,7 +4,7 @@
 		<div class="logo__slider" v-swiper:mySwiper="swiperOption">
 			<div class="swiper-wrapper logo__wrapper">
 				<div class="swiper-slide logo__slide" v-for="item in list" v-bind:key="item.id">
-					{{ item.city }} {{ item.wave }} FM
+					{{ item.city }} {{ item.wave }}
 				</div>
 			</div>
 		</div>
@@ -35,50 +35,50 @@
 				return this.$store.getters['map/markers']
 			}
 		},
-		// async fetch({store}) {
-		// 	if (this.$store.getters['map/markers'].length === 0) {
-		// 		await this.$store.dispatch('map/fetch')
-		// 	}
-		// },
-		mounted() {
-			this.$store.dispatch('map/fetch');
+		async fetch({store}) {
+			// if (this.$store.getters['map/markers'].length === 0) {
+			// 	await this.$store.dispatch('map/fetch')
+			// }
+		},
+		beforeCreate() {
+			this.$store.dispatch('map/fetch')
 		},
 	}
 </script>
 
 <style lang="scss">
-	.logo {
-		flex-shrink: 0;
-		padding-top: 12px;
-		padding-right: 23px;
-		padding-bottom: 8px;
-		position: relative;
-		width: 247px;
+.logo {
+	flex-shrink: 0;
+	padding-top: 12px;
+	padding-right: 23px;
+	padding-bottom: 8px;
+	position: relative;
+	width: 247px;
+	background-color: $light;
+	padding: 15px;
+	display: flex;
+	align-items: center;
+	position: relative;
+	&:after {
+		content: "";
+		position: absolute;
+		right: 100%;
+		width: 100vw;
+		top: 0px;
+		bottom: 0px;
+		display: block;
 		background-color: $light;
-		padding: 15px;
-		display: flex;
-		align-items: center;
-		position: relative;
-		&:after {
-			content: "";
-			position: absolute;
-			right: 100%;
-			width: 100vw;
-			top: 0px;
-			bottom: 0px;
-			display: block;
-			background-color: $light;
-		}
-		img {
-			display: block;
-			height: 100%;
-			width: 100%;
-			object-fit: contain;
-		}
-		&__slider {
-			position: absolute !important;
-			height: 20px;
-			width: 174px;
+	}
+	img {
+		display: block;
+		height: 100%;
+		width: 100%;
+		object-fit: contain;
+	}
+	&__slider {
+		position: absolute !important;
+		height: 20px;
+		width: 174px;
 			// background-color: red;
 			z-index: 2;
 			display: block;

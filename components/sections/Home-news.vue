@@ -94,7 +94,6 @@
 		},
 		mounted() {
 			if (this.$store.getters['news/news'].length === 0) {
-				console.log(this.$store);
 				this.$store.dispatch('news/fetch')
 			}
 		},

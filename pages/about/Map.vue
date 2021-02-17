@@ -25,6 +25,7 @@
 			<div class="page-about__main">
 				<div class="map">
 					<img :src="map" alt="">
+					{{ map }}
 				</div>
 			</div>
 		</div>
@@ -50,7 +51,7 @@
 			}
 		},
 		// async fetch({store}) {
-		// 	if (store.getters['map/markers'].length === 0) {
+		// 	if (store.getters['map/link']) {
 		// 		await store.dispatch('map/fetch')
 		// 	}
 		// },

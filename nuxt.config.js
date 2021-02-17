@@ -61,7 +61,7 @@ module.exports = {
 	{ src: '~/plugins/swiper.js', ssr: false },
 	{ src: '~/plugins/datepicker', ssr: false },
 	{ src: '~/plugins/mq', ssr: false },
-	{ src: '~/plugins/socket.js', ssr: false },
+	// { src: '~/plugins/socket.js', ssr: false },
 	{ src: '~/plugins/pagination.js', ssr: false },
 	{ src: '~/plugins/mask.js', ssr: false },
 	// { src: '~/plugins/howler.js', ssr: false },

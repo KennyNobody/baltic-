@@ -122,11 +122,11 @@ export const state = () => ({
 
 export const mutations = {
 	setPosts (state, blog) {
-		state.blog = blog
+		state.blog.items = blog.items.reverse()
+		state.blog.pages = blog.pages
 	},
 	setPostsFront (state, blogFront) {
-		// console.dir(blogFront)
-		state.blogFront = blogFront.items
+		state.blogFront = blogFront.items.reverse().slice(0, 3)
 	},
 	setPostsRandom (state, blogRandom) {
 		state.blogRandom = blogRandom.blog.items
@@ -145,26 +145,11 @@ export const actions = {
 		})
 		.then( response => {
 			commit('setPosts', response);
-			console.log(payload);
 		})
 		.catch((e) => {
 			// console.log(e);
 		})
 	},
-	// async fetchCustom ({commit}, payload) {
-	// 	let blog = await this.$axios.$get(process.env.apiURL + "wp-content/themes/diez__template_balticnews/api/blog.php", {
-	// 		params: {
-	// 			page: payload.page || 1,
-	// 		}
-	// 	})
-	// 	.then( response => {
-	// 		commit('setPosts', response)
-	// 		console.log(response)
-	// 	})
-	// 	.catch((e) => {
-	// 		console.log(e)
-	// 	})
-	// },
 	async fetchFront ({commit}) {
 		const blogFront = await this.$axios.$get(process.env.apiURL + "/wp-content/themes/diez__template_balticnews/api/blog.php", {
 			params: {

@@ -12,7 +12,7 @@ export const state = () => ({
 
 export const mutations = {
 	setNews (state, news) {
-		state.news = news.news
+		state.news = Object.values(news.news).reverse();
 	}
 }
 

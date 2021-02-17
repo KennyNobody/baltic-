@@ -43,7 +43,7 @@
 					<simplebar class="playlist__list">
 						<div class="playlist__song" v-for="item in player.playlist" v-bind:key="item.id">
 							<p class="playlist__time">
-								13:46
+								{{ item.time }}
 							</p>
 							<p class="playlist__author">
 								{{ item.author }}
@@ -110,11 +110,11 @@
 					Сейчас в эфире:
 				</p>
 				<div class="now__text">
-					<p class="now__author">
-						{{ player.name }}
-					</p>
-					<p class="now__title">
+					<p class="now__author" v-if="player.title">
 						{{ player.title }}
+					</p>
+					<p class="now__title" v-if="player.name">
+						{{ player.name }}
 					</p>
 				</div>
 			</div>
@@ -153,20 +153,14 @@
 			},
 			file() {
 				return this.$store.getters['player/playerChanged']
+			},
+			live() {
+				return this.$store.getters['player/playerLive']
 			}
 		},
 		components: {
 			simplebar,
 			VClamp,
-		},
-		sockets: {
-			flow: function (data) {
-				console.log('В целом работает');
-				if (this.player.live == true) {
-					console.log('Да, лайв');
-					this.$store.dispatch('player/SOCKET_flow', data)
-				}
-			},
 		},
 		watch: {
 			volume: function() {
@@ -190,7 +184,7 @@
 				});
 				
 				this.initHowler();
-			}
+			},
 		},
 		methods: {
 			play() {
@@ -234,9 +228,6 @@
 
 			setVolume() {
 				this.howler.volume(this.volume);
-				// this.$store.commit('player/setVolume', {
-				// 	volume: this.volume
-				// });
 			},
 
 			enableRadio() {
@@ -256,8 +247,7 @@
 
 				this.$store.commit('player/enableRadio');
 				
-				this.initHowler();
-				
+				this.initHowler();	
 			},
 
 			initHowler() {
@@ -277,11 +267,6 @@
 					if (component.player.wasPlaying == true || component.player.live == false) {
 						this.play();
 					}
-
-
-					// this.$store.commit('player/setLoading', {
-					// 	loading: true
-					// });
 
 					console.log('Инициировали');
 				});
@@ -312,17 +297,22 @@
 				this.howler.on('mute', function(){
 					console.log('муте/антмут');
 				});
-			}
+			},
 		},
 		mounted() {
 			this.initHowler();
-
-			
-
 			// this.howler.on('unload', function(){
 			// 	console.log('Деактивировали');
 			// });
 
+			setInterval(()=> {
+				if (this.$store.getters['player/playerLive'] == true) {
+					this.$store.dispatch('player/fetch');
+					console.log('Запрашиваем');
+				} else {
+					console.log('Не запрашиваем');
+				}
+			}, 3000);
 		},
 	}
 </script>

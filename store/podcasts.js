@@ -61,29 +61,36 @@ export const state = () => ({
 
 export const mutations = {
 	setPodcasts (state, podcasts) {
-		state.podcasts = podcasts
+		state.podcasts.items = Object.values(podcasts.items);
+		state.podcasts.pages = podcasts.pages;
 	},
 	setPodcastsFront (state, podcastsFront) {
-		state.podcastsFront = podcastsFront
+		state.podcastsFront = Object.values(podcastsFront);
 	},
 	setPodcastsList (state, podcasts) {
 		state.podcastsList = podcasts
 	},
 	changePodcast (state, payload) {
-		// Для основного каталога
-		for (let i = 0; i < state.podcasts.items.length; i++) {
-			state.podcasts.items[i].play = false;
-		}
-		let podcast = state.podcasts.items.find(podcast => podcast.id === payload);
-		podcast.play = !podcast.play;
-
 		// Для front-версии
-		for (let z = 0; z < state.podcastsFront.length; z++) {
-			state.podcastsFront[z].play = false;
+
+		if (Object.keys(state.podcastsFront).length) {
+			for (let z = 0; z < state.podcastsFront.length; z++) {
+				state.podcastsFront[z].play = false;
+			}
+			let podcastFront = state.podcastsFront.find(podcastFront => podcastFront.id === payload);
+			podcastFront.play = !podcastFront.play;
 		}
-		let podcastFront = state.podcastsFront.find(podcastFront => podcastFront.id === payload);
-		podcastFront.play = !podcastFront.play;
-		// console.log(payload);
+
+		// Для основного каталога
+
+		if (Object.keys(state.podcasts.items).length) {
+			for (let i = 0; i < state.podcasts.items.length; i++) {
+				state.podcasts.items[i].play = false;
+			}
+			let podcast = state.podcasts.items.find(podcast => podcast.id === payload);
+			podcast.play = !podcast.play;	
+		}
+		
 	},
 	pauseAllPodcasts (state, payload) {
 		for (let i = 0; i < state.podcasts.items.length; i++) {
@@ -109,8 +116,9 @@ export const actions = {
 			}
 		})
 		.then( response => {
-			commit('setPodcasts', response.podcasts)
-			commit('setPodcastsList', response.podcasts.list)
+			console.log(response);
+			commit('setPodcasts', response)
+			// commit('setPodcastsList', response.podcasts.list)
 		})
 		.catch((e) => {
 			console.log(e)
@@ -126,7 +134,7 @@ export const actions = {
 			}
 		})
 		.then( response => {
-			commit('setPodcasts', response.podcasts)
+			commit('setPodcasts', response)
 		})
 		.catch((e) => {
 			console.log(e)
@@ -139,7 +147,6 @@ export const actions = {
 			}
 		})
 		.then( response => {
-			console.log(response.items);
 			commit('setPodcastsFront', response.items)
 		})
 		.catch((e) => {
@@ -153,7 +160,8 @@ export const actions = {
 			}
 		})
 		.then( response => {
-			commit('setSinglePodcast', response.podcasts.items)
+			console.log(response);
+			commit('setSinglePodcast', response)
 		})
 		.catch((e) => {
 			console.log(e)

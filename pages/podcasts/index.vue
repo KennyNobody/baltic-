@@ -111,6 +111,7 @@
 		},
 		mounted() {
 			this.$store.dispatch('podcasts/fetch')
+			console.log(this.$store)
 		},
 		methods: {
 			changePage (index) {
