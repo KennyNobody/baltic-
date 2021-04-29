@@ -17,7 +17,7 @@ export const mutations = {
 
 export const actions = {
 	async fetch ({commit}) {
-		const mainSlider = await this.$axios.$get(process.env.apiURL + "wp-content/themes/diez__template_balticnews/api/front-slider.php")
+		const mainSlider = await this.$axios.$get(process.env.apiURL + "wp-content/themes/diez__template_balticplus/api/front-slider.php")
 		.then( response => {
 			commit('setSlider', response)
 		})

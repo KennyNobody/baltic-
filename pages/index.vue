@@ -78,8 +78,8 @@
 			</h2>
 			<div class="home-podcasts__articles">
 				<appPodcast
-				v-for="item in podcasts"
-				v-bind:key="item.id"
+				v-for="(item, index) in podcasts"
+				v-bind:key="index"
 				:title="item.title"
 				:date="item.date"
 				:play="item.play"
@@ -182,22 +182,16 @@
 				return this.$store.getters['video/video']
 			},
 		},
-		mounted() {
-			this.$store.dispatch('blog/fetchFront')
-			this.$store.dispatch('podcasts/fetchFront')
-			this.$store.dispatch('programs/fetchFront')
-			// this.$store.dispatch('video/fetch')
-		},
 		async fetch({store}) {
-			//if (store.getters['programs/programsFront'].length === 0) {
-			//	await store.dispatch('programs/fetchFront')
-			//}
-			// if (store.getters['blog/blogFront'].length === 0) {
-			// 	await store.dispatch('blog/fetchFront')
-			// }
-			// if (store.getters['podcasts/podcastsFront'].length === 0) {
-			// 	await store.dispatch('podcasts/fetchFront')
-			// }
+			if (store.getters['programs/programsFront'].length === 0) {
+				await store.dispatch('programs/fetchFront')
+			}
+			if (store.getters['blog/blogFront'].length === 0) {
+				await store.dispatch('blog/fetchFront')
+			}
+			if (store.getters['podcasts/podcastsFront'].length === 0) {
+				await store.dispatch('podcasts/fetchFront')
+			}
 		},
 		components: {
 			appSlider,

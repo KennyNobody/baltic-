@@ -17,8 +17,8 @@
 				<img :src="information.thumb" class="page-about__side-thumb" alt="">
 			</div>
 			<div class="page-about__main text">
-				<div class="page-about__history" v-html="information.content">
-					
+				<div class="page-about__history">
+					<div class="editor" v-html="information.content"></div>
 				</div>
 			</div>
 		</div>
@@ -42,15 +42,12 @@
 				return this.$store.getters['information/information']
 			}
 		},
-		// async fetch({store}) {
-		// 	if (store.getters['information/information'].length === 0) {
-		// 		await store.dispatch('information/fetch')
-		// 	}
-		// },
-		mounted () {
-			this.$store.dispatch('information/fetch')
+		async fetch({store}) {
+			await store.dispatch('information/fetch');
 		},
-		components: {}
+		// mounted () {
+		// 	this.$store.dispatch('information/fetch')
+		// },
 	}
 </script>
 

@@ -23,8 +23,8 @@
 				<appSidebar></appSidebar>
 			</div>
 			<div class="page-about__main text">
-				<div class="page-about__history" v-html="history.content">
-					
+				<div class="page-about__history">
+					<div class="editor" v-html="history.content"></div>
 				</div>
 				<div class="achievement" v-for="item in history.achievements" v-bind:key="item.id">
 					<div class="achievement__thumb">

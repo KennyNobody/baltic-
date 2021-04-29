@@ -68,7 +68,9 @@
 					Свежий выпуск новостей слушайте каждый час по будням c 07:00 до 19:00 на 105.2 FМ
 				</p>
 			</div>
-			<div class="single-podcast__discript"  v-html="podcast.content"></div>
+			<div class="single-podcast__discript">
+				<div class="editor" v-html="podcast.content"></div>
+			</div>
 		</article>
 	</div>
 </template>
@@ -165,9 +167,6 @@
 		min-width: 0px;
 		flex-grow: 1;
 		color: $light;
-		p {
-			margin-bottom: 1em;
-		}
 	}
 	&__content-discript {
 		a {

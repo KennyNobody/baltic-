@@ -138,7 +138,7 @@ export const mutations = {
 
 export const actions = {
 	async fetch ({commit}, payload) {
-		let blog = await this.$axios.$get(process.env.apiURL + "/wp-content/themes/diez__template_balticnews/api/blog.php", {
+		let blog = await this.$axios.$get(process.env.apiURL + "/wp-content/themes/diez__template_balticplus/api/blog.php", {
 			params: {
 				page: payload.page || 1,
 			}
@@ -151,7 +151,7 @@ export const actions = {
 		})
 	},
 	async fetchFront ({commit}) {
-		const blogFront = await this.$axios.$get(process.env.apiURL + "/wp-content/themes/diez__template_balticnews/api/blog.php", {
+		const blogFront = await this.$axios.$get(process.env.apiURL + "/wp-content/themes/diez__template_balticplus/api/blog.php", {
 			params: {
 				page: 1,
 			}
@@ -177,7 +177,7 @@ export const actions = {
 		})
 	},
 	async fetchSingle ({commit}, payload) {
-		const singleBlog = await this.$axios.$get(process.env.apiURL + "wp-content/themes/diez__template_balticnews/api/blog.php", {
+		const singleBlog = await this.$axios.$get(process.env.apiURL + "wp-content/themes/diez__template_balticplus/api/blog.php", {
 			params: {
 				single: payload,
 			}

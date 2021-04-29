@@ -83,7 +83,6 @@
 	import appForm from '~/components/ContactForm'
 	import { yandexMap, ymapMarker } from 'vue-yandex-maps'
 
-
 	export default {
 		head () {
 			return {
@@ -107,11 +106,9 @@
 				return this.$store.getters['contacts/contacts']
 			},
 		},
-		// async fetch({store}) {
-		// 	if (store.getters['contacts/contacts'].length === 0) {
-		// 		await store.dispatch('contacts/fetch')
-		// 	}
-		// },
+		methods: {
+			
+		},
 		mounted() {
 			let myMap;
 			let myPlacemark;
@@ -152,57 +149,58 @@
 </script>
 
 <style lang="scss">
-	.contacts {
-		&__columns {
-			display: flex;
-			justify-content: space-between;
-			color: $light;
-			margin-bottom: 74px;
-			@include r(1100) {
-				flex-direction: column;
-			}
+.contacts {
+	&__columns {
+		display: flex;
+		justify-content: space-between;
+		color: $light;
+		margin-bottom: 74px;
+		@include r(1100) {
+			flex-direction: column;
 		}
-		&__column {
-			width: calc(50% - 10px);
-			@include r(1100) {
-				width: 100%;
-			}
-			&:nth-child(2) {
-				@include r(1100) {
-					order: -1;
-					margin-bottom: 40px;
-				}
-			}
-		}
-		&__map {
-			height: 488px;
+	}
+	&__column {
+		width: calc(50% - 10px);
+		@include r(1100) {
 			width: 100%;
-			display: block;
 		}
-		&__bold {
-			font-weight: bold;
-		}
-		&__link {
-			text-decoration: underline;
-			color: $blue;
-			&:hover {
-				text-decoration: none;
-			}
-		}
-		&__phone {
-			font-weight: bold;
-			color: $light;
-			text-decoration: none;
-			&:hover {
-				color: $blue;
-			}
-		}
-		&__mail {
-			color: $light;
-			text-decoration: none;
-			&:hover {
-				text-decoration: underline;
+		&:nth-child(2) {
+			@include r(1100) {
+				order: -1;
+				margin-bottom: 40px;
 			}
 		}
 	}
+	&__map {
+		height: 488px;
+		width: 100%;
+		display: block;
+		overflow: hidden;
+	}
+	&__bold {
+		font-weight: bold;
+	}
+	&__link {
+		text-decoration: underline;
+		color: $blue;
+		&:hover {
+			text-decoration: none;
+		}
+	}
+	&__phone {
+		font-weight: bold;
+		color: $light;
+		text-decoration: none;
+		&:hover {
+			color: $blue;
+		}
+	}
+	&__mail {
+		color: $light;
+		text-decoration: none;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}
 </style>

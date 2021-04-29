@@ -59,6 +59,22 @@
 				:info="item.info"
 				></appPodcast>
 		</div>
+		<div class="single-program__pagination" v-if="podcasts.pages.max > 1">
+			<no-ssr>
+				<paginate
+				:prev-class="'pagination__link pagination__link--prev'"
+				:next-class="'pagination__link pagination__link--next'"
+				:active-class="'pagination__link pagination__link--now'"
+				:container-class="'pagination'"
+				:page-count="podcasts.pages.max"
+				:disabled-class="'pagination__link--disabled'"
+				:click-handler="changePage"
+				:prev-text="'🡠'"
+				:next-text="'🡢'"
+				:page-class="'pagination__link'">
+			</paginate>
+		</no-ssr>
+	</div>
 	</div>
 </template>
 
@@ -76,6 +92,7 @@
 		},
 		mounted () {
 			this.$store.dispatch('programs/fetchSingle', this.$route.params.id);
+			this.$store.dispatch('podcasts/fetchPodcasts', this.$route.params.id);
 		},
 		name: 'page-news',
 		validate({params}){
@@ -83,7 +100,7 @@
 		},
 		computed: {
 			podcasts(params) {
-				return this.$store.getters['podcasts/podcasts']
+				return this.$store.getters['podcasts/podcastsProgram']
 			},
 			post (params) {
 				return this.$store.getters['programs/singleProgram']
@@ -93,6 +110,7 @@
 			return {
 				newsPerPage: 3,
 				newsArticles: [],
+				pageNow: 1,
 			}
 		},
 		asyncData({$axios, params}) {
@@ -102,6 +120,40 @@
 		components: {
 			appPodcast,
 		},
+		watch: {
+			pageNow: function () {
+				this.getPosts();
+			}
+		},
+		methods: {
+			changePage (index) {
+				this.pageNow = index + 1
+			},
+			prevPage () {
+				if (this.pageNow <= 1) {
+					return false;
+				} else {
+					this.pageNow = this.pageNow - 1
+				}
+			},
+			nextPage () {
+				if (this.pageNow >= this.podcasts.pages.max) {
+					return false;
+				} else {
+					this.pageNow = this.pageNow + 1
+				}
+			},
+			async getPosts() {
+				let filterInfo = {
+					dateStart: this.filter.filterDateStart,
+					dateEnd: this.filter.filterDateEnd,
+					genre: this.filter.genre,
+					page: this.pageNow
+				}
+
+				await this.$store.dispatch('podcasts/fetchCustom', filterInfo)
+			}
+		}
 	}
 </script>
 

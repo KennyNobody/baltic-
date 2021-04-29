@@ -13,7 +13,7 @@ export const mutations = {
 
 export const actions = {
 	async fetch ({commit}) {
-		const information = await this.$axios.$get(process.env.apiURL + "/wp-content/themes/diez__template_balticnews/api/information.php")
+		const information = await this.$axios.$get(process.env.apiURL + "/wp-content/themes/diez__template_balticplus/api/information.php")
 		.then( response => {
 			commit('setInformation', response)
 		})

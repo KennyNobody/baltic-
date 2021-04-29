@@ -24,15 +24,15 @@
 			</div>
 			<div class="single-post__right">
 				<div class="single-post__info">
-					<time class="single-post__time">
+					<time class="single-post__time" v-if="post.public_at">
 						{{ $moment.unix(post.public_at).format('hh:mm') }}
 					</time>
-					<time class="single-post__date">
+					<time class="single-post__date" v-if="post.public_at">
 						{{ $moment.unix(post.public_at).format('DD/MM/YYYY') }}
 					</time>
 				</div>
-				<div class="single-post__content text" v-html="post.content">
-					
+				<div class="single-post__content">
+					<div class="editor" v-html="post.content"></div>
 				</div>
 			</div>
 		</div>
@@ -45,7 +45,7 @@
 			<div class="single-post__left">
 			</div>
 			<div class="single-post__right">
-				<div class="share">
+				<div class="share" v-if="post.content">
 					<p class="share__title">
 						Поделиться:
 					</p>

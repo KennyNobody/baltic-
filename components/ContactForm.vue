@@ -1,12 +1,20 @@
 <template>
 	<client-only>
-		<div class="form">
+		<form class="form" method="post" @submit.prevent="validate">
+			<vue-recaptcha
+			ref="recaptcha"
+			size="invisible"
+			:sitekey="sitekey"
+			@verify="sentMessage"
+			@expired="onCaptchaExpired"
+			:loadRecaptchaScript="true"
+			/>
 			<div class="form__left">
 				<p class="form__title">
 					Сообщение для:
 				</p>
 				<label class="form__radio">
-					<input type="radio" name="message-for" class="form__radio-input" value="Рекламного отдела" v-model="form.recipient" required>
+					<input checked type="radio" name="message-for" class="form__radio-input" value="Рекламного отдела" v-model="form.recipient">
 					<div class="form__radio-icon">
 						<div class="form__radio-point"></div>
 					</div>
@@ -39,18 +47,21 @@
 				</p>
 				<div class="form__content">
 					<div class="form__textarea">
+						<!-- v-validate="'required'" -->
 						<textarea class="form__textarea-input"
 						v-model="form.text"
 						name="text"
-						v-validate="'required'"
+						required
 						v-bind:class="{'form__textarea-input--error': errors.first('text') }"
 						></textarea>
 					</div>
 					<div class="form__inputs">
 
+						<!-- v-validate="'required'" -->
+
 						<input
 						v-bind:class="{'form__input--error': errors.first('name') }" 
-						v-validate="'required'" 
+						required
 						type="text"
 						name="name"
 						class="form__input" 
@@ -58,20 +69,23 @@
 						placeholder="Имя"
 						>
 
+						<!-- v-validate="'required'" -->
+
 						<imask-input
 						v-bind:class="{'form__input--error': errors.first('phone') }"
 						type="text"
 						name="phone"
-						v-validate="'required'" 
+						required
 						class="form__input" 
 						:mask="phoneMask"
 						v-model="form.phone" 
 						placeholder="Телефон"
 						></imask-input>
 
+						<!-- v-validate="'required|email'"  -->
 						<input
 						v-bind:class="{'form__input--error': errors.first('email') }"
-						v-validate="'required|email'" 
+						required
 						name="email" 
 						type="text" 
 						class="form__input"
@@ -84,44 +98,73 @@
 								политикой использования персональных данных.
 							</nuxt-link>
 						</p>
-						<button v-on:click.prevent="sentInfo" class="form__submit">
-							Отправить
+						<button class="form__submit" type="submit">
+							{{ message }}
 						</button>
 					</div>
 				</div>
 			</div>
-		</div>
+		</form>
 	</client-only>
 </template>
 
 <script>
+	import VueRecaptcha from 'vue-recaptcha';
 
 	export default {
 		name: 'contactForm',
+		components: {
+			'vue-recaptcha': VueRecaptcha
+		},
 		data () {
 			return {
 				form: {
-					recipient: '',
+					recipient: 'Рекламного отдела',
 					name: '',
 					phone: '',
 					email: '',
 					text: ''
 				},
 				phoneMask: '+7 (000) 000-00-00',
+				sitekey: '6LfrnXYaAAAAAGei57EgrfpBHRTEqNhtDICzfNYl',
+				message: 'Отправить'
 			}
-		},
-		components: {
-
 		},
 		methods: {
 			sentInfo () {
-				this.$validator.validateAll().then((result) => {
-					if (result) {
-						console.log(this.form);
-					}
-				});
-			}
-		}
+				
+			},
+			sentMessage (recaptchaToken) {
+				this.$axios.post(process.env.apiURL + 'wp-content/themes/diez__template_balticplus/php/send.php', {
+					recipient: this.form.recipient,
+					name: this.form.name,
+					phone: this.form.phone,
+					email: this.form.email,
+					text: this.form.text,
+					recaptchaToken: recaptchaToken
+				})
+				.then(response => {
+					console.log(response);
+					this.message = 'Отправлено!';
+
+					setTimeout(() => this.message = 'Отправить', 3000);
+				})
+				.catch((e) => {
+					console.log(e);
+				})
+			},
+			onCaptchaExpired () {
+				this.$refs.recaptcha.reset()
+			},
+			validate () {
+				// this.$validator.validateAll().then((result) => {
+				// 	if (result) {
+				// 		this.$refs.recaptcha.execute();
+				// 	}
+				// });
+				this.$refs.recaptcha.execute();
+			},
+		},
 	}
 </script>
 

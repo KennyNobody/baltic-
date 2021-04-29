@@ -39,7 +39,7 @@ export const mutations = {
 		state.programs = programs
 	},
 	setProgramsFront (state, programsFront) {
-		state.programsFront = programsFront
+		state.programsFront = Object.values(programsFront)
 	},
 	setSingleProgram (state, singleProgram) {
 		state.singleProgram = singleProgram
@@ -48,7 +48,7 @@ export const mutations = {
 
 export const actions = {
 	async fetch ({commit}) {
-		const programs = await this.$axios.$get(process.env.apiURL + "/wp-content/themes/diez__template_balticnews/api/programs.php")
+		const programs = await this.$axios.$get(process.env.apiURL + "/wp-content/themes/diez__template_balticplus/api/programs.php")
 		.then( response => {
 			commit('setPrograms', response)
 		})
@@ -57,20 +57,21 @@ export const actions = {
 		})
 	},
 	async fetchFront ({commit}) {
-		const programsFront = await this.$axios.$get(process.env.apiURL + "/wp-content/themes/diez__template_balticnews/api/programs.php", {
+		const programsFront = await this.$axios.$get(process.env.apiURL + "/wp-content/themes/diez__template_balticplus/api/programs.php", {
 			params: {
 				front: true,
 			}
 		})
 		.then( response => {
 			commit('setProgramsFront', response)
+			console.log(true);
 		})
 		.catch((e) => {
 			console.log(e)
 		})
 	},
 	async fetchSingle ({commit}, payload) {
-		const singleProgram = await this.$axios.$get(process.env.apiURL + "/wp-content/themes/diez__template_balticnews/api/programs.php", {
+		const singleProgram = await this.$axios.$get(process.env.apiURL + "/wp-content/themes/diez__template_balticplus/api/programs.php", {
 			params: {
 				single: payload,
 			}

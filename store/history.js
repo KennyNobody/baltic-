@@ -29,7 +29,7 @@ export const mutations = {
 
 export const actions = {
 	async fetch ({commit}) {
-		const history = await this.$axios.$get(process.env.apiURL + "/wp-content/themes/diez__template_balticnews/api/history.php")
+		const history = await this.$axios.$get(process.env.apiURL + "/wp-content/themes/diez__template_balticplus/api/history.php")
 		commit('setHistory', history)
 	}
 }

@@ -23,8 +23,7 @@
 				<appSidebar></appSidebar>
 			</div>
 			<div class="page-about__main">
-				<!-- <div class="editor" v-html="services"></div> -->
-				{{ services }}
+				<div class="editor" v-html="services"></div>
 			</div>
 		</div>
 	</div>
@@ -57,7 +56,6 @@ import appSidebar from '~/components/Sidebar'
 			appSidebar
 		},
 		mounted() {
-			console.log(this.$store);
 			this.$store.dispatch('services/fetch');
 		},
 	}

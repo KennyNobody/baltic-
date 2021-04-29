@@ -6,8 +6,8 @@ export const state = () => ({
 		defaultTitle: 'Балтик+',
 		name: 'Прямой эфир',
 		title: 'Балтик+',
-		defaultFile: 'http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3',
-		file: 'http://bp.koenig.ru:8000/Baltic_Plus_mp3_128.mp3',
+		defaultFile: 'https://bp.koenig.ru:8443/Baltic_Plus_mp3_128.mp3',
+		file: 'https://bp.koenig.ru:8443/Baltic_Plus_mp3_128.mp3',
 		loading: true,
 		playing: false,
 		wasPlaying: false,
@@ -60,7 +60,7 @@ export const mutations = {
 
 export const actions = {
 	async fetch ({commit, state}, payload) {
-		let thumbResponse = await this.$axios.$get(process.env.apiURL + "wp-content/themes/diez__template_balticnews/api/player.php")
+		let thumbResponse = await this.$axios.$get(process.env.apiURL + "wp-content/themes/diez__template_balticplus/api/player.php")
 		.then( response => {
 			let array = Object.values(response).reverse();
 			commit('setPlayer', array[0]);

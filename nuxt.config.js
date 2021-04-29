@@ -30,10 +30,10 @@ module.exports = {
 		{ src: "https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" },
 		],
 	},
-	loading: { color: '#3B8070' },
+	loading: false,
 	env: {
 		baseURL:"localhost:3000/",
-		apiURL: "http://new.balticplus.ru/"
+		apiURL: "https://api.balticplus.ru/"
 	},
 	modules: [
 	'@nuxtjs/style-resources',
@@ -77,6 +77,7 @@ module.exports = {
 		'~/scss/reset.scss',
 		'~/scss/mixins.scss',
 		'~/scss/variables.scss',
+		'~/scss/editor.scss',
 		'~/scss/common.scss',
 		],
 	},

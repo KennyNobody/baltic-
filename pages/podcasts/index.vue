@@ -15,10 +15,10 @@
 		<div class="filter">
 			<div class="filter__dates">
 				<no-ssr>
-					<date-picker format="x" v-model="filter.filterDateStart" valueType="timestamp" v-on:change="getPosts" placeholder="От"></date-picker>
+					<date-picker format="DD.MM.YY" v-model="filter.filterDateStart" valueType="timestamp" v-on:change="getPosts" placeholder="От"></date-picker>
 				</no-ssr>
 				<no-ssr>
-					<date-picker format="x" v-model="filter.filterDateEnd" valueType="timestamp" v-on:change="getPosts" placeholder="До"></date-picker>
+					<date-picker format="DD.MM.YY" v-model="filter.filterDateEnd" valueType="timestamp" v-on:change="getPosts" placeholder="До"></date-picker>
 				</no-ssr>
 			</div>
 			<select class="filter__select" v-on:change="getPosts" v-model="filter.genre">
@@ -59,8 +59,8 @@
 				:page-class="'pagination__link'">
 			</paginate>
 		</no-ssr>
-		</div>
 	</div>
+</div>
 </template>
 
 <script>
@@ -111,7 +111,6 @@
 		},
 		mounted() {
 			this.$store.dispatch('podcasts/fetch')
-			console.log(this.$store)
 		},
 		methods: {
 			changePage (index) {

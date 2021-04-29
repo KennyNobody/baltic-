@@ -6,8 +6,8 @@
 					<p class="playlist__title">
 						Подкасты
 					</p>
-					<article class="p-podcast" v-for="item in podcasts" v-bind:key="item.id">
-						<div class="p-podcast__thumb" style="background-image: url('http://placehold.it/1000x600')">
+					<article class="p-podcast" v-for="(item, index) in podcasts" v-bind:key="index">
+						<div class="p-podcast__thumb" v-bind:style="{ 'background-image': 'url(' + thumb + ')' }">
 							<div class="p-podcast__play">
 								<template v-if="item.play == false">
 									<svg class="p-podcast__icon--play">
@@ -41,7 +41,7 @@
 						История воспроизведения
 					</p>
 					<simplebar class="playlist__list">
-						<div class="playlist__song" v-for="item in player.playlist" v-bind:key="item.id">
+						<div class="playlist__song" v-for="(item, index) in player.playlist" v-bind:key="index">
 							<p class="playlist__time">
 								{{ item.time }}
 							</p>
@@ -809,8 +809,23 @@
 		padding: 16px 15px;
 		color: $dark;
 		flex-shrink: 0;
+		overflow-y: scroll;
+		scrollbar-width: thin;
+		scrollbar-color: $red;
 		@include r(1100) {
 			display: none;
+		}
+		&::-webkit-scrollbar {
+			width: 4px;
+			border-radius: 0;
+		}
+		&::-webkit-scrollbar-track {
+			background: inherit;
+		}
+		&::-webkit-scrollbar-thumb {
+			background-color: $red;
+			border-radius: 4px;
+			border-radius: 0;
 		}
 	}
 	&__right {

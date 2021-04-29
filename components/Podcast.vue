@@ -1,6 +1,7 @@
 <template>
 	<article class="podcast">
-		<div class="podcast__thumb" :style="{ 'background-image': 'url(' + thumb + ')' }">
+		<div class="podcast__thumb">
+			<img class="podcast__img" :src="thumb" :alt="title">
 			<div class="podcast__btn" v-on:click="playThis">
 				<template v-if="play == false">
 					<svg class="podcast__play-icon">
@@ -56,7 +57,7 @@
 				showToggle: false,
 				content: {
 					title: this.title,
-					url: process.env.baseURL + '/podcasts/' + this.id,
+					url: process.env.apiURL + 'podcasts/' + this.id,
 					image: this.thumb,
 					description: this.info,
 				}
@@ -78,8 +79,13 @@
 					author: this.title,
 					title: this.info,
 					file: this.link,
+					time: this.time,
+					id: this.id,
+					info: this.info,
+					play: true
 				}
 				this.$store.commit('player/setPlayer', newPodcast);
+				this.$store.commit('podcasts/setPodcastHistory', newPodcast);
 				this.$store.commit('player/setWasPlaying', {
 					wasPlaying: true
 				});
@@ -92,11 +98,7 @@
 				this.$store.commit('player/setLoading', {
 					loading: false
 				});
-				console.log(this.$store)
 			}
-		},
-		mounted(){
-			
 		}
 	}
 </script>
@@ -123,11 +125,16 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		background-size: cover;
-		background-position: center;
+		position: relative;
 		@include r(470) {
-			display: none;
+			width: 100%;
+			height: auto;
 		}
+	}
+	&__img {
+		display: block;
+		width: 100%;
+		height: 100%;
 	}
 	&__content {
 		padding: 16px 12px 16px 20px;
@@ -173,7 +180,7 @@
 		.fade-enter-active, .fade-leave-active {
 			transition: opacity .5s;
 		}
-		.fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+		.fade-enter, .fade-leave-to {
 			opacity: 0;
 		}
 	}
@@ -225,6 +232,10 @@
 		box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
 		cursor: pointer;
 		transition: 0.3s all;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
 		svg {
 			height: 30px;
 			width: 30px;

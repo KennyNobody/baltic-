@@ -25,7 +25,7 @@ export const mutations = {
 
 export const actions = {
 	async fetch ({commit}) {
-		const map = await this.$axios.$get(process.env.apiURL + "/wp-content/themes/diez__template_balticnews/api/map.php")
+		const map = await this.$axios.$get(process.env.apiURL + "/wp-content/themes/diez__template_balticplus/api/map.php")
 		.then( response => {
 			commit('setMap', response);
 			// commit('setMapMarkers', Object.values(response.markers));

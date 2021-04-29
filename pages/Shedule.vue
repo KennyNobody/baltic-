@@ -64,7 +64,25 @@
 				</nav>
 			</div>
 			<div class="page-shedule__right">
-				<div class="page-shedule__list" v-if="currentTab == 1">
+				<div v-for="(item) in shedule" :key="item.day">
+
+					<div class="page-shedule__list" v-if="currentTab == item.day">
+						<div class="page-shedule__item" v-for="key in item.table" v-bind:key="key.id">
+							<time class="page-shedule__time">
+								{{ key.time }}
+							</time>
+							<div class="page-shedule__info">
+								<p class="page-shedule__name">
+									{{ key.title }}
+								</p>
+								<p class="page-shedule__discript">
+									{{ key.authors }}
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- <div class="page-shedule__list" v-if="currentTab == 1">
 					<div class="page-shedule__item" v-for="item in shedule[0].table" v-bind:key="item.id">
 						<time class="page-shedule__time">
 							{{ item.time }}
@@ -168,7 +186,7 @@
 							</p>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>
@@ -198,9 +216,7 @@
 			},
 		},
 		async fetch({store}) {
-			if (store.getters['shedule/shedule'].length === 0) {
-				await store.dispatch('shedule/fetch')
-			}
+			await store.dispatch('shedule/fetch')
 		},
 		methods: {
 
@@ -220,35 +236,35 @@
 </script>
 
 <style lang="scss">
-	.page-shedule {
-		&__columns {
-			display: flex;
-			justify-content: space-between;
-			@include r(1100) {
-				display: block;
-			}
+.page-shedule {
+	&__columns {
+		display: flex;
+		justify-content: space-between;
+		@include r(1100) {
+			display: block;
 		}
-		&__left {
-			width: 247px;
-			flex-shrink: 0;
-			@include r(1100) {
-				color: $light;
-				margin-bottom: 40px;
-			}
-		}
-		&__right {
-			flex-grow: 1;
-			min-width: 0px;
+	}
+	&__left {
+		width: 247px;
+		flex-shrink: 0;
+		@include r(1100) {
 			color: $light;
-			padding-left: 20px;
-			@include r(1100) {
-				padding-left: 0px;
-			}
+			margin-bottom: 40px;
 		}
-		&__shedule {
+	}
+	&__right {
+		flex-grow: 1;
+		min-width: 0px;
+		color: $light;
+		padding-left: 20px;
+		@include r(1100) {
+			padding-left: 0px;
+		}
+	}
+	&__shedule {
 
-		}
-		&__day {
+	}
+	&__day {
 			// font-weight: bold;
 			// font-size: 20px;
 			// line-height: 27px;

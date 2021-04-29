@@ -24,7 +24,7 @@
 			</div>
 			<div class="page-about__main">
 				<div class="authors">
-					<article class="authors__article" v-for="item in authors" v-bind:key="item.id">
+					<article class="authors__article" v-for="item in authors" v-bind:key="item.id" tabindex="0">
 						<div class="authors__main" v-bind:style="{ 'background-image': 'url(' + item.thumb + ')' }">
 							<div class="authors__content">
 								<h5 class="authors__title">
@@ -115,6 +115,11 @@
 				opacity: 1;
 			}
 		}
+		&:focus {
+			.authors__content {
+				opacity: 1;
+			}
+		}
 	}
 	&__clear {
 		width: calc(100% / 3 - 10px);
@@ -135,6 +140,12 @@
 		background-color: $red;
 		min-height: 46px;
 		white-space: nowrap;
+		padding-left: 10px;
+		padding-right: 10px;
+		p {
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
 	}
 	&__main {
 		height: 203px;
