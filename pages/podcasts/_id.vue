@@ -62,11 +62,7 @@
 					</div>
 					
 				</div>
-				<p class="single-podcast__content-discript">
-					Другие новости читайте на сайте: <a href="http://balticplus.ru">http://balticplus.ru</a>.
-					<br>
-					Свежий выпуск новостей слушайте каждый час по будням c 07:00 до 19:00 на 105.2 FМ
-				</p>
+				<div class="single-podcast__content-discript" v-html="podcast.description"></div>
 			</div>
 			<div class="single-podcast__discript">
 				<div class="editor" v-html="podcast.content"></div>
