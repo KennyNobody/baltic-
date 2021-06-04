@@ -12,10 +12,12 @@
 						</p>
 						<div class="home-now__clock">
 							<time class="home-now__time">
-								{{ $moment.unix(broadcast.now.date).format('hh:mm') }}
+								{{ broadcast.now.time }}
+								{{ $moment.unix(+broadcast.now.time).format('hh:mm') }}
+								}
 							</time>
 							<time class="home-now__date">
-								{{ $moment.unix(broadcast.now.date).format('DD/MM/YYYY') }}
+								{{ $moment.unix(+broadcast.now.time).format('DD/MM/YYYY') }}
 							</time>
 						</div>
 						<h3 class="home-now__title">
@@ -32,10 +34,10 @@
 						</p>
 						<div class="home-now__clock">
 							<time class="home-now__time">
-								{{ $moment.unix(broadcast.next.date).format('hh:mm') }}
+								{{ $moment.unix(+broadcast.next.time).format('hh:mm') }}
 							</time>
 							<time class="home-now__date">
-								{{ $moment.unix(broadcast.next.date).format('DD/MM/YYYY') }}
+								{{ $moment.unix(+broadcast.next.time).format('DD/MM/YYYY') }}
 							</time>
 						</div>
 						<h3 class="home-now__title">
@@ -183,15 +185,35 @@
 			},
 		},
 		async fetch({store}) {
-			if (store.getters['programs/programsFront'].length === 0) {
-				await store.dispatch('programs/fetchFront')
-			}
-			if (store.getters['blog/blogFront'].length === 0) {
-				await store.dispatch('blog/fetchFront')
-			}
-			if (store.getters['podcasts/podcastsFront'].length === 0) {
-				await store.dispatch('podcasts/fetchFront')
-			}
+			// if (store.getters['programs/programsFront'].length === 0) {
+			// 	await store.dispatch('programs/fetchFront')
+			// }
+			// if (store.getters['blog/blogFront'].length === 0) {
+			// 	await store.dispatch('blog/fetchFront')
+			// }
+			// if (store.getters['podcasts/podcastsFront'].length === 0) {
+			// 	await store.dispatch('podcasts/fetchFront')
+			// }
+			// if (store.getters['programs/programsFront'].length === 0) {
+				// await store.dispatch('programs/fetchFront')
+			// }
+			// if (store.getters['blog/blogFront'].length === 0) {
+				// await store.dispatch('blog/fetchFront')
+			// }
+			// if (store.getters['podcasts/podcastsFront'].length === 0) {
+				// await store.dispatch('podcasts/fetchFront')
+			// }
+		},
+		mounted() {
+			this.$store.dispatch('broadcast/fetch');
+
+			this.$store.dispatch('programs/fetchFront')
+			// }
+			// if (store.getters['blog/blogFront'].length === 0) {
+				this.$store.dispatch('blog/fetchFront')
+			// }
+			// if (store.getters['podcasts/podcastsFront'].length === 0) {
+				this.$store.dispatch('podcasts/fetchFront')
 		},
 		components: {
 			appSlider,

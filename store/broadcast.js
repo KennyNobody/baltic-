@@ -15,16 +15,15 @@ export const state = () => ({
 
 export const mutations = {
 	setBroadcast (state, broadcast) {
-		state.broadcast = broadcast
+		state.broadcast = broadcast.broadcast;
 	}
 }
 
 export const actions = {
 	async fetch ({commit}) {
-		const broadcast = await this.$axios.$get("api/broadcast")
+		const response = await this.$axios.$get(process.env.apiURL + "/wp-content/themes/diez__template_balticplus/api/shedule.php?broadcast=true")
 		.then( response => {
-			console.log(response)
-			commit('setBroadcast', broadcast);
+			commit('setBroadcast', response);
 		})
 		.catch((e) => {
 			console.log(e)
@@ -35,4 +34,3 @@ export const actions = {
 export const getters = {
 	broadcast: s => s.broadcast,
 }
-// process.env.apiURL + 
