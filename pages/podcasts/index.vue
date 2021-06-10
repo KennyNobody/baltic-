@@ -120,6 +120,7 @@
 				this.filter.genre = '';
 				this.filter.filterDateStart = '';
 				this.filter.filterDateEnd = '';
+				this.$store.dispatch('podcasts/fetch');
 			},
 			prevPage () {
 				if (this.pageNow <= 1) {

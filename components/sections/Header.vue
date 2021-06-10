@@ -22,15 +22,20 @@
 							</p>
 						</div>
 						<div class="h-contact" v-if="contacts.phones.messengers.phone">
-							<a :href="'viber://chat?number=' + contacts.phones.messengers.link" class="h-contact__link">
+							<p class="h-contact__link">
 								{{ contacts.phones.messengers.code }} <strong>{{ contacts.phones.messengers.phone }}</strong>
-							</a>
+							</p>
 							<p class="h-contact__discript h-contact__discript--blue">
-								WhatsApp, Viber
+								<a target="_blank" rel="nofollow" :href="'https://wa.me/' + contacts.phones.messengers.link">WhatsApp</a>, <a target="_blank" rel="nofollow" :href="'viber://chat?number=%2B' + contacts.phones.messengers.link">Viber</a>, <a target="_blank" rel="nofollow" href="https://t.me/UserName">Telegram</a>
 							</p>
 						</div>
 					</div>
 					<div class="header__socials">
+						<!-- <a :href="socials.telegram" v-if="socials.telegram" class="header__soc-link" target="_blank">
+							<svg>
+								<use xlink:href="#icon-icon-telegram"></use>
+							</svg>
+						</a> -->
 						<a :href="socials.vkontakte" v-if="socials.vkontakte" class="header__soc-link" target="_blank">
 							<svg>
 								<use xlink:href="#icon-icon-vk"></use>
@@ -120,7 +125,7 @@
 								{{ contacts.phones.messengers.code }} <strong>{{ contacts.phones.messengers.phone }}</strong>
 							</a>
 							<p class="h-contact__discript h-contact__discript--blue">
-								WhatsApp, Viber
+								<a :href="'https://wa.me/' + contacts.phones.messengers.link">WhatsApp</a>, <a :href="'viber://chat?number=%2B' + contacts.phones.messengers.link">Viber</a>, <a href="">Telegram</a>
 							</p>
 						</div>
 					</div>
@@ -386,9 +391,6 @@
 				font-weight: normal;
 			}
 		}
-		&:hover {
-			opacity: 0.7;
-		}
 	}
 	&__discript {
 		font-size: 14px;
@@ -400,6 +402,19 @@
 		&--blue {
 			color: $blue;
 		}
+		a {
+			text-decoration: none;
+			color: $blue;
+			&:hover {
+				opacity: 0.7;
+			}
+		}
+	}
+}
+
+a.h-contact__link {
+	&:hover {
+		opacity: 0.7;
 	}
 }
 

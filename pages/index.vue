@@ -94,7 +94,7 @@
 				></appPodcast>
 			</div>
 		</section>
-		<section class="home-video">
+		<section class="home-video" v-if="video.iframe">
 			<h2 class="title">
 				<div class="title__line"></div>
 				<p class="title__text">Гость в эфире</p>
@@ -214,6 +214,7 @@
 			// }
 			// if (store.getters['podcasts/podcastsFront'].length === 0) {
 				this.$store.dispatch('podcasts/fetchFront')
+				this.$store.dispatch('video/fetch')
 		},
 		components: {
 			appSlider,
@@ -312,7 +313,9 @@
 			flex-wrap: wrap;
 		}
 		&__item {
-			display: block;
+			display: flex;
+    		justify-content: center;
+    		align-items: center;
 			width: calc(33% - 10px);
 			margin-bottom: 20px;
 			@include r(670) {

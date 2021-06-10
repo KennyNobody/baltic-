@@ -38,7 +38,8 @@ export const state = () => ({
 			'vkontakte': '',
 			'instagram': '',
 			'facebook': '',
-			'youtube': ''
+			'youtube': '',
+			// 'telegram': ''
 		},
 		footer_description: ''
 	}

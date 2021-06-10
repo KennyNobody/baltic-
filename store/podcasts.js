@@ -176,9 +176,8 @@ export const actions = {
 			}
 		})
 		.then( response => {
-			console.log(response);
+			console.log('Запрашиваем подкасты');
 			commit('setPodcasts', response)
-			// commit('setPodcastsList', response.podcasts.list)
 		})
 		.catch((e) => {
 			console.log(e)

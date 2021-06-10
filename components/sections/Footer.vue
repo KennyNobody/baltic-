@@ -13,6 +13,17 @@
 		</div>
 		<div class="footer__right">
 			<div class="footer__socials">
+				<!-- <a :href="socials.telegram" v-if="socials.telegram" class="soc-btn soc-btn--telegram">
+					<div class="soc-btn__left">
+						<svg>
+							<use xlink:href="#icon-icon-telegram"></use>
+						</svg>
+					</div>
+					<div class="soc-btn__separator"></div>
+					<div class="soc-btn__right">
+						Подписаться
+					</div>
+				</a> -->
 				<a :href="socials.vkontakte" v-if="socials.vkontakte" class="soc-btn soc-btn--vk">
 					<div class="soc-btn__left">
 						<svg>
@@ -204,6 +215,9 @@
 		&--youtube {
 			background-color: #DB4F3E;
 		}
+		// &--telegram {
+		// 	background-color: #DB4F3E;
+		// }
 		&__left {
 			width: 40px;
 			display: flex;

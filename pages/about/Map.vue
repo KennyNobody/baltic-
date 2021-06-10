@@ -25,7 +25,6 @@
 			<div class="page-about__main">
 				<div class="map">
 					<img :src="map" alt="">
-					{{ map }}
 				</div>
 			</div>
 		</div>
