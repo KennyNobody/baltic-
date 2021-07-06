@@ -27,7 +27,7 @@
 						</h3>
 					</div>
 				</article>
-				<article class="home-now__article" v-if="broadcast.next">
+				<!-- <article class="home-now__article" v-if="broadcast.next">
 					<div class="home-now__content">
 						<p class="home-now__discript">
 							Далее в эфире
@@ -46,10 +46,43 @@
 							</v-clamp>
 						</h3>
 					</div>
-				</article>
+				</article> -->
 			</div>
 		</section>
 		<appNews></appNews>
+		<section class="home-video" v-if="video.iframe">
+			<h2 class="title">
+				<div class="title__line"></div>
+				<p class="title__text">Гость в эфире</p>
+			</h2>
+			<div class="home-video__wrap" v-html="video.iframe">
+				
+			</div>
+		</section>
+		<section class="home-blog">
+			<h2 class="title">
+				<div class="title__line"></div>
+				<p class="title__text">Блог радиостанции</p>
+				<p class="title__control">
+					<nuxt-link class="title__link" to="/news/">
+						Все записи
+					</nuxt-link>
+				</p>
+			</h2>
+			<div class="home-blog__articles">
+				<appArticle
+				v-for="item in blog"
+				v-bind:key="item.id"
+				:title="item.title"
+				:description="item.description"
+				:thumb="item.preview"
+				:slug="item.slug"
+				:id="item.id"
+				:date="item.public_at"
+				></appArticle>
+				<div class="home-blog__clear"></div>
+			</div>
+		</section>
 		<section class="home-programs">
 			<h2 class="title">
 				<div class="title__line"></div>
@@ -94,15 +127,6 @@
 				></appPodcast>
 			</div>
 		</section>
-		<section class="home-video" v-if="video.iframe">
-			<h2 class="title">
-				<div class="title__line"></div>
-				<p class="title__text">Гость в эфире</p>
-			</h2>
-			<div class="home-video__wrap" v-html="video.iframe">
-				
-			</div>
-		</section>
 <!-- 		<section class="home-playlist">
 			<h2 class="title">
 				<div class="title__line"></div>
@@ -112,31 +136,6 @@
 				
 			</div>
 		</section> -->
-		<section class="home-blog">
-			<h2 class="title">
-				<div class="title__line"></div>
-				<p class="title__text">Блог радиостанции</p>
-				<p class="title__control">
-					<nuxt-link class="title__link" to="/news/">
-						Все записи
-					</nuxt-link>
-				</p>
-			</h2>
-			<div class="home-blog__articles">
-				<appArticle
-				v-for="item in blog"
-				v-bind:key="item.id"
-				:title="item.title"
-				:description="item.description"
-				:thumb="item.preview"
-				:slug="item.slug"
-				:id="item.id"
-				:date="item.public_at"
-				></appArticle>
-				<div class="home-blog__clear"></div>
-			</div>
-		</section>
-
 	</div>
 </template>
 
@@ -375,7 +374,7 @@
 		}
 	}
 	.home-blog {
-		// margin-bottom: 55px;
+		margin-bottom: 105px;
 		&__articles {
 			display: flex;
 			justify-content: space-between;

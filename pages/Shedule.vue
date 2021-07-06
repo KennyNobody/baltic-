@@ -67,7 +67,7 @@
 				<div v-for="(item) in shedule" :key="item.day">
 
 					<div class="page-shedule__list" v-if="currentTab == item.day">
-						<div class="page-shedule__item" v-for="key in item.table" v-bind:key="key.id">
+						<nuxt-link :to='"/programs/" + key.id' class="page-shedule__item" v-for="key in item.table" v-bind:key="key.id">
 							<time class="page-shedule__time">
 								{{ key.time }}
 							</time>
@@ -79,114 +79,9 @@
 									{{ key.authors }}
 								</p>
 							</div>
-						</div>
+						</nuxt-link>
 					</div>
 				</div>
-				<!-- <div class="page-shedule__list" v-if="currentTab == 1">
-					<div class="page-shedule__item" v-for="item in shedule[0].table" v-bind:key="item.id">
-						<time class="page-shedule__time">
-							{{ item.time }}
-						</time>
-						<div class="page-shedule__info">
-							<p class="page-shedule__name">
-								{{ item.title }}
-							</p>
-							<p class="page-shedule__discript">
-								{{ item.authors }}
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="page-shedule__list" v-if="currentTab == 2">
-					<div class="page-shedule__item" v-for="item in shedule[1].table" v-bind:key="item.id">
-						<time class="page-shedule__time">
-							{{ item.time }}
-						</time>
-						<div class="page-shedule__info">
-							<p class="page-shedule__name">
-								{{ item.title }}
-							</p>
-							<p class="page-shedule__discript">
-								{{ item.authors }}
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="page-shedule__list" v-if="currentTab == 3">
-					<div class="page-shedule__item" v-for="item in shedule[2].table" v-bind:key="item.id">
-						<time class="page-shedule__time">
-							{{ item.time }}
-						</time>
-						<div class="page-shedule__info">
-							<p class="page-shedule__name">
-								{{ item.title }}
-							</p>
-							<p class="page-shedule__discript">
-								{{ item.authors }}
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="page-shedule__list" v-if="currentTab == 4">
-					<div class="page-shedule__item" v-for="item in shedule[3].table" v-bind:key="item.id">
-						<time class="page-shedule__time">
-							{{ item.time }}
-						</time>
-						<div class="page-shedule__info">
-							<p class="page-shedule__name">
-								{{ item.title }}
-							</p>
-							<p class="page-shedule__discript">
-								{{ item.authors }}
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="page-shedule__list" v-if="currentTab == 5">
-					<div class="page-shedule__item" v-for="item in shedule[4].table" v-bind:key="item.id">
-						<time class="page-shedule__time">
-							{{ item.time }}
-						</time>
-						<div class="page-shedule__info">
-							<p class="page-shedule__name">
-								{{ item.title }}
-							</p>
-							<p class="page-shedule__discript">
-								{{ item.authors }}
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="page-shedule__list" v-if="currentTab == 6">
-					<div class="page-shedule__item" v-for="item in shedule[5].table" v-bind:key="item.id">
-						<time class="page-shedule__time">
-							{{ item.time }}
-						</time>
-						<div class="page-shedule__info">
-							<p class="page-shedule__name">
-								{{ item.title }}
-							</p>
-							<p class="page-shedule__discript">
-								{{ item.authors }}
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="page-shedule__list" v-if="currentTab == 7">
-					<div class="page-shedule__item" v-for="item in shedule[6].table" v-bind:key="item.id">
-						<time class="page-shedule__time">
-							{{ item.time }}
-						</time>
-						<div class="page-shedule__info">
-							<p class="page-shedule__name">
-								{{ item.title }}
-							</p>
-							<p class="page-shedule__discript">
-								{{ item.authors }}
-							</p>
-						</div>
-					</div>
-				</div> -->
 			</div>
 		</div>
 	</div>
@@ -303,6 +198,7 @@
 		&__item {
 			display: flex;
 			margin-bottom: 15px;
+			text-decoration: none;
 			@include r(1100) {
 				display: block;
 				margin-bottom: 10px;
@@ -318,6 +214,7 @@
 		}
 		&__name {
 			font-weight: bold;
+			color: #ffffff;
 		}
 	}
 </style>

@@ -5,14 +5,6 @@
 			<div class="header__content">
 				<div class="header__topline">
 					<div class="header__contacts">
-						<div class="h-contact" v-if="contacts.phones.broadcast.phone">
-							<a :href="'tel:' + contacts.phones.broadcast.link" class="h-contact__link" target="_blank">
-								{{ contacts.phones.broadcast.code }} <strong>{{ contacts.phones.broadcast.phone }}</strong>
-							</a>
-							<p class="h-contact__discript h-contact__discript--red">
-								Прямой эфир
-							</p>
-						</div>
 						<div class="h-contact" v-if="contacts.phones.office.phone">
 							<a :href="'tel:' + contacts.phones.office.link" class="h-contact__link" target="_blank">
 								{{ contacts.phones.office.code }} <strong>{{ contacts.phones.office.phone }}</strong>
@@ -21,12 +13,20 @@
 								Офис
 							</p>
 						</div>
+						<div class="h-contact" v-if="contacts.phones.broadcast.phone">
+							<a :href="'tel:' + contacts.phones.broadcast.link" class="h-contact__link" target="_blank">
+								{{ contacts.phones.broadcast.code }} <strong>{{ contacts.phones.broadcast.phone }}</strong>
+							</a>
+							<p class="h-contact__discript h-contact__discript--red">
+								Прямой эфир
+							</p>
+						</div>
 						<div class="h-contact" v-if="contacts.phones.messengers.phone">
 							<p class="h-contact__link">
 								{{ contacts.phones.messengers.code }} <strong>{{ contacts.phones.messengers.phone }}</strong>
 							</p>
 							<p class="h-contact__discript h-contact__discript--blue">
-								<a target="_blank" rel="nofollow" :href="'https://wa.me/' + contacts.phones.messengers.link">WhatsApp</a>, <a target="_blank" rel="nofollow" :href="'viber://chat?number=%2B' + contacts.phones.messengers.link">Viber</a>, <a target="_blank" rel="nofollow" href="https://t.me/UserName">Telegram</a>
+								<a target="_blank" rel="nofollow" :href="'https://wa.me/' + contacts.phones.messengers.link">WhatsApp</a>, <a target="_blank" rel="nofollow" :href="'viber://chat?number=%2B' + contacts.phones.messengers.link">Viber</a>, <a target="_blank" rel="nofollow" :href="contacts.phones.messengers.telegram">Telegram</a>
 							</p>
 						</div>
 					</div>
@@ -76,7 +76,7 @@
 							Блог
 						</nuxt-link>
 						<nuxt-link active-class="header__link--active" class="header__link" to="/information/">
-							Рекламодателям
+							Реклама
 						</nuxt-link>
 						<nuxt-link active-class="header__link--active" class="header__link" to="/contacts/">
 							Контакты
@@ -104,6 +104,29 @@
 			<div class="mob-menu" v-if="menuOpen">
 				<div class="mob-menu__content">
 					<div class="mob-menu__header">
+						<nuxt-link class="mob-menu__link" to="/" exact>
+							Главная
+						</nuxt-link>
+						<nuxt-link class="mob-menu__link" to="/programs/">
+							Программы
+						</nuxt-link>
+						<nuxt-link class="mob-menu__link" to="/podcasts/">
+							Подкасты
+						</nuxt-link>
+						<nuxt-link class="mob-menu__link" to="/about/history/">
+							О радио
+						</nuxt-link>
+						<nuxt-link class="mob-menu__link" to="/news/">
+							Блог
+						</nuxt-link>
+						<nuxt-link class="mob-menu__link" to="/information/">
+							Реклама
+						</nuxt-link>
+						<nuxt-link class="mob-menu__link" to="/contacts/">
+							Контакты
+						</nuxt-link>
+					</div>
+					<div class="mob-menu__middle">
 						<div class="h-contact" v-if="contacts.phones.broadcast.phone">
 							<a :href="'tel:+' + contacts.phones.broadcast.link" class="h-contact__link">
 								{{ contacts.phones.broadcast.code }} <strong>{{ contacts.phones.broadcast.phone }}</strong>
@@ -125,32 +148,9 @@
 								{{ contacts.phones.messengers.code }} <strong>{{ contacts.phones.messengers.phone }}</strong>
 							</a>
 							<p class="h-contact__discript h-contact__discript--blue">
-								<a :href="'https://wa.me/' + contacts.phones.messengers.link">WhatsApp</a>, <a :href="'viber://chat?number=%2B' + contacts.phones.messengers.link">Viber</a>, <a href="">Telegram</a>
+								<a :href="'https://wa.me/' + contacts.phones.messengers.link">WhatsApp</a>, <a :href="'viber://chat?number=%2B' + contacts.phones.messengers.link">Viber</a>, <a :href="contacts.phones.messengers.telegram">Telegram</a>
 							</p>
 						</div>
-					</div>
-					<div class="mob-menu__middle">
-						<nuxt-link class="mob-menu__link" to="/" exact>
-							Главная
-						</nuxt-link>
-						<nuxt-link class="mob-menu__link" to="/programs/">
-							Программы
-						</nuxt-link>
-						<nuxt-link class="mob-menu__link" to="/podcasts/">
-							Подкасты
-						</nuxt-link>
-						<nuxt-link class="mob-menu__link" to="/about/history/">
-							О радио
-						</nuxt-link>
-						<nuxt-link class="mob-menu__link" to="/news/">
-							Блог
-						</nuxt-link>
-						<nuxt-link class="mob-menu__link" to="/information/">
-							Рекламодателям
-						</nuxt-link>
-						<nuxt-link class="mob-menu__link" to="/contacts/">
-							Контакты
-						</nuxt-link>
 					</div>
 					<div class="mob-menu__footer">
 						<a :href="socials.vkontakte" v-if="socials.vkontakte" class="header__soc-link" target="_blank">
@@ -236,6 +236,7 @@
 	right: 0px;
 	z-index: 4;
 	transition: 0.3s all;
+	text-align: center;
 	@include r(1100) {
 		background-color: $dark;
 		box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
@@ -368,6 +369,7 @@
 
 .h-contact {
 	margin-right: 32px;
+	text-align: left;
 	@include r(1100) {
 		margin-right: 0px;
 		text-align: center;
@@ -406,7 +408,7 @@
 			text-decoration: none;
 			color: $blue;
 			&:hover {
-				opacity: 0.7;
+				color: $red;
 			}
 		}
 	}

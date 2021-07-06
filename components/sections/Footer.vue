@@ -176,10 +176,10 @@
 				margin-right: auto;
 			}
 			a {
-				text-decoration: none;
-				color: #EF4136;
+				text-decoration: underline;
+				color: $light;
 				&:hover {
-					color: $light;
+					text-decoration: none;
 				}
 			}
 			br {
