@@ -64,7 +64,6 @@ export const actions = {
 		})
 		.then( response => {
 			commit('setProgramsFront', response)
-			console.log(true);
 		})
 		.catch((e) => {
 			console.log(e)

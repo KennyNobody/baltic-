@@ -89,7 +89,8 @@ export const state = () => ({
 	},
 	singlePodcast: {
 		title: 'Загрузка...'
-	}
+	},
+	podcastsCategory: []
 })
 
 export const mutations = {
@@ -162,6 +163,9 @@ export const mutations = {
 	},
 	setPodcastHistory (state, payload) {
 		state.podcastHistory.unshift(payload);
+	},
+	setCategory (state, payload) {
+		state.podcastsCategory = payload;
 	}
 }
 
@@ -188,12 +192,14 @@ export const actions = {
 			params: {
 				dateStart: payload.dateStart || null,
 				dateEnd: payload.dateEnd || null,
-				genre: payload.genre || null,
+				category: payload.category || null,
 				page: payload.page || null,
 			}
 		})
 		.then( response => {
-			commit('setPodcasts', response)
+			console.log('Запрос из фильтра')
+			console.log(this);
+			commit('setPodcasts', response);
 		})
 		.catch((e) => {
 			console.log(e)
@@ -239,6 +245,20 @@ export const actions = {
 		.catch((e) => {
 			console.log(e)
 		})
+	},
+	async fetchCats ({commit}, payload) {
+		const singleCats = await this.$axios.$get(process.env.apiURL + "/wp-content/themes/diez__template_balticplus/api/podcasts.php", {
+			params: {
+				category: true,
+			}
+		})
+		.then( response => {
+			console.log(this);
+			commit('setCategory', response.category)
+		})
+		.catch((e) => {
+			console.log(e)
+		})
 	}
 }
 
@@ -250,5 +270,6 @@ export const getters = {
 	// podcastsPlayer: s => s.podcastsFront.slice(0, 4),
 	podcastsPlayer: s => s.podcastHistory,
 	podcastsList: s => s.podcastsList,
-	singlePodcast: s => s.singlePodcast
+	singlePodcast: s => s.singlePodcast,
+	podcastsCats: s => s.podcastsCategory
 }

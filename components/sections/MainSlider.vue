@@ -1,6 +1,6 @@
 <template>
-  <div v-swiper:mySwiper="swiperOption" class="front-slider" v-if="banners.length>1">
-    <div class="swiper-wrapper front-slider__wrapper"  >
+  <div v-swiper:frontSwiper="swiperOption" class="front-slider">
+    <div class="swiper-wrapper front-slider__wrapper">
       <div
         class="swiper-slide front-slider__slide"
         v-for="banner in banners"
@@ -35,8 +35,9 @@ export default {
   data() {
     return {
       swiperOption: {
+        init: false,
         loop: true,
-        loopedSlides: 1,
+        // loopedSlides: 1,
         slidesPerView: 1,
         centeredSlides: true,
         autoplay: {
@@ -48,7 +49,6 @@ export default {
           disabledClass: "front-slider__btn-disable",
         },
       },
-      swiperImgs: []
     };
   },
   computed: {
@@ -56,11 +56,17 @@ export default {
       return this.$store.getters["front-slider/mainSlider"];
     },
   },
+  watch: {
+    banners: function (val) {
+      let slider = this.frontSwiper;
+      setTimeout(initSlider, 500);
+      function initSlider() {
+        slider.init();
+      }
+    },
+  },
   mounted() {
-    if (this.$store.getters["front-slider/mainSlider"].length === 0) {
-      this.$store.dispatch("front-slider/fetch");
-    }
-    console.log(this.banners);
+    this.$store.dispatch("front-slider/fetch");
   },
 };
 </script>

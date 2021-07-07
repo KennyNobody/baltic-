@@ -28,7 +28,7 @@
 						<div class="form__radio-point"></div>
 					</div>
 					<p class="form__radio-text">
-						Прямого эфира
+						Службы информации
 					</p>
 				</label>
 				<label class="form__radio">
@@ -37,7 +37,7 @@
 						<div class="form__radio-point"></div>
 					</div>
 					<p class="form__radio-text">
-						Кого-нибудь
+						Ведущих новостей
 					</p>
 				</label>
 			</div>

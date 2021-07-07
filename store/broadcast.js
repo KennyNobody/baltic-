@@ -1,6 +1,7 @@
 export const state = () => ({
 	broadcast: {
-		// now: {
+		now: false,
+		// {
 		// 	title: 'Гость в эфире: Антонина Кочеткова о загрязнении окружающей среды',
 		// 	date: 1555065432,
 		// 	link: ''
@@ -23,7 +24,9 @@ export const actions = {
 	async fetch ({commit}) {
 		const response = await this.$axios.$get(process.env.apiURL + "/wp-content/themes/diez__template_balticplus/api/shedule.php?broadcast=true")
 		.then( response => {
-			commit('setBroadcast', response);
+			if (response.length) {
+				commit('setBroadcast', response);
+			}
 		})
 		.catch((e) => {
 			console.log(e)

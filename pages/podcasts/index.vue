@@ -21,9 +21,9 @@
 					<date-picker format="DD.MM.YY" v-model="filter.filterDateEnd" valueType="timestamp" v-on:change="getPosts" placeholder="До"></date-picker>
 				</no-ssr>
 			</div>
-			<select class="filter__select" v-on:change="getPosts" v-model="filter.genre">
+			<select class="filter__select" v-on:change="getPosts" v-model="filter.category">
 				<option value="" selected>По подкасту</option>
-				<option v-for="item in programs" :value="item.id" v-bind:key="item.id">{{ item.title }}</option>
+				<option v-for="item in podcastsCats" :value="item.slug" v-bind:key="item.key">{{ item.name }}</option>
 			</select>
 			<div class="filter__all" v-on:click="clearFilter">
 				Все подкасты
@@ -82,7 +82,7 @@
 				filter: {
 					filterDateStart: '',
 					filterDateEnd: '',
-					genre: ''
+					category: ''
 				},
 				pageNow: 1,
 			}
@@ -94,6 +94,9 @@
 		computed: {
 			podcasts() {
 				return this.$store.getters['podcasts/podcasts']
+			},
+			podcastsCats() {
+				return this.$store.getters['podcasts/podcastsCats']
 			},
 			programs() {
 				return this.$store.getters['podcasts/podcastsList']
@@ -110,14 +113,15 @@
 			}
 		},
 		mounted() {
-			this.$store.dispatch('podcasts/fetch')
+			this.$store.dispatch('podcasts/fetch');
+			this.$store.dispatch('podcasts/fetchCats')
 		},
 		methods: {
 			changePage (index) {
 				this.pageNow = index + 1
 			},
 			clearFilter() {
-				this.filter.genre = '';
+				this.filter.category = '';
 				this.filter.filterDateStart = '';
 				this.filter.filterDateEnd = '';
 				this.$store.dispatch('podcasts/fetch');
@@ -140,11 +144,13 @@
 				let filterInfo = {
 					dateStart: this.filter.filterDateStart,
 					dateEnd: this.filter.filterDateEnd,
-					genre: this.filter.genre,
+					category: this.filter.category,
 					page: this.pageNow
 				}
 
-				await this.$store.dispatch('podcasts/fetchCustom', filterInfo)
+				console.log(filterInfo)
+
+				await this.$store.dispatch('podcasts/fetchCustom', filterInfo);
 			}
 		}
 	}

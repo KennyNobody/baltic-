@@ -189,6 +189,14 @@
 				// }
 			}
 		}
+		a.footer__developer {
+			color: $red;
+			transition: 0.3s all;
+			text-decoration: none;
+			&:hover {
+				opacity: 0.7;
+			}
+		}
 	}
 
 	.soc-btn {

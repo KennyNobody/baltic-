@@ -221,6 +221,11 @@
 		watch:{
 			$route (to, from){
 				this.menuOpen = false;
+
+				let url = process.env.apiURL;
+				let fullUrl = url.substring(0, url.length - 1) + this.$route.fullPath;
+				
+				ym(process.env.yaMetrika, 'hit', fullUrl);
 			}
 		} 
 	}
