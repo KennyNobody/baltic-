@@ -85,7 +85,7 @@
 					play: true
 				}
 				this.$store.commit('player/setPlayer', newPodcast);
-				this.$store.commit('podcasts/setPodcastHistory', newPodcast);
+				// this.$store.commit('podcasts/setPodcastHistory', newPodcast);
 				this.$store.commit('player/setWasPlaying', {
 					wasPlaying: true
 				});

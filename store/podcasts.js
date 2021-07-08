@@ -2,84 +2,15 @@
 
 export const state = () => ({
 	podcasts: {
-		items: [
-		// {
-		// 	id: 1,
-		// 	title: '1. Очень длинное и сложноепроизносимое название хорошего подкаста',
-		// 	date: 1555065432,
-		// 	info: 'Краткое описание подкаста для отображения под заголовком',
-		// 	time: '25:15',
-		// 	thumb: 'http://placehold.it/500x500',
-		// 	play: false,
-		// 	link: './song-2.mp3',
-		// 	content: '<p>- Калининградцы рассказали о проблемах, с которыми сталкиваются в поликлиниках;</p><p>- В прокуратуре Московского района Калининграда назвали самую коррумпированную государственную структуру;</p><p>- Судьба 300 тонн инженерного наследия решается в Калининграде;</p>'
-		// },
-		// {
-		// 	id: 2,
-		// 	title: '2. Очень длинное и сложноепроизносимое название хорошего подкаста',
-		// 	date: 1555065432,
-		// 	info: 'Краткое описание подкаста для отображения под заголовком',
-		// 	time: '25:15',
-		// 	thumb: 'http://placehold.it/1000x600',
-		// 	play: false,
-		// 	link: './song-3.mp3',
-		// 	content: '<p>- Калининградцы рассказали о проблемах, с которыми сталкиваются в поликлиниках;</p><p>- В прокуратуре Московского района Калининграда назвали самую коррумпированную государственную структуру;</p><p>- Судьба 300 тонн инженерного наследия решается в Калининграде;</p>'
-		// },
-		],
+		items: [],
 		pages: {
 			current: 1,
 			max: 1
 		}
 	},
 	podcastsList: [],
-	podcastsFront: [
-	// {
-	// 	id: 1,
-	// 	title: '1. Очень длинное и сложноепроизносимое название хорошего подкаста',
-	// 	date: 1555065432,
-	// 	info: 'Краткое описание подкаста для отображения под заголовком',
-	// 	time: '25:15',
-	// 	thumb: 'http://placehold.it/1000x600',
-	// 	play: false,
-	// 	link: './song-2.mp3',
-	// 	content: '<p>- Калининградцы рассказали о проблемах, с которыми сталкиваются в поликлиниках;</p><p>- В прокуратуре Московского района Калининграда назвали самую коррумпированную государственную структуру;</p><p>- Судьба 300 тонн инженерного наследия решается в Калининграде;</p>'
-	// },
-	// {
-	// 	id: 2,
-	// 	title: '2. Очень длинное и сложноепроизносимое название хорошего подкаста',
-	// 	date: 1555065432,
-	// 	info: 'Краткое описание подкаста для отображения под заголовком',
-	// 	time: '25:15',
-	// 	thumb: 'http://placehold.it/1000x600',
-	// 	play: false,
-	// 	link: './song-3.mp3',
-	// 	content: '<p>- Калининградцы рассказали о проблемах, с которыми сталкиваются в поликлиниках;</p><p>- В прокуратуре Московского района Калининграда назвали самую коррумпированную государственную структуру;</p><p>- Судьба 300 тонн инженерного наследия решается в Калининграде;</p>'
-	// },
-	],
-	podcastHistory: [
-	// {
-	// 	id: 1,
-	// 	title: '1. Очень длинное и сложноепроизносимое название хорошего подкаста',
-	// 	date: 1555065432,
-	// 	info: 'Краткое описание подкаста для отображения под заголовком',
-	// 	time: '25:15',
-	// 	thumb: 'http://placehold.it/1000x600',
-	// 	play: false,
-	// 	link: './song-2.mp3',
-	// 	content: '<p>- Калининградцы рассказали о проблемах, с которыми сталкиваются в поликлиниках;</p><p>- В прокуратуре Московского района Калининграда назвали самую коррумпированную государственную структуру;</p><p>- Судьба 300 тонн инженерного наследия решается в Калининграде;</p>'
-	// },
-	// {
-	// 	id: 2,
-	// 	title: '2. Очень длинное и сложноепроизносимое название хорошего подкаста',
-	// 	date: 1555065432,
-	// 	info: 'Краткое описание подкаста для отображения под заголовком',
-	// 	time: '25:15',
-	// 	thumb: 'http://placehold.it/1000x600',
-	// 	play: false,
-	// 	link: './song-3.mp3',
-	// 	content: '<p>- Калининградцы рассказали о проблемах, с которыми сталкиваются в поликлиниках;</p><p>- В прокуратуре Московского района Калининграда назвали самую коррумпированную государственную структуру;</p><p>- Судьба 300 тонн инженерного наследия решается в Калининграде;</p>'
-	// },
-	],
+	podcastsFront: [],
+	podcastHistory: [],
 	podcastsProgram: {
 		items: [],
 		pages: {
@@ -94,29 +25,32 @@ export const state = () => ({
 })
 
 export const mutations = {
-	setPodcasts (state, podcasts) {
+	setPodcasts(state, podcasts) {
 		state.podcasts.items = Object.values(podcasts.items);
 		state.podcasts.pages = podcasts.pages;
 	},
-	setPodcastsFront (state, podcastsFront) {
+	setPodcastsFront(state, podcastsFront) {
 		state.podcastsFront = Object.values(podcastsFront);
 	},
-	setPodcastsProgram (state, response) {
+	setPodcastsProgram(state, response) {
 		state.podcastsProgram.items = Object.values(response.items);
 		state.podcastsProgram.pages = response.pages;
 	},
-	setPodcastsList (state, podcasts) {
+	setPodcastsList(state, podcasts) {
 		state.podcastsList = podcasts
 	},
-	changePodcast (state, payload) {
-		// Для front-версии
+	changePodcast(state, payload) {
 
 		if (Object.keys(state.podcastsFront).length) {
 			for (let z = 0; z < state.podcastsFront.length; z++) {
 				state.podcastsFront[z].play = false;
 			}
 			let podcastFront = state.podcastsFront.find(podcastFront => podcastFront.id === payload);
-			podcastFront.play = !podcastFront.play;
+
+			if (podcastFront) {
+				podcastFront.play = !podcastFront.play;
+			}
+
 		}
 
 		// Для основного каталога
@@ -126,9 +60,12 @@ export const mutations = {
 				state.podcasts.items[i].play = false;
 			}
 			let podcast = state.podcasts.items.find(podcast => podcast.id === payload);
-			podcast.play = !podcast.play;	
+			
+			if (podcast) {
+				podcast.play = !podcast.play;
+			}
 		}
-		
+
 		// Для одиночной программы
 
 		if (Object.keys(state.podcastsProgram.items).length) {
@@ -136,7 +73,10 @@ export const mutations = {
 				state.podcastsProgram.items[i].play = false;
 			}
 			let podcast = state.podcastsProgram.items.find(podcastsProgram => podcastsProgram.id === payload);
-			podcast.play = !podcast.play;	
+
+			if (podcast) {
+				podcast.play = !podcast.play;
+			}
 		}
 
 		// Для истории воспроизведения
@@ -146,25 +86,33 @@ export const mutations = {
 				state.podcastHistory[i].play = false;
 			}
 			let podcast = state.podcastHistory.find(podcast => podcast.id === payload);
-			// podcast.play = !podcast.play;	
-			console.log(podcast);
+
+			if (podcast) {
+				podcast.play = !podcast.play;	
+			}
 		}
 	},
-	pauseAllPodcasts (state, payload) {
+	pauseAllPodcasts(state, payload) {
 		for (let i = 0; i < state.podcasts.items.length; i++) {
 			state.podcasts.items[i].play = false;
 		}
 		for (let z = 0; z < state.podcastsFront.length; z++) {
 			state.podcastsFront[z].play = false;
 		}
+		for (let z = 0; z < state.podcastHistory.length; z++) {
+			state.podcastHistory[z].play = false;
+		}
+		for (let z = 0; z < state.podcastsProgram.length; z++) {
+			state.podcastsProgram[z].play = false;
+		}
 	},
-	setSinglePodcast (state, singlePodcast) {
+	setSinglePodcast(state, singlePodcast) {
 		state.singlePodcast = singlePodcast
 	},
-	setPodcastHistory (state, payload) {
-		state.podcastHistory.unshift(payload);
+	setPodcastHistory(state, payload) {
+		state.podcastHistory = Object.values(payload.items).reverse();
 	},
-	setCategory (state, payload) {
+	setCategory(state, payload) {
 		state.podcastsCategory = payload;
 	}
 }
@@ -172,22 +120,22 @@ export const mutations = {
 // Пример полного запроса, любой из параметров может отсутствовать
 // http://localhost:8000/api/podcasts?dateStart=1578078000000&dateEnd=1578423600000&genre=7&page=1
 export const actions = {
-	async fetch ({commit}) {
+	async fetch({ commit }) {
 		let podcasts = await this.$axios.$get(process.env.apiURL + "/wp-content/themes/diez__template_balticplus/api/podcasts.php", {
 			params: {
 				page: 1,
 				front: false
 			}
 		})
-		.then( response => {
-			console.log('Запрашиваем подкасты');
-			commit('setPodcasts', response)
-		})
-		.catch((e) => {
-			console.log(e)
-		})
+			.then(response => {
+				console.log('Запрашиваем подкасты');
+				commit('setPodcasts', response)
+			})
+			.catch((e) => {
+				console.log(e)
+			})
 	},
-	async fetchCustom ({commit}, payload) {
+	async fetchCustom({ commit }, payload) {
 		let podcasts = await this.$axios.$get(process.env.apiURL + "/wp-content/themes/diez__template_balticplus/api/podcasts.php", {
 			params: {
 				dateStart: payload.dateStart || null,
@@ -196,69 +144,81 @@ export const actions = {
 				page: payload.page || null,
 			}
 		})
-		.then( response => {
-			console.log('Запрос из фильтра')
-			console.log(this);
-			commit('setPodcasts', response);
-		})
-		.catch((e) => {
-			console.log(e)
-		})
+			.then(response => {
+				console.log('Запрос из фильтра')
+				console.log(this);
+				commit('setPodcasts', response);
+			})
+			.catch((e) => {
+				console.log(e)
+			})
 	},
-	async fetchFront ({commit}) {
+	async fetchFront({ commit }) {
 		let podcastsFront = await this.$axios.$get(process.env.apiURL + "/wp-content/themes/diez__template_balticplus/api/podcasts.php", {
 			params: {
 				front: true
 			}
 		})
-		.then( response => {
-			commit('setPodcastsFront', response.items)
-		})
-		.catch((e) => {
-			console.log(e)
-		})
+			.then(response => {
+				commit('setPodcastsFront', response.items)
+			})
+			.catch((e) => {
+				console.log(e)
+			})
 	},
-	async fetchPodcasts ({commit}, payload) {
+	async fetchPodcasts({ commit }, payload) {
 		let podcasts = await this.$axios.$get(process.env.apiURL + "/wp-content/themes/diez__template_balticplus/api/podcasts.php", {
 			params: {
 				program: payload,
 			}
 		})
-		.then( response => {
-			commit('setPodcastsProgram', response);
-			console.log(this);
-		})
-		.catch((e) => {
-			console.log(e)
-		})
+			.then(response => {
+				commit('setPodcastsProgram', response);
+				console.log(this);
+			})
+			.catch((e) => {
+				console.log(e)
+			})
 	},
-	async fetchSingle ({commit}, payload) {
+	async fetchSingle({ commit }, payload) {
 		const singlePodcast = await this.$axios.$get(process.env.apiURL + "/wp-content/themes/diez__template_balticplus/api/podcasts.php", {
 			params: {
 				single: payload,
 			}
 		})
-		.then( response => {
-			console.log(response);
-			commit('setSinglePodcast', response)
-		})
-		.catch((e) => {
-			console.log(e)
-		})
+			.then(response => {
+				console.log(response);
+				commit('setSinglePodcast', response)
+			})
+			.catch((e) => {
+				console.log(e)
+			})
 	},
-	async fetchCats ({commit}, payload) {
+	async fetchCats({ commit }, payload) {
 		const singleCats = await this.$axios.$get(process.env.apiURL + "/wp-content/themes/diez__template_balticplus/api/podcasts.php", {
 			params: {
 				category: true,
 			}
 		})
-		.then( response => {
-			console.log(this);
-			commit('setCategory', response.category)
+			.then(response => {
+				commit('setCategory', response.category)
+			})
+			.catch((e) => {
+				console.log(e)
+			})
+	},
+	async fetchHistory({ commit }) {
+		const podcastHistory = await this.$axios.$get(process.env.apiURL + "/wp-content/themes/diez__template_balticplus/api/podcasts.php", {
+			params: {
+				podcastplayer: true,
+			}
 		})
-		.catch((e) => {
-			console.log(e)
-		})
+			.then(response => {
+				commit('setPodcastHistory', response)
+			})
+			.catch((e) => {
+				console.log(e)
+			})
 	}
 }
 
@@ -266,10 +226,9 @@ export const getters = {
 	podcasts: s => s.podcasts,
 	podcastsFront: s => s.podcastsFront,
 	podcastsProgram: s => s.podcastsProgram,
-	// Расскомнетировать следующую строку
-	// podcastsPlayer: s => s.podcastsFront.slice(0, 4),
 	podcastsPlayer: s => s.podcastHistory,
 	podcastsList: s => s.podcastsList,
 	singlePodcast: s => s.singlePodcast,
-	podcastsCats: s => s.podcastsCategory
+	podcastsCats: s => s.podcastsCategory,
+	podcastsHistory: s => s.podcastHistory
 }

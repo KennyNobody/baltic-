@@ -201,16 +201,10 @@ export default {
   },
   mounted() {
     this.$store.dispatch("broadcast/fetch");
-
     this.$store.dispatch("programs/fetchFront");
-    // }
-    // if (store.getters['blog/blogFront'].length === 0) {
     this.$store.dispatch("blog/fetchFront");
-    // }
-    // if (store.getters['podcasts/podcastsFront'].length === 0) {
     this.$store.dispatch("podcasts/fetchFront");
     this.$store.dispatch("video/fetch");
-    // this.$store.dispatch('broadcast/fetch');
   },
   components: {
     appSlider,
