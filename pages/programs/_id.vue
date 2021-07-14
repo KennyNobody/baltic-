@@ -83,7 +83,7 @@ import appPodcast from "~/components/Podcast";
 export default {
   head() {
     return {
-      title: this.post.title + " - Балтик+",
+      title: this.post.title + ' - ' + process.env.title,
       meta: [{}],
     };
   },

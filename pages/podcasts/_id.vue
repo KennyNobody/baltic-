@@ -79,7 +79,7 @@
 	export default {
 		head () {
 			return {
-				title: this.podcast.title + ' - Балтик+',
+				title: this.podcast.title + ' - ' + process.env.title,
 				meta: [
 				{}
 				]

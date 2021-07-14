@@ -35,7 +35,7 @@ import appSidebar from '~/components/Sidebar'
 	export default {
 		head () {
 			return {
-				title: 'Службы новостей - Балтик+',
+				title: 'Службы новостей'  + ' - ' + process.env.title,
 				meta: [
 				{}
 				]

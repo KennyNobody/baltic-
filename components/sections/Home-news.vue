@@ -23,6 +23,8 @@
           class="swiper-slide home-news__article"
           v-for="item in news"
           v-bind:key="item.id"
+          target="_blank"
+          rel="nofollow"
         >
           <div class="home-news__thumb">
             <img :src="item.preview" :alt="item.title" />

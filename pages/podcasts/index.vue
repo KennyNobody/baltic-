@@ -70,7 +70,7 @@
 	export default {
 		head () {
 			return {
-				title: 'Подкасты - Балтик+',
+				title: 'Подкасты'  + ' - ' + process.env.title,
 				meta: [
 				{}
 				]

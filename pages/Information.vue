@@ -30,7 +30,7 @@
 	export default {
 		head () {
 			return {
-				title: 'Рекламодателям - Балтик+',
+				title: 'Рекламодателям' + ' - ' + process.env.title,
 				meta: [
 				{}
 				]

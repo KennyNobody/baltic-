@@ -35,7 +35,7 @@
 	export default {
 		head () {
 			return {
-				title: 'Политика конфиденциальности - Балтик+',
+				title: 'Политика конфиденциальности' + ' - ' + process.env.title,
 				meta: [
 				{}
 				]

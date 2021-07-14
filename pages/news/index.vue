@@ -64,7 +64,7 @@
 	export default {
 		head () {
 			return {
-				title: 'Блог - Балтик+',
+				title: 'Блог' + ' - ' + process.env.title,
 				meta: [
 				{}
 				]

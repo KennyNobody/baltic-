@@ -1,10 +1,10 @@
 module.exports = {
 	head: {
-		title: 'Балтик+',
+		title: 'Балтик Плюс – радио твоего города',
 		meta: [
 			{ charset: 'utf-8' },
 			{ name: 'viewport', content: 'width=device-width, initial-scale=1' },
-			{ hid: 'description', name: 'description', content: 'сайт для радио Балтик+' }
+			{ hid: 'description', name: 'description', content: 'Балтик Плюс – радио твоего города' }
 		],
 		link: [
 			{ rel: 'apple-touch-icon', sizes: "180x180", type: 'apple-touch-icon', href: '/apple-icon-180x180.png' },
@@ -37,6 +37,7 @@ module.exports = {
 		baseURL: "http://radio.balticplus.ru/",
 		apiURL: "https://api.balticplus.ru/",
 		yaMetrika: 48479600,
+		title: 'Балтик Плюс – радио твоего города'
 	},
 	modules: [
 		'@nuxtjs/style-resources',

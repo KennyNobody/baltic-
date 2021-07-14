@@ -37,7 +37,7 @@
 	export default {
 		head () {
 			return {
-				title: 'Города вещания - Балтик+',
+				title: 'Города вещания' + ' - ' + process.env.title,
 				meta: [
 				{}
 				]

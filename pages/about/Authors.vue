@@ -60,7 +60,7 @@
 	export default {
 		head () {
 			return {
-				title: 'Ведущие эфира - Балтик+',
+				title: 'Ведущие эфира' + ' - ' + process.env.title,
 				meta: [
 				{}
 				]

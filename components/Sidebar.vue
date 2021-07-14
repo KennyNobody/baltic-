@@ -10,11 +10,11 @@
 			Ведущие эфира
 		</nuxt-link>
 		<nuxt-link active-class="sidebar__link--active" class="sidebar__link" to="/about/news-services/" exact>
-			Службы новостей
+			Служба новостей
 		</nuxt-link>
-		<nuxt-link active-class="sidebar__link--active" class="sidebar__link" to="/about/politics/" exact>
+		<!-- <nuxt-link active-class="sidebar__link--active" class="sidebar__link" to="/about/politics/" exact>
 			Политики
-		</nuxt-link>
+		</nuxt-link> -->
 	</aside>
 </template>
 

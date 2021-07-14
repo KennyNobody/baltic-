@@ -3,7 +3,7 @@
     <section class="home-slider">
       <appSlider></appSlider>
     </section>
-    <section class="home-now">
+    <!-- <section class="home-now">
       <div class="home-now__articles">
         <template v-if="broadcast.now">
         <article class="home-now__article" >
@@ -24,7 +24,7 @@
             </h3>
           </div>
         </article>
-        </template>
+        </template> -->
         <!-- <article class="home-now__article" v-if="broadcast.next">
 					<div class="home-now__content">
 						<p class="home-now__discript">
@@ -45,13 +45,13 @@
 						</h3>
 					</div>
 				</article> -->
-      </div>
-    </section>
+      <!-- </div>
+    </section> -->
     <appNews></appNews>
     <section class="home-video" v-if="video.iframe">
       <h2 class="title">
         <div class="title__line"></div>
-        <p class="title__text">Гость в эфире</p>
+        <p class="title__text">Смотри Балтик Плюс TV</p>
       </h2>
       <div class="home-video__wrap" v-html="video.iframe"></div>
     </section>
@@ -150,7 +150,7 @@ export default {
   name: "home",
   head() {
     return {
-      title: "Балтик+",
+      title: process.env.title,
       meta: [{}],
     };
   },
@@ -219,7 +219,7 @@ export default {
 
 <style lang="scss">
 .home-slider {
-  margin-bottom: 22px;
+  margin-bottom: 105px;
   overflow: hidden;
 }
 .home-now {

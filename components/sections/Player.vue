@@ -263,7 +263,7 @@ export default {
       });
       this.$store.commit("player/setLive", false);
       this.$store.commit("podcasts/changePodcast", item.id);
-	  console.log(item);
+      console.log(item);
       let newPodcast = {
         img: item.thumb,
         author: item.title,
@@ -315,13 +315,11 @@ export default {
 
     initHowler() {
       let component = this;
-
-	  console.log(this);
-
+      
       this.howler = new Howl({
         src: [this.player.file],
         html5: true,
-		// preload: false,
+        // preload: false,
         volume: component.player.volume,
       });
 
@@ -366,16 +364,18 @@ export default {
       this.howler.on("mute", function () {
         console.log("муте/антмут");
       });
+
+      this.howler.on("end", function () {
+        console.log("подкаст завершился");
+        component.$store.commit("podcasts/pauseAllPodcasts");
+      });
     },
   },
   mounted() {
     this.initHowler();
-	this.$store.dispatch('podcasts/fetchHistory');
-    // this.howler.on('unload', function(){
-    // 	console.log('Деактивировали');
-    // });
+    this.$store.dispatch("podcasts/fetchHistory");
 
-    setInterval(() => {
+setInterval(() => {
       if (this.$store.getters["player/playerLive"] == true) {
         this.$store.dispatch("player/fetch");
         console.log("Запрашиваем");

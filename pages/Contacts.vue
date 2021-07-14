@@ -86,9 +86,9 @@
 	export default {
 		head () {
 			return {
-				title: 'Контакты - Балтик+',
+				title: 'Контакты'  + ' - ' + process.env.title,
 				meta: [
-				{ hid: 'description', name: 'description', content: 'About our company Nuxt.js ' }
+				// { hid: 'description', name: 'description', content: 'About our company Nuxt.js ' }
 				]
 			}
 		},
@@ -127,7 +127,7 @@
 					balloonContentHeader: "Рекламный отдел «Балтик Плюс»",
 					balloonContentBody: "236023, Калининград, ул. Третьяковская, 10",
 				}),
-				myPlacemark2 = new ymaps.Placemark([54.73025506995538,20.488244999999978], {
+				myPlacemark2 = new ymaps.Placemark([54.730619, 20.489242], {
 					balloonContentHeader: "Информационное агентство «Балтик Плюс»",
 					balloonContentBody: "Калининград, ул. Яналова, 2",
 				});

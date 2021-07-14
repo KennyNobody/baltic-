@@ -50,7 +50,7 @@
 	export default {
 		head () {
 			return {
-				title: 'История и награды - Балтик+',
+				title: 'История и награды' + ' - ' + process.env.title,
 				meta: [
 				{}
 				]

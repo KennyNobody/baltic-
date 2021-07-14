@@ -14,7 +14,7 @@
 					Сообщение для:
 				</p>
 				<label class="form__radio">
-					<input checked type="radio" name="message-for" class="form__radio-input" value="Рекламного отдела" v-model="form.recipient">
+					<input checked type="radio" name="message-for" class="form__radio-input" value="1" v-model="form.recipient">
 					<div class="form__radio-icon">
 						<div class="form__radio-point"></div>
 					</div>
@@ -23,7 +23,7 @@
 					</p>
 				</label>
 				<label class="form__radio">
-					<input type="radio" name="message-for" class="form__radio-input" value="Прямой эфир" v-model="form.recipient">
+					<input type="radio" name="message-for" class="form__radio-input" value="2" v-model="form.recipient">
 					<div class="form__radio-icon">
 						<div class="form__radio-point"></div>
 					</div>
@@ -32,12 +32,12 @@
 					</p>
 				</label>
 				<label class="form__radio">
-					<input type="radio" name="message-for" class="form__radio-input" value="Кому-нибудь" v-model="form.recipient">
+					<input type="radio" name="message-for" class="form__radio-input" value="3" v-model="form.recipient">
 					<div class="form__radio-icon">
 						<div class="form__radio-point"></div>
 					</div>
 					<p class="form__radio-text">
-						Ведущих новостей
+						Ведущих эфира
 					</p>
 				</label>
 			</div>
@@ -135,23 +135,24 @@
 				
 			},
 			sentMessage (recaptchaToken) {
-				this.$axios.post(process.env.apiURL + 'wp-content/themes/diez__template_balticplus/php/send.php', {
-					recipient: this.form.recipient,
-					name: this.form.name,
-					phone: this.form.phone,
-					email: this.form.email,
-					text: this.form.text,
-					recaptchaToken: recaptchaToken
-				})
-				.then(response => {
-					console.log(response);
-					this.message = 'Отправлено!';
+				console.log(this.form.recipient);
+				// this.$axios.post(process.env.apiURL + 'wp-content/themes/diez__template_balticplus/php/send.php', {
+				// 	recipient: this.form.recipient,
+				// 	name: this.form.name,
+				// 	phone: this.form.phone,
+				// 	email: this.form.email,
+				// 	text: this.form.text,
+				// 	recaptchaToken: recaptchaToken
+				// })
+				// .then(response => {
+				// 	console.log(response);
+				// 	this.message = 'Отправлено!';
 
-					setTimeout(() => this.message = 'Отправить', 3000);
-				})
-				.catch((e) => {
-					console.log(e);
-				})
+				// 	setTimeout(() => this.message = 'Отправить', 3000);
+				// })
+				// .catch((e) => {
+				// 	console.log(e);
+				// })
 			},
 			onCaptchaExpired () {
 				this.$refs.recaptcha.reset()
@@ -185,7 +186,7 @@
 	}
 	&__main {
 		color: $light;
-		font-style: italic;
+		// font-style: italic;
 		font-size: 14px;
 		line-height: 19px;
 		padding-left: 20px;

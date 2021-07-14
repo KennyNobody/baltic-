@@ -67,7 +67,7 @@
 				<div v-for="(item) in shedule" :key="item.day">
 
 					<div class="page-shedule__list" v-if="currentTab == item.day">
-						<nuxt-link :to='"/programs/" + key.id' class="page-shedule__item" v-for="key in item.table" v-bind:key="key.id">
+						<!-- <nuxt-link :to='"/programs/" + key.id' class="page-shedule__item" v-for="key in item.table" v-bind:key="key.id">
 							<time class="page-shedule__time">
 								{{ key.time }}
 							</time>
@@ -79,7 +79,20 @@
 									{{ key.authors }}
 								</p>
 							</div>
-						</nuxt-link>
+						</nuxt-link> -->
+						<div class="page-shedule__item" >
+							<time class="page-shedule__time">
+								{{ item.time }}
+							</time>
+							<div class="page-shedule__info">
+								<p class="page-shedule__name">
+									{{ item.name }}
+								</p>
+								<!-- <p class="page-shedule__discript">
+									{{ item.authors }}
+								</p> -->
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -93,7 +106,7 @@
 	export default {
 		head () {
 			return {
-				title: 'Расписание - Балтик+',
+				title: 'Расписание' + ' - ' + process.env.title,
 				meta: [
 				{}
 				]
