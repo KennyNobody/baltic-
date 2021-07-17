@@ -22,11 +22,13 @@
 							</p>
 						</div>
 						<div class="h-contact" v-if="contacts.phones.messengers.phone">
-							<p class="h-contact__link">
+							<a :href="'tel:' + contacts.phones.messengers.link" class="h-contact__link">
 								{{ contacts.phones.messengers.code }} <strong>{{ contacts.phones.messengers.phone }}</strong>
-							</p>
+							</a>
 							<p class="h-contact__discript h-contact__discript--blue">
-								<a target="_blank" rel="nofollow" :href="'https://wa.me/' + contacts.phones.messengers.link">WhatsApp</a>, <a target="_blank" rel="nofollow" :href="'viber://chat?number=%2B' + contacts.phones.messengers.link">Viber</a>, <a target="_blank" rel="nofollow" :href="contacts.phones.messengers.telegram">Telegram</a>
+								<a target="_blank" rel="nofollow" :href="'https://wa.me/' + contacts.phones.messengers.whatsapp">WhatsApp</a>, 
+								<a target="_blank" rel="nofollow" :href="'viber://chat?number=%2B' + contacts.phones.messengers.viber">Viber</a>, 
+								<a target="_blank" rel="nofollow" :href="contacts.phones.messengers.telegram">Telegram</a>
 							</p>
 						</div>
 					</div>
@@ -54,6 +56,11 @@
 						<a :href="socials.youtube" v-if="socials.youtube" class="header__soc-link" target="_blank">
 							<svg>
 								<use xlink:href="#icon-icon-youtube"></use>
+							</svg>
+						</a>
+						<a :href="socials.telegram" v-if="socials.telegram" class="header__soc-link" target="_blank">
+							<svg>
+								<use xlink:href="#icon-icon-telegram"></use>
 							</svg>
 						</a>
 					</div>
@@ -128,7 +135,7 @@
 					</div>
 					<div class="mob-menu__middle">
 						<div class="h-contact" v-if="contacts.phones.broadcast.phone">
-							<a :href="'tel:+' + contacts.phones.broadcast.link" class="h-contact__link">
+							<a :href="'tel:' + contacts.phones.broadcast.link" class="h-contact__link">
 								{{ contacts.phones.broadcast.code }} <strong>{{ contacts.phones.broadcast.phone }}</strong>
 							</a>
 							<p class="h-contact__discript h-contact__discript--red">
@@ -136,7 +143,7 @@
 							</p>
 						</div>
 						<div class="h-contact" v-if="contacts.phones.office.phone">
-							<a :href="'tel:+' + contacts.phones.office.link" class="h-contact__link">
+							<a :href="'tel:' + contacts.phones.office.link" class="h-contact__link">
 								{{ contacts.phones.office.code }} <strong>{{ contacts.phones.office.phone }}</strong>
 							</a>
 							<p class="h-contact__discript h-contact__discript--blue">
@@ -144,11 +151,13 @@
 							</p>
 						</div>
 						<div class="h-contact" v-if="contacts.phones.messengers.phone">
-							<a :href="'viber://chat?number=' + contacts.phones.messengers.link" class="h-contact__link">
+							<a :href="'tel:' + contacts.phones.messengers.link" class="h-contact__link">
 								{{ contacts.phones.messengers.code }} <strong>{{ contacts.phones.messengers.phone }}</strong>
 							</a>
 							<p class="h-contact__discript h-contact__discript--blue">
-								<a :href="'https://wa.me/' + contacts.phones.messengers.link">WhatsApp</a>, <a :href="'viber://chat?number=%2B' + contacts.phones.messengers.link">Viber</a>, <a :href="contacts.phones.messengers.telegram">Telegram</a>
+								<a :href="'https://wa.me/' + contacts.phones.messengers.whatsapp">WhatsApp</a>, 
+								<a :href="'viber://chat?number=%2B' + contacts.phones.messengers.viber">Viber</a>, 
+								<a :href="contacts.phones.messengers.telegram">Telegram</a>
 							</p>
 						</div>
 					</div>
@@ -171,6 +180,11 @@
 						<a :href="socials.youtube" v-if="socials.youtube" class="header__soc-link" target="_blank">
 							<svg>
 								<use xlink:href="#icon-icon-youtube"></use>
+							</svg>
+						</a>
+						<a :href="socials.youtube" v-if="socials.youtube" class="header__soc-link" target="_blank">
+							<svg>
+								<use xlink:href="#icon-icon-telegram"></use>
 							</svg>
 						</a>
 					</div>
@@ -373,7 +387,7 @@
 }
 
 .h-contact {
-	margin-right: 32px;
+	margin-right: 25px;
 	text-align: left;
 	@include r(1100) {
 		margin-right: 0px;

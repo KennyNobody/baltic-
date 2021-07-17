@@ -1,17 +1,17 @@
 export const state = () => ({
 	markers: [
-	{
-		city: 'Калининград',
-		wave: '105,2FM',
-	},
-	{
-		city: 'Советск',
-		wave: '105,2FM',
-	},
-	{
-		city: 'Черняховск',
-		wave: '105,2FM',
-	}
+	// {
+	// 	city: 'Калининград',
+	// 	wave: '105,2FM',
+	// },
+	// {
+	// 	city: 'Советск',
+	// 	wave: '105,2FM',
+	// },
+	// {
+	// 	city: 'Черняховск',
+	// 	wave: '105,2FM',
+	// }
 	]
 	// link: ''
 })
@@ -19,7 +19,7 @@ export const state = () => ({
 export const mutations = {
 	setMap (state, response) {
 		state.link = response.link;
-		// state.markers = response.markers
+		state.markers = response.markers
 	}
 }
 

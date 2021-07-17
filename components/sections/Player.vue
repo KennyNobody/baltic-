@@ -28,9 +28,9 @@
             </div>
             <div class="p-podcast__content">
               <div class="p-podcast__header">
-                <p class="p-podcast__title">
+                <nuxt-link :to='"/podcasts/" + item.id' class="p-podcast__title">
                   <v-clamp :max-lines="1">{{ item.title }}</v-clamp>
-                </p>
+                </nuxt-link>
                 <p class="p-podcast__discript">
                   <v-clamp :max-lines="2">{{ item.info }}</v-clamp>
                 </p>
@@ -156,6 +156,10 @@
 import VClamp from "vue-clamp";
 import { Howl, Howler } from "howler";
 
+console.log(Howler);
+
+// window.player.Howler = Howler;
+
 export default {
   name: "Player",
   data() {
@@ -187,6 +191,9 @@ export default {
     VClamp,
   },
   watch: {
+    $route (){
+        this.open = false;
+    },
     volume: function () {
       this.setVolume();
     },
@@ -1028,6 +1035,12 @@ setInterval(() => {
   &__title {
     font-size: 16px;
     font-weight: 600;
+    color: $dark;
+    transition: 0.3s opacity;
+    text-decoration: none;
+    &:hover {
+      opacity: 0.7;
+    }
   }
   &__discript {
     font-size: 14px;

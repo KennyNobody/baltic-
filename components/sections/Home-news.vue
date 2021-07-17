@@ -1,6 +1,6 @@
 <template>
   <section class="home-news">
-    <div class="home-news__container" v-swiper:mySwiper="swiperOption">
+    <div class="home-news__container" v-swiper:newsSwiper="swiperOption">
       <h2 class="title">
         <div class="title__line"></div>
         <p class="title__text">Региональные новости</p>
@@ -65,7 +65,8 @@ export default {
       banners: [],
       homeNewsCounter: 16,
       swiperOption: {
-        loop: false,
+        init: false,
+        loop: true,
         slidesPerView: 2,
         slidesPerColumn: 2,
         spaceBetween: 20,
@@ -76,14 +77,7 @@ export default {
         },
         autoplay: {
           delay: 5000,
-        },
-        on: {
-          slideChange() {
-            // console.log('onSlideChangeEnd', this);
-          },
-          tap() {
-            // console.log('onTap', this);
-          },
+          pauseOnMouseEnter: true
         },
         breakpoints: {
           1100: {
@@ -96,6 +90,15 @@ export default {
   },
   components: {
     VClamp,
+  },
+  watch: {
+    news: function (val) {
+      let slider = this.newsSwiper;
+      setTimeout(initSlider, 500);
+      function initSlider() {
+        slider.init();
+      }
+    },
   },
   computed: {
     news() {

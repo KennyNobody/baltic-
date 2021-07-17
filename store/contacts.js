@@ -39,7 +39,7 @@ export const state = () => ({
 			'instagram': '',
 			'facebook': '',
 			'youtube': '',
-			// 'telegram': ''
+			'telegram': ''
 		},
 		footer_description: ''
 	}

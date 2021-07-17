@@ -92,6 +92,20 @@ export const mutations = {
 			}
 		}
 	},
+	setPodcastPlaying(state, payload) {
+		// for (let i = 0; i < state.podcasts.items.length; i++) {
+		// 	state.podcasts.items[i].play = false;
+		// }
+		// for (let z = 0; z < state.podcastsFront.length; z++) {
+		// 	state.podcastsFront[z].play = false;
+		// }
+		// for (let z = 0; z < state.podcastHistory.length; z++) {
+		// 	state.podcastHistory[z].play = false;
+		// }
+		// for (let z = 0; z < state.podcastsProgram.length; z++) {
+		// 	state.podcastsProgram[z].play = false;
+		// }
+	},
 	pauseAllPodcasts(state, payload) {
 		for (let i = 0; i < state.podcasts.items.length; i++) {
 			state.podcasts.items[i].play = false;

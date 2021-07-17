@@ -37,11 +37,15 @@ export default {
       swiperOption: {
         init: false,
         loop: true,
-        // loopedSlides: 1,
         slidesPerView: 1,
         centeredSlides: true,
+        effect: "fade",
+        fadeEffect: {
+          crossFade: true,
+        },
         autoplay: {
           delay: 5000,
+          pauseOnMouseEnter: true,
         },
         navigation: {
           nextEl: ".front-slider__next",

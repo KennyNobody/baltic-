@@ -25,7 +25,7 @@
           </div>
         </article>
         </template> -->
-        <!-- <article class="home-now__article" v-if="broadcast.next">
+    <!-- <article class="home-now__article" v-if="broadcast.next">
 					<div class="home-now__content">
 						<p class="home-now__discript">
 							Далее в эфире
@@ -45,7 +45,7 @@
 						</h3>
 					</div>
 				</article> -->
-      <!-- </div>
+    <!-- </div>
     </section> -->
     <appNews></appNews>
     <section class="home-video" v-if="video.iframe">
@@ -53,7 +53,13 @@
         <div class="title__line"></div>
         <p class="title__text">Смотри Балтик Плюс TV</p>
       </h2>
-      <div class="home-video__wrap" v-html="video.iframe"></div>
+      <div class="home-video__columns">
+        <div
+          class="home-video__column home-video__column--left"
+          v-html="video.iframe"
+        ></div>
+        <div class="home-video__column home-video__column--right">123</div>
+      </div>
     </section>
     <section class="home-blog">
       <h2 class="title">
@@ -344,11 +350,20 @@ export default {
 }
 .home-video {
   margin-bottom: 105px;
-  &__wrap {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
+  &__columns {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__column {
+    width: calc(50% - 10px);
+    &--left {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+    }
+    &--right {
+    }
   }
   @include r(1100) {
     margin-bottom: 60px;

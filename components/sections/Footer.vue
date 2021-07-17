@@ -25,8 +25,8 @@
         :href="socials.vkontakte"
         v-if="socials.vkontakte"
         class="soc-btn soc-btn--vk"
-		rel="nofollow"
-		target="_blank"
+        rel="nofollow"
+        target="_blank"
       >
         <div class="soc-btn__left">
           <svg>
@@ -40,8 +40,8 @@
         :href="socials.instagram"
         v-if="socials.instagram"
         class="soc-btn soc-btn--instagram"
-		rel="nofollow"
-		target="_blank"
+        rel="nofollow"
+        target="_blank"
       >
         <div class="soc-btn__left">
           <svg>
@@ -55,8 +55,8 @@
         :href="socials.facebook"
         v-if="socials.facebook"
         class="soc-btn soc-btn--facebook"
-		rel="nofollow"
-		target="_blank"
+        rel="nofollow"
+        target="_blank"
       >
         <div class="soc-btn__left">
           <svg>
@@ -70,8 +70,8 @@
         :href="socials.youtube"
         v-if="socials.youtube"
         class="soc-btn soc-btn--youtube"
-		rel="nofollow"
-		target="_blank"
+        rel="nofollow"
+        target="_blank"
       >
         <div class="soc-btn__left">
           <svg>
@@ -81,12 +81,12 @@
         <div class="soc-btn__separator"></div>
         <div class="soc-btn__right">Подписаться</div>
       </a>
-	  <a
-        :href="socials.youtube"
-        v-if="socials.youtube"
+      <a
+        :href="socials.telegram"
+        v-if="socials.telegram"
         class="soc-btn soc-btn--telegram"
-		rel="nofollow"
-		target="_blank"
+        rel="nofollow"
+        target="_blank"
       >
         <div class="soc-btn__left">
           <svg>
@@ -253,7 +253,7 @@ export default {
     background-color: #db4f3e;
   }
   &--telegram {
-  	background-color: #DB4F3E;
+    background-color: #0088cc;
   }
   &__left {
     width: 40px;
